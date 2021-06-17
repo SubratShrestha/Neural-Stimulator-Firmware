@@ -1,0 +1,35 @@
+stimulation_commands:
+    start// 0x01 00000000
+    stop// 0x02 00000000
+    stim_type:0 // 0:uniform; 1:burst // 0x03 00000000
+    anodic_cathodic:1 // 0:anodic; 1:cathodic //0x04 00000001
+    dac_phase_one:0 //[0,65535]	//0x05 00000000
+    dac_phase_two:65535 //[0,65535] //0x06 ffffffff
+    dac_gap:32767 //[0,65535] // 0x07 7ffffffff
+    phase_one_time:10 //[10,2^30 - 1] //0x08
+    inter_phase_gap:0 //[3,2^30 - 1]	//0x09
+    phase_two_time:10 //[10,2^30 - 1]	//0x0a
+    inter_stim_delay:100 //[3,2^30 - 1]	//0x0b
+    inter_burst_delay:100 //[10,2^30-1]	//0x0c
+    pulse_num:0 //[0,2^32-1]	//0x0d
+    pulse_num_in_one_burst:0 //[0,2^32-1] //0x0e
+    burst_num:0 //[0,2^32-1]	//0x0f
+
+    ramp_up:0 // 0:no; 1:yes	//0x10
+    #short_electrode:1 // 0:no; 1:yes //0x11
+    record_freq:2000 // [1,20000];	//0x12
+    
+    start_recording	//0x13 00000000
+    stop_recording	// 0x14 00000000
+    
+    electrode_voltage // it will return the last measured phase one voltage in the format like "electrode_voltage:xxxx"
+    //0x15 00000000 it will return 0x15 00000xxx in hex
+    elec_offset:4 // acquire electrode voltage before the end of phase one, 4 is 1us, 8 is 2us....so the minimum offset should be 0.25us
+    //0x16 00000004
+    show_dac:65535 // [0,65535]; //0x17 ffffffff
+    return_idle // dac will return to DAC_GAP(1.5V) 0x18 00000000
+    
+    check_state:0 //0x19 0000000x  1 is idle, 2 is running; this one also can be used to check connection
+    
+    
+
