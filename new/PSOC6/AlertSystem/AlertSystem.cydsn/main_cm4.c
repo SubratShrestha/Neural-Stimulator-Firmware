@@ -47,6 +47,26 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
     }
 }
 
+void iasEventHandler(uint32_t eventCode, void *eventParam) {
+    (void) eventParam;
+    uint8_t alertLevel;
+    
+    if (eventCode == CY_BLE_EVT_IASS_WRITE_CHAR_CMD) {
+        // Read updated Alert Level from GATT database
+        Cy_BLE_IASS_GetCharacteristicValue(CY_BLE_IAS_ALERT_LEVEL, sizeof(alertLevel), &alertLevel);
+        
+        switch(alertLevel) {
+            case CY_BLE_NO_ALERT:
+                printf("No Alert\r\n");
+            break;
+                
+            case CY_BLE_MILD_ALERT:
+                printf("Mild Alert\r\n");
+            break;
+        }
+    }
+}
+
 
 int main(void)
 {
