@@ -20,6 +20,32 @@
 #include "cyfitter_gpio.h"
 #include "cyfitter_sysint.h"
 
+/* BLE_1 */
+#define BLE_1_cy_mxs40_ble__HW BLE
+#define BLE_1_cy_mxs40_ble__IDX 0
+
+/* PWM_1 */
+#define PWM_1_TCPWM__CNT_HW TCPWM0_CNT0
+#define PWM_1_TCPWM__CNT_IDX 0u
+#define PWM_1_TCPWM__HW TCPWM0
+#define PWM_1_TCPWM__IDX 0u
+
+/* UART_1 */
+#define UART_1_SCB__HW SCB2
+#define UART_1_SCB__IDX 2
+#define UART_1_SCB__SS0_POSITION 0u
+#define UART_1_SCB__SS1_POSITION 1u
+#define UART_1_SCB__SS2_POSITION 2u
+#define UART_1_SCB__SS3_POSITION 3u
+#define UART_1_SCBCLK__DIV_IDX 0
+#define UART_1_SCBCLK__DIV_NUM 0
+#define UART_1_SCBCLK__DIV_TYPE CY_SYSCLK_DIV_8_BIT
+
+/* Clock_1 */
+#define Clock_1__DIV_IDX 1
+#define Clock_1__DIV_NUM 1
+#define Clock_1__DIV_TYPE CY_SYSCLK_DIV_8_BIT
+
 /* Miscellaneous */
 #define CPUSS__CTI_TR_IN_0 TRIG5_OUT_CPUSS_CTI_TR_IN0
 #define CPUSS__CTI_TR_IN_1 TRIG5_OUT_CPUSS_CTI_TR_IN1
