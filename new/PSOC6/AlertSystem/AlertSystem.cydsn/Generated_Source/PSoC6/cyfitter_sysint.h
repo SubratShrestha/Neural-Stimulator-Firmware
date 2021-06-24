@@ -27,9 +27,15 @@
 #define UART_1_SCB_IRQ_INTC_NUMBER 43u
 
 /* BLE_1_bless_isr */
+#define BLE_1_bless_isr__INTC_CORTEXM0P_ASSIGNED 1
+#define BLE_1_bless_isr__INTC_CORTEXM0P_MUX 3u
+#define BLE_1_bless_isr__INTC_CORTEXM0P_PRIORITY 3u
 #define BLE_1_bless_isr__INTC_CORTEXM4_ASSIGNED 1
 #define BLE_1_bless_isr__INTC_CORTEXM4_PRIORITY 7u
 #define BLE_1_bless_isr__INTC_NUMBER 24u
+#define BLE_1_bless_isr_INTC_CORTEXM0P_ASSIGNED 1
+#define BLE_1_bless_isr_INTC_CORTEXM0P_MUX 3u
+#define BLE_1_bless_isr_INTC_CORTEXM0P_PRIORITY 3u
 #define BLE_1_bless_isr_INTC_CORTEXM4_ASSIGNED 1
 #define BLE_1_bless_isr_INTC_CORTEXM4_PRIORITY 7u
 #define BLE_1_bless_isr_INTC_NUMBER 24u

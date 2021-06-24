@@ -58,26 +58,72 @@ void iasEventHandler(uint32_t eventCode, void *eventParam) {
         switch(alertLevel) {
             case CY_BLE_NO_ALERT:
                 printf("No Alert\r\n");
+                Cy_GPIO_Write(P7_1_PORT, P7_1_PIN, LED_OFF);   // GREEN LED OFF
+                Cy_GPIO_Write(P7_1_PORT, P6_3_PIN, LED_OFF);   // GREEN LED OFF
             break;
                 
             case CY_BLE_MILD_ALERT:
                 printf("Mild Alert\r\n");
+                Cy_GPIO_Write(P6_3_PORT, P6_3_PIN, LED_ON);   // RED LED ON
+                Cy_GPIO_Write(P6_3_PORT, P7_1_PIN, LED_OFF);  // GREEN LED ON
+            break;
+                
+            case CY_BLE_HIGH_ALERT:
+                printf("High Alert\r\n");
+                Cy_GPIO_Write(P6_3_PORT, P6_3_PIN, LED_ON);   // RED LED ON
+                Cy_GPIO_Write(P7_1_PORT, P7_1_PIN, LED_ON);   // GREEN LED ON
             break;
         }
     }
 }
 
 
+void bleInterruptNotify() {
+    BaseType_t xHigherPriorityTaskWoken;
+    xHigherPriorityTaskWoken = pdFALSE;
+    xSemaphoreGiveFromISR(bleSemaphore, &xHigherPriorityTaskWoken);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+}
+
+
+void bleTask(void *arg) {
+    (void) arg;
+    
+    printf("BLE Task Started\r\n");
+    
+    bleSemaphore = xSemaphoreCreateCounting(UINT_MAX, 0);
+    Cy_BLE_Start(genericEventHandler);
+    
+    // Get the stack going
+    while (Cy_BLE_GetState() != CY_BLE_STATE_ON) {
+        Cy_BLE_ProcessEvents();
+    }
+    
+    Cy_BLE_RegisterAppHostCallback(bleInterruptNotify);
+    Cy_BLE_IAS_RegisterAttrCallback(iasEventHandler);
+    
+    for(;;) {
+        xSemaphoreTake(bleSemaphore, portMAX_DELAY);
+        Cy_BLE_ProcessEvents();
+    }
+}
+
 int main(void)
 {
     __enable_irq(); /* Enable global interrupts. */
 
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-
-    for(;;)
-    {
-        /* Place your application code here. */
-    }
+    
+    UART_1_Start();
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
+    printf("System Started\r\n");
+    TaskHandle_t bleTaskHandle;
+    
+    xTaskCreate(bleTask, "bleTask", 8*1024, 0, 2, &bleTaskHandle);
+    
+    vTaskStartScheduler();
+    for(;;) {}
 }
 
 /* [] END OF FILE */
