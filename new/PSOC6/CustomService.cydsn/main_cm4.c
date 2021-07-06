@@ -15,6 +15,9 @@
 #include "semphr.h"
 #include <stdio.h>
 #include <limits.h>
+#include "command_parser.h"
+#include "command_queue.h"
+#include "stdlib.h"
 
 SemaphoreHandle_t bleSemaphore;
 
@@ -36,12 +39,22 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
             
             if (CY_BLE_NS_NSCHARACTERISTIC_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
                 uint8_t *commands = writeReqParameter->handleValPair.value.val;
+                // error handling
+                /*int array_size = (int)(sizeof(commands)/sizeof(commands[0]));
+                switch (array_size) {
+                    case (array_size > 5): 
+                        printf("invalid command");
+                        break;
+                }*/
+                //
                 
                 for (int i=0; i < 5; i++) {
                     // please null check.
-                    printf("command[%d] = %d\r\n", i, commands[i]);
-                    // pass to command parser.
+                    printf("command[%d] = %d\r\n", i, commands[i]);    
                 }
+                
+                // passing to command parser
+                execute_command(commands);
                 
             }
             
@@ -90,7 +103,6 @@ int main(void)
     printf("System started\r\n");
     
     xTaskCreate(bleTask, "bleTask", 8*1024, 0, 2, 0);
-    
     vTaskStartScheduler();
 
     for(;;)
