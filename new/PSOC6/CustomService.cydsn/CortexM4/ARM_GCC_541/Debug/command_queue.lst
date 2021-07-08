@@ -1,0 +1,1327 @@
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"command_queue.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.InitQueue,"ax",%progbits
+  21              		.align	2
+  22              		.global	InitQueue
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	InitQueue, %function
+  26              	InitQueue:
+  27              	.LFB1:
+  28              		.file 1 "command_queue.c"
+   1:command_queue.c **** /* ========================================
+   2:command_queue.c ****  *
+   3:command_queue.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:command_queue.c ****  * All Rights Reserved
+   5:command_queue.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:command_queue.c ****  *
+   7:command_queue.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:command_queue.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:command_queue.c ****  *
+  10:command_queue.c ****  * ========================================
+  11:command_queue.c **** */
+  12:command_queue.c **** 
+  13:command_queue.c **** #include "command_queue.h"
+  14:command_queue.c **** 
+  15:command_queue.c **** void InitQueue(PQueue queue){
+  29              		.loc 1 15 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              	.LVL0:
+  34 0000 10B5     		push	{r4, lr}
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 14, -4
+  38 0002 0446     		mov	r4, r0
+  16:command_queue.c **** 	queue->Front = queue->Rear = (PNODE)malloc(sizeof(NODE));
+  39              		.loc 1 16 0
+  40 0004 4420     		movs	r0, #68
+  41              	.LVL1:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 2
+
+
+  42 0006 FFF7FEFF 		bl	malloc
+  43              	.LVL2:
+  44 000a 6060     		str	r0, [r4, #4]
+  45 000c 2060     		str	r0, [r4]
+  17:command_queue.c **** 	if (queue->Front != NULL) {
+  46              		.loc 1 17 0
+  47 000e 08B1     		cbz	r0, .L1
+  18:command_queue.c **** 		queue->Front->Next = NULL;
+  48              		.loc 1 18 0
+  49 0010 0023     		movs	r3, #0
+  50 0012 0364     		str	r3, [r0, #64]
+  51              	.L1:
+  52 0014 10BD     		pop	{r4, pc}
+  53              		.cfi_endproc
+  54              	.LFE1:
+  55              		.size	InitQueue, .-InitQueue
+  56 0016 00BF     		.section	.text.IsEmptyQueue,"ax",%progbits
+  57              		.align	2
+  58              		.global	IsEmptyQueue
+  59              		.thumb
+  60              		.thumb_func
+  61              		.type	IsEmptyQueue, %function
+  62              	IsEmptyQueue:
+  63              	.LFB2:
+  19:command_queue.c **** 	}else{
+  20:command_queue.c **** 		//should reboot here
+  21:command_queue.c **** 		// __NVIC_System_Reset();
+  22:command_queue.c **** 
+  23:command_queue.c ****     }
+  24:command_queue.c **** }
+  25:command_queue.c **** 
+  26:command_queue.c **** uint8_t IsEmptyQueue(PQueue queue) {
+  64              		.loc 1 26 0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69              	.LVL3:
+  27:command_queue.c ****     if (queue->Front == queue->Rear) {
+  70              		.loc 1 27 0
+  71 0000 0268     		ldr	r2, [r0]
+  72 0002 4368     		ldr	r3, [r0, #4]
+  73 0004 9A42     		cmp	r2, r3
+  74 0006 01D1     		bne	.L6
+  28:command_queue.c ****         return 1;
+  75              		.loc 1 28 0
+  76 0008 0120     		movs	r0, #1
+  77              	.LVL4:
+  78 000a 7047     		bx	lr
+  79              	.LVL5:
+  80              	.L6:
+  29:command_queue.c ****     }
+  30:command_queue.c ****     else {
+  31:command_queue.c ****         return 0;
+  81              		.loc 1 31 0
+  82 000c 0020     		movs	r0, #0
+  83              	.LVL6:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 3
+
+
+  32:command_queue.c ****     }
+  33:command_queue.c **** }
+  84              		.loc 1 33 0
+  85 000e 7047     		bx	lr
+  86              		.cfi_endproc
+  87              	.LFE2:
+  88              		.size	IsEmptyQueue, .-IsEmptyQueue
+  89              		.section	.text.EnQueue,"ax",%progbits
+  90              		.align	2
+  91              		.global	EnQueue
+  92              		.thumb
+  93              		.thumb_func
+  94              		.type	EnQueue, %function
+  95              	EnQueue:
+  96              	.LFB3:
+  34:command_queue.c **** 
+  35:command_queue.c **** void EnQueue(PQueue queue, uint8_t *commands,uint8_t commands_len) {
+  97              		.loc 1 35 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              	.LVL7:
+ 102 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 103              		.cfi_def_cfa_offset 24
+ 104              		.cfi_offset 3, -24
+ 105              		.cfi_offset 4, -20
+ 106              		.cfi_offset 5, -16
+ 107              		.cfi_offset 6, -12
+ 108              		.cfi_offset 7, -8
+ 109              		.cfi_offset 14, -4
+ 110 0002 0546     		mov	r5, r0
+ 111 0004 0E46     		mov	r6, r1
+ 112 0006 1746     		mov	r7, r2
+  36:command_queue.c ****     PNODE P = (PNODE)calloc(1,sizeof(NODE));
+ 113              		.loc 1 36 0
+ 114 0008 4421     		movs	r1, #68
+ 115              	.LVL8:
+ 116 000a 0120     		movs	r0, #1
+ 117              	.LVL9:
+ 118 000c FFF7FEFF 		bl	calloc
+ 119              	.LVL10:
+  37:command_queue.c ****     if (P != NULL) {
+ 120              		.loc 1 37 0
+ 121 0010 48B1     		cbz	r0, .L7
+ 122 0012 0446     		mov	r4, r0
+  38:command_queue.c ****     	memcpy(P->command,commands,commands_len);
+ 123              		.loc 1 38 0
+ 124 0014 3A46     		mov	r2, r7
+ 125 0016 3146     		mov	r1, r6
+ 126 0018 FFF7FEFF 		bl	memcpy
+ 127              	.LVL11:
+  39:command_queue.c **** 		P->Next = NULL;
+ 128              		.loc 1 39 0
+ 129 001c 0023     		movs	r3, #0
+ 130 001e 2364     		str	r3, [r4, #64]
+  40:command_queue.c **** 		queue->Rear->Next = P;
+ 131              		.loc 1 40 0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 4
+
+
+ 132 0020 6B68     		ldr	r3, [r5, #4]
+ 133 0022 1C64     		str	r4, [r3, #64]
+  41:command_queue.c **** 		queue->Rear = P;
+ 134              		.loc 1 41 0
+ 135 0024 6C60     		str	r4, [r5, #4]
+ 136              	.LVL12:
+ 137              	.L7:
+ 138 0026 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 139              		.cfi_endproc
+ 140              	.LFE3:
+ 141              		.size	EnQueue, .-EnQueue
+ 142              		.section	.text.DeQueue,"ax",%progbits
+ 143              		.align	2
+ 144              		.global	DeQueue
+ 145              		.thumb
+ 146              		.thumb_func
+ 147              		.type	DeQueue, %function
+ 148              	DeQueue:
+ 149              	.LFB4:
+  42:command_queue.c ****     }
+  43:command_queue.c **** }
+  44:command_queue.c **** 
+  45:command_queue.c **** void DeQueue(PQueue queue,uint8_t *commands) {
+ 150              		.loc 1 45 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 0
+ 153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154              	.LVL13:
+ 155 0000 38B5     		push	{r3, r4, r5, lr}
+ 156              		.cfi_def_cfa_offset 16
+ 157              		.cfi_offset 3, -16
+ 158              		.cfi_offset 4, -12
+ 159              		.cfi_offset 5, -8
+ 160              		.cfi_offset 14, -4
+ 161 0002 0446     		mov	r4, r0
+ 162 0004 0D46     		mov	r5, r1
+  46:command_queue.c ****     if (IsEmptyQueue(queue)!=1) {
+ 163              		.loc 1 46 0
+ 164 0006 FFF7FEFF 		bl	IsEmptyQueue
+ 165              	.LVL14:
+ 166 000a 0128     		cmp	r0, #1
+ 167 000c 0FD0     		beq	.L10
+ 168              	.LBB2:
+  47:command_queue.c ****     	PNODE  P= queue->Front->Next;
+ 169              		.loc 1 47 0
+ 170 000e 2368     		ldr	r3, [r4]
+ 171 0010 186C     		ldr	r0, [r3, #64]
+ 172              	.LVL15:
+  48:command_queue.c ****     	memcpy(commands,P->command,5);
+ 173              		.loc 1 48 0
+ 174 0012 0368     		ldr	r3, [r0]	@ unaligned
+ 175 0014 2B60     		str	r3, [r5]	@ unaligned
+ 176 0016 0379     		ldrb	r3, [r0, #4]	@ zero_extendqisi2
+ 177 0018 2B71     		strb	r3, [r5, #4]
+  49:command_queue.c **** 		queue->Front->Next = P->Next;
+ 178              		.loc 1 49 0
+ 179 001a 2368     		ldr	r3, [r4]
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 5
+
+
+ 180 001c 026C     		ldr	r2, [r0, #64]
+ 181 001e 1A64     		str	r2, [r3, #64]
+  50:command_queue.c **** 		if (queue->Rear==P)
+ 182              		.loc 1 50 0
+ 183 0020 6368     		ldr	r3, [r4, #4]
+ 184 0022 9842     		cmp	r0, r3
+ 185 0024 01D1     		bne	.L12
+  51:command_queue.c **** 			queue->Rear = queue->Front;
+ 186              		.loc 1 51 0
+ 187 0026 2368     		ldr	r3, [r4]
+ 188 0028 6360     		str	r3, [r4, #4]
+ 189              	.L12:
+  52:command_queue.c **** 		free(P);
+ 190              		.loc 1 52 0
+ 191 002a FFF7FEFF 		bl	free
+ 192              	.LVL16:
+ 193              	.L10:
+ 194 002e 38BD     		pop	{r3, r4, r5, pc}
+ 195              	.LBE2:
+ 196              		.cfi_endproc
+ 197              	.LFE4:
+ 198              		.size	DeQueue, .-DeQueue
+ 199              		.section	.text.DestroyQueue,"ax",%progbits
+ 200              		.align	2
+ 201              		.global	DestroyQueue
+ 202              		.thumb
+ 203              		.thumb_func
+ 204              		.type	DestroyQueue, %function
+ 205              	DestroyQueue:
+ 206              	.LFB5:
+  53:command_queue.c **** 		P = NULL;
+  54:command_queue.c ****     }
+  55:command_queue.c **** }
+  56:command_queue.c **** 
+  57:command_queue.c **** void DestroyQueue(PQueue queue) {
+ 207              		.loc 1 57 0
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 0
+ 210              		@ frame_needed = 0, uses_anonymous_args = 0
+ 211              	.LVL17:
+ 212 0000 10B5     		push	{r4, lr}
+ 213              		.cfi_def_cfa_offset 8
+ 214              		.cfi_offset 4, -8
+ 215              		.cfi_offset 14, -4
+ 216 0002 0446     		mov	r4, r0
+  58:command_queue.c ****     while (queue->Front != NULL) {
+ 217              		.loc 1 58 0
+ 218 0004 05E0     		b	.L15
+ 219              	.LVL18:
+ 220              	.L16:
+  59:command_queue.c ****         queue->Rear = queue->Front->Next;
+ 221              		.loc 1 59 0
+ 222 0006 036C     		ldr	r3, [r0, #64]
+ 223 0008 6360     		str	r3, [r4, #4]
+  60:command_queue.c ****         free(queue->Front);
+ 224              		.loc 1 60 0
+ 225 000a FFF7FEFF 		bl	free
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 6
+
+
+ 226              	.LVL19:
+  61:command_queue.c ****         queue->Front = queue->Rear;
+ 227              		.loc 1 61 0
+ 228 000e 6368     		ldr	r3, [r4, #4]
+ 229 0010 2360     		str	r3, [r4]
+ 230              	.L15:
+  58:command_queue.c ****         queue->Rear = queue->Front->Next;
+ 231              		.loc 1 58 0
+ 232 0012 2068     		ldr	r0, [r4]
+ 233 0014 0028     		cmp	r0, #0
+ 234 0016 F6D1     		bne	.L16
+  62:command_queue.c ****     }
+  63:command_queue.c **** }
+ 235              		.loc 1 63 0
+ 236 0018 10BD     		pop	{r4, pc}
+ 237              		.cfi_endproc
+ 238              	.LFE5:
+ 239              		.size	DestroyQueue, .-DestroyQueue
+ 240 001a 00BF     		.text
+ 241              	.Letext0:
+ 242              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 243              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 244              		.file 4 "command_queue.h"
+ 245              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 246              		.section	.debug_info,"",%progbits
+ 247              	.Ldebug_info0:
+ 248 0000 B8020000 		.4byte	0x2b8
+ 249 0004 0400     		.2byte	0x4
+ 250 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 251 000a 04       		.byte	0x4
+ 252 000b 01       		.uleb128 0x1
+ 253 000c 27010000 		.4byte	.LASF32
+ 254 0010 0C       		.byte	0xc
+ 255 0011 16000000 		.4byte	.LASF33
+ 256 0015 63000000 		.4byte	.LASF34
+ 257 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 258 001d 00000000 		.4byte	0
+ 259 0021 00000000 		.4byte	.Ldebug_line0
+ 260 0025 02       		.uleb128 0x2
+ 261 0026 01       		.byte	0x1
+ 262 0027 06       		.byte	0x6
+ 263 0028 3A020000 		.4byte	.LASF0
+ 264 002c 03       		.uleb128 0x3
+ 265 002d 07000000 		.4byte	.LASF12
+ 266 0031 02       		.byte	0x2
+ 267 0032 1D       		.byte	0x1d
+ 268 0033 37000000 		.4byte	0x37
+ 269 0037 02       		.uleb128 0x2
+ 270 0038 01       		.byte	0x1
+ 271 0039 08       		.byte	0x8
+ 272 003a B8000000 		.4byte	.LASF1
+ 273 003e 02       		.uleb128 0x2
+ 274 003f 02       		.byte	0x2
+ 275 0040 05       		.byte	0x5
+ 276 0041 16020000 		.4byte	.LASF2
+ 277 0045 02       		.uleb128 0x2
+ 278 0046 02       		.byte	0x2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 7
+
+
+ 279 0047 07       		.byte	0x7
+ 280 0048 D8000000 		.4byte	.LASF3
+ 281 004c 02       		.uleb128 0x2
+ 282 004d 04       		.byte	0x4
+ 283 004e 05       		.byte	0x5
+ 284 004f 20020000 		.4byte	.LASF4
+ 285 0053 02       		.uleb128 0x2
+ 286 0054 04       		.byte	0x4
+ 287 0055 07       		.byte	0x7
+ 288 0056 C6000000 		.4byte	.LASF5
+ 289 005a 02       		.uleb128 0x2
+ 290 005b 08       		.byte	0x8
+ 291 005c 05       		.byte	0x5
+ 292 005d E8010000 		.4byte	.LASF6
+ 293 0061 02       		.uleb128 0x2
+ 294 0062 08       		.byte	0x8
+ 295 0063 07       		.byte	0x7
+ 296 0064 08010000 		.4byte	.LASF7
+ 297 0068 04       		.uleb128 0x4
+ 298 0069 04       		.byte	0x4
+ 299 006a 05       		.byte	0x5
+ 300 006b 696E7400 		.ascii	"int\000"
+ 301 006f 02       		.uleb128 0x2
+ 302 0070 04       		.byte	0x4
+ 303 0071 07       		.byte	0x7
+ 304 0072 F5000000 		.4byte	.LASF8
+ 305 0076 02       		.uleb128 0x2
+ 306 0077 08       		.byte	0x8
+ 307 0078 04       		.byte	0x4
+ 308 0079 2E020000 		.4byte	.LASF9
+ 309 007d 02       		.uleb128 0x2
+ 310 007e 04       		.byte	0x4
+ 311 007f 07       		.byte	0x7
+ 312 0080 DA010000 		.4byte	.LASF10
+ 313 0084 02       		.uleb128 0x2
+ 314 0085 01       		.byte	0x1
+ 315 0086 08       		.byte	0x8
+ 316 0087 29020000 		.4byte	.LASF11
+ 317 008b 03       		.uleb128 0x3
+ 318 008c 1F010000 		.4byte	.LASF13
+ 319 0090 03       		.byte	0x3
+ 320 0091 18       		.byte	0x18
+ 321 0092 2C000000 		.4byte	0x2c
+ 322 0096 05       		.uleb128 0x5
+ 323 0097 11000000 		.4byte	.LASF17
+ 324 009b 44       		.byte	0x44
+ 325 009c 04       		.byte	0x4
+ 326 009d 13       		.byte	0x13
+ 327 009e BB000000 		.4byte	0xbb
+ 328 00a2 06       		.uleb128 0x6
+ 329 00a3 33000000 		.4byte	.LASF14
+ 330 00a7 04       		.byte	0x4
+ 331 00a8 14       		.byte	0x14
+ 332 00a9 BB000000 		.4byte	0xbb
+ 333 00ad 00       		.byte	0
+ 334 00ae 06       		.uleb128 0x6
+ 335 00af 56000000 		.4byte	.LASF15
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 8
+
+
+ 336 00b3 04       		.byte	0x4
+ 337 00b4 15       		.byte	0x15
+ 338 00b5 CB000000 		.4byte	0xcb
+ 339 00b9 40       		.byte	0x40
+ 340 00ba 00       		.byte	0
+ 341 00bb 07       		.uleb128 0x7
+ 342 00bc 84000000 		.4byte	0x84
+ 343 00c0 CB000000 		.4byte	0xcb
+ 344 00c4 08       		.uleb128 0x8
+ 345 00c5 7D000000 		.4byte	0x7d
+ 346 00c9 3F       		.byte	0x3f
+ 347 00ca 00       		.byte	0
+ 348 00cb 09       		.uleb128 0x9
+ 349 00cc 04       		.byte	0x4
+ 350 00cd 96000000 		.4byte	0x96
+ 351 00d1 03       		.uleb128 0x3
+ 352 00d2 03020000 		.4byte	.LASF16
+ 353 00d6 04       		.byte	0x4
+ 354 00d7 16       		.byte	0x16
+ 355 00d8 CB000000 		.4byte	0xcb
+ 356 00dc 05       		.uleb128 0x5
+ 357 00dd 43000000 		.4byte	.LASF18
+ 358 00e1 08       		.byte	0x8
+ 359 00e2 04       		.byte	0x4
+ 360 00e3 19       		.byte	0x19
+ 361 00e4 01010000 		.4byte	0x101
+ 362 00e8 06       		.uleb128 0x6
+ 363 00e9 02010000 		.4byte	.LASF19
+ 364 00ed 04       		.byte	0x4
+ 365 00ee 1A       		.byte	0x1a
+ 366 00ef D1000000 		.4byte	0xd1
+ 367 00f3 00       		.byte	0
+ 368 00f4 06       		.uleb128 0x6
+ 369 00f5 56020000 		.4byte	.LASF20
+ 370 00f9 04       		.byte	0x4
+ 371 00fa 1A       		.byte	0x1a
+ 372 00fb D1000000 		.4byte	0xd1
+ 373 00ff 04       		.byte	0x4
+ 374 0100 00       		.byte	0
+ 375 0101 03       		.uleb128 0x3
+ 376 0102 4F020000 		.4byte	.LASF21
+ 377 0106 04       		.byte	0x4
+ 378 0107 1B       		.byte	0x1b
+ 379 0108 0C010000 		.4byte	0x10c
+ 380 010c 09       		.uleb128 0x9
+ 381 010d 04       		.byte	0x4
+ 382 010e DC000000 		.4byte	0xdc
+ 383 0112 0A       		.uleb128 0xa
+ 384 0113 EB000000 		.4byte	.LASF23
+ 385 0117 01       		.byte	0x1
+ 386 0118 0F       		.byte	0xf
+ 387 0119 00000000 		.4byte	.LFB1
+ 388 011d 16000000 		.4byte	.LFE1-.LFB1
+ 389 0121 01       		.uleb128 0x1
+ 390 0122 9C       		.byte	0x9c
+ 391 0123 47010000 		.4byte	0x147
+ 392 0127 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 9
+
+
+ 393 0128 FD010000 		.4byte	.LASF22
+ 394 012c 01       		.byte	0x1
+ 395 012d 0F       		.byte	0xf
+ 396 012e 01010000 		.4byte	0x101
+ 397 0132 00000000 		.4byte	.LLST0
+ 398 0136 0C       		.uleb128 0xc
+ 399 0137 0A000000 		.4byte	.LVL2
+ 400 013b 91020000 		.4byte	0x291
+ 401 013f 0D       		.uleb128 0xd
+ 402 0140 01       		.uleb128 0x1
+ 403 0141 50       		.byte	0x50
+ 404 0142 02       		.uleb128 0x2
+ 405 0143 08       		.byte	0x8
+ 406 0144 44       		.byte	0x44
+ 407 0145 00       		.byte	0
+ 408 0146 00       		.byte	0
+ 409 0147 0E       		.uleb128 0xe
+ 410 0148 49000000 		.4byte	.LASF35
+ 411 014c 01       		.byte	0x1
+ 412 014d 1A       		.byte	0x1a
+ 413 014e 8B000000 		.4byte	0x8b
+ 414 0152 00000000 		.4byte	.LFB2
+ 415 0156 10000000 		.4byte	.LFE2-.LFB2
+ 416 015a 01       		.uleb128 0x1
+ 417 015b 9C       		.byte	0x9c
+ 418 015c 70010000 		.4byte	0x170
+ 419 0160 0B       		.uleb128 0xb
+ 420 0161 FD010000 		.4byte	.LASF22
+ 421 0165 01       		.byte	0x1
+ 422 0166 1A       		.byte	0x1a
+ 423 0167 01010000 		.4byte	0x101
+ 424 016b 1E000000 		.4byte	.LLST1
+ 425 016f 00       		.byte	0
+ 426 0170 0A       		.uleb128 0xa
+ 427 0171 3B000000 		.4byte	.LASF24
+ 428 0175 01       		.byte	0x1
+ 429 0176 23       		.byte	0x23
+ 430 0177 00000000 		.4byte	.LFB3
+ 431 017b 28000000 		.4byte	.LFE3-.LFB3
+ 432 017f 01       		.uleb128 0x1
+ 433 0180 9C       		.byte	0x9c
+ 434 0181 F5010000 		.4byte	0x1f5
+ 435 0185 0B       		.uleb128 0xb
+ 436 0186 FD010000 		.4byte	.LASF22
+ 437 018a 01       		.byte	0x1
+ 438 018b 23       		.byte	0x23
+ 439 018c 01010000 		.4byte	0x101
+ 440 0190 58000000 		.4byte	.LLST2
+ 441 0194 0B       		.uleb128 0xb
+ 442 0195 46020000 		.4byte	.LASF25
+ 443 0199 01       		.byte	0x1
+ 444 019a 23       		.byte	0x23
+ 445 019b F5010000 		.4byte	0x1f5
+ 446 019f 76000000 		.4byte	.LLST3
+ 447 01a3 0B       		.uleb128 0xb
+ 448 01a4 26000000 		.4byte	.LASF26
+ 449 01a8 01       		.byte	0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 10
+
+
+ 450 01a9 23       		.byte	0x23
+ 451 01aa 8B000000 		.4byte	0x8b
+ 452 01ae 94000000 		.4byte	.LLST4
+ 453 01b2 0F       		.uleb128 0xf
+ 454 01b3 5000     		.ascii	"P\000"
+ 455 01b5 01       		.byte	0x1
+ 456 01b6 24       		.byte	0x24
+ 457 01b7 D1000000 		.4byte	0xd1
+ 458 01bb B5000000 		.4byte	.LLST5
+ 459 01bf 10       		.uleb128 0x10
+ 460 01c0 10000000 		.4byte	.LVL10
+ 461 01c4 9C020000 		.4byte	0x29c
+ 462 01c8 D8010000 		.4byte	0x1d8
+ 463 01cc 0D       		.uleb128 0xd
+ 464 01cd 01       		.uleb128 0x1
+ 465 01ce 50       		.byte	0x50
+ 466 01cf 01       		.uleb128 0x1
+ 467 01d0 31       		.byte	0x31
+ 468 01d1 0D       		.uleb128 0xd
+ 469 01d2 01       		.uleb128 0x1
+ 470 01d3 51       		.byte	0x51
+ 471 01d4 02       		.uleb128 0x2
+ 472 01d5 08       		.byte	0x8
+ 473 01d6 44       		.byte	0x44
+ 474 01d7 00       		.byte	0
+ 475 01d8 0C       		.uleb128 0xc
+ 476 01d9 1C000000 		.4byte	.LVL11
+ 477 01dd A7020000 		.4byte	0x2a7
+ 478 01e1 0D       		.uleb128 0xd
+ 479 01e2 01       		.uleb128 0x1
+ 480 01e3 50       		.byte	0x50
+ 481 01e4 02       		.uleb128 0x2
+ 482 01e5 74       		.byte	0x74
+ 483 01e6 00       		.sleb128 0
+ 484 01e7 0D       		.uleb128 0xd
+ 485 01e8 01       		.uleb128 0x1
+ 486 01e9 51       		.byte	0x51
+ 487 01ea 02       		.uleb128 0x2
+ 488 01eb 76       		.byte	0x76
+ 489 01ec 00       		.sleb128 0
+ 490 01ed 0D       		.uleb128 0xd
+ 491 01ee 01       		.uleb128 0x1
+ 492 01ef 52       		.byte	0x52
+ 493 01f0 02       		.uleb128 0x2
+ 494 01f1 77       		.byte	0x77
+ 495 01f2 00       		.sleb128 0
+ 496 01f3 00       		.byte	0
+ 497 01f4 00       		.byte	0
+ 498 01f5 09       		.uleb128 0x9
+ 499 01f6 04       		.byte	0x4
+ 500 01f7 8B000000 		.4byte	0x8b
+ 501 01fb 0A       		.uleb128 0xa
+ 502 01fc 5B000000 		.4byte	.LASF27
+ 503 0200 01       		.byte	0x1
+ 504 0201 2D       		.byte	0x2d
+ 505 0202 00000000 		.4byte	.LFB4
+ 506 0206 30000000 		.4byte	.LFE4-.LFB4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 11
+
+
+ 507 020a 01       		.uleb128 0x1
+ 508 020b 9C       		.byte	0x9c
+ 509 020c 63020000 		.4byte	0x263
+ 510 0210 0B       		.uleb128 0xb
+ 511 0211 FD010000 		.4byte	.LASF22
+ 512 0215 01       		.byte	0x1
+ 513 0216 2D       		.byte	0x2d
+ 514 0217 01010000 		.4byte	0x101
+ 515 021b D3000000 		.4byte	.LLST6
+ 516 021f 0B       		.uleb128 0xb
+ 517 0220 46020000 		.4byte	.LASF25
+ 518 0224 01       		.byte	0x1
+ 519 0225 2D       		.byte	0x2d
+ 520 0226 F5010000 		.4byte	0x1f5
+ 521 022a F1000000 		.4byte	.LLST7
+ 522 022e 11       		.uleb128 0x11
+ 523 022f 0E000000 		.4byte	.LBB2
+ 524 0233 22000000 		.4byte	.LBE2-.LBB2
+ 525 0237 52020000 		.4byte	0x252
+ 526 023b 0F       		.uleb128 0xf
+ 527 023c 5000     		.ascii	"P\000"
+ 528 023e 01       		.byte	0x1
+ 529 023f 2F       		.byte	0x2f
+ 530 0240 D1000000 		.4byte	0xd1
+ 531 0244 0F010000 		.4byte	.LLST8
+ 532 0248 12       		.uleb128 0x12
+ 533 0249 2E000000 		.4byte	.LVL16
+ 534 024d B0020000 		.4byte	0x2b0
+ 535 0251 00       		.byte	0
+ 536 0252 0C       		.uleb128 0xc
+ 537 0253 0A000000 		.4byte	.LVL14
+ 538 0257 47010000 		.4byte	0x147
+ 539 025b 0D       		.uleb128 0xd
+ 540 025c 01       		.uleb128 0x1
+ 541 025d 50       		.byte	0x50
+ 542 025e 02       		.uleb128 0x2
+ 543 025f 74       		.byte	0x74
+ 544 0260 00       		.sleb128 0
+ 545 0261 00       		.byte	0
+ 546 0262 00       		.byte	0
+ 547 0263 0A       		.uleb128 0xa
+ 548 0264 09020000 		.4byte	.LASF28
+ 549 0268 01       		.byte	0x1
+ 550 0269 39       		.byte	0x39
+ 551 026a 00000000 		.4byte	.LFB5
+ 552 026e 1A000000 		.4byte	.LFE5-.LFB5
+ 553 0272 01       		.uleb128 0x1
+ 554 0273 9C       		.byte	0x9c
+ 555 0274 91020000 		.4byte	0x291
+ 556 0278 0B       		.uleb128 0xb
+ 557 0279 FD010000 		.4byte	.LASF22
+ 558 027d 01       		.byte	0x1
+ 559 027e 39       		.byte	0x39
+ 560 027f 01010000 		.4byte	0x101
+ 561 0283 22010000 		.4byte	.LLST9
+ 562 0287 12       		.uleb128 0x12
+ 563 0288 0E000000 		.4byte	.LVL19
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 12
+
+
+ 564 028c B0020000 		.4byte	0x2b0
+ 565 0290 00       		.byte	0
+ 566 0291 13       		.uleb128 0x13
+ 567 0292 5B020000 		.4byte	.LASF29
+ 568 0296 5B020000 		.4byte	.LASF29
+ 569 029a 05       		.byte	0x5
+ 570 029b 64       		.byte	0x64
+ 571 029c 13       		.uleb128 0x13
+ 572 029d 00000000 		.4byte	.LASF30
+ 573 02a1 00000000 		.4byte	.LASF30
+ 574 02a5 05       		.byte	0x5
+ 575 02a6 56       		.byte	0x56
+ 576 02a7 14       		.uleb128 0x14
+ 577 02a8 F6010000 		.4byte	.LASF36
+ 578 02ac F6010000 		.4byte	.LASF36
+ 579 02b0 13       		.uleb128 0x13
+ 580 02b1 E3010000 		.4byte	.LASF31
+ 581 02b5 E3010000 		.4byte	.LASF31
+ 582 02b9 05       		.byte	0x5
+ 583 02ba 59       		.byte	0x59
+ 584 02bb 00       		.byte	0
+ 585              		.section	.debug_abbrev,"",%progbits
+ 586              	.Ldebug_abbrev0:
+ 587 0000 01       		.uleb128 0x1
+ 588 0001 11       		.uleb128 0x11
+ 589 0002 01       		.byte	0x1
+ 590 0003 25       		.uleb128 0x25
+ 591 0004 0E       		.uleb128 0xe
+ 592 0005 13       		.uleb128 0x13
+ 593 0006 0B       		.uleb128 0xb
+ 594 0007 03       		.uleb128 0x3
+ 595 0008 0E       		.uleb128 0xe
+ 596 0009 1B       		.uleb128 0x1b
+ 597 000a 0E       		.uleb128 0xe
+ 598 000b 55       		.uleb128 0x55
+ 599 000c 17       		.uleb128 0x17
+ 600 000d 11       		.uleb128 0x11
+ 601 000e 01       		.uleb128 0x1
+ 602 000f 10       		.uleb128 0x10
+ 603 0010 17       		.uleb128 0x17
+ 604 0011 00       		.byte	0
+ 605 0012 00       		.byte	0
+ 606 0013 02       		.uleb128 0x2
+ 607 0014 24       		.uleb128 0x24
+ 608 0015 00       		.byte	0
+ 609 0016 0B       		.uleb128 0xb
+ 610 0017 0B       		.uleb128 0xb
+ 611 0018 3E       		.uleb128 0x3e
+ 612 0019 0B       		.uleb128 0xb
+ 613 001a 03       		.uleb128 0x3
+ 614 001b 0E       		.uleb128 0xe
+ 615 001c 00       		.byte	0
+ 616 001d 00       		.byte	0
+ 617 001e 03       		.uleb128 0x3
+ 618 001f 16       		.uleb128 0x16
+ 619 0020 00       		.byte	0
+ 620 0021 03       		.uleb128 0x3
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 13
+
+
+ 621 0022 0E       		.uleb128 0xe
+ 622 0023 3A       		.uleb128 0x3a
+ 623 0024 0B       		.uleb128 0xb
+ 624 0025 3B       		.uleb128 0x3b
+ 625 0026 0B       		.uleb128 0xb
+ 626 0027 49       		.uleb128 0x49
+ 627 0028 13       		.uleb128 0x13
+ 628 0029 00       		.byte	0
+ 629 002a 00       		.byte	0
+ 630 002b 04       		.uleb128 0x4
+ 631 002c 24       		.uleb128 0x24
+ 632 002d 00       		.byte	0
+ 633 002e 0B       		.uleb128 0xb
+ 634 002f 0B       		.uleb128 0xb
+ 635 0030 3E       		.uleb128 0x3e
+ 636 0031 0B       		.uleb128 0xb
+ 637 0032 03       		.uleb128 0x3
+ 638 0033 08       		.uleb128 0x8
+ 639 0034 00       		.byte	0
+ 640 0035 00       		.byte	0
+ 641 0036 05       		.uleb128 0x5
+ 642 0037 13       		.uleb128 0x13
+ 643 0038 01       		.byte	0x1
+ 644 0039 03       		.uleb128 0x3
+ 645 003a 0E       		.uleb128 0xe
+ 646 003b 0B       		.uleb128 0xb
+ 647 003c 0B       		.uleb128 0xb
+ 648 003d 3A       		.uleb128 0x3a
+ 649 003e 0B       		.uleb128 0xb
+ 650 003f 3B       		.uleb128 0x3b
+ 651 0040 0B       		.uleb128 0xb
+ 652 0041 01       		.uleb128 0x1
+ 653 0042 13       		.uleb128 0x13
+ 654 0043 00       		.byte	0
+ 655 0044 00       		.byte	0
+ 656 0045 06       		.uleb128 0x6
+ 657 0046 0D       		.uleb128 0xd
+ 658 0047 00       		.byte	0
+ 659 0048 03       		.uleb128 0x3
+ 660 0049 0E       		.uleb128 0xe
+ 661 004a 3A       		.uleb128 0x3a
+ 662 004b 0B       		.uleb128 0xb
+ 663 004c 3B       		.uleb128 0x3b
+ 664 004d 0B       		.uleb128 0xb
+ 665 004e 49       		.uleb128 0x49
+ 666 004f 13       		.uleb128 0x13
+ 667 0050 38       		.uleb128 0x38
+ 668 0051 0B       		.uleb128 0xb
+ 669 0052 00       		.byte	0
+ 670 0053 00       		.byte	0
+ 671 0054 07       		.uleb128 0x7
+ 672 0055 01       		.uleb128 0x1
+ 673 0056 01       		.byte	0x1
+ 674 0057 49       		.uleb128 0x49
+ 675 0058 13       		.uleb128 0x13
+ 676 0059 01       		.uleb128 0x1
+ 677 005a 13       		.uleb128 0x13
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 14
+
+
+ 678 005b 00       		.byte	0
+ 679 005c 00       		.byte	0
+ 680 005d 08       		.uleb128 0x8
+ 681 005e 21       		.uleb128 0x21
+ 682 005f 00       		.byte	0
+ 683 0060 49       		.uleb128 0x49
+ 684 0061 13       		.uleb128 0x13
+ 685 0062 2F       		.uleb128 0x2f
+ 686 0063 0B       		.uleb128 0xb
+ 687 0064 00       		.byte	0
+ 688 0065 00       		.byte	0
+ 689 0066 09       		.uleb128 0x9
+ 690 0067 0F       		.uleb128 0xf
+ 691 0068 00       		.byte	0
+ 692 0069 0B       		.uleb128 0xb
+ 693 006a 0B       		.uleb128 0xb
+ 694 006b 49       		.uleb128 0x49
+ 695 006c 13       		.uleb128 0x13
+ 696 006d 00       		.byte	0
+ 697 006e 00       		.byte	0
+ 698 006f 0A       		.uleb128 0xa
+ 699 0070 2E       		.uleb128 0x2e
+ 700 0071 01       		.byte	0x1
+ 701 0072 3F       		.uleb128 0x3f
+ 702 0073 19       		.uleb128 0x19
+ 703 0074 03       		.uleb128 0x3
+ 704 0075 0E       		.uleb128 0xe
+ 705 0076 3A       		.uleb128 0x3a
+ 706 0077 0B       		.uleb128 0xb
+ 707 0078 3B       		.uleb128 0x3b
+ 708 0079 0B       		.uleb128 0xb
+ 709 007a 27       		.uleb128 0x27
+ 710 007b 19       		.uleb128 0x19
+ 711 007c 11       		.uleb128 0x11
+ 712 007d 01       		.uleb128 0x1
+ 713 007e 12       		.uleb128 0x12
+ 714 007f 06       		.uleb128 0x6
+ 715 0080 40       		.uleb128 0x40
+ 716 0081 18       		.uleb128 0x18
+ 717 0082 9742     		.uleb128 0x2117
+ 718 0084 19       		.uleb128 0x19
+ 719 0085 01       		.uleb128 0x1
+ 720 0086 13       		.uleb128 0x13
+ 721 0087 00       		.byte	0
+ 722 0088 00       		.byte	0
+ 723 0089 0B       		.uleb128 0xb
+ 724 008a 05       		.uleb128 0x5
+ 725 008b 00       		.byte	0
+ 726 008c 03       		.uleb128 0x3
+ 727 008d 0E       		.uleb128 0xe
+ 728 008e 3A       		.uleb128 0x3a
+ 729 008f 0B       		.uleb128 0xb
+ 730 0090 3B       		.uleb128 0x3b
+ 731 0091 0B       		.uleb128 0xb
+ 732 0092 49       		.uleb128 0x49
+ 733 0093 13       		.uleb128 0x13
+ 734 0094 02       		.uleb128 0x2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 15
+
+
+ 735 0095 17       		.uleb128 0x17
+ 736 0096 00       		.byte	0
+ 737 0097 00       		.byte	0
+ 738 0098 0C       		.uleb128 0xc
+ 739 0099 898201   		.uleb128 0x4109
+ 740 009c 01       		.byte	0x1
+ 741 009d 11       		.uleb128 0x11
+ 742 009e 01       		.uleb128 0x1
+ 743 009f 31       		.uleb128 0x31
+ 744 00a0 13       		.uleb128 0x13
+ 745 00a1 00       		.byte	0
+ 746 00a2 00       		.byte	0
+ 747 00a3 0D       		.uleb128 0xd
+ 748 00a4 8A8201   		.uleb128 0x410a
+ 749 00a7 00       		.byte	0
+ 750 00a8 02       		.uleb128 0x2
+ 751 00a9 18       		.uleb128 0x18
+ 752 00aa 9142     		.uleb128 0x2111
+ 753 00ac 18       		.uleb128 0x18
+ 754 00ad 00       		.byte	0
+ 755 00ae 00       		.byte	0
+ 756 00af 0E       		.uleb128 0xe
+ 757 00b0 2E       		.uleb128 0x2e
+ 758 00b1 01       		.byte	0x1
+ 759 00b2 3F       		.uleb128 0x3f
+ 760 00b3 19       		.uleb128 0x19
+ 761 00b4 03       		.uleb128 0x3
+ 762 00b5 0E       		.uleb128 0xe
+ 763 00b6 3A       		.uleb128 0x3a
+ 764 00b7 0B       		.uleb128 0xb
+ 765 00b8 3B       		.uleb128 0x3b
+ 766 00b9 0B       		.uleb128 0xb
+ 767 00ba 27       		.uleb128 0x27
+ 768 00bb 19       		.uleb128 0x19
+ 769 00bc 49       		.uleb128 0x49
+ 770 00bd 13       		.uleb128 0x13
+ 771 00be 11       		.uleb128 0x11
+ 772 00bf 01       		.uleb128 0x1
+ 773 00c0 12       		.uleb128 0x12
+ 774 00c1 06       		.uleb128 0x6
+ 775 00c2 40       		.uleb128 0x40
+ 776 00c3 18       		.uleb128 0x18
+ 777 00c4 9742     		.uleb128 0x2117
+ 778 00c6 19       		.uleb128 0x19
+ 779 00c7 01       		.uleb128 0x1
+ 780 00c8 13       		.uleb128 0x13
+ 781 00c9 00       		.byte	0
+ 782 00ca 00       		.byte	0
+ 783 00cb 0F       		.uleb128 0xf
+ 784 00cc 34       		.uleb128 0x34
+ 785 00cd 00       		.byte	0
+ 786 00ce 03       		.uleb128 0x3
+ 787 00cf 08       		.uleb128 0x8
+ 788 00d0 3A       		.uleb128 0x3a
+ 789 00d1 0B       		.uleb128 0xb
+ 790 00d2 3B       		.uleb128 0x3b
+ 791 00d3 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 16
+
+
+ 792 00d4 49       		.uleb128 0x49
+ 793 00d5 13       		.uleb128 0x13
+ 794 00d6 02       		.uleb128 0x2
+ 795 00d7 17       		.uleb128 0x17
+ 796 00d8 00       		.byte	0
+ 797 00d9 00       		.byte	0
+ 798 00da 10       		.uleb128 0x10
+ 799 00db 898201   		.uleb128 0x4109
+ 800 00de 01       		.byte	0x1
+ 801 00df 11       		.uleb128 0x11
+ 802 00e0 01       		.uleb128 0x1
+ 803 00e1 31       		.uleb128 0x31
+ 804 00e2 13       		.uleb128 0x13
+ 805 00e3 01       		.uleb128 0x1
+ 806 00e4 13       		.uleb128 0x13
+ 807 00e5 00       		.byte	0
+ 808 00e6 00       		.byte	0
+ 809 00e7 11       		.uleb128 0x11
+ 810 00e8 0B       		.uleb128 0xb
+ 811 00e9 01       		.byte	0x1
+ 812 00ea 11       		.uleb128 0x11
+ 813 00eb 01       		.uleb128 0x1
+ 814 00ec 12       		.uleb128 0x12
+ 815 00ed 06       		.uleb128 0x6
+ 816 00ee 01       		.uleb128 0x1
+ 817 00ef 13       		.uleb128 0x13
+ 818 00f0 00       		.byte	0
+ 819 00f1 00       		.byte	0
+ 820 00f2 12       		.uleb128 0x12
+ 821 00f3 898201   		.uleb128 0x4109
+ 822 00f6 00       		.byte	0
+ 823 00f7 11       		.uleb128 0x11
+ 824 00f8 01       		.uleb128 0x1
+ 825 00f9 31       		.uleb128 0x31
+ 826 00fa 13       		.uleb128 0x13
+ 827 00fb 00       		.byte	0
+ 828 00fc 00       		.byte	0
+ 829 00fd 13       		.uleb128 0x13
+ 830 00fe 2E       		.uleb128 0x2e
+ 831 00ff 00       		.byte	0
+ 832 0100 3F       		.uleb128 0x3f
+ 833 0101 19       		.uleb128 0x19
+ 834 0102 3C       		.uleb128 0x3c
+ 835 0103 19       		.uleb128 0x19
+ 836 0104 6E       		.uleb128 0x6e
+ 837 0105 0E       		.uleb128 0xe
+ 838 0106 03       		.uleb128 0x3
+ 839 0107 0E       		.uleb128 0xe
+ 840 0108 3A       		.uleb128 0x3a
+ 841 0109 0B       		.uleb128 0xb
+ 842 010a 3B       		.uleb128 0x3b
+ 843 010b 0B       		.uleb128 0xb
+ 844 010c 00       		.byte	0
+ 845 010d 00       		.byte	0
+ 846 010e 14       		.uleb128 0x14
+ 847 010f 2E       		.uleb128 0x2e
+ 848 0110 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 17
+
+
+ 849 0111 3F       		.uleb128 0x3f
+ 850 0112 19       		.uleb128 0x19
+ 851 0113 3C       		.uleb128 0x3c
+ 852 0114 19       		.uleb128 0x19
+ 853 0115 6E       		.uleb128 0x6e
+ 854 0116 0E       		.uleb128 0xe
+ 855 0117 03       		.uleb128 0x3
+ 856 0118 0E       		.uleb128 0xe
+ 857 0119 00       		.byte	0
+ 858 011a 00       		.byte	0
+ 859 011b 00       		.byte	0
+ 860              		.section	.debug_loc,"",%progbits
+ 861              	.Ldebug_loc0:
+ 862              	.LLST0:
+ 863 0000 00000000 		.4byte	.LVL0
+ 864 0004 06000000 		.4byte	.LVL1
+ 865 0008 0100     		.2byte	0x1
+ 866 000a 50       		.byte	0x50
+ 867 000b 06000000 		.4byte	.LVL1
+ 868 000f 16000000 		.4byte	.LFE1
+ 869 0013 0100     		.2byte	0x1
+ 870 0015 54       		.byte	0x54
+ 871 0016 00000000 		.4byte	0
+ 872 001a 00000000 		.4byte	0
+ 873              	.LLST1:
+ 874 001e 00000000 		.4byte	.LVL3
+ 875 0022 0A000000 		.4byte	.LVL4
+ 876 0026 0100     		.2byte	0x1
+ 877 0028 50       		.byte	0x50
+ 878 0029 0A000000 		.4byte	.LVL4
+ 879 002d 0C000000 		.4byte	.LVL5
+ 880 0031 0400     		.2byte	0x4
+ 881 0033 F3       		.byte	0xf3
+ 882 0034 01       		.uleb128 0x1
+ 883 0035 50       		.byte	0x50
+ 884 0036 9F       		.byte	0x9f
+ 885 0037 0C000000 		.4byte	.LVL5
+ 886 003b 0E000000 		.4byte	.LVL6
+ 887 003f 0100     		.2byte	0x1
+ 888 0041 50       		.byte	0x50
+ 889 0042 0E000000 		.4byte	.LVL6
+ 890 0046 10000000 		.4byte	.LFE2
+ 891 004a 0400     		.2byte	0x4
+ 892 004c F3       		.byte	0xf3
+ 893 004d 01       		.uleb128 0x1
+ 894 004e 50       		.byte	0x50
+ 895 004f 9F       		.byte	0x9f
+ 896 0050 00000000 		.4byte	0
+ 897 0054 00000000 		.4byte	0
+ 898              	.LLST2:
+ 899 0058 00000000 		.4byte	.LVL7
+ 900 005c 0C000000 		.4byte	.LVL9
+ 901 0060 0100     		.2byte	0x1
+ 902 0062 50       		.byte	0x50
+ 903 0063 0C000000 		.4byte	.LVL9
+ 904 0067 28000000 		.4byte	.LFE3
+ 905 006b 0100     		.2byte	0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 18
+
+
+ 906 006d 55       		.byte	0x55
+ 907 006e 00000000 		.4byte	0
+ 908 0072 00000000 		.4byte	0
+ 909              	.LLST3:
+ 910 0076 00000000 		.4byte	.LVL7
+ 911 007a 0A000000 		.4byte	.LVL8
+ 912 007e 0100     		.2byte	0x1
+ 913 0080 51       		.byte	0x51
+ 914 0081 0A000000 		.4byte	.LVL8
+ 915 0085 28000000 		.4byte	.LFE3
+ 916 0089 0100     		.2byte	0x1
+ 917 008b 56       		.byte	0x56
+ 918 008c 00000000 		.4byte	0
+ 919 0090 00000000 		.4byte	0
+ 920              	.LLST4:
+ 921 0094 00000000 		.4byte	.LVL7
+ 922 0098 0F000000 		.4byte	.LVL10-1
+ 923 009c 0100     		.2byte	0x1
+ 924 009e 52       		.byte	0x52
+ 925 009f 0F000000 		.4byte	.LVL10-1
+ 926 00a3 28000000 		.4byte	.LFE3
+ 927 00a7 0400     		.2byte	0x4
+ 928 00a9 F3       		.byte	0xf3
+ 929 00aa 01       		.uleb128 0x1
+ 930 00ab 52       		.byte	0x52
+ 931 00ac 9F       		.byte	0x9f
+ 932 00ad 00000000 		.4byte	0
+ 933 00b1 00000000 		.4byte	0
+ 934              	.LLST5:
+ 935 00b5 10000000 		.4byte	.LVL10
+ 936 00b9 1B000000 		.4byte	.LVL11-1
+ 937 00bd 0100     		.2byte	0x1
+ 938 00bf 50       		.byte	0x50
+ 939 00c0 1B000000 		.4byte	.LVL11-1
+ 940 00c4 26000000 		.4byte	.LVL12
+ 941 00c8 0100     		.2byte	0x1
+ 942 00ca 54       		.byte	0x54
+ 943 00cb 00000000 		.4byte	0
+ 944 00cf 00000000 		.4byte	0
+ 945              	.LLST6:
+ 946 00d3 00000000 		.4byte	.LVL13
+ 947 00d7 09000000 		.4byte	.LVL14-1
+ 948 00db 0100     		.2byte	0x1
+ 949 00dd 50       		.byte	0x50
+ 950 00de 09000000 		.4byte	.LVL14-1
+ 951 00e2 30000000 		.4byte	.LFE4
+ 952 00e6 0100     		.2byte	0x1
+ 953 00e8 54       		.byte	0x54
+ 954 00e9 00000000 		.4byte	0
+ 955 00ed 00000000 		.4byte	0
+ 956              	.LLST7:
+ 957 00f1 00000000 		.4byte	.LVL13
+ 958 00f5 09000000 		.4byte	.LVL14-1
+ 959 00f9 0100     		.2byte	0x1
+ 960 00fb 51       		.byte	0x51
+ 961 00fc 09000000 		.4byte	.LVL14-1
+ 962 0100 30000000 		.4byte	.LFE4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 19
+
+
+ 963 0104 0100     		.2byte	0x1
+ 964 0106 55       		.byte	0x55
+ 965 0107 00000000 		.4byte	0
+ 966 010b 00000000 		.4byte	0
+ 967              	.LLST8:
+ 968 010f 12000000 		.4byte	.LVL15
+ 969 0113 2D000000 		.4byte	.LVL16-1
+ 970 0117 0100     		.2byte	0x1
+ 971 0119 50       		.byte	0x50
+ 972 011a 00000000 		.4byte	0
+ 973 011e 00000000 		.4byte	0
+ 974              	.LLST9:
+ 975 0122 00000000 		.4byte	.LVL17
+ 976 0126 06000000 		.4byte	.LVL18
+ 977 012a 0100     		.2byte	0x1
+ 978 012c 50       		.byte	0x50
+ 979 012d 06000000 		.4byte	.LVL18
+ 980 0131 1A000000 		.4byte	.LFE5
+ 981 0135 0100     		.2byte	0x1
+ 982 0137 54       		.byte	0x54
+ 983 0138 00000000 		.4byte	0
+ 984 013c 00000000 		.4byte	0
+ 985              		.section	.debug_aranges,"",%progbits
+ 986 0000 3C000000 		.4byte	0x3c
+ 987 0004 0200     		.2byte	0x2
+ 988 0006 00000000 		.4byte	.Ldebug_info0
+ 989 000a 04       		.byte	0x4
+ 990 000b 00       		.byte	0
+ 991 000c 0000     		.2byte	0
+ 992 000e 0000     		.2byte	0
+ 993 0010 00000000 		.4byte	.LFB1
+ 994 0014 16000000 		.4byte	.LFE1-.LFB1
+ 995 0018 00000000 		.4byte	.LFB2
+ 996 001c 10000000 		.4byte	.LFE2-.LFB2
+ 997 0020 00000000 		.4byte	.LFB3
+ 998 0024 28000000 		.4byte	.LFE3-.LFB3
+ 999 0028 00000000 		.4byte	.LFB4
+ 1000 002c 30000000 		.4byte	.LFE4-.LFB4
+ 1001 0030 00000000 		.4byte	.LFB5
+ 1002 0034 1A000000 		.4byte	.LFE5-.LFB5
+ 1003 0038 00000000 		.4byte	0
+ 1004 003c 00000000 		.4byte	0
+ 1005              		.section	.debug_ranges,"",%progbits
+ 1006              	.Ldebug_ranges0:
+ 1007 0000 00000000 		.4byte	.LFB1
+ 1008 0004 16000000 		.4byte	.LFE1
+ 1009 0008 00000000 		.4byte	.LFB2
+ 1010 000c 10000000 		.4byte	.LFE2
+ 1011 0010 00000000 		.4byte	.LFB3
+ 1012 0014 28000000 		.4byte	.LFE3
+ 1013 0018 00000000 		.4byte	.LFB4
+ 1014 001c 30000000 		.4byte	.LFE4
+ 1015 0020 00000000 		.4byte	.LFB5
+ 1016 0024 1A000000 		.4byte	.LFE5
+ 1017 0028 00000000 		.4byte	0
+ 1018 002c 00000000 		.4byte	0
+ 1019              		.section	.debug_line,"",%progbits
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 20
+
+
+ 1020              	.Ldebug_line0:
+ 1021 0000 15020000 		.section	.debug_str,"MS",%progbits,1
+ 1021      0200AA01 
+ 1021      00000201 
+ 1021      FB0E0D00 
+ 1021      01010101 
+ 1022              	.LASF30:
+ 1023 0000 63616C6C 		.ascii	"calloc\000"
+ 1023      6F6300
+ 1024              	.LASF12:
+ 1025 0007 5F5F7569 		.ascii	"__uint8_t\000"
+ 1025      6E74385F 
+ 1025      7400
+ 1026              	.LASF17:
+ 1027 0011 4E6F6465 		.ascii	"Node\000"
+ 1027      00
+ 1028              	.LASF33:
+ 1029 0016 636F6D6D 		.ascii	"command_queue.c\000"
+ 1029      616E645F 
+ 1029      71756575 
+ 1029      652E6300 
+ 1030              	.LASF26:
+ 1031 0026 636F6D6D 		.ascii	"commands_len\000"
+ 1031      616E6473 
+ 1031      5F6C656E 
+ 1031      00
+ 1032              	.LASF14:
+ 1033 0033 636F6D6D 		.ascii	"command\000"
+ 1033      616E6400 
+ 1034              	.LASF24:
+ 1035 003b 456E5175 		.ascii	"EnQueue\000"
+ 1035      65756500 
+ 1036              	.LASF18:
+ 1037 0043 514E6F64 		.ascii	"QNode\000"
+ 1037      6500
+ 1038              	.LASF35:
+ 1039 0049 4973456D 		.ascii	"IsEmptyQueue\000"
+ 1039      70747951 
+ 1039      75657565 
+ 1039      00
+ 1040              	.LASF15:
+ 1041 0056 4E657874 		.ascii	"Next\000"
+ 1041      00
+ 1042              	.LASF27:
+ 1043 005b 44655175 		.ascii	"DeQueue\000"
+ 1043      65756500 
+ 1044              	.LASF34:
+ 1045 0063 433A5C55 		.ascii	"C:\\Users\\cmila\\uni\\projects\\Neural-Stimulator-"
+ 1045      73657273 
+ 1045      5C636D69 
+ 1045      6C615C75 
+ 1045      6E695C70 
+ 1046 0091 4669726D 		.ascii	"Firmware\\new\\PSOC6\\CustomService.cydsn\000"
+ 1046      77617265 
+ 1046      5C6E6577 
+ 1046      5C50534F 
+ 1046      43365C43 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 21
+
+
+ 1047              	.LASF1:
+ 1048 00b8 756E7369 		.ascii	"unsigned char\000"
+ 1048      676E6564 
+ 1048      20636861 
+ 1048      7200
+ 1049              	.LASF5:
+ 1050 00c6 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1050      20756E73 
+ 1050      69676E65 
+ 1050      6420696E 
+ 1050      7400
+ 1051              	.LASF3:
+ 1052 00d8 73686F72 		.ascii	"short unsigned int\000"
+ 1052      7420756E 
+ 1052      7369676E 
+ 1052      65642069 
+ 1052      6E7400
+ 1053              	.LASF23:
+ 1054 00eb 496E6974 		.ascii	"InitQueue\000"
+ 1054      51756575 
+ 1054      6500
+ 1055              	.LASF8:
+ 1056 00f5 756E7369 		.ascii	"unsigned int\000"
+ 1056      676E6564 
+ 1056      20696E74 
+ 1056      00
+ 1057              	.LASF19:
+ 1058 0102 46726F6E 		.ascii	"Front\000"
+ 1058      7400
+ 1059              	.LASF7:
+ 1060 0108 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1060      206C6F6E 
+ 1060      6720756E 
+ 1060      7369676E 
+ 1060      65642069 
+ 1061              	.LASF13:
+ 1062 011f 75696E74 		.ascii	"uint8_t\000"
+ 1062      385F7400 
+ 1063              	.LASF32:
+ 1064 0127 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1064      43313120 
+ 1064      352E342E 
+ 1064      31203230 
+ 1064      31363036 
+ 1065 015a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 1065      20726576 
+ 1065      6973696F 
+ 1065      6E203233 
+ 1065      37373135 
+ 1066 018d 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 1066      70202D6D 
+ 1066      6670753D 
+ 1066      66707634 
+ 1066      2D73702D 
+ 1067 01c0 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 1067      6F6E7320 
+ 1067      2D666661 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 22
+
+
+ 1067      742D6C74 
+ 1067      6F2D6F62 
+ 1068              	.LASF10:
+ 1069 01da 73697A65 		.ascii	"sizetype\000"
+ 1069      74797065 
+ 1069      00
+ 1070              	.LASF31:
+ 1071 01e3 66726565 		.ascii	"free\000"
+ 1071      00
+ 1072              	.LASF6:
+ 1073 01e8 6C6F6E67 		.ascii	"long long int\000"
+ 1073      206C6F6E 
+ 1073      6720696E 
+ 1073      7400
+ 1074              	.LASF36:
+ 1075 01f6 6D656D63 		.ascii	"memcpy\000"
+ 1075      707900
+ 1076              	.LASF22:
+ 1077 01fd 71756575 		.ascii	"queue\000"
+ 1077      6500
+ 1078              	.LASF16:
+ 1079 0203 504E4F44 		.ascii	"PNODE\000"
+ 1079      4500
+ 1080              	.LASF28:
+ 1081 0209 44657374 		.ascii	"DestroyQueue\000"
+ 1081      726F7951 
+ 1081      75657565 
+ 1081      00
+ 1082              	.LASF2:
+ 1083 0216 73686F72 		.ascii	"short int\000"
+ 1083      7420696E 
+ 1083      7400
+ 1084              	.LASF4:
+ 1085 0220 6C6F6E67 		.ascii	"long int\000"
+ 1085      20696E74 
+ 1085      00
+ 1086              	.LASF11:
+ 1087 0229 63686172 		.ascii	"char\000"
+ 1087      00
+ 1088              	.LASF9:
+ 1089 022e 6C6F6E67 		.ascii	"long double\000"
+ 1089      20646F75 
+ 1089      626C6500 
+ 1090              	.LASF0:
+ 1091 023a 7369676E 		.ascii	"signed char\000"
+ 1091      65642063 
+ 1091      68617200 
+ 1092              	.LASF25:
+ 1093 0246 636F6D6D 		.ascii	"commands\000"
+ 1093      616E6473 
+ 1093      00
+ 1094              	.LASF21:
+ 1095 024f 50517565 		.ascii	"PQueue\000"
+ 1095      756500
+ 1096              	.LASF20:
+ 1097 0256 52656172 		.ascii	"Rear\000"
+ 1097      00
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccEwJszf.s 			page 23
+
+
+ 1098              	.LASF29:
+ 1099 025b 6D616C6C 		.ascii	"malloc\000"
+ 1099      6F6300
+ 1100              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

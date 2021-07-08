@@ -1,12 +1,12 @@
 /***************************************************************************//**
 * \file cy_scb_common.c
-* \version 2.20
+* \version 2.30
 *
 * Provides common API implementation of the SCB driver.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2016-2018, Cypress Semiconductor Corporation. All rights reserved.
+* Copyright 2016-2021, Cypress Semiconductor Corporation. All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
