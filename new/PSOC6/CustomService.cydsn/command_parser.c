@@ -15,69 +15,71 @@
 #include "FreeRTOS.h"
 #include <stdio.h>
 #include <string.h>
+#include "supported_commands.h"
 
 void execute_command(uint8_t *command){
 	uint32_t value = (command[1]<<24) + (command[2]<<16) + (command[3]<<8) + command[4];
 	switch (command[0]){
-		case 0x01:
-            printf("Command 1 executed");
+		case START:
+            printf("Command 1 executed... Starting stimulation");
             
             break;
-        case 0x02:
+        case STOP:
             // testing multitasking capabilities
-            printf("Command 2 executed");
+            printf("Command 2 executed... Stopping stimulation");
 			break;
-		case 0x03:
-            printf("Command 3 executed");
+		case STIM_TYPE:
+            printf("Command 3 executed... set stimulation type");
 			break;
-		case 0x04:
-            printf("Command 4 executed");
+		case ANODIC_CATHODIC:
+            // anodic = 0, cathodic = 1
+            printf("Command 4 executed... Anodic selected....");
 			break;
-		case 0x05:
+		case DAC_PHASE_ONE:
             printf("Command 5 executed");
 			break;
-		case 0x06:
+		case DAC_PHASE_TWO:
             printf("Command 6 executed");
 			break;
-		case 0x07:
+		case DAC_GAP:
             printf("Command 7 executed");
 			break;
-		case 0x08:
+		case PHASE_ONE_TIME:
             printf("Command 8 executed");
 			break;
-		case 0x09:
+		case INTER_PHASE_GAP:
 			break;
-		case 0x0a:
+		case PHASE_TWO_TIME:
 			break;
-		case 0x0b:
+		case INTER_STIM_DELAY:
 			break;
-		case 0x0c:
+		case INTER_BURST_DELAY:
 			break;
-		case 0x0d:
+		case PULSE_NUM:
 			break;
-		case 0x0e:
+		case PULSE_NUM_IN_ONE_BURST:
 			break;
-		case 0x0f:
+		case BURST_NUM:
 			break;
-		case 0x10:
+		case RAMP_UP:
 			break;
-		case 0x11:
+		case SHORT_ELECTRODE:
 			break;
-		case 0x12:
+		case RECORD_FREQ:
 			break;
-		case 0x13:
+		case START_RECORDING:
 			break;
-		case 0x14:
+		case STOP_RECORDING:
 			break;
-		case 0x15:
+		case ELECTRODE_VOLTAGE:
 			break;
-		case 0x16:
+		case ELEC_OFFSET:
 			break;
-		case 0x17:
+		case SHOW_DAC:
 			break;
-		case 0x18:
+		case RETURN_IDLE:
 			break;
-		case 0x19:
+		case CHECK_STATE:
 			break;
 		default:break;
 	}

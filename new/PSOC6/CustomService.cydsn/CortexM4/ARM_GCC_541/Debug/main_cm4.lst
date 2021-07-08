@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 1
 
 
    1              		.syntax unified
@@ -48,29 +48,30 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
   17:main_cm4.c    **** #include <limits.h>
   18:main_cm4.c    **** #include "command_parser.h"
   19:main_cm4.c    **** #include "command_queue.h"
-  20:main_cm4.c    **** 
-  21:main_cm4.c    **** SemaphoreHandle_t bleSemaphore;
-  22:main_cm4.c    **** 
-  23:main_cm4.c    **** void genericEventHandler(uint32_t event, void *eventParameter) {
-  29              		.loc 1 23 0
+  20:main_cm4.c    **** #include "stdlib.h"
+  21:main_cm4.c    **** 
+  22:main_cm4.c    **** SemaphoreHandle_t bleSemaphore;
+  23:main_cm4.c    **** 
+  24:main_cm4.c    **** void genericEventHandler(uint32_t event, void *eventParameter) {
+  29              		.loc 1 24 0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
   33              	.LVL0:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 2
+
+
   34 0000 70B5     		push	{r4, r5, r6, lr}
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 2
-
-
   35              		.cfi_def_cfa_offset 16
   36              		.cfi_offset 4, -16
   37              		.cfi_offset 5, -12
   38              		.cfi_offset 6, -8
   39              		.cfi_offset 14, -4
-  24:main_cm4.c    ****     cy_stc_ble_gatts_write_cmd_req_param_t *writeReqParameter;
-  25:main_cm4.c    ****     
-  26:main_cm4.c    ****     // Take an action based on current event
-  27:main_cm4.c    ****     switch (event) {
-  40              		.loc 1 27 0
+  25:main_cm4.c    ****     cy_stc_ble_gatts_write_cmd_req_param_t *writeReqParameter;
+  26:main_cm4.c    ****     
+  27:main_cm4.c    ****     // Take an action based on current event
+  28:main_cm4.c    ****     switch (event) {
+  40              		.loc 1 28 0
   41 0002 44F20803 		movw	r3, #16392
   42 0006 9842     		cmp	r0, r3
   43 0008 0ED0     		beq	.L3
@@ -88,99 +89,107 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
   55 0024 0CD0     		beq	.L6
   56 0026 70BD     		pop	{r4, r5, r6, pc}
   57              	.L3:
-  28:main_cm4.c    ****         case CY_BLE_EVT_STACK_ON:
-  29:main_cm4.c    ****         case CY_BLE_EVT_GAP_DEVICE_DISCONNECTED:
-  30:main_cm4.c    ****             printf("disconnected\n");
-  58              		.loc 1 30 0
+  29:main_cm4.c    ****         case CY_BLE_EVT_STACK_ON:
+  30:main_cm4.c    ****         case CY_BLE_EVT_GAP_DEVICE_DISCONNECTED:
+  31:main_cm4.c    ****             printf("disconnected\n");
+  58              		.loc 1 31 0
   59 0028 1048     		ldr	r0, .L11
   60              	.LVL1:
   61 002a FFF7FEFF 		bl	puts
   62              	.LVL2:
-  31:main_cm4.c    ****             Cy_BLE_GAPP_StartAdvertisement(CY_BLE_ADVERTISING_FAST, CY_BLE_PERIPHERAL_CONFIGURATION
-  63              		.loc 1 31 0
+  32:main_cm4.c    ****             Cy_BLE_GAPP_StartAdvertisement(CY_BLE_ADVERTISING_FAST, CY_BLE_PERIPHERAL_CONFIGURATION
+  63              		.loc 1 32 0
   64 002e 0021     		movs	r1, #0
   65 0030 0846     		mov	r0, r1
   66 0032 FFF7FEFF 		bl	Cy_BLE_GAPP_StartAdvertisement
   67              	.LVL3:
-  32:main_cm4.c    ****             break;
-  68              		.loc 1 32 0
+  33:main_cm4.c    ****             break;
+  68              		.loc 1 33 0
   69 0036 70BD     		pop	{r4, r5, r6, pc}
   70              	.LVL4:
   71              	.L5:
-  33:main_cm4.c    ****         case CY_BLE_EVT_GATT_CONNECT_IND:
-  34:main_cm4.c    ****             printf("connected\n");
-  72              		.loc 1 34 0
+  34:main_cm4.c    ****         case CY_BLE_EVT_GATT_CONNECT_IND:
+  35:main_cm4.c    ****             printf("connected\n");
+  72              		.loc 1 35 0
   73 0038 0D48     		ldr	r0, .L11+4
   74              	.LVL5:
   75 003a FFF7FEFF 		bl	puts
   76              	.LVL6:
-  35:main_cm4.c    ****             break;
-  77              		.loc 1 35 0
+  36:main_cm4.c    ****             break;
+  77              		.loc 1 36 0
   78 003e 70BD     		pop	{r4, r5, r6, pc}
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 3
+
+
   79              	.LVL7:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 3
-
-
   80              	.L6:
-  36:main_cm4.c    ****         case CY_BLE_EVT_GATTS_WRITE_REQ:
-  37:main_cm4.c    ****             writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
-  38:main_cm4.c    ****             
-  39:main_cm4.c    ****             if (CY_BLE_NS_NSCHARACTERISTIC_CHAR_HANDLE == writeReqParameter->handleValPair.attrHand
-  81              		.loc 1 39 0
+  37:main_cm4.c    ****         case CY_BLE_EVT_GATTS_WRITE_REQ:
+  38:main_cm4.c    ****             writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
+  39:main_cm4.c    ****             
+  40:main_cm4.c    ****             if (CY_BLE_NS_NSCHARACTERISTIC_CHAR_HANDLE == writeReqParameter->handleValPair.attrHand
+  81              		.loc 1 40 0
   82 0040 0B89     		ldrh	r3, [r1, #8]
   83 0042 122B     		cmp	r3, #18
   84 0044 0DD1     		bne	.L7
   85              	.LBB4:
-  40:main_cm4.c    ****                 uint8_t *commands = writeReqParameter->handleValPair.value.val;
-  86              		.loc 1 40 0
+  41:main_cm4.c    ****                 uint8_t *commands = writeReqParameter->handleValPair.value.val;
+  86              		.loc 1 41 0
   87 0046 0E68     		ldr	r6, [r1]
   88              	.LVL8:
   89              	.LBB5:
-  41:main_cm4.c    ****                 
-  42:main_cm4.c    ****                 for (int i=0; i < 5; i++) {
-  90              		.loc 1 42 0
+  42:main_cm4.c    ****                 // error handling
+  43:main_cm4.c    ****                 /*int array_size = (int)(sizeof(commands)/sizeof(commands[0]));
+  44:main_cm4.c    ****                 switch (array_size) {
+  45:main_cm4.c    ****                     case (array_size > 5): 
+  46:main_cm4.c    ****                         printf("invalid command");
+  47:main_cm4.c    ****                         break;
+  48:main_cm4.c    ****                 }*/
+  49:main_cm4.c    ****                 //
+  50:main_cm4.c    ****                 
+  51:main_cm4.c    ****                 for (int i=0; i < 5; i++) {
+  90              		.loc 1 51 0
   91 0048 0024     		movs	r4, #0
   92 004a 05E0     		b	.L8
   93              	.LVL9:
   94              	.L9:
-  43:main_cm4.c    ****                     // please null check.
-  44:main_cm4.c    ****                     printf("command[%d] = %d\r\n", i, commands[i]);    
-  95              		.loc 1 44 0 discriminator 3
+  52:main_cm4.c    ****                     // please null check.
+  53:main_cm4.c    ****                     printf("command[%d] = %d\r\n", i, commands[i]);    
+  95              		.loc 1 53 0 discriminator 3
   96 004c 325D     		ldrb	r2, [r6, r4]	@ zero_extendqisi2
   97 004e 2146     		mov	r1, r4
   98 0050 0848     		ldr	r0, .L11+8
   99 0052 FFF7FEFF 		bl	printf
  100              	.LVL10:
-  42:main_cm4.c    ****                     // please null check.
- 101              		.loc 1 42 0 discriminator 3
+  51:main_cm4.c    ****                     // please null check.
+ 101              		.loc 1 51 0 discriminator 3
  102 0056 0134     		adds	r4, r4, #1
  103              	.LVL11:
  104              	.L8:
-  42:main_cm4.c    ****                     // please null check.
- 105              		.loc 1 42 0 is_stmt 0 discriminator 1
+  51:main_cm4.c    ****                     // please null check.
+ 105              		.loc 1 51 0 is_stmt 0 discriminator 1
  106 0058 042C     		cmp	r4, #4
  107 005a F7DD     		ble	.L9
  108              	.LBE5:
-  45:main_cm4.c    ****                 }
-  46:main_cm4.c    ****                 
-  47:main_cm4.c    ****                 // passing to command parser
-  48:main_cm4.c    ****                 execute_command(commands);
- 109              		.loc 1 48 0 is_stmt 1
+  54:main_cm4.c    ****                 }
+  55:main_cm4.c    ****                 
+  56:main_cm4.c    ****                 // passing to command parser
+  57:main_cm4.c    ****                 execute_command(commands);
+ 109              		.loc 1 57 0 is_stmt 1
  110 005c 3046     		mov	r0, r6
  111 005e FFF7FEFF 		bl	execute_command
  112              	.LVL12:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 4
+
+
  113              	.L7:
  114              	.LBE4:
-  49:main_cm4.c    ****                 
-  50:main_cm4.c    ****             }
-  51:main_cm4.c    ****             
-  52:main_cm4.c    ****             Cy_BLE_GATTS_WriteRsp(writeReqParameter->connHandle);
- 115              		.loc 1 52 0
+  58:main_cm4.c    ****                 
+  59:main_cm4.c    ****             }
+  60:main_cm4.c    ****             
+  61:main_cm4.c    ****             Cy_BLE_GATTS_WriteRsp(writeReqParameter->connHandle);
+ 115              		.loc 1 61 0
  116 0062 E868     		ldr	r0, [r5, #12]
  117 0064 FFF7FEFF 		bl	Cy_BLE_GATTS_WriteRsp
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 4
-
-
  118              	.LVL13:
  119 0068 70BD     		pop	{r4, r5, r6, pc}
  120              	.LVL14:
@@ -201,14 +210,14 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  135              		.type	bleInterruptNotify, %function
  136              	bleInterruptNotify:
  137              	.LFB497:
-  53:main_cm4.c    ****             break;
-  54:main_cm4.c    ****         default:
-  55:main_cm4.c    ****             break;
-  56:main_cm4.c    ****     }
-  57:main_cm4.c    **** }
-  58:main_cm4.c    **** 
-  59:main_cm4.c    **** void bleInterruptNotify() {
- 138              		.loc 1 59 0
+  62:main_cm4.c    ****             break;
+  63:main_cm4.c    ****         default:
+  64:main_cm4.c    ****             break;
+  65:main_cm4.c    ****     }
+  66:main_cm4.c    **** }
+  67:main_cm4.c    **** 
+  68:main_cm4.c    **** void bleInterruptNotify() {
+ 138              		.loc 1 68 0
  139              		.cfi_startproc
  140              		@ args = 0, pretend = 0, frame = 8
  141              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -217,41 +226,41 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  144              		.cfi_offset 14, -4
  145 0002 83B0     		sub	sp, sp, #12
  146              		.cfi_def_cfa_offset 16
-  60:main_cm4.c    ****     BaseType_t xHigherPriorityTaskWoken;
-  61:main_cm4.c    ****     xHigherPriorityTaskWoken = pdFALSE;
- 147              		.loc 1 61 0
+  69:main_cm4.c    ****     BaseType_t xHigherPriorityTaskWoken;
+  70:main_cm4.c    ****     xHigherPriorityTaskWoken = pdFALSE;
+ 147              		.loc 1 70 0
  148 0004 02A9     		add	r1, sp, #8
  149 0006 0023     		movs	r3, #0
  150 0008 41F8043D 		str	r3, [r1, #-4]!
-  62:main_cm4.c    ****     xSemaphoreGiveFromISR(bleSemaphore, &xHigherPriorityTaskWoken);
- 151              		.loc 1 62 0
+  71:main_cm4.c    ****     xSemaphoreGiveFromISR(bleSemaphore, &xHigherPriorityTaskWoken);
+ 151              		.loc 1 71 0
  152 000c 084B     		ldr	r3, .L16
  153 000e 1868     		ldr	r0, [r3]
  154 0010 FFF7FEFF 		bl	xQueueGiveFromISR
  155              	.LVL15:
-  63:main_cm4.c    ****     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
- 156              		.loc 1 63 0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 5
+
+
+  72:main_cm4.c    ****     portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+ 156              		.loc 1 72 0
  157 0014 019B     		ldr	r3, [sp, #4]
  158 0016 3BB1     		cbz	r3, .L13
- 159              		.loc 1 63 0 is_stmt 0 discriminator 1
+ 159              		.loc 1 72 0 is_stmt 0 discriminator 1
  160 0018 4FF08052 		mov	r2, #268435456
  161 001c 054B     		ldr	r3, .L16+4
  162 001e 1A60     		str	r2, [r3]
  163              		.syntax unified
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 5
-
-
- 164              	@ 63 "main_cm4.c" 1
+ 164              	@ 72 "main_cm4.c" 1
  165 0020 BFF34F8F 		dsb
  166              	@ 0 "" 2
- 167              	@ 63 "main_cm4.c" 1
+ 167              	@ 72 "main_cm4.c" 1
  168 0024 BFF36F8F 		isb
  169              	@ 0 "" 2
  170              		.thumb
  171              		.syntax unified
  172              	.L13:
-  64:main_cm4.c    **** }
- 173              		.loc 1 64 0 is_stmt 1
+  73:main_cm4.c    **** }
+ 173              		.loc 1 73 0 is_stmt 1
  174 0028 03B0     		add	sp, sp, #12
  175              		.cfi_def_cfa_offset 4
  176              		@ sp needed
@@ -272,9 +281,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  191              		.type	bleTask, %function
  192              	bleTask:
  193              	.LFB498:
-  65:main_cm4.c    **** 
-  66:main_cm4.c    **** void bleTask(void *arg) {
- 194              		.loc 1 66 0
+  74:main_cm4.c    **** 
+  75:main_cm4.c    **** void bleTask(void *arg) {
+ 194              		.loc 1 75 0
  195              		.cfi_startproc
  196              		@ Volatile: function does not return.
  197              		@ args = 0, pretend = 0, frame = 0
@@ -284,71 +293,74 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  201              		.cfi_def_cfa_offset 8
  202              		.cfi_offset 3, -8
  203              		.cfi_offset 14, -4
-  67:main_cm4.c    ****     (void) arg;
-  68:main_cm4.c    ****     printf("BLE Task Started\r\n");
- 204              		.loc 1 68 0
+  76:main_cm4.c    ****     (void) arg;
+  77:main_cm4.c    ****     printf("BLE Task Started\r\n");
+ 204              		.loc 1 77 0
  205 0002 1048     		ldr	r0, .L23
  206              	.LVL17:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 6
+
+
  207 0004 FFF7FEFF 		bl	puts
  208              	.LVL18:
-  69:main_cm4.c    ****     
-  70:main_cm4.c    ****     bleSemaphore = xSemaphoreCreateCounting(UINT_MAX, 0);
- 209              		.loc 1 70 0
+  78:main_cm4.c    ****     
+  79:main_cm4.c    ****     bleSemaphore = xSemaphoreCreateCounting(UINT_MAX, 0);
+ 209              		.loc 1 79 0
  210 0008 0021     		movs	r1, #0
  211 000a 4FF0FF30 		mov	r0, #-1
  212 000e FFF7FEFF 		bl	xQueueCreateCountingSemaphore
  213              	.LVL19:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 6
-
-
  214 0012 0D4B     		ldr	r3, .L23+4
  215 0014 1860     		str	r0, [r3]
-  71:main_cm4.c    ****     
-  72:main_cm4.c    ****     Cy_BLE_Start(genericEventHandler);
- 216              		.loc 1 72 0
+  80:main_cm4.c    ****     
+  81:main_cm4.c    ****     Cy_BLE_Start(genericEventHandler);
+ 216              		.loc 1 81 0
  217 0016 0D48     		ldr	r0, .L23+8
  218 0018 FFF7FEFF 		bl	Cy_BLE_Start
  219              	.LVL20:
-  73:main_cm4.c    ****     
-  74:main_cm4.c    ****     while (Cy_BLE_GetState() != CY_BLE_STATE_ON) {
- 220              		.loc 1 74 0
+  82:main_cm4.c    ****     
+  83:main_cm4.c    ****     while (Cy_BLE_GetState() != CY_BLE_STATE_ON) {
+ 220              		.loc 1 83 0
  221 001c 01E0     		b	.L19
  222              	.L20:
-  75:main_cm4.c    ****         Cy_BLE_ProcessEvents();
- 223              		.loc 1 75 0
+  84:main_cm4.c    ****         Cy_BLE_ProcessEvents();
+ 223              		.loc 1 84 0
  224 001e FFF7FEFF 		bl	Cy_BLE_ProcessEvents
  225              	.LVL21:
  226              	.L19:
-  74:main_cm4.c    ****         Cy_BLE_ProcessEvents();
- 227              		.loc 1 74 0
+  83:main_cm4.c    ****         Cy_BLE_ProcessEvents();
+ 227              		.loc 1 83 0
  228 0022 0B4B     		ldr	r3, .L23+12
  229 0024 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  230 0026 022B     		cmp	r3, #2
  231 0028 F9D1     		bne	.L20
-  76:main_cm4.c    ****     }
-  77:main_cm4.c    ****     
-  78:main_cm4.c    ****     Cy_BLE_RegisterAppHostCallback(bleInterruptNotify);
- 232              		.loc 1 78 0
+  85:main_cm4.c    ****     }
+  86:main_cm4.c    ****     
+  87:main_cm4.c    ****     Cy_BLE_RegisterAppHostCallback(bleInterruptNotify);
+ 232              		.loc 1 87 0
  233 002a 0A48     		ldr	r0, .L23+16
  234 002c FFF7FEFF 		bl	Cy_BLE_RegisterAppHostCallback
  235              	.LVL22:
  236              	.L21:
-  79:main_cm4.c    ****     
-  80:main_cm4.c    ****     for(;;) {
-  81:main_cm4.c    ****         xSemaphoreTake(bleSemaphore, portMAX_DELAY);
- 237              		.loc 1 81 0 discriminator 1
+  88:main_cm4.c    ****     
+  89:main_cm4.c    ****     for(;;) {
+  90:main_cm4.c    ****         xSemaphoreTake(bleSemaphore, portMAX_DELAY);
+ 237              		.loc 1 90 0 discriminator 1
  238 0030 4FF0FF31 		mov	r1, #-1
  239 0034 044B     		ldr	r3, .L23+4
  240 0036 1868     		ldr	r0, [r3]
  241 0038 FFF7FEFF 		bl	xQueueSemaphoreTake
  242              	.LVL23:
-  82:main_cm4.c    ****         Cy_BLE_ProcessEvents();
- 243              		.loc 1 82 0 discriminator 1
+  91:main_cm4.c    ****         Cy_BLE_ProcessEvents();
+ 243              		.loc 1 91 0 discriminator 1
  244 003c FFF7FEFF 		bl	Cy_BLE_ProcessEvents
  245              	.LVL24:
  246 0040 F6E7     		b	.L21
  247              	.L24:
  248 0042 00BF     		.align	2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 7
+
+
  249              	.L23:
  250 0044 30000000 		.word	.LC3
  251 0048 00000000 		.word	bleSemaphore
@@ -358,9 +370,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  255              		.cfi_endproc
  256              	.LFE498:
  257              		.size	bleTask, .-bleTask
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 7
-
-
  258              		.section	.text.main,"ax",%progbits
  259              		.align	2
  260              		.global	main
@@ -369,13 +378,13 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  263              		.type	main, %function
  264              	main:
  265              	.LFB499:
-  83:main_cm4.c    ****     }
-  84:main_cm4.c    **** }
-  85:main_cm4.c    **** 
-  86:main_cm4.c    **** 
-  87:main_cm4.c    **** int main(void)
-  88:main_cm4.c    **** {
- 266              		.loc 1 88 0
+  92:main_cm4.c    ****     }
+  93:main_cm4.c    **** }
+  94:main_cm4.c    **** 
+  95:main_cm4.c    **** 
+  96:main_cm4.c    **** int main(void)
+  97:main_cm4.c    **** {
+ 266              		.loc 1 97 0
  267              		.cfi_startproc
  268              		@ Volatile: function does not return.
  269              		@ args = 0, pretend = 0, frame = 0
@@ -409,6 +418,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
   19:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
   20:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   21:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 8
+
+
   22:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****  * limitations under the License.
   23:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****  */
   24:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** 
@@ -418,9 +430,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
   28:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** /* ignore some GCC warnings */
   29:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #pragma GCC diagnostic push
   30:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 8
-
-
   31:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
   32:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
   33:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** 
@@ -469,6 +478,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
   76:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
   77:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #endif
   78:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 9
+
+
   79:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   80:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   81:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
@@ -478,9 +490,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
   85:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #endif
   86:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
   87:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic push
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 9
-
-
   88:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   89:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
   90:Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
@@ -529,22 +538,22 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  280              		.syntax unified
  281              	@ 131 "Generated_Source\PSoC6\pdl\cmsis/include/cmsis_gcc.h" 1
  282 0004 62B6     		cpsie i
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 10
+
+
  283              	@ 0 "" 2
  284              		.thumb
  285              		.syntax unified
  286              	.LBE7:
  287              	.LBE6:
-  89:main_cm4.c    ****     __enable_irq(); /* Enable global interrupts. */
-  90:main_cm4.c    ****     
-  91:main_cm4.c    ****     UART_1_Start();
- 288              		.loc 1 91 0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 10
-
-
+  98:main_cm4.c    ****     __enable_irq(); /* Enable global interrupts. */
+  99:main_cm4.c    ****     
+ 100:main_cm4.c    ****     UART_1_Start();
+ 288              		.loc 1 100 0
  289 0006 FFF7FEFF 		bl	UART_1_Start
  290              	.LVL25:
-  92:main_cm4.c    ****     setvbuf(stdin, NULL, _IONBF, 0);
- 291              		.loc 1 92 0
+ 101:main_cm4.c    ****     setvbuf(stdin, NULL, _IONBF, 0);
+ 291              		.loc 1 101 0
  292 000a 0F4C     		ldr	r4, .L28
  293 000c 2068     		ldr	r0, [r4]
  294 000e 0023     		movs	r3, #0
@@ -553,8 +562,8 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  297 0014 4068     		ldr	r0, [r0, #4]
  298 0016 FFF7FEFF 		bl	setvbuf
  299              	.LVL26:
-  93:main_cm4.c    ****     setvbuf(stdout, NULL, _IONBF, 0);
- 300              		.loc 1 93 0
+ 102:main_cm4.c    ****     setvbuf(stdout, NULL, _IONBF, 0);
+ 300              		.loc 1 102 0
  301 001a 2068     		ldr	r0, [r4]
  302 001c 0023     		movs	r3, #0
  303 001e 0222     		movs	r2, #2
@@ -562,14 +571,14 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  305 0022 8068     		ldr	r0, [r0, #8]
  306 0024 FFF7FEFF 		bl	setvbuf
  307              	.LVL27:
-  94:main_cm4.c    ****     printf("System started\r\n");
- 308              		.loc 1 94 0
+ 103:main_cm4.c    ****     printf("System started\r\n");
+ 308              		.loc 1 103 0
  309 0028 0848     		ldr	r0, .L28+4
  310 002a FFF7FEFF 		bl	puts
  311              	.LVL28:
-  95:main_cm4.c    ****     
-  96:main_cm4.c    ****     xTaskCreate(bleTask, "bleTask", 8*1024, 0, 2, 0);
- 312              		.loc 1 96 0
+ 104:main_cm4.c    ****     
+ 105:main_cm4.c    ****     xTaskCreate(bleTask, "bleTask", 8*1024, 0, 2, 0);
+ 312              		.loc 1 105 0
  313 002e 0023     		movs	r3, #0
  314 0030 0193     		str	r3, [sp, #4]
  315 0032 0222     		movs	r2, #2
@@ -579,8 +588,8 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  319 003c 0548     		ldr	r0, .L28+12
  320 003e FFF7FEFF 		bl	xTaskCreate
  321              	.LVL29:
-  97:main_cm4.c    ****     vTaskStartScheduler();
- 322              		.loc 1 97 0
+ 106:main_cm4.c    ****     vTaskStartScheduler();
+ 322              		.loc 1 106 0
  323 0042 FFF7FEFF 		bl	vTaskStartScheduler
  324              	.LVL30:
  325              	.L26:
@@ -589,6 +598,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  328              		.align	2
  329              	.L28:
  330 0048 00000000 		.word	_impure_ptr
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 11
+
+
  331 004c 44000000 		.word	.LC4
  332 0050 54000000 		.word	.LC5
  333 0054 00000000 		.word	bleTask
@@ -598,9 +610,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  337              		.comm	bleSemaphore,4,4
  338              		.section	.rodata.str1.4,"aMS",%progbits,1
  339              		.align	2
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 11
-
-
  340              	.LC0:
  341 0000 64697363 		.ascii	"disconnected\000"
  341      6F6E6E65 
@@ -649,6 +658,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  368              		.file 13 "Generated_Source\\PSoC6\\pdl\\middleware/ble/cy_ble_stack.h"
  369              		.file 14 "Generated_Source\\PSoC6\\pdl\\middleware/ble/cy_ble_gap.h"
  370              		.file 15 "Generated_Source\\PSoC6\\pdl\\middleware/ble/cy_ble_stack_gatt_server.h"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 12
+
+
  371              		.file 16 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/portmacro.h"
  372              		.file 17 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/include/queue.h"
  373              		.file 18 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/include/semphr.h"
@@ -658,9 +670,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  377              		.file 22 "command_parser.h"
  378              		.file 23 "Generated_Source\\PSoC6/BLE.h"
  379              		.file 24 "Generated_Source\\PSoC6\\pdl\\middleware/ble/cy_ble.h"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 12
-
-
  380              		.file 25 "Generated_Source\\PSoC6\\pdl\\rtos/FreeRTOS/10.0.1/Source/include/task.h"
  381              		.file 26 "<built-in>"
  382              		.section	.debug_info,"",%progbits
@@ -709,6 +718,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  425 005d 07       		.byte	0x7
  426 005e 65150000 		.4byte	.LASF6
  427 0062 03       		.uleb128 0x3
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 13
+
+
  428 0063 52030000 		.4byte	.LASF7
  429 0067 03       		.byte	0x3
  430 0068 3F       		.byte	0x3f
@@ -718,9 +730,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  434 006f 05       		.byte	0x5
  435 0070 2F180000 		.4byte	.LASF8
  436 0074 03       		.uleb128 0x3
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 13
-
-
  437 0075 8A1C0000 		.4byte	.LASF9
  438 0079 03       		.byte	0x3
  439 007a 41       		.byte	0x41
@@ -769,6 +778,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  482 00cf 1B070000 		.4byte	.LASF18
  483 00d3 04       		.byte	0x4
  484 00d4 30       		.byte	0x30
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 14
+
+
  485 00d5 74000000 		.4byte	0x74
  486 00d9 02       		.uleb128 0x2
  487 00da 04       		.byte	0x4
@@ -778,9 +790,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  491 00e1 CE000000 		.4byte	0xce
  492 00e5 02       		.uleb128 0x2
  493 00e6 08       		.byte	0x8
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 14
-
-
  494 00e7 04       		.byte	0x4
  495 00e8 82150000 		.4byte	.LASF20
  496 00ec 06       		.uleb128 0x6
@@ -829,6 +838,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  539 0141 05       		.byte	0x5
  540 0142 3D       		.byte	0x3d
  541 0143 CE000000 		.4byte	0xce
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 15
+
+
  542 0147 18       		.byte	0x18
  543 0148 07       		.uleb128 0x7
  544 0149 571F0000 		.4byte	.LASF28
@@ -838,9 +850,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  548 0153 1C       		.byte	0x1c
  549 0154 07       		.uleb128 0x7
  550 0155 24110000 		.4byte	.LASF29
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 15
-
-
  551 0159 05       		.byte	0x5
  552 015a 3F       		.byte	0x3f
  553 015b CE000000 		.4byte	0xce
@@ -889,6 +898,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  596 01b3 2D       		.byte	0x2d
  597 01b4 07       		.uleb128 0x7
  598 01b5 76200000 		.4byte	.LASF37
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 16
+
+
  599 01b9 05       		.byte	0x5
  600 01ba 49       		.byte	0x49
  601 01bb A2000000 		.4byte	0xa2
@@ -898,9 +910,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  605 01c5 05       		.byte	0x5
  606 01c6 4A       		.byte	0x4a
  607 01c7 A2000000 		.4byte	0xa2
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 16
-
-
  608 01cb 2F       		.byte	0x2f
  609 01cc 07       		.uleb128 0x7
  610 01cd 6A200000 		.4byte	.LASF39
@@ -949,6 +958,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  653 0225 05       		.byte	0x5
  654 0226 54       		.byte	0x54
  655 0227 AD000000 		.4byte	0xad
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 17
+
+
  656 022b 3A       		.byte	0x3a
  657 022c 07       		.uleb128 0x7
  658 022d D7080000 		.4byte	.LASF47
@@ -958,9 +970,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  662 0237 3C       		.byte	0x3c
  663 0238 07       		.uleb128 0x7
  664 0239 B90A0000 		.4byte	.LASF48
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 17
-
-
  665 023d 05       		.byte	0x5
  666 023e 56       		.byte	0x56
  667 023f A2000000 		.4byte	0xa2
@@ -1009,6 +1018,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  710 0297 44       		.byte	0x44
  711 0298 07       		.uleb128 0x7
  712 0299 B5180000 		.4byte	.LASF56
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 18
+
+
  713 029d 05       		.byte	0x5
  714 029e 5E       		.byte	0x5e
  715 029f CE000000 		.4byte	0xce
@@ -1018,9 +1030,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  719 02a9 05       		.byte	0x5
  720 02aa 5F       		.byte	0x5f
  721 02ab CE000000 		.4byte	0xce
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 18
-
-
  722 02af 4C       		.byte	0x4c
  723 02b0 07       		.uleb128 0x7
  724 02b1 F81D0000 		.4byte	.LASF58
@@ -1069,6 +1078,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  767 0309 05       		.byte	0x5
  768 030a 67       		.byte	0x67
  769 030b A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 19
+
+
  770 030f 57       		.byte	0x57
  771 0310 07       		.uleb128 0x7
  772 0311 850A0000 		.4byte	.LASF66
@@ -1078,9 +1090,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  776 031b 58       		.byte	0x58
  777 031c 07       		.uleb128 0x7
  778 031d 891F0000 		.4byte	.LASF67
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 19
-
-
  779 0321 05       		.byte	0x5
  780 0322 69       		.byte	0x69
  781 0323 A2000000 		.4byte	0xa2
@@ -1129,6 +1138,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  824 037b 68       		.byte	0x68
  825 037c 07       		.uleb128 0x7
  826 037d A0150000 		.4byte	.LASF75
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 20
+
+
  827 0381 05       		.byte	0x5
  828 0382 77       		.byte	0x77
  829 0383 B8000000 		.4byte	0xb8
@@ -1138,9 +1150,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  833 038d 05       		.byte	0x5
  834 038e 78       		.byte	0x78
  835 038f B8000000 		.4byte	0xb8
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 20
-
-
  836 0393 6C       		.byte	0x6c
  837 0394 07       		.uleb128 0x7
  838 0395 2B040000 		.4byte	.LASF77
@@ -1189,6 +1198,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  881 03ed 05       		.byte	0x5
  882 03ee 82       		.byte	0x82
  883 03ef B8000000 		.4byte	0xb8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 21
+
+
  884 03f3 78       		.byte	0x78
  885 03f4 07       		.uleb128 0x7
  886 03f5 B5080000 		.4byte	.LASF85
@@ -1198,9 +1210,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  890 03ff 7A       		.byte	0x7a
  891 0400 07       		.uleb128 0x7
  892 0401 491A0000 		.4byte	.LASF86
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 21
-
-
  893 0405 05       		.byte	0x5
  894 0406 86       		.byte	0x86
  895 0407 A2000000 		.4byte	0xa2
@@ -1249,6 +1258,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  938 045f 8C       		.byte	0x8c
  939 0460 07       		.uleb128 0x7
  940 0461 321C0000 		.4byte	.LASF94
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 22
+
+
  941 0465 05       		.byte	0x5
  942 0466 90       		.byte	0x90
  943 0467 CE000000 		.4byte	0xce
@@ -1258,9 +1270,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  947 0471 05       		.byte	0x5
  948 0472 91       		.byte	0x91
  949 0473 CE000000 		.4byte	0xce
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 22
-
-
  950 0477 94       		.byte	0x94
  951 0478 07       		.uleb128 0x7
  952 0479 82060000 		.4byte	.LASF96
@@ -1309,6 +1318,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  995 04d1 05       		.byte	0x5
  996 04d2 99       		.byte	0x99
  997 04d3 B8000000 		.4byte	0xb8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 23
+
+
  998 04d7 AC       		.byte	0xac
  999 04d8 07       		.uleb128 0x7
  1000 04d9 A3130000 		.4byte	.LASF104
@@ -1318,9 +1330,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1004 04e3 AE       		.byte	0xae
  1005 04e4 07       		.uleb128 0x7
  1006 04e5 D9040000 		.4byte	.LASF105
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 23
-
-
  1007 04e9 05       		.byte	0x5
  1008 04ea 9D       		.byte	0x9d
  1009 04eb B8000000 		.4byte	0xb8
@@ -1369,6 +1378,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1052 053d 00       		.byte	0
  1053 053e 08       		.uleb128 0x8
  1054 053f 04       		.byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 24
+
+
  1055 0540 A2000000 		.4byte	0xa2
  1056 0544 0D       		.uleb128 0xd
  1057 0545 A8100000 		.4byte	.LASF112
@@ -1378,9 +1390,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1061 0550 0E       		.uleb128 0xe
  1062 0551 27080000 		.4byte	.LASF139
  1063 0555 38       		.byte	0x38
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 24
-
-
  1064 0556 06       		.byte	0x6
  1065 0557 7502     		.2byte	0x275
  1066 0559 14060000 		.4byte	0x614
@@ -1429,6 +1438,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1109 05b8 0F       		.uleb128 0xf
  1110 05b9 BA200000 		.4byte	.LASF120
  1111 05bd 06       		.byte	0x6
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 25
+
+
  1112 05be 8102     		.2byte	0x281
  1113 05c0 CE000000 		.4byte	0xce
  1114 05c4 1C       		.byte	0x1c
@@ -1438,9 +1450,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1118 05cb 8202     		.2byte	0x282
  1119 05cd E0000000 		.4byte	0xe0
  1120 05d1 20       		.byte	0x20
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 25
-
-
  1121 05d2 0F       		.uleb128 0xf
  1122 05d3 AA140000 		.4byte	.LASF122
  1123 05d7 06       		.byte	0x6
@@ -1489,6 +1498,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1166 0632 6D000000 		.4byte	0x6d
  1167 0636 03       		.uleb128 0x3
  1168 0637 66020000 		.4byte	.LASF130
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 26
+
+
  1169 063b 08       		.byte	0x8
  1170 063c 72       		.byte	0x72
  1171 063d 6D000000 		.4byte	0x6d
@@ -1498,9 +1510,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1175 0647 6501     		.2byte	0x165
  1176 0649 9B000000 		.4byte	0x9b
  1177 064d 10       		.uleb128 0x10
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 26
-
-
  1178 064e 04       		.byte	0x4
  1179 064f 08       		.byte	0x8
  1180 0650 A6       		.byte	0xa6
@@ -1549,6 +1558,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1223 06a8 03       		.uleb128 0x3
  1224 06a9 040F0000 		.4byte	.LASF137
  1225 06ad 08       		.byte	0x8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 27
+
+
  1226 06ae AF       		.byte	0xaf
  1227 06af 20060000 		.4byte	0x620
  1228 06b3 08       		.uleb128 0x8
@@ -1558,9 +1570,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1232 06ba 1B1B0000 		.4byte	.LASF138
  1233 06be 0A       		.byte	0xa
  1234 06bf 16       		.byte	0x16
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 27
-
-
  1235 06c0 7F000000 		.4byte	0x7f
  1236 06c4 14       		.uleb128 0x14
  1237 06c5 D9060000 		.4byte	.LASF140
@@ -1609,6 +1618,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1280 0718 04       		.byte	0x4
  1281 0719 C4060000 		.4byte	0x6c4
  1282 071d 12       		.uleb128 0x12
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 28
+
+
  1283 071e B9060000 		.4byte	0x6b9
  1284 0722 2D070000 		.4byte	0x72d
  1285 0726 13       		.uleb128 0x13
@@ -1618,9 +1630,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1289 072d 14       		.uleb128 0x14
  1290 072e 391B0000 		.4byte	.LASF145
  1291 0732 24       		.byte	0x24
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 28
-
-
  1292 0733 0A       		.byte	0xa
  1293 0734 35       		.byte	0x35
  1294 0735 A6070000 		.4byte	0x7a6
@@ -1669,6 +1678,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1337 078d 07       		.uleb128 0x7
  1338 078e 581D0000 		.4byte	.LASF153
  1339 0792 0A       		.byte	0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 29
+
+
  1340 0793 3E       		.byte	0x3e
  1341 0794 94000000 		.4byte	0x94
  1342 0798 1C       		.byte	0x1c
@@ -1678,9 +1690,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1346 079f 3F       		.byte	0x3f
  1347 07a0 94000000 		.4byte	0x94
  1348 07a4 20       		.byte	0x20
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 29
-
-
  1349 07a5 00       		.byte	0
  1350 07a6 16       		.uleb128 0x16
  1351 07a7 B6010000 		.4byte	.LASF155
@@ -1729,6 +1738,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1394 0803 07       		.uleb128 0x7
  1395 0804 64200000 		.4byte	.LASF141
  1396 0808 0A       		.byte	0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 30
+
+
  1397 0809 5C       		.byte	0x5c
  1398 080a 34080000 		.4byte	0x834
  1399 080e 00       		.byte	0
@@ -1738,9 +1750,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1403 0815 5D       		.byte	0x5d
  1404 0816 94000000 		.4byte	0x94
  1405 081a 04       		.byte	0x4
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 30
-
-
  1406 081b 07       		.uleb128 0x7
  1407 081c 55060000 		.4byte	.LASF162
  1408 0820 0A       		.byte	0xa
@@ -1789,6 +1798,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1451 0875 14       		.uleb128 0x14
  1452 0876 1B1F0000 		.4byte	.LASF166
  1453 087a 68       		.byte	0x68
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 31
+
+
  1454 087b 0A       		.byte	0xa
  1455 087c B3       		.byte	0xb3
  1456 087d 9F090000 		.4byte	0x99f
@@ -1798,9 +1810,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1460 0886 B4       		.byte	0xb4
  1461 0887 6F080000 		.4byte	0x86f
  1462 088b 00       		.byte	0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 31
-
-
  1463 088c 15       		.uleb128 0x15
  1464 088d 5F7200   		.ascii	"_r\000"
  1465 0890 0A       		.byte	0xa
@@ -1849,6 +1858,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1508 08e4 C3       		.byte	0xc3
  1509 08e5 F50A0000 		.4byte	0xaf5
  1510 08e9 20       		.byte	0x20
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 32
+
+
  1511 08ea 07       		.uleb128 0x7
  1512 08eb E7190000 		.4byte	.LASF172
  1513 08ef 0A       		.byte	0xa
@@ -1858,9 +1870,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1517 08f6 07       		.uleb128 0x7
  1518 08f7 5E200000 		.4byte	.LASF173
  1519 08fb 0A       		.byte	0xa
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 32
-
-
  1520 08fc C8       		.byte	0xc8
  1521 08fd 480B0000 		.4byte	0xb48
  1522 0901 28       		.byte	0x28
@@ -1909,6 +1918,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1565 0956 07       		.uleb128 0x7
  1566 0957 B40E0000 		.4byte	.LASF177
  1567 095b 0A       		.byte	0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 33
+
+
  1568 095c D8       		.byte	0xd8
  1569 095d 94000000 		.4byte	0x94
  1570 0961 4C       		.byte	0x4c
@@ -1918,9 +1930,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1574 0968 D9       		.byte	0xd9
  1575 0969 2B060000 		.4byte	0x62b
  1576 096d 50       		.byte	0x50
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 33
-
-
  1577 096e 07       		.uleb128 0x7
  1578 096f 27190000 		.4byte	.LASF179
  1579 0973 0A       		.byte	0xa
@@ -1969,6 +1978,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1622 09cd F50A0000 		.4byte	0xaf5
  1623 09d1 0F       		.uleb128 0xf
  1624 09d2 5C030000 		.4byte	.LASF184
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 34
+
+
  1625 09d6 0A       		.byte	0xa
  1626 09d7 3A02     		.2byte	0x23a
  1627 09d9 94000000 		.4byte	0x94
@@ -1978,9 +1990,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1631 09e3 0A       		.byte	0xa
  1632 09e4 3F02     		.2byte	0x23f
  1633 09e6 CF0B0000 		.4byte	0xbcf
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 34
-
-
  1634 09ea 04       		.byte	0x4
  1635 09eb 0F       		.uleb128 0xf
  1636 09ec 36050000 		.4byte	.LASF186
@@ -2029,6 +2038,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1679 0a4b 0A       		.byte	0xa
  1680 0a4c 4902     		.2byte	0x249
  1681 0a4e CC0D0000 		.4byte	0xdcc
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 35
+
+
  1682 0a52 3C       		.byte	0x3c
  1683 0a53 0F       		.uleb128 0xf
  1684 0a54 F4060000 		.4byte	.LASF194
@@ -2038,9 +2050,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1688 0a5f 40       		.byte	0x40
  1689 0a60 0F       		.uleb128 0xf
  1690 0a61 94080000 		.4byte	.LASF195
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 35
-
-
  1691 0a65 0A       		.byte	0xa
  1692 0a66 4D02     		.2byte	0x24d
  1693 0a68 94000000 		.4byte	0x94
@@ -2089,6 +2098,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1736 0ac8 4C01     		.2byte	0x14c
  1737 0aca 1A       		.uleb128 0x1a
  1738 0acb 410E0000 		.4byte	.LASF202
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 36
+
+
  1739 0acf 0A       		.byte	0xa
  1740 0ad0 7F02     		.2byte	0x27f
  1741 0ad2 E30D0000 		.4byte	0xde3
@@ -2098,9 +2110,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1745 0add 0A       		.byte	0xa
  1746 0ade 8402     		.2byte	0x284
  1747 0ae0 940B0000 		.4byte	0xb94
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 36
-
-
  1748 0ae4 E002     		.2byte	0x2e0
  1749 0ae6 1A       		.uleb128 0x1a
  1750 0ae7 E7180000 		.4byte	.LASF204
@@ -2149,6 +2158,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1793 0b4a 2A0B0000 		.4byte	0xb2a
  1794 0b4e 18       		.uleb128 0x18
  1795 0b4f 94000000 		.4byte	0x94
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 37
+
+
  1796 0b53 620B0000 		.4byte	0xb62
  1797 0b57 0C       		.uleb128 0xc
  1798 0b58 BD090000 		.4byte	0x9bd
@@ -2158,9 +2170,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1802 0b62 08       		.uleb128 0x8
  1803 0b63 04       		.byte	0x4
  1804 0b64 4E0B0000 		.4byte	0xb4e
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 37
-
-
  1805 0b68 12       		.uleb128 0x12
  1806 0b69 3E000000 		.4byte	0x3e
  1807 0b6d 780B0000 		.4byte	0xb78
@@ -2209,6 +2218,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1850 0bca 04       		.byte	0x4
  1851 0bcb 940B0000 		.4byte	0xb94
  1852 0bcf 08       		.uleb128 0x8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 38
+
+
  1853 0bd0 04       		.byte	0x4
  1854 0bd1 880B0000 		.4byte	0xb88
  1855 0bd5 0E       		.uleb128 0xe
@@ -2218,9 +2230,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1859 0bdc 3D01     		.2byte	0x13d
  1860 0bde 0A0C0000 		.4byte	0xc0a
  1861 0be2 0F       		.uleb128 0xf
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 38
-
-
  1862 0be3 DF030000 		.4byte	.LASF210
  1863 0be7 0A       		.byte	0xa
  1864 0be8 3E01     		.2byte	0x13e
@@ -2269,6 +2278,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1907 0c43 5B02     		.2byte	0x25b
  1908 0c45 1B0D0000 		.4byte	0xd1b
  1909 0c49 08       		.byte	0x8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 39
+
+
  1910 0c4a 0F       		.uleb128 0xf
  1911 0c4b 22020000 		.4byte	.LASF216
  1912 0c4f 0A       		.byte	0xa
@@ -2278,9 +2290,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1916 0c57 0F       		.uleb128 0xf
  1917 0c58 EC150000 		.4byte	.LASF217
  1918 0c5c 0A       		.byte	0xa
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 39
-
-
  1919 0c5d 5D02     		.2byte	0x25d
  1920 0c5f 94000000 		.4byte	0x94
  1921 0c63 48       		.byte	0x48
@@ -2329,6 +2338,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1964 0cbf 0F       		.uleb128 0xf
  1965 0cc0 EB1D0000 		.4byte	.LASF225
  1966 0cc4 0A       		.byte	0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 40
+
+
  1967 0cc5 6502     		.2byte	0x265
  1968 0cc7 94000000 		.4byte	0x94
  1969 0ccb A0       		.byte	0xa0
@@ -2338,9 +2350,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  1973 0cd2 6602     		.2byte	0x266
  1974 0cd4 9D060000 		.4byte	0x69d
  1975 0cd8 A4       		.byte	0xa4
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 40
-
-
  1976 0cd9 0F       		.uleb128 0xf
  1977 0cda 54040000 		.4byte	.LASF227
  1978 0cde 0A       		.byte	0xa
@@ -2389,6 +2398,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2021 0d3b 12       		.uleb128 0x12
  2022 0d3c 0F050000 		.4byte	0x50f
  2023 0d40 4B0D0000 		.4byte	0xd4b
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 41
+
+
  2024 0d44 13       		.uleb128 0x13
  2025 0d45 D9000000 		.4byte	0xd9
  2026 0d49 17       		.byte	0x17
@@ -2398,9 +2410,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2030 0d4d 0A       		.byte	0xa
  2031 0d4e 7002     		.2byte	0x270
  2032 0d50 6F0D0000 		.4byte	0xd6f
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 41
-
-
  2033 0d54 0F       		.uleb128 0xf
  2034 0d55 20080000 		.4byte	.LASF232
  2035 0d59 0A       		.byte	0xa
@@ -2449,6 +2458,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2078 0db6 C10D0000 		.4byte	0xdc1
  2079 0dba 13       		.uleb128 0x13
  2080 0dbb D9000000 		.4byte	0xd9
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 42
+
+
  2081 0dbf 18       		.byte	0x18
  2082 0dc0 00       		.byte	0
  2083 0dc1 0B       		.uleb128 0xb
@@ -2458,9 +2470,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2087 0dcb 00       		.byte	0
  2088 0dcc 08       		.uleb128 0x8
  2089 0dcd 04       		.byte	0x4
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 42
-
-
  2090 0dce C10D0000 		.4byte	0xdc1
  2091 0dd2 08       		.uleb128 0x8
  2092 0dd3 04       		.byte	0x4
@@ -2509,6 +2518,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2135 0e33 0410     		.2byte	0x1004
  2136 0e35 21       		.uleb128 0x21
  2137 0e36 39030000 		.4byte	.LASF241
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 43
+
+
  2138 0e3a 0510     		.2byte	0x1005
  2139 0e3c 21       		.uleb128 0x21
  2140 0e3d FB150000 		.4byte	.LASF242
@@ -2518,9 +2530,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2144 0e48 0120     		.2byte	0x2001
  2145 0e4a 21       		.uleb128 0x21
  2146 0e4b 4D000000 		.4byte	.LASF244
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 43
-
-
  2147 0e4f 0220     		.2byte	0x2002
  2148 0e51 21       		.uleb128 0x21
  2149 0e52 F10C0000 		.4byte	.LASF245
@@ -2569,6 +2578,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2192 0eb8 1120     		.2byte	0x2011
  2193 0eba 21       		.uleb128 0x21
  2194 0ebb E01C0000 		.4byte	.LASF260
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 44
+
+
  2195 0ebf 1220     		.2byte	0x2012
  2196 0ec1 21       		.uleb128 0x21
  2197 0ec2 4F0A0000 		.4byte	.LASF261
@@ -2578,9 +2590,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2201 0ecd 1420     		.2byte	0x2014
  2202 0ecf 21       		.uleb128 0x21
  2203 0ed0 E7040000 		.4byte	.LASF263
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 44
-
-
  2204 0ed4 1520     		.2byte	0x2015
  2205 0ed6 21       		.uleb128 0x21
  2206 0ed7 34200000 		.4byte	.LASF264
@@ -2629,6 +2638,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2249 0f3d 0C30     		.2byte	0x300c
  2250 0f3f 21       		.uleb128 0x21
  2251 0f40 E30F0000 		.4byte	.LASF279
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 45
+
+
  2252 0f44 1130     		.2byte	0x3011
  2253 0f46 21       		.uleb128 0x21
  2254 0f47 01170000 		.4byte	.LASF280
@@ -2638,9 +2650,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2258 0f52 1330     		.2byte	0x3013
  2259 0f54 21       		.uleb128 0x21
  2260 0f55 C8190000 		.4byte	.LASF282
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 45
-
-
  2261 0f59 1430     		.2byte	0x3014
  2262 0f5b 21       		.uleb128 0x21
  2263 0f5c 74180000 		.4byte	.LASF283
@@ -2689,6 +2698,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2306 0fc2 0940     		.2byte	0x4009
  2307 0fc4 21       		.uleb128 0x21
  2308 0fc5 0F210000 		.4byte	.LASF298
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 46
+
+
  2309 0fc9 0A40     		.2byte	0x400a
  2310 0fcb 21       		.uleb128 0x21
  2311 0fcc 210E0000 		.4byte	.LASF299
@@ -2698,9 +2710,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2315 0fd7 0C40     		.2byte	0x400c
  2316 0fd9 21       		.uleb128 0x21
  2317 0fda 560F0000 		.4byte	.LASF301
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 46
-
-
  2318 0fde 0D40     		.2byte	0x400d
  2319 0fe0 21       		.uleb128 0x21
  2320 0fe1 3E140000 		.4byte	.LASF302
@@ -2749,6 +2758,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2363 1047 0150     		.2byte	0x5001
  2364 1049 21       		.uleb128 0x21
  2365 104a 7F1D0000 		.4byte	.LASF317
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 47
+
+
  2366 104e 0250     		.2byte	0x5002
  2367 1050 21       		.uleb128 0x21
  2368 1051 C41D0000 		.4byte	.LASF318
@@ -2758,9 +2770,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2372 105c 0450     		.2byte	0x5004
  2373 105e 21       		.uleb128 0x21
  2374 105f 74160000 		.4byte	.LASF320
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 47
-
-
  2375 1063 0550     		.2byte	0x5005
  2376 1065 21       		.uleb128 0x21
  2377 1066 BD0E0000 		.4byte	.LASF321
@@ -2809,6 +2818,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2420 10cc 1450     		.2byte	0x5014
  2421 10ce 21       		.uleb128 0x21
  2422 10cf 651C0000 		.4byte	.LASF336
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 48
+
+
  2423 10d3 1550     		.2byte	0x5015
  2424 10d5 21       		.uleb128 0x21
  2425 10d6 FF1B0000 		.4byte	.LASF337
@@ -2818,9 +2830,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2429 10e1 1750     		.2byte	0x5017
  2430 10e3 21       		.uleb128 0x21
  2431 10e4 72120000 		.4byte	.LASF339
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 48
-
-
  2432 10e8 1850     		.2byte	0x5018
  2433 10ea 21       		.uleb128 0x21
  2434 10eb 231F0000 		.4byte	.LASF340
@@ -2869,6 +2878,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2477 114d 0B       		.byte	0xb
  2478 114e 6E01     		.2byte	0x16e
  2479 1150 A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 49
+
+
  2480 1154 00       		.byte	0
  2481 1155 0F       		.uleb128 0xf
  2482 1156 B5090000 		.4byte	.LASF353
@@ -2878,9 +2890,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2486 1161 01       		.byte	0x1
  2487 1162 00       		.byte	0
  2488 1163 0D       		.uleb128 0xd
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 49
-
-
  2489 1164 32170000 		.4byte	.LASF354
  2490 1168 0B       		.byte	0xb
  2491 1169 7401     		.2byte	0x174
@@ -2929,6 +2938,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2534 11c6 0C       		.byte	0xc
  2535 11c7 A901     		.2byte	0x1a9
  2536 11c9 AC110000 		.4byte	0x11ac
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 50
+
+
  2537 11cd 00       		.byte	0
  2538 11ce 0F       		.uleb128 0xf
  2539 11cf A70B0000 		.4byte	.LASF359
@@ -2938,9 +2950,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2543 11da 08       		.byte	0x8
  2544 11db 00       		.byte	0
  2545 11dc 0D       		.uleb128 0xd
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 50
-
-
  2546 11dd 761B0000 		.4byte	.LASF360
  2547 11e1 0C       		.byte	0xc
  2548 11e2 AE01     		.2byte	0x1ae
@@ -2989,6 +2998,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2591 123c 0E       		.byte	0xe
  2592 123d 70       		.byte	0x70
  2593 123e 18120000 		.4byte	0x1218
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 51
+
+
  2594 1242 23       		.uleb128 0x23
  2595 1243 01       		.byte	0x1
  2596 1244 3E000000 		.4byte	0x3e
@@ -2998,9 +3010,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2600 124e 20       		.uleb128 0x20
  2601 124f 7C040000 		.4byte	.LASF368
  2602 1253 00       		.byte	0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 51
-
-
  2603 1254 20       		.uleb128 0x20
  2604 1255 1E090000 		.4byte	.LASF369
  2605 1259 01       		.byte	0x1
@@ -3049,6 +3058,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2648 12ae 00       		.byte	0
  2649 12af 03       		.uleb128 0x3
  2650 12b0 C7100000 		.4byte	.LASF381
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 52
+
+
  2651 12b4 0E       		.byte	0xe
  2652 12b5 90       		.byte	0x90
  2653 12b6 72120000 		.4byte	0x1272
@@ -3058,9 +3070,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2657 12c0 74       		.byte	0x74
  2658 12c1 0C120000 		.4byte	0x120c
  2659 12c5 03       		.uleb128 0x3
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 52
-
-
  2660 12c6 17120000 		.4byte	.LASF383
  2661 12ca 10       		.byte	0x10
  2662 12cb 38       		.byte	0x38
@@ -3088,7 +3097,7 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2684 12f9 25       		.uleb128 0x25
  2685 12fa FB200000 		.4byte	.LASF420
  2686 12fe 01       		.byte	0x1
- 2687 12ff 17       		.byte	0x17
+ 2687 12ff 18       		.byte	0x18
  2688 1300 00000000 		.4byte	.LFB496
  2689 1304 78000000 		.4byte	.LFE496-.LFB496
  2690 1308 01       		.uleb128 0x1
@@ -3097,19 +3106,22 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2693 130e 26       		.uleb128 0x26
  2694 130f EB070000 		.4byte	.LASF387
  2695 1313 01       		.byte	0x1
- 2696 1314 17       		.byte	0x17
+ 2696 1314 18       		.byte	0x18
  2697 1315 CE000000 		.4byte	0xce
  2698 1319 00000000 		.4byte	.LLST0
  2699 131d 26       		.uleb128 0x26
  2700 131e 9D1F0000 		.4byte	.LASF388
  2701 1322 01       		.byte	0x1
- 2702 1323 17       		.byte	0x17
+ 2702 1323 18       		.byte	0x18
  2703 1324 24050000 		.4byte	0x524
  2704 1328 53000000 		.4byte	.LLST1
  2705 132c 27       		.uleb128 0x27
  2706 132d 96000000 		.4byte	.LASF389
  2707 1331 01       		.byte	0x1
- 2708 1332 18       		.byte	0x18
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 53
+
+
+ 2708 1332 19       		.byte	0x19
  2709 1333 EC130000 		.4byte	0x13ec
  2710 1337 AE000000 		.4byte	.LLST2
  2711 133b 28       		.uleb128 0x28
@@ -3118,11 +3130,8 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2714 1344 9C130000 		.4byte	0x139c
  2715 1348 27       		.uleb128 0x27
  2716 1349 03050000 		.4byte	.LASF390
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 53
-
-
  2717 134d 01       		.byte	0x1
- 2718 134e 28       		.byte	0x28
+ 2718 134e 29       		.byte	0x29
  2719 134f 3E050000 		.4byte	0x53e
  2720 1353 DA000000 		.4byte	.LLST3
  2721 1357 28       		.uleb128 0x28
@@ -3132,7 +3141,7 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2725 1364 29       		.uleb128 0x29
  2726 1365 6900     		.ascii	"i\000"
  2727 1367 01       		.byte	0x1
- 2728 1368 2A       		.byte	0x2a
+ 2728 1368 33       		.byte	0x33
  2729 1369 94000000 		.4byte	0x94
  2730 136d ED000000 		.4byte	.LLST4
  2731 1371 2A       		.uleb128 0x2a
@@ -3169,6 +3178,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2762 13a5 B3130000 		.4byte	0x13b3
  2763 13a9 2B       		.uleb128 0x2b
  2764 13aa 01       		.uleb128 0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 54
+
+
  2765 13ab 50       		.byte	0x50
  2766 13ac 05       		.uleb128 0x5
  2767 13ad 03       		.byte	0x3
@@ -3178,9 +3190,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2771 13b4 36000000 		.4byte	.LVL3
  2772 13b8 63160000 		.4byte	0x1663
  2773 13bc CB130000 		.4byte	0x13cb
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 54
-
-
  2774 13c0 2B       		.uleb128 0x2b
  2775 13c1 01       		.uleb128 0x1
  2776 13c2 50       		.byte	0x50
@@ -3213,7 +3222,7 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2803 13f2 2E       		.uleb128 0x2e
  2804 13f3 22120000 		.4byte	.LASF421
  2805 13f7 01       		.byte	0x1
- 2806 13f8 3B       		.byte	0x3b
+ 2806 13f8 44       		.byte	0x44
  2807 13f9 00000000 		.4byte	.LFB497
  2808 13fd 38000000 		.4byte	.LFE497-.LFB497
  2809 1401 01       		.uleb128 0x1
@@ -3222,13 +3231,16 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2812 1407 2F       		.uleb128 0x2f
  2813 1408 830C0000 		.4byte	.LASF391
  2814 140c 01       		.byte	0x1
- 2815 140d 3C       		.byte	0x3c
+ 2815 140d 45       		.byte	0x45
  2816 140e C5120000 		.4byte	0x12c5
  2817 1412 02       		.uleb128 0x2
  2818 1413 91       		.byte	0x91
  2819 1414 74       		.sleb128 -12
  2820 1415 2A       		.uleb128 0x2a
  2821 1416 14000000 		.4byte	.LVL15
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 55
+
+
  2822 141a 7B160000 		.4byte	0x167b
  2823 141e 2B       		.uleb128 0x2b
  2824 141f 01       		.uleb128 0x1
@@ -3238,13 +3250,10 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2828 1423 74       		.sleb128 -12
  2829 1424 00       		.byte	0
  2830 1425 00       		.byte	0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 55
-
-
  2831 1426 30       		.uleb128 0x30
  2832 1427 800F0000 		.4byte	.LASF422
  2833 142b 01       		.byte	0x1
- 2834 142c 42       		.byte	0x42
+ 2834 142c 4B       		.byte	0x4b
  2835 142d 00000000 		.4byte	.LFB498
  2836 1431 58000000 		.4byte	.LFE498-.LFB498
  2837 1435 01       		.uleb128 0x1
@@ -3253,7 +3262,7 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2840 143b 31       		.uleb128 0x31
  2841 143c 61726700 		.ascii	"arg\000"
  2842 1440 01       		.byte	0x1
- 2843 1441 42       		.byte	0x42
+ 2843 1441 4B       		.byte	0x4b
  2844 1442 24050000 		.4byte	0x524
  2845 1446 0C010000 		.4byte	.LLST5
  2846 144a 2C       		.uleb128 0x2c
@@ -3289,6 +3298,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2876 1483 91140000 		.4byte	0x1491
  2877 1487 2B       		.uleb128 0x2b
  2878 1488 01       		.uleb128 0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 56
+
+
  2879 1489 50       		.byte	0x50
  2880 148a 05       		.uleb128 0x5
  2881 148b 03       		.byte	0x3
@@ -3298,9 +3310,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2885 1492 22000000 		.4byte	.LVL21
  2886 1496 9E160000 		.4byte	0x169e
  2887 149a 2C       		.uleb128 0x2c
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 56
-
-
  2888 149b 30000000 		.4byte	.LVL22
  2889 149f AA160000 		.4byte	0x16aa
  2890 14a3 B1140000 		.4byte	0x14b1
@@ -3329,7 +3338,7 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2913 14cf 32       		.uleb128 0x32
  2914 14d0 D01E0000 		.4byte	.LASF423
  2915 14d4 01       		.byte	0x1
- 2916 14d5 57       		.byte	0x57
+ 2916 14d5 60       		.byte	0x60
  2917 14d6 94000000 		.4byte	0x94
  2918 14da 00000000 		.4byte	.LFB499
  2919 14de 58000000 		.4byte	.LFE499-.LFB499
@@ -3341,7 +3350,7 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2925 14ed 04000000 		.4byte	.LBB6
  2926 14f1 02000000 		.4byte	.LBE6-.LBB6
  2927 14f5 01       		.byte	0x1
- 2928 14f6 59       		.byte	0x59
+ 2928 14f6 62       		.byte	0x62
  2929 14f7 2D       		.uleb128 0x2d
  2930 14f8 0A000000 		.4byte	.LVL25
  2931 14fc C2160000 		.4byte	0x16c2
@@ -3349,6 +3358,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2933 1501 1A000000 		.4byte	.LVL26
  2934 1505 CD160000 		.4byte	0x16cd
  2935 1509 1D150000 		.4byte	0x151d
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 57
+
+
  2936 150d 2B       		.uleb128 0x2b
  2937 150e 01       		.uleb128 0x1
  2938 150f 51       		.byte	0x51
@@ -3358,9 +3370,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2942 1513 01       		.uleb128 0x1
  2943 1514 52       		.byte	0x52
  2944 1515 01       		.uleb128 0x1
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 57
-
-
  2945 1516 32       		.byte	0x32
  2946 1517 2B       		.uleb128 0x2b
  2947 1518 01       		.uleb128 0x1
@@ -3409,6 +3418,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2990 1561 05       		.uleb128 0x5
  2991 1562 03       		.byte	0x3
  2992 1563 00000000 		.4byte	bleTask
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 58
+
+
  2993 1567 2B       		.uleb128 0x2b
  2994 1568 01       		.uleb128 0x1
  2995 1569 51       		.byte	0x51
@@ -3418,9 +3430,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  2999 1570 2B       		.uleb128 0x2b
  3000 1571 01       		.uleb128 0x1
  3001 1572 52       		.byte	0x52
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 58
-
-
  3002 1573 03       		.uleb128 0x3
  3003 1574 0A       		.byte	0xa
  3004 1575 0020     		.2byte	0x2000
@@ -3469,6 +3478,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3047 15c0 FD02     		.2byte	0x2fd
  3048 15c2 BD090000 		.4byte	0x9bd
  3049 15c6 34       		.uleb128 0x34
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 59
+
+
  3050 15c7 F2180000 		.4byte	.LASF395
  3051 15cb 0E       		.byte	0xe
  3052 15cc 1B02     		.2byte	0x21b
@@ -3478,9 +3490,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3056 15d7 0E       		.byte	0xe
  3057 15d8 2202     		.2byte	0x222
  3058 15da 67120000 		.4byte	0x1267
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 59
-
-
  3059 15de 12       		.uleb128 0x12
  3060 15df 63110000 		.4byte	0x1163
  3061 15e3 EE150000 		.4byte	0x15ee
@@ -3518,7 +3527,7 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3093 162d 36       		.uleb128 0x36
  3094 162e 62080000 		.4byte	.LASF401
  3095 1632 01       		.byte	0x1
- 3096 1633 15       		.byte	0x15
+ 3096 1633 16       		.byte	0x16
  3097 1634 E6120000 		.4byte	0x12e6
  3098 1638 05       		.uleb128 0x5
  3099 1639 03       		.byte	0x3
@@ -3529,6 +3538,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3104 1647 15       		.byte	0x15
  3105 1648 BB       		.byte	0xbb
  3106 1649 37       		.uleb128 0x37
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 60
+
+
  3107 164a 730C0000 		.4byte	.LASF403
  3108 164e 730C0000 		.4byte	.LASF403
  3109 1652 16       		.byte	0x16
@@ -3538,9 +3550,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3113 1659 AF0F0000 		.4byte	.LASF425
  3114 165d 1A       		.byte	0x1a
  3115 165e 00       		.byte	0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 60
-
-
  3116 165f 100B0000 		.4byte	.LASF424
  3117 1663 39       		.uleb128 0x39
  3118 1664 A91C0000 		.4byte	.LASF404
@@ -3589,6 +3598,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3161 16cc 31       		.byte	0x31
  3162 16cd 37       		.uleb128 0x37
  3163 16ce 5E020000 		.4byte	.LASF413
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 61
+
+
  3164 16d2 5E020000 		.4byte	.LASF413
  3165 16d6 15       		.byte	0x15
  3166 16d7 B6       		.byte	0xb6
@@ -3598,9 +3610,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3170 16e1 19       		.byte	0x19
  3171 16e2 4101     		.2byte	0x141
  3172 16e4 39       		.uleb128 0x39
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 61
-
-
  3173 16e5 EB1B0000 		.4byte	.LASF415
  3174 16e9 EB1B0000 		.4byte	.LASF415
  3175 16ed 19       		.byte	0x19
@@ -3649,6 +3658,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3218 0026 0B       		.uleb128 0xb
  3219 0027 49       		.uleb128 0x49
  3220 0028 13       		.uleb128 0x13
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 62
+
+
  3221 0029 00       		.byte	0
  3222 002a 00       		.byte	0
  3223 002b 04       		.uleb128 0x4
@@ -3658,9 +3670,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3227 002f 0B       		.uleb128 0xb
  3228 0030 3E       		.uleb128 0x3e
  3229 0031 0B       		.uleb128 0xb
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 62
-
-
  3230 0032 03       		.uleb128 0x3
  3231 0033 08       		.uleb128 0x8
  3232 0034 00       		.byte	0
@@ -3709,6 +3718,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3275 005f 13       		.uleb128 0x13
  3276 0060 00       		.byte	0
  3277 0061 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 63
+
+
  3278 0062 09       		.uleb128 0x9
  3279 0063 15       		.uleb128 0x15
  3280 0064 00       		.byte	0
@@ -3718,9 +3730,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3284 0068 00       		.byte	0
  3285 0069 0A       		.uleb128 0xa
  3286 006a 0F       		.uleb128 0xf
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 63
-
-
  3287 006b 00       		.byte	0
  3288 006c 0B       		.uleb128 0xb
  3289 006d 0B       		.uleb128 0xb
@@ -3769,6 +3778,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3332 0098 01       		.uleb128 0x1
  3333 0099 13       		.uleb128 0x13
  3334 009a 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 64
+
+
  3335 009b 00       		.byte	0
  3336 009c 0F       		.uleb128 0xf
  3337 009d 0D       		.uleb128 0xd
@@ -3778,9 +3790,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3341 00a1 3A       		.uleb128 0x3a
  3342 00a2 0B       		.uleb128 0xb
  3343 00a3 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 64
-
-
  3344 00a4 05       		.uleb128 0x5
  3345 00a5 49       		.uleb128 0x49
  3346 00a6 13       		.uleb128 0x13
@@ -3829,6 +3838,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3389 00d1 49       		.uleb128 0x49
  3390 00d2 13       		.uleb128 0x13
  3391 00d3 2F       		.uleb128 0x2f
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 65
+
+
  3392 00d4 0B       		.uleb128 0xb
  3393 00d5 00       		.byte	0
  3394 00d6 00       		.byte	0
@@ -3838,9 +3850,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3398 00da 03       		.uleb128 0x3
  3399 00db 0E       		.uleb128 0xe
  3400 00dc 0B       		.uleb128 0xb
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 65
-
-
  3401 00dd 0B       		.uleb128 0xb
  3402 00de 3A       		.uleb128 0x3a
  3403 00df 0B       		.uleb128 0xb
@@ -3889,6 +3898,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3446 010a 0B       		.uleb128 0xb
  3447 010b 3B       		.uleb128 0x3b
  3448 010c 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 66
+
+
  3449 010d 49       		.uleb128 0x49
  3450 010e 13       		.uleb128 0x13
  3451 010f 38       		.uleb128 0x38
@@ -3898,9 +3910,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3455 0113 18       		.uleb128 0x18
  3456 0114 15       		.uleb128 0x15
  3457 0115 01       		.byte	0x1
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 66
-
-
  3458 0116 27       		.uleb128 0x27
  3459 0117 19       		.uleb128 0x19
  3460 0118 49       		.uleb128 0x49
@@ -3949,6 +3958,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3503 0143 1C       		.uleb128 0x1c
  3504 0144 13       		.uleb128 0x13
  3505 0145 01       		.byte	0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 67
+
+
  3506 0146 0B       		.uleb128 0xb
  3507 0147 0B       		.uleb128 0xb
  3508 0148 3A       		.uleb128 0x3a
@@ -3958,9 +3970,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3512 014c 01       		.uleb128 0x1
  3513 014d 13       		.uleb128 0x13
  3514 014e 00       		.byte	0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 67
-
-
  3515 014f 00       		.byte	0
  3516 0150 1D       		.uleb128 0x1d
  3517 0151 17       		.uleb128 0x17
@@ -4009,6 +4018,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3560 017c 03       		.uleb128 0x3
  3561 017d 0E       		.uleb128 0xe
  3562 017e 1C       		.uleb128 0x1c
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 68
+
+
  3563 017f 0B       		.uleb128 0xb
  3564 0180 00       		.byte	0
  3565 0181 00       		.byte	0
@@ -4018,9 +4030,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3569 0185 03       		.uleb128 0x3
  3570 0186 0E       		.uleb128 0xe
  3571 0187 1C       		.uleb128 0x1c
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 68
-
-
  3572 0188 05       		.uleb128 0x5
  3573 0189 00       		.byte	0
  3574 018a 00       		.byte	0
@@ -4069,6 +4078,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3617 01b5 0B       		.uleb128 0xb
  3618 01b6 00       		.byte	0
  3619 01b7 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 69
+
+
  3620 01b8 25       		.uleb128 0x25
  3621 01b9 2E       		.uleb128 0x2e
  3622 01ba 01       		.byte	0x1
@@ -4078,9 +4090,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3626 01be 0E       		.uleb128 0xe
  3627 01bf 3A       		.uleb128 0x3a
  3628 01c0 0B       		.uleb128 0xb
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 69
-
-
  3629 01c1 3B       		.uleb128 0x3b
  3630 01c2 0B       		.uleb128 0xb
  3631 01c3 27       		.uleb128 0x27
@@ -4129,6 +4138,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3674 01ef 00       		.byte	0
  3675 01f0 28       		.uleb128 0x28
  3676 01f1 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 70
+
+
  3677 01f2 01       		.byte	0x1
  3678 01f3 11       		.uleb128 0x11
  3679 01f4 01       		.uleb128 0x1
@@ -4138,9 +4150,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3683 01f8 13       		.uleb128 0x13
  3684 01f9 00       		.byte	0
  3685 01fa 00       		.byte	0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 70
-
-
  3686 01fb 29       		.uleb128 0x29
  3687 01fc 34       		.uleb128 0x34
  3688 01fd 00       		.byte	0
@@ -4189,6 +4198,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3731 022f 898201   		.uleb128 0x4109
  3732 0232 00       		.byte	0
  3733 0233 11       		.uleb128 0x11
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 71
+
+
  3734 0234 01       		.uleb128 0x1
  3735 0235 31       		.uleb128 0x31
  3736 0236 13       		.uleb128 0x13
@@ -4198,9 +4210,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3740 023a 2E       		.uleb128 0x2e
  3741 023b 01       		.byte	0x1
  3742 023c 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 71
-
-
  3743 023d 19       		.uleb128 0x19
  3744 023e 03       		.uleb128 0x3
  3745 023f 0E       		.uleb128 0xe
@@ -4249,6 +4258,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3788 026b 27       		.uleb128 0x27
  3789 026c 19       		.uleb128 0x19
  3790 026d 8701     		.uleb128 0x87
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 72
+
+
  3791 026f 19       		.uleb128 0x19
  3792 0270 11       		.uleb128 0x11
  3793 0271 01       		.uleb128 0x1
@@ -4258,9 +4270,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3797 0275 18       		.uleb128 0x18
  3798 0276 9742     		.uleb128 0x2117
  3799 0278 19       		.uleb128 0x19
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 72
-
-
  3800 0279 01       		.uleb128 0x1
  3801 027a 13       		.uleb128 0x13
  3802 027b 00       		.byte	0
@@ -4309,6 +4318,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3845 02a8 13       		.uleb128 0x13
  3846 02a9 00       		.byte	0
  3847 02aa 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 73
+
+
  3848 02ab 33       		.uleb128 0x33
  3849 02ac 1D       		.uleb128 0x1d
  3850 02ad 00       		.byte	0
@@ -4318,9 +4330,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3854 02b1 01       		.uleb128 0x1
  3855 02b2 12       		.uleb128 0x12
  3856 02b3 06       		.uleb128 0x6
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 73
-
-
  3857 02b4 58       		.uleb128 0x58
  3858 02b5 0B       		.uleb128 0xb
  3859 02b6 59       		.uleb128 0x59
@@ -4369,6 +4378,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3902 02e1 3A       		.uleb128 0x3a
  3903 02e2 0B       		.uleb128 0xb
  3904 02e3 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 74
+
+
  3905 02e4 0B       		.uleb128 0xb
  3906 02e5 49       		.uleb128 0x49
  3907 02e6 13       		.uleb128 0x13
@@ -4378,9 +4390,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3911 02ea 18       		.uleb128 0x18
  3912 02eb 00       		.byte	0
  3913 02ec 00       		.byte	0
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 74
-
-
  3914 02ed 37       		.uleb128 0x37
  3915 02ee 2E       		.uleb128 0x2e
  3916 02ef 00       		.byte	0
@@ -4429,6 +4438,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3959 031a 03       		.uleb128 0x3
  3960 031b 0E       		.uleb128 0xe
  3961 031c 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 75
+
+
  3962 031d 0B       		.uleb128 0xb
  3963 031e 3B       		.uleb128 0x3b
  3964 031f 05       		.uleb128 0x5
@@ -4438,9 +4450,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  3968              		.section	.debug_loc,"",%progbits
  3969              	.Ldebug_loc0:
  3970              	.LLST0:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 75
-
-
  3971 0000 00000000 		.4byte	.LVL0
  3972 0004 2A000000 		.4byte	.LVL1
  3973 0008 0100     		.2byte	0x1
@@ -4489,6 +4498,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4016 006a 51       		.byte	0x51
  4017 006b 9F       		.byte	0x9f
  4018 006c 38000000 		.4byte	.LVL4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 76
+
+
  4019 0070 3D000000 		.4byte	.LVL6-1
  4020 0074 0100     		.2byte	0x1
  4021 0076 51       		.byte	0x51
@@ -4498,9 +4510,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4025 0081 55       		.byte	0x55
  4026 0082 40000000 		.4byte	.LVL7
  4027 0086 4C000000 		.4byte	.LVL9
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 76
-
-
  4028 008a 0100     		.2byte	0x1
  4029 008c 51       		.byte	0x51
  4030 008d 4C000000 		.4byte	.LVL9
@@ -4549,6 +4558,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4073 00f8 9F       		.byte	0x9f
  4074 00f9 4C000000 		.4byte	.LVL9
  4075 00fd 62000000 		.4byte	.LVL12
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 77
+
+
  4076 0101 0100     		.2byte	0x1
  4077 0103 54       		.byte	0x54
  4078 0104 00000000 		.4byte	0
@@ -4558,9 +4570,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4082 0110 04000000 		.4byte	.LVL17
  4083 0114 0100     		.2byte	0x1
  4084 0116 50       		.byte	0x50
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 77
-
-
  4085 0117 04000000 		.4byte	.LVL17
  4086 011b 58000000 		.4byte	.LFE498
  4087 011f 0400     		.2byte	0x4
@@ -4602,13 +4611,16 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4123 0024 00000000 		.4byte	0
  4124              		.section	.debug_line,"",%progbits
  4125              	.Ldebug_line0:
- 4126 0000 3C050000 		.section	.debug_str,"MS",%progbits,1
+ 4126 0000 3F050000 		.section	.debug_str,"MS",%progbits,1
  4126      0200B004 
  4126      00000201 
  4126      FB0E0D00 
  4126      01010101 
  4127              	.LASF64:
  4128 0000 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 78
+
+
  4128      6843746C 
  4128      4D61696E 
  4128      57733146 
@@ -4618,9 +4630,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4130      75655365 
  4130      6D617068 
  4130      6F726554 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 78
-
-
  4130      616B6500 
  4131              	.LASF290:
  4132 0028 43595F42 		.ascii	"CY_BLE_EVT_GAP_PASSKEY_ENTRY_REQUEST\000"
@@ -4669,6 +4678,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4147              	.LASF349:
  4148 010a 43595F42 		.ascii	"CY_BLE_EVT_L2CAP_CBFC_TX_CREDIT_IND\000"
  4148      4C455F45 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 79
+
+
  4148      56545F4C 
  4148      32434150 
  4148      5F434246 
@@ -4678,9 +4690,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4150      56545F50 
  4150      454E4449 
  4150      4E475F46 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 79
-
-
  4151              	.LASF91:
  4152 014d 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
  4152      73436D30 
@@ -4729,6 +4738,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4168      42617365 
  4168      00
  4169              	.LASF222:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 80
+
+
  4170 0214 5F776374 		.ascii	"_wctomb_state\000"
  4170      6F6D625F 
  4170      73746174 
@@ -4738,9 +4750,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4172      616C7469 
  4172      6D655F62 
  4172      756600
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 80
-
-
  4173              	.LASF272:
  4174 0231 43595F42 		.ascii	"CY_BLE_EVT_SET_TX_PWR_COMPLETE\000"
  4174      4C455F45 
@@ -4789,6 +4798,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4194 02b9 43595F42 		.ascii	"CY_BLE_EVT_GAP_CREATE_CONN_CANCEL_COMPLETE\000"
  4194      4C455F45 
  4194      56545F47 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 81
+
+
  4194      41505F43 
  4194      52454154 
  4195              	.LASF51:
@@ -4798,9 +4810,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4196      00
  4197              	.LASF81:
  4198 02f1 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 81
-
-
  4198      44697643 
  4198      6D645061 
  4198      54797065 
@@ -4849,6 +4858,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4216      5F46494E 
  4217              	.LASF38:
  4218 03ae 70657269 		.ascii	"periVersion\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 82
+
+
  4218      56657273 
  4218      696F6E00 
  4219              	.LASF265:
@@ -4858,9 +4870,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4220      45545F50 
  4220      52495641 
  4221              	.LASF210:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 82
-
-
  4222 03df 5F736565 		.ascii	"_seed\000"
  4222      6400
  4223              	.LASF46:
@@ -4909,6 +4918,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4238      4E56414C 
  4238      494400
  4239              	.LASF171:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 83
+
+
  4240 0476 5F726561 		.ascii	"_read\000"
  4240      6400
  4241              	.LASF368:
@@ -4918,9 +4930,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4242      54415445 
  4242      5F53544F 
  4243              	.LASF226:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 83
-
-
  4244 0495 5F6D6272 		.ascii	"_mbrlen_state\000"
  4244      6C656E5F 
  4244      73746174 
@@ -4969,6 +4978,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4261 0571 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
  4261      20726576 
  4261      6973696F 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 84
+
+
  4261      6E203233 
  4261      37373135 
  4262 05a4 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
@@ -4978,9 +4990,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4262      2D73702D 
  4263 05d7 65637469 		.ascii	"ections -ffat-lto-objects\000"
  4263      6F6E7320 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 84
-
-
  4263      2D666661 
  4263      742D6C74 
  4263      6F2D6F62 
@@ -5029,6 +5038,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4281      41545443 
  4281      5F584348 
  4282              	.LASF335:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 85
+
+
  4283 06b7 43595F42 		.ascii	"CY_BLE_EVT_GATTS_HANDLE_VALUE_CNF\000"
  4283      4C455F45 
  4283      56545F47 
@@ -5038,9 +5050,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4285 06d9 5F426967 		.ascii	"_Bigint\000"
  4285      696E7400 
  4286              	.LASF181:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 85
-
-
  4287 06e1 5F6D6273 		.ascii	"_mbstate\000"
  4287      74617465 
  4287      00
@@ -5089,6 +5098,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4305      56545F4C 
  4305      4C5F434E 
  4305      54524C5F 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 86
+
+
  4306              	.LASF89:
  4307 07ae 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
  4307      50727443 
@@ -5098,9 +5110,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4308              	.LASF134:
  4309 07c2 5F5F636F 		.ascii	"__count\000"
  4309      756E7400 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 86
-
-
  4310              	.LASF252:
  4311 07ca 43595F42 		.ascii	"CY_BLE_EVT_GET_PEER_RPA_COMPLETE\000"
  4311      4C455F45 
@@ -5149,6 +5158,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4331 0862 626C6553 		.ascii	"bleSemaphore\000"
  4331      656D6170 
  4331      686F7265 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 87
+
+
  4331      00
  4332              	.LASF304:
  4333 086f 43595F42 		.ascii	"CY_BLE_EVT_GAP_ENHANCE_CONN_COMPLETE\000"
@@ -5158,9 +5170,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4333      4E48414E 
  4334              	.LASF195:
  4335 0894 5F726573 		.ascii	"_result_k\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 87
-
-
  4335      756C745F 
  4335      6B00
  4336              	.LASF12:
@@ -5209,6 +5218,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4352              	.LASF24:
  4353 093d 75646242 		.ascii	"udbBase\000"
  4353      61736500 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 88
+
+
  4354              	.LASF205:
  4355 0945 5F5F4649 		.ascii	"__FILE\000"
  4355      4C4500
@@ -5218,9 +5230,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4357      00
  4358              	.LASF297:
  4359 0955 43595F42 		.ascii	"CY_BLE_EVT_GAP_ENCRYPT_CHANGE\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 88
-
-
  4359      4C455F45 
  4359      56545F47 
  4359      41505F45 
@@ -5269,6 +5278,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4375      5554485F 
  4376              	.LASF78:
  4377 0a3b 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 89
+
+
  4377      44697643 
  4377      6D644469 
  4377      7653656C 
@@ -5278,9 +5290,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4379      4C455F45 
  4379      56545F47 
  4379      45545F50 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 89
-
-
  4379      48595F43 
  4380              	.LASF358:
  4381 0a6b 76616C75 		.ascii	"value\000"
@@ -5329,6 +5338,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4398              	.LASF424:
  4399 0b10 70757473 		.ascii	"puts\000"
  4399      00
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 90
+
+
  4400              	.LASF59:
  4401 0b15 666C6173 		.ascii	"flashPipeRequired\000"
  4401      68506970 
@@ -5338,9 +5350,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4402              	.LASF146:
  4403 0b27 5F5F746D 		.ascii	"__tm_sec\000"
  4403      5F736563 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 90
-
-
  4403      00
  4404              	.LASF334:
  4405 0b30 43595F42 		.ascii	"CY_BLE_EVT_GATTC_HANDLE_VALUE_IND\000"
@@ -5389,6 +5398,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4423      42617365 
  4423      00
  4424              	.LASF370:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 91
+
+
  4425 0bde 43595F42 		.ascii	"CY_BLE_ADV_STATE_ADVERTISING\000"
  4425      4C455F41 
  4425      44565F53 
@@ -5398,9 +5410,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4427 0bfb 5F6D6273 		.ascii	"_mbsrtowcs_state\000"
  4427      72746F77 
  4427      63735F73 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 91
-
-
  4427      74617465 
  4427      00
  4428              	.LASF306:
@@ -5449,6 +5458,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4443      6E7400
  4444              	.LASF342:
  4445 0cd4 43595F42 		.ascii	"CY_BLE_EVT_L2CAP_COMMAND_REJ\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 92
+
+
  4445      4C455F45 
  4445      56545F4C 
  4445      32434150 
@@ -5458,9 +5470,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4447      4C455F45 
  4447      56545F47 
  4447      45545F43 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 92
-
-
  4447      48414E4E 
  4448              	.LASF135:
  4449 0d15 5F5F7661 		.ascii	"__value\000"
@@ -5509,6 +5518,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4467      73466C61 
  4467      73685061 
  4467      53697A65 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 93
+
+
  4467      00
  4468              	.LASF378:
  4469 0dc3 43595F42 		.ascii	"CY_BLE_CONN_STATE_CLIENT_CHAR_DISCOVERING\000"
@@ -5518,9 +5530,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4469      455F434C 
  4470              	.LASF22:
  4471 0ded 666C6173 		.ascii	"flashcBase\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 93
-
-
  4471      68634261 
  4471      736500
  4472              	.LASF108:
@@ -5569,6 +5578,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4489 0ea6 63727970 		.ascii	"cryptoMemSize\000"
  4489      746F4D65 
  4489      6D53697A 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 94
+
+
  4489      6500
  4490              	.LASF177:
  4491 0eb4 5F626C6B 		.ascii	"_blksize\000"
@@ -5578,9 +5590,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4493 0ebd 43595F42 		.ascii	"CY_BLE_EVT_GATTC_READ_BY_TYPE_RSP\000"
  4493      4C455F45 
  4493      56545F47 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 94
-
-
  4493      41545443 
  4493      5F524541 
  4494              	.LASF256:
@@ -5629,6 +5638,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4513      6800
  4514              	.LASF73:
  4515 0f96 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 95
+
+
  4515      61747573 
  4515      43684964 
  4515      784D736B 
@@ -5638,9 +5650,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4517      385F7400 
  4518              	.LASF425:
  4519 0faf 5F5F6275 		.ascii	"__builtin_puts\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 95
-
-
  4519      696C7469 
  4519      6E5F7075 
  4519      747300
@@ -5689,6 +5698,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4536              	.LASF84:
  4537 1083 70657269 		.ascii	"periDiv16_5CtlOffset\000"
  4537      44697631 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 96
+
+
  4537      365F3543 
  4537      746C4F66 
  4537      66736574 
@@ -5698,9 +5710,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4539      64765374 
  4539      61746500 
  4540              	.LASF112:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 96
-
-
  4541 10a8 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
  4541      625F7363 
  4541      625F7561 
@@ -5749,6 +5758,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4559 115a 63727970 		.ascii	"cryptoBase\000"
  4559      746F4261 
  4559      736500
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 97
+
+
  4560              	.LASF402:
  4561 1165 7072696E 		.ascii	"printf\000"
  4561      746600
@@ -5758,9 +5770,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4564              	.LASF197:
  4565 1172 5F667265 		.ascii	"_freelist\000"
  4565      656C6973 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 97
-
-
  4565      7400
  4566              	.LASF312:
  4567 117c 43595F42 		.ascii	"CY_BLE_EVT_GAP_CONN_ESTB\000"
@@ -5809,6 +5818,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4583      6500
  4584              	.LASF4:
  4585 123b 5F5F696E 		.ascii	"__int16_t\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 98
+
+
  4585      7431365F 
  4585      7400
  4586              	.LASF274:
@@ -5818,9 +5830,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4587      45545F43 
  4587      4C4B5F43 
  4588              	.LASF26:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 98
-
-
  4589 1268 6873696F 		.ascii	"hsiomBase\000"
  4589      6D426173 
  4589      6500
@@ -5869,6 +5878,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4607      44445F44 
  4607      45564943 
  4608              	.LASF123:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 99
+
+
  4609 132e 74784275 		.ascii	"txBufSize\000"
  4609      6653697A 
  4609      6500
@@ -5878,9 +5890,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4611      737400
  4612              	.LASF314:
  4613 1343 43595F42 		.ascii	"CY_BLE_EVT_GAP_ADV_TX\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 99
-
-
  4613      4C455F45 
  4613      56545F47 
  4613      41505F41 
@@ -5929,6 +5938,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4629      4C455F45 
  4629      56545F47 
  4629      4150435F 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 100
+
+
  4629      5343414E 
  4630              	.LASF343:
  4631 1405 43595F42 		.ascii	"CY_BLE_EVT_L2CAP_CBFC_CONN_IND\000"
@@ -5938,9 +5950,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4631      5F434246 
  4632              	.LASF324:
  4633 1424 43595F42 		.ascii	"CY_BLE_EVT_GATTC_READ_RSP\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 100
-
-
  4633      4C455F45 
  4633      56545F47 
  4633      41545443 
@@ -5989,6 +5998,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4649      6C615C75 
  4649      6E695C70 
  4650 150e 4669726D 		.ascii	"Firmware\\new\\PSOC6\\CustomService.cydsn\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 101
+
+
  4650      77617265 
  4650      5C6E6577 
  4650      5C50534F 
@@ -5998,9 +6010,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4652      74635F62 
  4652      6C655F67 
  4652      61747473 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 101
-
-
  4652      5F777269 
  4653              	.LASF150:
  4654 155c 5F5F746D 		.ascii	"__tm_mon\000"
@@ -6049,6 +6058,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4672      4C455F45 
  4672      56545F53 
  4672      45545F52 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 102
+
+
  4672      50415F54 
  4673              	.LASF217:
  4674 15ec 5F67616D 		.ascii	"_gamma_signgam\000"
@@ -6058,9 +6070,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4675              	.LASF242:
  4676 15fb 43595F42 		.ascii	"CY_BLE_EVT_HARDWARE_ERROR\000"
  4676      4C455F45 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 102
-
-
  4676      56545F48 
  4676      41524457 
  4676      4152455F 
@@ -6109,6 +6118,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4694 16c7 43595F42 		.ascii	"CY_BLE_EVT_GATTS_WRITE_REQ\000"
  4694      4C455F45 
  4694      56545F47 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 103
+
+
  4694      41545453 
  4694      5F575249 
  4695              	.LASF410:
@@ -6118,9 +6130,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4696      74657241 
  4696      7070486F 
  4697              	.LASF280:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 103
-
-
  4698 1701 43595F42 		.ascii	"CY_BLE_EVT_STACK_SHUTDOWN_COMPLETE\000"
  4698      4C455F45 
  4698      56545F53 
@@ -6169,6 +6178,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4712      5F434F4E 
  4713              	.LASF0:
  4714 17dc 73686F72 		.ascii	"short int\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 104
+
+
  4714      7420696E 
  4714      7400
  4715              	.LASF287:
@@ -6178,9 +6190,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4716      43495F50 
  4716      4B545F52 
  4717              	.LASF296:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 104
-
-
  4718 17fe 43595F42 		.ascii	"CY_BLE_EVT_GAP_DEVICE_DISCONNECTED\000"
  4718      4C455F45 
  4718      56545F47 
@@ -6229,6 +6238,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4734      7400
  4735              	.LASF34:
  4736 18a7 666C6173 		.ascii	"flashcVersion\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 105
+
+
  4736      68635665 
  4736      7273696F 
  4736      6E00
@@ -6238,9 +6250,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4738      61737465 
  4738      724D6173 
  4738      6B00
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 105
-
-
  4739              	.LASF326:
  4740 18c7 43595F42 		.ascii	"CY_BLE_EVT_GATTC_READ_MULTI_RSP\000"
  4740      4C455F45 
@@ -6289,6 +6298,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4760 196e 74784C65 		.ascii	"txLeftToTransmit\000"
  4760      6674546F 
  4760      5472616E 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 106
+
+
  4760      736D6974 
  4760      00
  4761              	.LASF364:
@@ -6298,9 +6310,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4762      5F53544F 
  4762      50504544 
  4763              	.LASF356:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 106
-
-
  4764 1994 61637475 		.ascii	"actualLen\000"
  4764      616C4C65 
  4764      6E00
@@ -6349,6 +6358,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4786      5F636174 
  4786      65676F72 
  4786      7900
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 107
+
+
  4787              	.LASF412:
  4788 1a3c 55415254 		.ascii	"UART_1_Start\000"
  4788      5F315F53 
@@ -6358,9 +6370,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4790 1a49 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
  4790      50727449 
  4790      6E747243 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 107
-
-
  4790      66674F66 
  4790      66736574 
  4791              	.LASF249:
@@ -6409,6 +6418,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4806      43746C4F 
  4806      66667365 
  4807              	.LASF145:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 108
+
+
  4808 1b39 5F5F746D 		.ascii	"__tm\000"
  4808      00
  4809              	.LASF237:
@@ -6418,9 +6430,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4810      494D454F 
  4810      555400
  4811              	.LASF180:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 108
-
-
  4812 1b51 5F6C6F63 		.ascii	"_lock\000"
  4812      6B00
  4813              	.LASF36:
@@ -6469,6 +6478,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4833              	.LASF415:
  4834 1beb 76546173 		.ascii	"vTaskStartScheduler\000"
  4834      6B537461 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 109
+
+
  4834      72745363 
  4834      68656475 
  4834      6C657200 
@@ -6478,9 +6490,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4836      56545F47 
  4836      41545443 
  4836      5F53544F 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 109
-
-
  4837              	.LASF366:
  4838 1c22 43595F42 		.ascii	"CY_BLE_STATE_ON\000"
  4838      4C455F53 
@@ -6529,6 +6538,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4856 1cc8 63795F73 		.ascii	"cy_stc_ble_gatt_value_t\000"
  4856      74635F62 
  4856      6C655F67 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 110
+
+
  4856      6174745F 
  4856      76616C75 
  4857              	.LASF260:
@@ -6538,9 +6550,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4858      454D4F56 
  4858      455F4445 
  4859              	.LASF250:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 110
-
-
  4860 1d12 43595F42 		.ascii	"CY_BLE_EVT_GET_DATA_LENGTH_COMPLETE\000"
  4860      4C455F45 
  4860      56545F47 
@@ -6589,6 +6598,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4878      41545453 
  4878      5F58434E 
  4879              	.LASF203:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 111
+
+
  4880 1de3 5F5F7367 		.ascii	"__sglue\000"
  4880      6C756500 
  4881              	.LASF225:
@@ -6598,9 +6610,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4882      00
  4883              	.LASF58:
  4884 1df8 666C6173 		.ascii	"flashRwwRequired\000"
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 111
-
-
  4884      68527777 
  4884      52657175 
  4884      69726564 
@@ -6649,6 +6658,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4904      7200
  4905              	.LASF71:
  4906 1e78 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 112
+
+
  4906      43746C50 
  4906      7265656D 
  4906      70746162 
@@ -6658,9 +6670,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4908      4C455F45 
  4908      56545F47 
  4908      41545453 
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 112
-
-
  4908      5F575249 
  4909              	.LASF273:
  4910 1ead 43595F42 		.ascii	"CY_BLE_EVT_GET_CLK_CONFIG_COMPLETE\000"
@@ -6709,6 +6718,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4929              	.LASF28:
  4930 1f57 70617373 		.ascii	"passBase\000"
  4930      42617365 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 113
+
+
  4930      00
  4931              	.LASF129:
  4932 1f60 5F6F6666 		.ascii	"_off_t\000"
@@ -6718,9 +6730,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4934      5F315F63 
  4934      6F6E7465 
  4934      787400
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 113
-
-
  4935              	.LASF176:
  4936 1f76 5F6E6275 		.ascii	"_nbuf\000"
  4936      6600
@@ -6769,6 +6778,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4954      6600
  4955              	.LASF264:
  4956 2034 43595F42 		.ascii	"CY_BLE_EVT_PHY_UPDATE_COMPLETE\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 114
+
+
  4956      4C455F45 
  4956      56545F50 
  4956      48595F55 
@@ -6778,9 +6790,6 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4958      645F6E65 
  4958      787400
  4959              	.LASF173:
-ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 114
-
-
  4960 205e 5F736565 		.ascii	"_seek\000"
  4960      6B00
  4961              	.LASF141:
@@ -6829,6 +6838,9 @@ ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccNwciCO.s 			page 1
  4980      76656E74 
  4980      48616E64 
  4980      6C657200 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cchD4obU.s 			page 115
+
+
  4981              	.LASF298:
  4982 210f 43595F42 		.ascii	"CY_BLE_EVT_GAP_CONNECTION_UPDATE_COMPLETE\000"
  4982      4C455F45 
