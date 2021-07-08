@@ -39,22 +39,22 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
             
             if (CY_BLE_NS_NSCHARACTERISTIC_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
                 uint8_t *commands = writeReqParameter->handleValPair.value.val;
-                // error handling
-                /*int array_size = (int)(sizeof(commands)/sizeof(commands[0]));
-                switch (array_size) {
-                    case (array_size > 5): 
-                        printf("invalid command");
-                        break;
-                }*/
-                //
+                
+                
                 
                 for (int i=0; i < 5; i++) {
                     // please null check.
                     printf("command[%d] = %d\r\n", i, commands[i]);    
                 }
                 
-                // passing to command parser
-                execute_command(commands);
+                // error handling
+                int array_size = (int)(sizeof(commands)/sizeof(commands[0]));
+                if (array_size > 5 || array_size < 0) {
+                    printf("invalid command");
+                } else {
+                    // passing to command parser
+                    execute_command(commands);
+                }
                 
             }
             
