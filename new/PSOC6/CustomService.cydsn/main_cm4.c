@@ -18,6 +18,7 @@
 #include "command_parser.h"
 #include "command_queue.h"
 #include "stdlib.h"
+#include "main_cm4.h"
 
 SemaphoreHandle_t bleSemaphore;
 

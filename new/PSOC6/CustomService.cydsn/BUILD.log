@@ -1,4 +1,4 @@
---------------- Build Started: 07/08/2021 14:14:10 Project: CustomService, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 07/17/2021 17:10:28 Project: CustomService, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 cydsfit.exe -.appdatapath "C:\Users\cmila\AppData\Local\Cypress Semiconductor\PSoC Creator\4.4" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\cmila\uni\projects\Neural-Stimulator-Firmware\new\PSOC6\CustomService.cydsn\CustomService.cyprj -d CYBLE-416045-02 -s C:\Users\cmila\uni\projects\Neural-Stimulator-Firmware\new\PSOC6\CustomService.cydsn\Generated_Source\PSoC6 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 ADD: fit.M0067: information: Clock Information: (The WCO is enabled. Chip startup will be slower because clock configuration cannot continue until the WCO is ready. See the device datasheet for WCO startup timing. If WCO is not required during startup, consider starting it in main() for faster chip startup.).
  * C:\Users\cmila\uni\projects\Neural-Stimulator-Firmware\new\PSOC6\CustomService.cydsn\CustomService.cydwr (WCO)
@@ -8,8 +8,6 @@ ADD: fit.M0052: information: Interrupt "BLE_1_bless_isr" is currently mapped to 
 HDL Generation...
 Synthesis...
 Tech Mapping...
-Error: apr.M0136: Opamp \VDAC_1:REFBUF\ is available in deep sleep but is driven by a vref which is not enabled in deep sleep. (App=cydsfit)
-ADD: pft.M0040: information: The following 1 pin(s) will be assigned a location by the fitter: Pin_2(0)
 Info: plm.M0038: The pin named CY_CPUSS_SWJ_SWCLK_TCLK(0) at location P6[7] prevents usage of special purposes: SCB[6].uart_cts. (App=cydsfit)
 Info: plm.M0038: The pin named CY_CPUSS_SWJ_SWCLK_TCLK(0) at location P6[7] prevents usage of special purposes: SCB[6].spi_select[0]. (App=cydsfit)
 Info: plm.M0038: The pin named CY_CPUSS_SWJ_SWCLK_TCLK(0) at location P6[7] prevents usage of special purposes: SCB[8].spi_select[0]. (App=cydsfit)
@@ -21,7 +19,126 @@ Info: plm.M0038: The pin named CY_CPUSS_SWJ_SWDIO_TMS(0) at location P6[6] preve
 Info: plm.M0038: The pin named CY_SRSS_WCO_IN(0) at location P0[0] prevents usage of special purposes: SCB[0].spi_select[1]. (App=cydsfit)
 Info: plm.M0038: The pin named CY_SRSS_WCO_OUT(0) at location P0[1] prevents usage of special purposes: SCB[0].spi_select[2]. (App=cydsfit)
 Info: plm.M0038: The pin named CY_SRSS_WCO_OUT(0) at location P0[1] prevents usage of special purposes: CPUSS[0].swj_trstn. (App=cydsfit)
+Analog Placement...
+Analog Routing...
+Analog Code Generation...
+Digital Placement...
+Digital Routing...
+Bitstream Generation...
+Bitstream Verification...
+Static timing analysis...
+API Generation...
 Dependency Generation...
 Cleanup...
-Error: fit.M0050: The fitter aborted due to errors, please address all errors and rebuild. (App=cydsfit)
---------------- Build Failed: 07/08/2021 14:14:18 ---------------
+The compile step is up to date, no work needs to be done.
+The link step is up to date, no work needs to be done.
+arm-none-eabi-gcc.exe -mcpu=cortex-m4 -mfloat-abi=softfp -mfpu=fpv4-sp-d16 -mthumb -I. -IGenerated_Source\PSoC6 -IGenerated_Source\PSoC6\pdl\cmsis/include/ -IGenerated_Source\PSoC6\pdl\devices/psoc6/include/ -IGenerated_Source\PSoC6\pdl\devices/psoc6/include/ip/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/device/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/efuse/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/flash/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/gpio/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/ipc/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/lvd/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/profile/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/prot/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/scb/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/sysanalog/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/sysclk/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/sysint/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/syslib/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/syspm/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/systick/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/trigmux/ -IGenerated_Source\PSoC6\pdl\drivers/peripheral/wdt/ -IGenerated_Source\PSoC6\pdl\middleware/ -IGenerated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/include/ -IGenerated_Source\PSoC6\pdl\rtos/FreeRTOS/10.0.1/Source/portable/GCC/CM4F/ -IGenerated_Source\PSoC6\pdl\utilities/ -Wa,-alh=.\CortexM4\ARM_GCC_541\Debug/command_parser.lst -g -D DEBUG -D CY_CORE_ID=0 -D CY_PSOC_CREATOR_USED=1 -D CYBLE_416045_02 -Wall -ffunction-sections -ffat-lto-objects -Og -c command_parser.c -o .\CortexM4\ARM_GCC_541\Debug\command_parser.o
+In file included from command_parser.c:18:0:
+supported_commands.h:23:28: error: expected identifier or '(' before numeric constant
+     #define PHASE_ONE_TIME 0x08
+                            ^
+main_cm4.h:40:10: note: in expansion of macro 'PHASE_ONE_TIME'
+ uint32_t PHASE_ONE_TIME;
+          ^
+supported_commands.h:25:28: error: expected identifier or '(' before numeric constant
+     #define PHASE_TWO_TIME 0x0a
+                            ^
+main_cm4.h:41:10: note: in expansion of macro 'PHASE_TWO_TIME'
+ uint32_t PHASE_TWO_TIME;
+          ^
+supported_commands.h:24:29: error: expected identifier or '(' before numeric constant
+     #define INTER_PHASE_GAP 0x09
+                             ^
+main_cm4.h:42:10: note: in expansion of macro 'INTER_PHASE_GAP'
+ uint32_t INTER_PHASE_GAP;
+          ^
+supported_commands.h:26:30: error: expected identifier or '(' before numeric constant
+     #define INTER_STIM_DELAY 0x0b
+                              ^
+main_cm4.h:43:10: note: in expansion of macro 'INTER_STIM_DELAY'
+ uint32_t INTER_STIM_DELAY;
+          ^
+supported_commands.h:28:23: error: expected identifier or '(' before numeric constant
+     #define PULSE_NUM 0x0d
+                       ^
+main_cm4.h:44:10: note: in expansion of macro 'PULSE_NUM'
+ uint32_t PULSE_NUM;
+          ^
+supported_commands.h:19:29: error: expected identifier or '(' before numeric constant
+     #define ANODIC_CATHODIC 0x04
+                             ^
+main_cm4.h:45:9: note: in expansion of macro 'ANODIC_CATHODIC'
+ uint8_t ANODIC_CATHODIC;
+         ^
+supported_commands.h:18:23: error: expected identifier or '(' before numeric constant
+     #define STIM_TYPE 0x03
+                       ^
+main_cm4.h:46:9: note: in expansion of macro 'STIM_TYPE'
+ uint8_t STIM_TYPE;
+         ^
+supported_commands.h:30:23: error: expected identifier or '(' before numeric constant
+     #define BURST_NUM 0x0f
+                       ^
+main_cm4.h:47:10: note: in expansion of macro 'BURST_NUM'
+ uint32_t BURST_NUM;
+          ^
+supported_commands.h:27:31: error: expected identifier or '(' before numeric constant
+     #define INTER_BURST_DELAY 0x0c
+                               ^
+main_cm4.h:48:10: note: in expansion of macro 'INTER_BURST_DELAY'
+ uint32_t INTER_BURST_DELAY;
+          ^
+supported_commands.h:29:36: error: expected identifier or '(' before numeric constant
+     #define PULSE_NUM_IN_ONE_BURST 0x0e
+                                    ^
+main_cm4.h:49:10: note: in expansion of macro 'PULSE_NUM_IN_ONE_BURST'
+ uint32_t PULSE_NUM_IN_ONE_BURST;
+          ^
+supported_commands.h:33:21: error: expected identifier or '(' before numeric constant
+     #define RAMP_UP 0x10 // yes or no (1 or 0)
+                     ^
+main_cm4.h:50:9: note: in expansion of macro 'RAMP_UP'
+ uint8_t RAMP_UP;
+         ^
+supported_commands.h:34:29: error: expected identifier or '(' before numeric constant
+     #define SHORT_ELECTRODE 0x11 // yes or no (1 or 0)
+                             ^
+main_cm4.h:51:9: note: in expansion of macro 'SHORT_ELECTRODE'
+ uint8_t SHORT_ELECTRODE;
+         ^
+supported_commands.h:35:25: error: expected identifier or '(' before numeric constant
+     #define RECORD_FREQ 0x12
+                         ^
+main_cm4.h:59:10: note: in expansion of macro 'RECORD_FREQ'
+ uint16_t RECORD_FREQ;
+          ^
+supported_commands.h:20:27: error: expected identifier or '(' before numeric constant
+     #define DAC_PHASE_ONE 0x05
+                           ^
+main_cm4.h:73:10: note: in expansion of macro 'DAC_PHASE_ONE'
+ uint16_t DAC_PHASE_ONE;
+          ^
+supported_commands.h:21:27: error: expected identifier or '(' before numeric constant
+     #define DAC_PHASE_TWO 0x06
+                           ^
+main_cm4.h:74:10: note: in expansion of macro 'DAC_PHASE_TWO'
+ uint16_t DAC_PHASE_TWO;
+          ^
+supported_commands.h:22:21: error: expected identifier or '(' before numeric constant
+     #define DAC_GAP 0x07
+                     ^
+main_cm4.h:75:10: note: in expansion of macro 'DAC_GAP'
+ uint16_t DAC_GAP;
+          ^
+supported_commands.h:43:25: error: expected identifier or '(' before numeric constant
+     #define ELEC_OFFSET 0x16
+                         ^
+main_cm4.h:87:10: note: in expansion of macro 'ELEC_OFFSET'
+ uint32_t ELEC_OFFSET;
+          ^
+command_parser.c: In function 'execute_command':
+command_parser.c:22:11: warning: unused variable 'value' [-Wunused-variable]
+  uint32_t value = (command[1]<<24) + (command[2]<<16) + (command[3]<<8) + command[4];
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+           ^
+--------------- Build Failed: 07/17/2021 17:10:54 ---------------

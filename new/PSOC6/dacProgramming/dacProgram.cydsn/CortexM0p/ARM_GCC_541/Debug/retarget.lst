@@ -1,0 +1,4041 @@
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0plus
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"retarget.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.syntax divided
+  20              		.global _printf_float
+  21              		.global _scanf_float
+  22              		.thumb
+  23              		.syntax unified
+  24              		.section	.text._write,"ax",%progbits
+  25              		.align	2
+  26              		.weak	_write
+  27              		.code	16
+  28              		.thumb_func
+  29              		.type	_write, %function
+  30              	_write:
+  31              	.LFB488:
+  32              		.file 1 "Generated_Source\\PSoC6\\pdl\\utilities\\retarget_io\\retarget.c"
+   1:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \file retarget.c
+   3:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \version 1.20
+   4:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** *
+   5:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \brief
+   6:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * 'Retarget' layer for target-dependent low level function.
+   7:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** *
+   8:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** ********************************************************************************
+   9:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \copyright
+  10:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * Copyright 2016-2018, Cypress Semiconductor Corporation. All rights reserved.
+  11:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** *******************************************************************************/
+  15:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  16:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #include <stdio.h>
+  17:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #include "stdio_user.h"
+  18:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  19:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(__cplusplus)
+  20:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** extern "C" {
+  21:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #endif
+  22:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  23:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #ifdef IO_STDOUT_ENABLE
+  24:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  25:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(__ARMCC_VERSION) /* ARM-MDK */
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 2
+
+
+  26:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+  27:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: fputc
+  28:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+  29:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int fputc(int ch, FILE *f)
+  30:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  31:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)f;
+  32:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     #if (STDOUT_CR_LF != 0)
+  33:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if ((char)ch == '\n')
+  34:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  35:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             STDIO_PutChar('\r');
+  36:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  37:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     #endif /* STDOUT_CR_LF != 0 */
+  38:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         STDIO_PutChar(ch);
+  39:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (ch);
+  40:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+  41:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #elif defined (__ICCARM__) /* IAR */
+  42:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     #include <yfuns.h>
+  43:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  44:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+  45:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: __write
+  46:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+  47:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __weak size_t __write(int handle, const unsigned char * buffer, size_t size)
+  48:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  49:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         size_t nChars = 0;
+  50:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         /* This template only writes to "standard out", for all other file
+  51:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         * handles it returns failure. */
+  52:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (handle != _LLIO_STDOUT)
+  53:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  54:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             return (_LLIO_ERROR);
+  55:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  56:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (buffer != NULL)
+  57:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  58:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             for (/* Empty */; nChars < size; ++nChars)
+  59:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  60:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #if (STDOUT_CR_LF != 0)
+  61:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 if(*buffer == '\n')
+  62:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 {
+  63:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                     STDIO_PutChar('\r');
+  64:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 }
+  65:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #endif /* STDOUT_CR_LF != 0 */
+  66:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 STDIO_PutChar(*buffer);
+  67:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 ++buffer;
+  68:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             }
+  69:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  70:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (nChars);
+  71:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+  72:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #else /* (__GNUC__)  GCC */    
+  73:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /* Add an explicit reference to the floating point printf library to allow
+  74:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     the usage of floating point conversion specifier. */
+  75:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __asm (".global _printf_float");
+  76:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+  77:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: _write
+  78:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+  79:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int _write (int fd, const char *ptr, int len)
+  80:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  33              		.loc 1 80 0
+  34              		.cfi_startproc
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 3
+
+
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              	.LVL0:
+  38 0000 70B5     		push	{r4, r5, r6, lr}
+  39              		.cfi_def_cfa_offset 16
+  40              		.cfi_offset 4, -16
+  41              		.cfi_offset 5, -12
+  42              		.cfi_offset 6, -8
+  43              		.cfi_offset 14, -4
+  44 0002 0D00     		movs	r5, r1
+  45 0004 1600     		movs	r6, r2
+  46              	.LVL1:
+  81:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+  82:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)fd;
+  83:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (ptr != NULL)
+  47              		.loc 1 83 0
+  48 0006 0029     		cmp	r1, #0
+  49 0008 07D1     		bne	.L5
+  81:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+  50              		.loc 1 81 0
+  51 000a 0024     		movs	r4, #0
+  52 000c 08E0     		b	.L3
+  53              	.LVL2:
+  54              	.L4:
+  84:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  85:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             for (/* Empty */; nChars < len; ++nChars)
+  86:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  87:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #if (STDOUT_CR_LF != 0)
+  88:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 if(*ptr == '\n')
+  89:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 {
+  90:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                     STDIO_PutChar('\r');
+  91:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 }
+  92:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #endif /* STDOUT_CR_LF != 0 */
+  93:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 STDIO_PutChar((uint32_t)*ptr);
+  55              		.loc 1 93 0 discriminator 2
+  56 000e 2878     		ldrb	r0, [r5]
+  57 0010 FFF7FEFF 		bl	STDIO_PutChar
+  58              	.LVL3:
+  94:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 ++ptr;
+  59              		.loc 1 94 0 discriminator 2
+  60 0014 0135     		adds	r5, r5, #1
+  61              	.LVL4:
+  85:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  62              		.loc 1 85 0 discriminator 2
+  63 0016 0134     		adds	r4, r4, #1
+  64              	.LVL5:
+  65 0018 00E0     		b	.L2
+  66              	.LVL6:
+  67              	.L5:
+  68 001a 0024     		movs	r4, #0
+  69              	.LVL7:
+  70              	.L2:
+  85:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  71              		.loc 1 85 0 is_stmt 0 discriminator 1
+  72 001c B442     		cmp	r4, r6
+  73 001e F6DB     		blt	.L4
+  74              	.LVL8:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 4
+
+
+  75              	.L3:
+  95:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             }
+  96:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  97:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (nChars);
+  98:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+  76              		.loc 1 98 0 is_stmt 1
+  77 0020 2000     		movs	r0, r4
+  78              		@ sp needed
+  79              	.LVL9:
+  80              	.LVL10:
+  81              	.LVL11:
+  82 0022 70BD     		pop	{r4, r5, r6, pc}
+  83              		.cfi_endproc
+  84              	.LFE488:
+  85              		.size	_write, .-_write
+  86              		.section	.text._read,"ax",%progbits
+  87              		.align	2
+  88              		.weak	_read
+  89              		.code	16
+  90              		.thumb_func
+  91              		.type	_read, %function
+  92              	_read:
+  93              	.LFB489:
+  99:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #endif
+ 100:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+ 101:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #endif /* IO_STDOUT_ENABLE */
+ 102:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+ 103:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(IO_STDIN_ENABLE)
+ 104:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+ 105:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(__ARMCC_VERSION) /* ARM-MDK */
+ 106:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+ 107:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: fgetc
+ 108:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+ 109:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int fgetc(FILE *f) 
+ 110:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+ 111:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)f;
+ 112:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (STDIO_GetChar());
+ 113:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+ 114:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #elif defined (__ICCARM__) /* IAR */
+ 115:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __weak size_t __read(int handle, unsigned char * buffer, size_t size)
+ 116:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+ 117:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         /* This template only reads from "standard in", for all other file
+ 118:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         handles it returns failure. */
+ 119:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if ((handle != _LLIO_STDIN) || (buffer == NULL))
+ 120:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+ 121:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             return (_LLIO_ERROR);
+ 122:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+ 123:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         else
+ 124:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+ 125:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             *buffer = STDIO_GetChar();
+ 126:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             return (1);
+ 127:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+ 128:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+ 129:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #else /* (__GNUC__)  GCC */
+ 130:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /* Add an explicit reference to the floating point scanf library to allow
+ 131:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     the usage of floating point conversion specifier. */
+ 132:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __asm (".global _scanf_float");
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 5
+
+
+ 133:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int _read (int fd, char *ptr, int len)
+ 134:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  94              		.loc 1 134 0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              	.LVL12:
+  99 0000 70B5     		push	{r4, r5, r6, lr}
+ 100              		.cfi_def_cfa_offset 16
+ 101              		.cfi_offset 4, -16
+ 102              		.cfi_offset 5, -12
+ 103              		.cfi_offset 6, -8
+ 104              		.cfi_offset 14, -4
+ 105 0002 0D00     		movs	r5, r1
+ 106 0004 1600     		movs	r6, r2
+ 107              	.LVL13:
+ 135:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+ 136:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)fd;
+ 137:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (ptr != NULL)
+ 108              		.loc 1 137 0
+ 109 0006 0029     		cmp	r1, #0
+ 110 0008 0CD1     		bne	.L10
+ 135:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+ 111              		.loc 1 135 0
+ 112 000a 0024     		movs	r4, #0
+ 113 000c 0DE0     		b	.L8
+ 114              	.LVL14:
+ 115              	.L9:
+ 138:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+ 139:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             for(/* Empty */;nChars < len;++ptr)
+ 140:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+ 141:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 *ptr = (char)STDIO_GetChar();
+ 116              		.loc 1 141 0
+ 117 000e FFF7FEFF 		bl	STDIO_GetChar
+ 118              	.LVL15:
+ 119 0012 C0B2     		uxtb	r0, r0
+ 120 0014 2870     		strb	r0, [r5]
+ 142:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 ++nChars;
+ 121              		.loc 1 142 0
+ 122 0016 0134     		adds	r4, r4, #1
+ 123              	.LVL16:
+ 143:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 if((*ptr == '\n') || (*ptr == '\r'))
+ 124              		.loc 1 143 0
+ 125 0018 0A28     		cmp	r0, #10
+ 126 001a 06D0     		beq	.L8
+ 127              		.loc 1 143 0 is_stmt 0 discriminator 1
+ 128 001c 0D28     		cmp	r0, #13
+ 129 001e 04D0     		beq	.L8
+ 139:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+ 130              		.loc 1 139 0 is_stmt 1
+ 131 0020 0135     		adds	r5, r5, #1
+ 132              	.LVL17:
+ 133 0022 00E0     		b	.L7
+ 134              	.LVL18:
+ 135              	.L10:
+ 136 0024 0024     		movs	r4, #0
+ 137              	.LVL19:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 6
+
+
+ 138              	.L7:
+ 139:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+ 139              		.loc 1 139 0 is_stmt 0 discriminator 1
+ 140 0026 B442     		cmp	r4, r6
+ 141 0028 F1DB     		blt	.L9
+ 142              	.LVL20:
+ 143              	.L8:
+ 144:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 {
+ 145:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                     break;
+ 146:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 }
+ 147:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             }
+ 148:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+ 149:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (nChars);
+ 150:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+ 144              		.loc 1 150 0 is_stmt 1
+ 145 002a 2000     		movs	r0, r4
+ 146              		@ sp needed
+ 147              	.LVL21:
+ 148              	.LVL22:
+ 149              	.LVL23:
+ 150 002c 70BD     		pop	{r4, r5, r6, pc}
+ 151              		.cfi_endproc
+ 152              	.LFE489:
+ 153              		.size	_read, .-_read
+ 154 002e C046     		.text
+ 155              	.Letext0:
+ 156              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 157              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 158              		.file 4 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
+ 159              		.file 5 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/ctb/cy_ctb.h"
+ 160              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/sysclk/cy_sysclk.h"
+ 161              		.file 7 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/ctdac/cy_ctdac.h"
+ 162              		.file 8 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/sar/cy_sar.h"
+ 163              		.file 9 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/scb/cy_scb_uart.h"
+ 164              		.file 10 "Generated_Source\\PSoC6/ADC_1.h"
+ 165              		.file 11 "Generated_Source\\PSoC6/VDAC.h"
+ 166              		.file 12 "Generated_Source\\PSoC6/UART.h"
+ 167              		.file 13 "./stdio_user.h"
+ 168              		.section	.debug_info,"",%progbits
+ 169              	.Ldebug_info0:
+ 170 0000 230D0000 		.4byte	0xd23
+ 171 0004 0400     		.2byte	0x4
+ 172 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 173 000a 04       		.byte	0x4
+ 174 000b 01       		.uleb128 0x1
+ 175 000c B9080000 		.4byte	.LASF255
+ 176 0010 0C       		.byte	0xc
+ 177 0011 980C0000 		.4byte	.LASF256
+ 178 0015 500E0000 		.4byte	.LASF257
+ 179 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 180 001d 00000000 		.4byte	0
+ 181 0021 00000000 		.4byte	.Ldebug_line0
+ 182 0025 02       		.uleb128 0x2
+ 183 0026 01       		.byte	0x1
+ 184 0027 06       		.byte	0x6
+ 185 0028 60100000 		.4byte	.LASF0
+ 186 002c 03       		.uleb128 0x3
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 7
+
+
+ 187 002d 070D0000 		.4byte	.LASF2
+ 188 0031 02       		.byte	0x2
+ 189 0032 1D       		.byte	0x1d
+ 190 0033 37000000 		.4byte	0x37
+ 191 0037 02       		.uleb128 0x2
+ 192 0038 01       		.byte	0x1
+ 193 0039 08       		.byte	0x8
+ 194 003a D60E0000 		.4byte	.LASF1
+ 195 003e 03       		.uleb128 0x3
+ 196 003f 66090000 		.4byte	.LASF3
+ 197 0043 02       		.byte	0x2
+ 198 0044 29       		.byte	0x29
+ 199 0045 49000000 		.4byte	0x49
+ 200 0049 02       		.uleb128 0x2
+ 201 004a 02       		.byte	0x2
+ 202 004b 05       		.byte	0x5
+ 203 004c BA0B0000 		.4byte	.LASF4
+ 204 0050 03       		.uleb128 0x3
+ 205 0051 B8040000 		.4byte	.LASF5
+ 206 0055 02       		.byte	0x2
+ 207 0056 2B       		.byte	0x2b
+ 208 0057 5B000000 		.4byte	0x5b
+ 209 005b 02       		.uleb128 0x2
+ 210 005c 02       		.byte	0x2
+ 211 005d 07       		.byte	0x7
+ 212 005e A80A0000 		.4byte	.LASF6
+ 213 0062 03       		.uleb128 0x3
+ 214 0063 44010000 		.4byte	.LASF7
+ 215 0067 02       		.byte	0x2
+ 216 0068 3F       		.byte	0x3f
+ 217 0069 6D000000 		.4byte	0x6d
+ 218 006d 02       		.uleb128 0x2
+ 219 006e 04       		.byte	0x4
+ 220 006f 05       		.byte	0x5
+ 221 0070 180C0000 		.4byte	.LASF8
+ 222 0074 03       		.uleb128 0x3
+ 223 0075 190B0000 		.4byte	.LASF9
+ 224 0079 02       		.byte	0x2
+ 225 007a 41       		.byte	0x41
+ 226 007b 7F000000 		.4byte	0x7f
+ 227 007f 02       		.uleb128 0x2
+ 228 0080 04       		.byte	0x4
+ 229 0081 07       		.byte	0x7
+ 230 0082 0A0E0000 		.4byte	.LASF10
+ 231 0086 02       		.uleb128 0x2
+ 232 0087 08       		.byte	0x8
+ 233 0088 05       		.byte	0x5
+ 234 0089 79080000 		.4byte	.LASF11
+ 235 008d 02       		.uleb128 0x2
+ 236 008e 08       		.byte	0x8
+ 237 008f 07       		.byte	0x7
+ 238 0090 28040000 		.4byte	.LASF12
+ 239 0094 04       		.uleb128 0x4
+ 240 0095 04       		.byte	0x4
+ 241 0096 05       		.byte	0x5
+ 242 0097 696E7400 		.ascii	"int\000"
+ 243 009b 02       		.uleb128 0x2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 8
+
+
+ 244 009c 04       		.byte	0x4
+ 245 009d 07       		.byte	0x7
+ 246 009e 96070000 		.4byte	.LASF13
+ 247 00a2 02       		.uleb128 0x2
+ 248 00a3 08       		.byte	0x8
+ 249 00a4 04       		.byte	0x4
+ 250 00a5 C50A0000 		.4byte	.LASF14
+ 251 00a9 05       		.uleb128 0x5
+ 252 00aa 04       		.byte	0x4
+ 253 00ab 02       		.uleb128 0x2
+ 254 00ac 04       		.byte	0x4
+ 255 00ad 07       		.byte	0x7
+ 256 00ae 750B0000 		.4byte	.LASF15
+ 257 00b2 06       		.uleb128 0x6
+ 258 00b3 04       		.byte	0x4
+ 259 00b4 B8000000 		.4byte	0xb8
+ 260 00b8 02       		.uleb128 0x2
+ 261 00b9 01       		.byte	0x1
+ 262 00ba 08       		.byte	0x8
+ 263 00bb 41070000 		.4byte	.LASF16
+ 264 00bf 06       		.uleb128 0x6
+ 265 00c0 04       		.byte	0x4
+ 266 00c1 C5000000 		.4byte	0xc5
+ 267 00c5 07       		.uleb128 0x7
+ 268 00c6 B8000000 		.4byte	0xb8
+ 269 00ca 03       		.uleb128 0x3
+ 270 00cb D7070000 		.4byte	.LASF17
+ 271 00cf 03       		.byte	0x3
+ 272 00d0 18       		.byte	0x18
+ 273 00d1 2C000000 		.4byte	0x2c
+ 274 00d5 03       		.uleb128 0x3
+ 275 00d6 E0030000 		.4byte	.LASF18
+ 276 00da 03       		.byte	0x3
+ 277 00db 20       		.byte	0x20
+ 278 00dc 3E000000 		.4byte	0x3e
+ 279 00e0 03       		.uleb128 0x3
+ 280 00e1 CD0E0000 		.4byte	.LASF19
+ 281 00e5 03       		.byte	0x3
+ 282 00e6 24       		.byte	0x24
+ 283 00e7 50000000 		.4byte	0x50
+ 284 00eb 03       		.uleb128 0x3
+ 285 00ec 280E0000 		.4byte	.LASF20
+ 286 00f0 03       		.byte	0x3
+ 287 00f1 2C       		.byte	0x2c
+ 288 00f2 62000000 		.4byte	0x62
+ 289 00f6 03       		.uleb128 0x3
+ 290 00f7 1E030000 		.4byte	.LASF21
+ 291 00fb 03       		.byte	0x3
+ 292 00fc 30       		.byte	0x30
+ 293 00fd 74000000 		.4byte	0x74
+ 294 0101 08       		.uleb128 0x8
+ 295 0102 F6000000 		.4byte	0xf6
+ 296 0106 09       		.uleb128 0x9
+ 297 0107 B8       		.byte	0xb8
+ 298 0108 04       		.byte	0x4
+ 299 0109 34       		.byte	0x34
+ 300 010a 17050000 		.4byte	0x517
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 9
+
+
+ 301 010e 0A       		.uleb128 0xa
+ 302 010f 4E010000 		.4byte	.LASF22
+ 303 0113 04       		.byte	0x4
+ 304 0114 37       		.byte	0x37
+ 305 0115 F6000000 		.4byte	0xf6
+ 306 0119 00       		.byte	0
+ 307 011a 0A       		.uleb128 0xa
+ 308 011b D5030000 		.4byte	.LASF23
+ 309 011f 04       		.byte	0x4
+ 310 0120 38       		.byte	0x38
+ 311 0121 F6000000 		.4byte	0xf6
+ 312 0125 04       		.byte	0x4
+ 313 0126 0A       		.uleb128 0xa
+ 314 0127 AE000000 		.4byte	.LASF24
+ 315 012b 04       		.byte	0x4
+ 316 012c 39       		.byte	0x39
+ 317 012d F6000000 		.4byte	0xf6
+ 318 0131 08       		.byte	0x8
+ 319 0132 0A       		.uleb128 0xa
+ 320 0133 89000000 		.4byte	.LASF25
+ 321 0137 04       		.byte	0x4
+ 322 0138 3A       		.byte	0x3a
+ 323 0139 F6000000 		.4byte	0xf6
+ 324 013d 0C       		.byte	0xc
+ 325 013e 0A       		.uleb128 0xa
+ 326 013f EA0A0000 		.4byte	.LASF26
+ 327 0143 04       		.byte	0x4
+ 328 0144 3B       		.byte	0x3b
+ 329 0145 F6000000 		.4byte	0xf6
+ 330 0149 10       		.byte	0x10
+ 331 014a 0A       		.uleb128 0xa
+ 332 014b 70090000 		.4byte	.LASF27
+ 333 014f 04       		.byte	0x4
+ 334 0150 3C       		.byte	0x3c
+ 335 0151 F6000000 		.4byte	0xf6
+ 336 0155 14       		.byte	0x14
+ 337 0156 0A       		.uleb128 0xa
+ 338 0157 3D060000 		.4byte	.LASF28
+ 339 015b 04       		.byte	0x4
+ 340 015c 3D       		.byte	0x3d
+ 341 015d F6000000 		.4byte	0xf6
+ 342 0161 18       		.byte	0x18
+ 343 0162 0A       		.uleb128 0xa
+ 344 0163 1F110000 		.4byte	.LASF29
+ 345 0167 04       		.byte	0x4
+ 346 0168 3E       		.byte	0x3e
+ 347 0169 F6000000 		.4byte	0xf6
+ 348 016d 1C       		.byte	0x1c
+ 349 016e 0A       		.uleb128 0xa
+ 350 016f 87080000 		.4byte	.LASF30
+ 351 0173 04       		.byte	0x4
+ 352 0174 3F       		.byte	0x3f
+ 353 0175 F6000000 		.4byte	0xf6
+ 354 0179 20       		.byte	0x20
+ 355 017a 0A       		.uleb128 0xa
+ 356 017b 9E080000 		.4byte	.LASF31
+ 357 017f 04       		.byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 10
+
+
+ 358 0180 40       		.byte	0x40
+ 359 0181 F6000000 		.4byte	0xf6
+ 360 0185 24       		.byte	0x24
+ 361 0186 0A       		.uleb128 0xa
+ 362 0187 210C0000 		.4byte	.LASF32
+ 363 018b 04       		.byte	0x4
+ 364 018c 43       		.byte	0x43
+ 365 018d CA000000 		.4byte	0xca
+ 366 0191 28       		.byte	0x28
+ 367 0192 0A       		.uleb128 0xa
+ 368 0193 67030000 		.4byte	.LASF33
+ 369 0197 04       		.byte	0x4
+ 370 0198 44       		.byte	0x44
+ 371 0199 CA000000 		.4byte	0xca
+ 372 019d 29       		.byte	0x29
+ 373 019e 0A       		.uleb128 0xa
+ 374 019f 470B0000 		.4byte	.LASF34
+ 375 01a3 04       		.byte	0x4
+ 376 01a4 45       		.byte	0x45
+ 377 01a5 CA000000 		.4byte	0xca
+ 378 01a9 2A       		.byte	0x2a
+ 379 01aa 0A       		.uleb128 0xa
+ 380 01ab 410C0000 		.4byte	.LASF35
+ 381 01af 04       		.byte	0x4
+ 382 01b0 46       		.byte	0x46
+ 383 01b1 CA000000 		.4byte	0xca
+ 384 01b5 2B       		.byte	0x2b
+ 385 01b6 0A       		.uleb128 0xa
+ 386 01b7 2E0C0000 		.4byte	.LASF36
+ 387 01bb 04       		.byte	0x4
+ 388 01bc 47       		.byte	0x47
+ 389 01bd CA000000 		.4byte	0xca
+ 390 01c1 2C       		.byte	0x2c
+ 391 01c2 0A       		.uleb128 0xa
+ 392 01c3 E00D0000 		.4byte	.LASF37
+ 393 01c7 04       		.byte	0x4
+ 394 01c8 48       		.byte	0x48
+ 395 01c9 CA000000 		.4byte	0xca
+ 396 01cd 2D       		.byte	0x2d
+ 397 01ce 0A       		.uleb128 0xa
+ 398 01cf 99110000 		.4byte	.LASF38
+ 399 01d3 04       		.byte	0x4
+ 400 01d4 49       		.byte	0x49
+ 401 01d5 CA000000 		.4byte	0xca
+ 402 01d9 2E       		.byte	0x2e
+ 403 01da 0A       		.uleb128 0xa
+ 404 01db EC100000 		.4byte	.LASF39
+ 405 01df 04       		.byte	0x4
+ 406 01e0 4A       		.byte	0x4a
+ 407 01e1 CA000000 		.4byte	0xca
+ 408 01e5 2F       		.byte	0x2f
+ 409 01e6 0A       		.uleb128 0xa
+ 410 01e7 5D020000 		.4byte	.LASF40
+ 411 01eb 04       		.byte	0x4
+ 412 01ec 4B       		.byte	0x4b
+ 413 01ed CA000000 		.4byte	0xca
+ 414 01f1 30       		.byte	0x30
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 11
+
+
+ 415 01f2 0A       		.uleb128 0xa
+ 416 01f3 D3090000 		.4byte	.LASF41
+ 417 01f7 04       		.byte	0x4
+ 418 01f8 4E       		.byte	0x4e
+ 419 01f9 CA000000 		.4byte	0xca
+ 420 01fd 31       		.byte	0x31
+ 421 01fe 0A       		.uleb128 0xa
+ 422 01ff 77100000 		.4byte	.LASF42
+ 423 0203 04       		.byte	0x4
+ 424 0204 4F       		.byte	0x4f
+ 425 0205 CA000000 		.4byte	0xca
+ 426 0209 32       		.byte	0x32
+ 427 020a 0A       		.uleb128 0xa
+ 428 020b AC090000 		.4byte	.LASF43
+ 429 020f 04       		.byte	0x4
+ 430 0210 50       		.byte	0x50
+ 431 0211 CA000000 		.4byte	0xca
+ 432 0215 33       		.byte	0x33
+ 433 0216 0A       		.uleb128 0xa
+ 434 0217 01070000 		.4byte	.LASF44
+ 435 021b 04       		.byte	0x4
+ 436 021c 51       		.byte	0x51
+ 437 021d CA000000 		.4byte	0xca
+ 438 0221 34       		.byte	0x34
+ 439 0222 0A       		.uleb128 0xa
+ 440 0223 68040000 		.4byte	.LASF45
+ 441 0227 04       		.byte	0x4
+ 442 0228 52       		.byte	0x52
+ 443 0229 D5000000 		.4byte	0xd5
+ 444 022d 36       		.byte	0x36
+ 445 022e 0A       		.uleb128 0xa
+ 446 022f 64010000 		.4byte	.LASF46
+ 447 0233 04       		.byte	0x4
+ 448 0234 53       		.byte	0x53
+ 449 0235 D5000000 		.4byte	0xd5
+ 450 0239 38       		.byte	0x38
+ 451 023a 0A       		.uleb128 0xa
+ 452 023b 89090000 		.4byte	.LASF47
+ 453 023f 04       		.byte	0x4
+ 454 0240 54       		.byte	0x54
+ 455 0241 D5000000 		.4byte	0xd5
+ 456 0245 3A       		.byte	0x3a
+ 457 0246 0A       		.uleb128 0xa
+ 458 0247 3E110000 		.4byte	.LASF48
+ 459 024b 04       		.byte	0x4
+ 460 024c 55       		.byte	0x55
+ 461 024d CA000000 		.4byte	0xca
+ 462 0251 3C       		.byte	0x3c
+ 463 0252 0A       		.uleb128 0xa
+ 464 0253 35020000 		.4byte	.LASF49
+ 465 0257 04       		.byte	0x4
+ 466 0258 56       		.byte	0x56
+ 467 0259 CA000000 		.4byte	0xca
+ 468 025d 3D       		.byte	0x3d
+ 469 025e 0A       		.uleb128 0xa
+ 470 025f 240B0000 		.4byte	.LASF50
+ 471 0263 04       		.byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 12
+
+
+ 472 0264 57       		.byte	0x57
+ 473 0265 CA000000 		.4byte	0xca
+ 474 0269 3E       		.byte	0x3e
+ 475 026a 0A       		.uleb128 0xa
+ 476 026b 4C000000 		.4byte	.LASF51
+ 477 026f 04       		.byte	0x4
+ 478 0270 58       		.byte	0x58
+ 479 0271 CA000000 		.4byte	0xca
+ 480 0275 3F       		.byte	0x3f
+ 481 0276 0A       		.uleb128 0xa
+ 482 0277 EF000000 		.4byte	.LASF52
+ 483 027b 04       		.byte	0x4
+ 484 027c 59       		.byte	0x59
+ 485 027d CA000000 		.4byte	0xca
+ 486 0281 40       		.byte	0x40
+ 487 0282 0A       		.uleb128 0xa
+ 488 0283 420D0000 		.4byte	.LASF53
+ 489 0287 04       		.byte	0x4
+ 490 0288 5A       		.byte	0x5a
+ 491 0289 CA000000 		.4byte	0xca
+ 492 028d 41       		.byte	0x41
+ 493 028e 0A       		.uleb128 0xa
+ 494 028f 2C100000 		.4byte	.LASF54
+ 495 0293 04       		.byte	0x4
+ 496 0294 5B       		.byte	0x5b
+ 497 0295 CA000000 		.4byte	0xca
+ 498 0299 42       		.byte	0x42
+ 499 029a 0A       		.uleb128 0xa
+ 500 029b C9060000 		.4byte	.LASF55
+ 501 029f 04       		.byte	0x4
+ 502 02a0 5C       		.byte	0x5c
+ 503 02a1 CA000000 		.4byte	0xca
+ 504 02a5 43       		.byte	0x43
+ 505 02a6 0A       		.uleb128 0xa
+ 506 02a7 7C070000 		.4byte	.LASF56
+ 507 02ab 04       		.byte	0x4
+ 508 02ac 5D       		.byte	0x5d
+ 509 02ad CA000000 		.4byte	0xca
+ 510 02b1 44       		.byte	0x44
+ 511 02b2 0A       		.uleb128 0xa
+ 512 02b3 4F0C0000 		.4byte	.LASF57
+ 513 02b7 04       		.byte	0x4
+ 514 02b8 5E       		.byte	0x5e
+ 515 02b9 F6000000 		.4byte	0xf6
+ 516 02bd 48       		.byte	0x48
+ 517 02be 0A       		.uleb128 0xa
+ 518 02bf 0D020000 		.4byte	.LASF58
+ 519 02c3 04       		.byte	0x4
+ 520 02c4 5F       		.byte	0x5f
+ 521 02c5 F6000000 		.4byte	0xf6
+ 522 02c9 4C       		.byte	0x4c
+ 523 02ca 0A       		.uleb128 0xa
+ 524 02cb E90F0000 		.4byte	.LASF59
+ 525 02cf 04       		.byte	0x4
+ 526 02d0 60       		.byte	0x60
+ 527 02d1 CA000000 		.4byte	0xca
+ 528 02d5 50       		.byte	0x50
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 13
+
+
+ 529 02d6 0A       		.uleb128 0xa
+ 530 02d7 9C050000 		.4byte	.LASF60
+ 531 02db 04       		.byte	0x4
+ 532 02dc 61       		.byte	0x61
+ 533 02dd CA000000 		.4byte	0xca
+ 534 02e1 51       		.byte	0x51
+ 535 02e2 0A       		.uleb128 0xa
+ 536 02e3 A9080000 		.4byte	.LASF61
+ 537 02e7 04       		.byte	0x4
+ 538 02e8 62       		.byte	0x62
+ 539 02e9 CA000000 		.4byte	0xca
+ 540 02ed 52       		.byte	0x52
+ 541 02ee 0A       		.uleb128 0xa
+ 542 02ef 8F030000 		.4byte	.LASF62
+ 543 02f3 04       		.byte	0x4
+ 544 02f4 63       		.byte	0x63
+ 545 02f5 CA000000 		.4byte	0xca
+ 546 02f9 53       		.byte	0x53
+ 547 02fa 0A       		.uleb128 0xa
+ 548 02fb 780F0000 		.4byte	.LASF63
+ 549 02ff 04       		.byte	0x4
+ 550 0300 64       		.byte	0x64
+ 551 0301 CA000000 		.4byte	0xca
+ 552 0305 54       		.byte	0x54
+ 553 0306 0A       		.uleb128 0xa
+ 554 0307 18060000 		.4byte	.LASF64
+ 555 030b 04       		.byte	0x4
+ 556 030c 65       		.byte	0x65
+ 557 030d CA000000 		.4byte	0xca
+ 558 0311 55       		.byte	0x55
+ 559 0312 0A       		.uleb128 0xa
+ 560 0313 00000000 		.4byte	.LASF65
+ 561 0317 04       		.byte	0x4
+ 562 0318 66       		.byte	0x66
+ 563 0319 CA000000 		.4byte	0xca
+ 564 031d 56       		.byte	0x56
+ 565 031e 0A       		.uleb128 0xa
+ 566 031f 510B0000 		.4byte	.LASF66
+ 567 0323 04       		.byte	0x4
+ 568 0324 67       		.byte	0x67
+ 569 0325 CA000000 		.4byte	0xca
+ 570 0329 57       		.byte	0x57
+ 571 032a 0A       		.uleb128 0xa
+ 572 032b 58050000 		.4byte	.LASF67
+ 573 032f 04       		.byte	0x4
+ 574 0330 68       		.byte	0x68
+ 575 0331 CA000000 		.4byte	0xca
+ 576 0335 58       		.byte	0x58
+ 577 0336 0A       		.uleb128 0xa
+ 578 0337 4D110000 		.4byte	.LASF68
+ 579 033b 04       		.byte	0x4
+ 580 033c 69       		.byte	0x69
+ 581 033d CA000000 		.4byte	0xca
+ 582 0341 59       		.byte	0x59
+ 583 0342 0A       		.uleb128 0xa
+ 584 0343 6C100000 		.4byte	.LASF69
+ 585 0347 04       		.byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 14
+
+
+ 586 0348 6E       		.byte	0x6e
+ 587 0349 E0000000 		.4byte	0xe0
+ 588 034d 5A       		.byte	0x5a
+ 589 034e 0A       		.uleb128 0xa
+ 590 034f DA000000 		.4byte	.LASF70
+ 591 0353 04       		.byte	0x4
+ 592 0354 6F       		.byte	0x6f
+ 593 0355 E0000000 		.4byte	0xe0
+ 594 0359 5C       		.byte	0x5c
+ 595 035a 0A       		.uleb128 0xa
+ 596 035b 8F080000 		.4byte	.LASF71
+ 597 035f 04       		.byte	0x4
+ 598 0360 70       		.byte	0x70
+ 599 0361 CA000000 		.4byte	0xca
+ 600 0365 5E       		.byte	0x5e
+ 601 0366 0A       		.uleb128 0xa
+ 602 0367 85100000 		.4byte	.LASF72
+ 603 036b 04       		.byte	0x4
+ 604 036c 71       		.byte	0x71
+ 605 036d CA000000 		.4byte	0xca
+ 606 0371 5F       		.byte	0x5f
+ 607 0372 0A       		.uleb128 0xa
+ 608 0373 D4060000 		.4byte	.LASF73
+ 609 0377 04       		.byte	0x4
+ 610 0378 72       		.byte	0x72
+ 611 0379 CA000000 		.4byte	0xca
+ 612 037d 60       		.byte	0x60
+ 613 037e 0A       		.uleb128 0xa
+ 614 037f 2C060000 		.4byte	.LASF74
+ 615 0383 04       		.byte	0x4
+ 616 0384 73       		.byte	0x73
+ 617 0385 F6000000 		.4byte	0xf6
+ 618 0389 64       		.byte	0x64
+ 619 038a 0A       		.uleb128 0xa
+ 620 038b 650B0000 		.4byte	.LASF75
+ 621 038f 04       		.byte	0x4
+ 622 0390 76       		.byte	0x76
+ 623 0391 E0000000 		.4byte	0xe0
+ 624 0395 68       		.byte	0x68
+ 625 0396 0A       		.uleb128 0xa
+ 626 0397 F30A0000 		.4byte	.LASF76
+ 627 039b 04       		.byte	0x4
+ 628 039c 77       		.byte	0x77
+ 629 039d E0000000 		.4byte	0xe0
+ 630 03a1 6A       		.byte	0x6a
+ 631 03a2 0A       		.uleb128 0xa
+ 632 03a3 7A090000 		.4byte	.LASF77
+ 633 03a7 04       		.byte	0x4
+ 634 03a8 78       		.byte	0x78
+ 635 03a9 E0000000 		.4byte	0xe0
+ 636 03ad 6C       		.byte	0x6c
+ 637 03ae 0A       		.uleb128 0xa
+ 638 03af E4010000 		.4byte	.LASF78
+ 639 03b3 04       		.byte	0x4
+ 640 03b4 79       		.byte	0x79
+ 641 03b5 E0000000 		.4byte	0xe0
+ 642 03b9 6E       		.byte	0x6e
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 15
+
+
+ 643 03ba 0A       		.uleb128 0xa
+ 644 03bb F8070000 		.4byte	.LASF79
+ 645 03bf 04       		.byte	0x4
+ 646 03c0 7B       		.byte	0x7b
+ 647 03c1 CA000000 		.4byte	0xca
+ 648 03c5 70       		.byte	0x70
+ 649 03c6 0A       		.uleb128 0xa
+ 650 03c7 A0020000 		.4byte	.LASF80
+ 651 03cb 04       		.byte	0x4
+ 652 03cc 7C       		.byte	0x7c
+ 653 03cd CA000000 		.4byte	0xca
+ 654 03d1 71       		.byte	0x71
+ 655 03d2 0A       		.uleb128 0xa
+ 656 03d3 F1010000 		.4byte	.LASF81
+ 657 03d7 04       		.byte	0x4
+ 658 03d8 7D       		.byte	0x7d
+ 659 03d9 CA000000 		.4byte	0xca
+ 660 03dd 72       		.byte	0x72
+ 661 03de 0A       		.uleb128 0xa
+ 662 03df 16010000 		.4byte	.LASF82
+ 663 03e3 04       		.byte	0x4
+ 664 03e4 7E       		.byte	0x7e
+ 665 03e5 CA000000 		.4byte	0xca
+ 666 03e9 73       		.byte	0x73
+ 667 03ea 0A       		.uleb128 0xa
+ 668 03eb A80B0000 		.4byte	.LASF83
+ 669 03ef 04       		.byte	0x4
+ 670 03f0 80       		.byte	0x80
+ 671 03f1 E0000000 		.4byte	0xe0
+ 672 03f5 74       		.byte	0x74
+ 673 03f6 0A       		.uleb128 0xa
+ 674 03f7 790A0000 		.4byte	.LASF84
+ 675 03fb 04       		.byte	0x4
+ 676 03fc 81       		.byte	0x81
+ 677 03fd E0000000 		.4byte	0xe0
+ 678 0401 76       		.byte	0x76
+ 679 0402 0A       		.uleb128 0xa
+ 680 0403 5B070000 		.4byte	.LASF85
+ 681 0407 04       		.byte	0x4
+ 682 0408 82       		.byte	0x82
+ 683 0409 E0000000 		.4byte	0xe0
+ 684 040d 78       		.byte	0x78
+ 685 040e 0A       		.uleb128 0xa
+ 686 040f 3F040000 		.4byte	.LASF86
+ 687 0413 04       		.byte	0x4
+ 688 0414 83       		.byte	0x83
+ 689 0415 E0000000 		.4byte	0xe0
+ 690 0419 7A       		.byte	0x7a
+ 691 041a 0A       		.uleb128 0xa
+ 692 041b 2D0D0000 		.4byte	.LASF87
+ 693 041f 04       		.byte	0x4
+ 694 0420 86       		.byte	0x86
+ 695 0421 CA000000 		.4byte	0xca
+ 696 0425 7C       		.byte	0x7c
+ 697 0426 0A       		.uleb128 0xa
+ 698 0427 05100000 		.4byte	.LASF88
+ 699 042b 04       		.byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 16
+
+
+ 700 042c 87       		.byte	0x87
+ 701 042d CA000000 		.4byte	0xca
+ 702 0431 7D       		.byte	0x7d
+ 703 0432 0A       		.uleb128 0xa
+ 704 0433 F0030000 		.4byte	.LASF89
+ 705 0437 04       		.byte	0x4
+ 706 0438 88       		.byte	0x88
+ 707 0439 CA000000 		.4byte	0xca
+ 708 043d 7E       		.byte	0x7e
+ 709 043e 0A       		.uleb128 0xa
+ 710 043f 27030000 		.4byte	.LASF90
+ 711 0443 04       		.byte	0x4
+ 712 0444 89       		.byte	0x89
+ 713 0445 CA000000 		.4byte	0xca
+ 714 0449 7F       		.byte	0x7f
+ 715 044a 0A       		.uleb128 0xa
+ 716 044b 54040000 		.4byte	.LASF91
+ 717 044f 04       		.byte	0x4
+ 718 0450 8A       		.byte	0x8a
+ 719 0451 CA000000 		.4byte	0xca
+ 720 0455 80       		.byte	0x80
+ 721 0456 0A       		.uleb128 0xa
+ 722 0457 35000000 		.4byte	.LASF92
+ 723 045b 04       		.byte	0x4
+ 724 045c 8D       		.byte	0x8d
+ 725 045d F6000000 		.4byte	0xf6
+ 726 0461 84       		.byte	0x84
+ 727 0462 0A       		.uleb128 0xa
+ 728 0463 840D0000 		.4byte	.LASF93
+ 729 0467 04       		.byte	0x4
+ 730 0468 8E       		.byte	0x8e
+ 731 0469 F6000000 		.4byte	0xf6
+ 732 046d 88       		.byte	0x88
+ 733 046e 0A       		.uleb128 0xa
+ 734 046f DE090000 		.4byte	.LASF94
+ 735 0473 04       		.byte	0x4
+ 736 0474 8F       		.byte	0x8f
+ 737 0475 F6000000 		.4byte	0xf6
+ 738 0479 8C       		.byte	0x8c
+ 739 047a 0A       		.uleb128 0xa
+ 740 047b 930B0000 		.4byte	.LASF95
+ 741 047f 04       		.byte	0x4
+ 742 0480 90       		.byte	0x90
+ 743 0481 F6000000 		.4byte	0xf6
+ 744 0485 90       		.byte	0x90
+ 745 0486 0A       		.uleb128 0xa
+ 746 0487 F20C0000 		.4byte	.LASF96
+ 747 048b 04       		.byte	0x4
+ 748 048c 91       		.byte	0x91
+ 749 048d F6000000 		.4byte	0xf6
+ 750 0491 94       		.byte	0x94
+ 751 0492 0A       		.uleb128 0xa
+ 752 0493 B5020000 		.4byte	.LASF97
+ 753 0497 04       		.byte	0x4
+ 754 0498 92       		.byte	0x92
+ 755 0499 F6000000 		.4byte	0xf6
+ 756 049d 98       		.byte	0x98
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 17
+
+
+ 757 049e 0A       		.uleb128 0xa
+ 758 049f BD0D0000 		.4byte	.LASF98
+ 759 04a3 04       		.byte	0x4
+ 760 04a4 93       		.byte	0x93
+ 761 04a5 F6000000 		.4byte	0xf6
+ 762 04a9 9C       		.byte	0x9c
+ 763 04aa 0A       		.uleb128 0xa
+ 764 04ab B3060000 		.4byte	.LASF99
+ 765 04af 04       		.byte	0x4
+ 766 04b0 94       		.byte	0x94
+ 767 04b1 F6000000 		.4byte	0xf6
+ 768 04b5 A0       		.byte	0xa0
+ 769 04b6 0A       		.uleb128 0xa
+ 770 04b7 C5000000 		.4byte	.LASF100
+ 771 04bb 04       		.byte	0x4
+ 772 04bc 95       		.byte	0x95
+ 773 04bd E0000000 		.4byte	0xe0
+ 774 04c1 A4       		.byte	0xa4
+ 775 04c2 0A       		.uleb128 0xa
+ 776 04c3 7E0B0000 		.4byte	.LASF101
+ 777 04c7 04       		.byte	0x4
+ 778 04c8 96       		.byte	0x96
+ 779 04c9 E0000000 		.4byte	0xe0
+ 780 04cd A6       		.byte	0xa6
+ 781 04ce 0A       		.uleb128 0xa
+ 782 04cf 1C0E0000 		.4byte	.LASF102
+ 783 04d3 04       		.byte	0x4
+ 784 04d4 97       		.byte	0x97
+ 785 04d5 E0000000 		.4byte	0xe0
+ 786 04d9 A8       		.byte	0xa8
+ 787 04da 0A       		.uleb128 0xa
+ 788 04db 57080000 		.4byte	.LASF103
+ 789 04df 04       		.byte	0x4
+ 790 04e0 98       		.byte	0x98
+ 791 04e1 E0000000 		.4byte	0xe0
+ 792 04e5 AA       		.byte	0xaa
+ 793 04e6 0A       		.uleb128 0xa
+ 794 04e7 27020000 		.4byte	.LASF104
+ 795 04eb 04       		.byte	0x4
+ 796 04ec 99       		.byte	0x99
+ 797 04ed E0000000 		.4byte	0xe0
+ 798 04f1 AC       		.byte	0xac
+ 799 04f2 0A       		.uleb128 0xa
+ 800 04f3 0B0A0000 		.4byte	.LASF105
+ 801 04f7 04       		.byte	0x4
+ 802 04f8 9A       		.byte	0x9a
+ 803 04f9 E0000000 		.4byte	0xe0
+ 804 04fd AE       		.byte	0xae
+ 805 04fe 0A       		.uleb128 0xa
+ 806 04ff 40020000 		.4byte	.LASF106
+ 807 0503 04       		.byte	0x4
+ 808 0504 9D       		.byte	0x9d
+ 809 0505 E0000000 		.4byte	0xe0
+ 810 0509 B0       		.byte	0xb0
+ 811 050a 0A       		.uleb128 0xa
+ 812 050b 020F0000 		.4byte	.LASF107
+ 813 050f 04       		.byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 18
+
+
+ 814 0510 9E       		.byte	0x9e
+ 815 0511 F6000000 		.4byte	0xf6
+ 816 0515 B4       		.byte	0xb4
+ 817 0516 00       		.byte	0
+ 818 0517 03       		.uleb128 0x3
+ 819 0518 DC020000 		.4byte	.LASF108
+ 820 051c 04       		.byte	0x4
+ 821 051d 9F       		.byte	0x9f
+ 822 051e 06010000 		.4byte	0x106
+ 823 0522 02       		.uleb128 0x2
+ 824 0523 04       		.byte	0x4
+ 825 0524 04       		.byte	0x4
+ 826 0525 61030000 		.4byte	.LASF109
+ 827 0529 02       		.uleb128 0x2
+ 828 052a 08       		.byte	0x8
+ 829 052b 04       		.byte	0x4
+ 830 052c B7050000 		.4byte	.LASF110
+ 831 0530 0B       		.uleb128 0xb
+ 832 0531 04       		.byte	0x4
+ 833 0532 9B000000 		.4byte	0x9b
+ 834 0536 05       		.byte	0x5
+ 835 0537 C701     		.2byte	0x1c7
+ 836 0539 4D050000 		.4byte	0x54d
+ 837 053d 0C       		.uleb128 0xc
+ 838 053e 0F040000 		.4byte	.LASF111
+ 839 0542 00       		.byte	0
+ 840 0543 0D       		.uleb128 0xd
+ 841 0544 6B0C0000 		.4byte	.LASF112
+ 842 0548 00000040 		.4byte	0x40000000
+ 843 054c 00       		.byte	0
+ 844 054d 0E       		.uleb128 0xe
+ 845 054e 8B040000 		.4byte	.LASF113
+ 846 0552 05       		.byte	0x5
+ 847 0553 CA01     		.2byte	0x1ca
+ 848 0555 30050000 		.4byte	0x530
+ 849 0559 0B       		.uleb128 0xb
+ 850 055a 01       		.byte	0x1
+ 851 055b 37000000 		.4byte	0x37
+ 852 055f 05       		.byte	0x5
+ 853 0560 EA01     		.2byte	0x1ea
+ 854 0562 7F050000 		.4byte	0x57f
+ 855 0566 0C       		.uleb128 0xc
+ 856 0567 B10E0000 		.4byte	.LASF114
+ 857 056b 00       		.byte	0
+ 858 056c 0C       		.uleb128 0xc
+ 859 056d A1030000 		.4byte	.LASF115
+ 860 0571 01       		.byte	0x1
+ 861 0572 0C       		.uleb128 0xc
+ 862 0573 BE050000 		.4byte	.LASF116
+ 863 0577 02       		.byte	0x2
+ 864 0578 0C       		.uleb128 0xc
+ 865 0579 0C080000 		.4byte	.LASF117
+ 866 057d 03       		.byte	0x3
+ 867 057e 00       		.byte	0
+ 868 057f 0E       		.uleb128 0xe
+ 869 0580 8C0A0000 		.4byte	.LASF118
+ 870 0584 05       		.byte	0x5
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 19
+
+
+ 871 0585 EF01     		.2byte	0x1ef
+ 872 0587 59050000 		.4byte	0x559
+ 873 058b 0B       		.uleb128 0xb
+ 874 058c 01       		.byte	0x1
+ 875 058d 37000000 		.4byte	0x37
+ 876 0591 05       		.byte	0x5
+ 877 0592 F501     		.2byte	0x1f5
+ 878 0594 AB050000 		.4byte	0x5ab
+ 879 0598 0C       		.uleb128 0xc
+ 880 0599 65080000 		.4byte	.LASF119
+ 881 059d 00       		.byte	0
+ 882 059e 0C       		.uleb128 0xc
+ 883 059f 880F0000 		.4byte	.LASF120
+ 884 05a3 08       		.byte	0x8
+ 885 05a4 0C       		.uleb128 0xc
+ 886 05a5 B9010000 		.4byte	.LASF121
+ 887 05a9 10       		.byte	0x10
+ 888 05aa 00       		.byte	0
+ 889 05ab 0E       		.uleb128 0xe
+ 890 05ac B8090000 		.4byte	.LASF122
+ 891 05b0 05       		.byte	0x5
+ 892 05b1 F901     		.2byte	0x1f9
+ 893 05b3 8B050000 		.4byte	0x58b
+ 894 05b7 0B       		.uleb128 0xb
+ 895 05b8 02       		.byte	0x2
+ 896 05b9 5B000000 		.4byte	0x5b
+ 897 05bd 05       		.byte	0x5
+ 898 05be 0F02     		.2byte	0x20f
+ 899 05c0 D2050000 		.4byte	0x5d2
+ 900 05c4 0C       		.uleb128 0xc
+ 901 05c5 72060000 		.4byte	.LASF123
+ 902 05c9 00       		.byte	0
+ 903 05ca 0F       		.uleb128 0xf
+ 904 05cb 300E0000 		.4byte	.LASF124
+ 905 05cf 0008     		.2byte	0x800
+ 906 05d1 00       		.byte	0
+ 907 05d2 0E       		.uleb128 0xe
+ 908 05d3 E40E0000 		.4byte	.LASF125
+ 909 05d7 05       		.byte	0x5
+ 910 05d8 1202     		.2byte	0x212
+ 911 05da B7050000 		.4byte	0x5b7
+ 912 05de 0B       		.uleb128 0xb
+ 913 05df 02       		.byte	0x2
+ 914 05e0 5B000000 		.4byte	0x5b
+ 915 05e4 05       		.byte	0x5
+ 916 05e5 1902     		.2byte	0x219
+ 917 05e7 07060000 		.4byte	0x607
+ 918 05eb 0C       		.uleb128 0xc
+ 919 05ec 160F0000 		.4byte	.LASF126
+ 920 05f0 00       		.byte	0
+ 921 05f1 0F       		.uleb128 0xf
+ 922 05f2 6F010000 		.4byte	.LASF127
+ 923 05f6 0001     		.2byte	0x100
+ 924 05f8 0F       		.uleb128 0xf
+ 925 05f9 C50F0000 		.4byte	.LASF128
+ 926 05fd 0002     		.2byte	0x200
+ 927 05ff 0F       		.uleb128 0xf
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 20
+
+
+ 928 0600 42050000 		.4byte	.LASF129
+ 929 0604 0003     		.2byte	0x300
+ 930 0606 00       		.byte	0
+ 931 0607 0E       		.uleb128 0xe
+ 932 0608 190A0000 		.4byte	.LASF130
+ 933 060c 05       		.byte	0x5
+ 934 060d 1E02     		.2byte	0x21e
+ 935 060f DE050000 		.4byte	0x5de
+ 936 0613 0B       		.uleb128 0xb
+ 937 0614 01       		.byte	0x1
+ 938 0615 37000000 		.4byte	0x37
+ 939 0619 05       		.byte	0x5
+ 940 061a 2202     		.2byte	0x222
+ 941 061c 2D060000 		.4byte	0x62d
+ 942 0620 0C       		.uleb128 0xc
+ 943 0621 9B0D0000 		.4byte	.LASF131
+ 944 0625 00       		.byte	0
+ 945 0626 0C       		.uleb128 0xc
+ 946 0627 AD110000 		.4byte	.LASF132
+ 947 062b 80       		.byte	0x80
+ 948 062c 00       		.byte	0
+ 949 062d 0E       		.uleb128 0xe
+ 950 062e 12070000 		.4byte	.LASF133
+ 951 0632 05       		.byte	0x5
+ 952 0633 2502     		.2byte	0x225
+ 953 0635 13060000 		.4byte	0x613
+ 954 0639 0B       		.uleb128 0xb
+ 955 063a 01       		.byte	0x1
+ 956 063b 37000000 		.4byte	0x37
+ 957 063f 05       		.byte	0x5
+ 958 0640 2902     		.2byte	0x229
+ 959 0642 53060000 		.4byte	0x653
+ 960 0646 0C       		.uleb128 0xc
+ 961 0647 71000000 		.4byte	.LASF134
+ 962 064b 00       		.byte	0
+ 963 064c 0C       		.uleb128 0xc
+ 964 064d 4B090000 		.4byte	.LASF135
+ 965 0651 40       		.byte	0x40
+ 966 0652 00       		.byte	0
+ 967 0653 0E       		.uleb128 0xe
+ 968 0654 520D0000 		.4byte	.LASF136
+ 969 0658 05       		.byte	0x5
+ 970 0659 2C02     		.2byte	0x22c
+ 971 065b 39060000 		.4byte	0x639
+ 972 065f 0B       		.uleb128 0xb
+ 973 0660 01       		.byte	0x1
+ 974 0661 37000000 		.4byte	0x37
+ 975 0665 05       		.byte	0x5
+ 976 0666 3002     		.2byte	0x230
+ 977 0668 79060000 		.4byte	0x679
+ 978 066c 0C       		.uleb128 0xc
+ 979 066d 9A060000 		.4byte	.LASF137
+ 980 0671 00       		.byte	0
+ 981 0672 0C       		.uleb128 0xc
+ 982 0673 08030000 		.4byte	.LASF138
+ 983 0677 20       		.byte	0x20
+ 984 0678 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 21
+
+
+ 985 0679 0E       		.uleb128 0xe
+ 986 067a 28110000 		.4byte	.LASF139
+ 987 067e 05       		.byte	0x5
+ 988 067f 3302     		.2byte	0x233
+ 989 0681 5F060000 		.4byte	0x65f
+ 990 0685 02       		.uleb128 0x2
+ 991 0686 01       		.byte	0x1
+ 992 0687 02       		.byte	0x2
+ 993 0688 D2050000 		.4byte	.LASF140
+ 994 068c 10       		.uleb128 0x10
+ 995 068d 10       		.byte	0x10
+ 996 068e 05       		.byte	0x5
+ 997 068f 0503     		.2byte	0x305
+ 998 0691 0B070000 		.4byte	0x70b
+ 999 0695 11       		.uleb128 0x11
+ 1000 0696 610C0000 		.4byte	.LASF141
+ 1001 069a 05       		.byte	0x5
+ 1002 069b 0603     		.2byte	0x306
+ 1003 069d 4D050000 		.4byte	0x54d
+ 1004 06a1 00       		.byte	0
+ 1005 06a2 11       		.uleb128 0x11
+ 1006 06a3 E8030000 		.4byte	.LASF142
+ 1007 06a7 05       		.byte	0x5
+ 1008 06a8 0903     		.2byte	0x309
+ 1009 06aa 7F050000 		.4byte	0x57f
+ 1010 06ae 04       		.byte	0x4
+ 1011 06af 11       		.uleb128 0x11
+ 1012 06b0 92110000 		.4byte	.LASF143
+ 1013 06b4 05       		.byte	0x5
+ 1014 06b5 0A03     		.2byte	0x30a
+ 1015 06b7 AB050000 		.4byte	0x5ab
+ 1016 06bb 05       		.byte	0x5
+ 1017 06bc 11       		.uleb128 0x11
+ 1018 06bd 3A0C0000 		.4byte	.LASF144
+ 1019 06c1 05       		.byte	0x5
+ 1020 06c2 0B03     		.2byte	0x30b
+ 1021 06c4 D2050000 		.4byte	0x5d2
+ 1022 06c8 06       		.byte	0x6
+ 1023 06c9 11       		.uleb128 0x11
+ 1024 06ca FA0F0000 		.4byte	.LASF145
+ 1025 06ce 05       		.byte	0x5
+ 1026 06cf 0C03     		.2byte	0x30c
+ 1027 06d1 07060000 		.4byte	0x607
+ 1028 06d5 08       		.byte	0x8
+ 1029 06d6 11       		.uleb128 0x11
+ 1030 06d7 E3000000 		.4byte	.LASF146
+ 1031 06db 05       		.byte	0x5
+ 1032 06dc 0D03     		.2byte	0x30d
+ 1033 06de 2D060000 		.4byte	0x62d
+ 1034 06e2 0A       		.byte	0xa
+ 1035 06e3 11       		.uleb128 0x11
+ 1036 06e4 6C0A0000 		.4byte	.LASF147
+ 1037 06e8 05       		.byte	0x5
+ 1038 06e9 0E03     		.2byte	0x30e
+ 1039 06eb 53060000 		.4byte	0x653
+ 1040 06ef 0B       		.byte	0xb
+ 1041 06f0 11       		.uleb128 0x11
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 22
+
+
+ 1042 06f1 46060000 		.4byte	.LASF148
+ 1043 06f5 05       		.byte	0x5
+ 1044 06f6 0F03     		.2byte	0x30f
+ 1045 06f8 79060000 		.4byte	0x679
+ 1046 06fc 0C       		.byte	0xc
+ 1047 06fd 11       		.uleb128 0x11
+ 1048 06fe D40C0000 		.4byte	.LASF149
+ 1049 0702 05       		.byte	0x5
+ 1050 0703 1003     		.2byte	0x310
+ 1051 0705 85060000 		.4byte	0x685
+ 1052 0709 0D       		.byte	0xd
+ 1053 070a 00       		.byte	0
+ 1054 070b 0E       		.uleb128 0xe
+ 1055 070c FE0B0000 		.4byte	.LASF150
+ 1056 0710 05       		.byte	0x5
+ 1057 0711 1103     		.2byte	0x311
+ 1058 0713 8C060000 		.4byte	0x68c
+ 1059 0717 0B       		.uleb128 0xb
+ 1060 0718 01       		.byte	0x1
+ 1061 0719 37000000 		.4byte	0x37
+ 1062 071d 06       		.byte	0x6
+ 1063 071e 2107     		.2byte	0x721
+ 1064 0720 3D070000 		.4byte	0x73d
+ 1065 0724 0C       		.uleb128 0xc
+ 1066 0725 91000000 		.4byte	.LASF151
+ 1067 0729 00       		.byte	0
+ 1068 072a 0C       		.uleb128 0xc
+ 1069 072b 320B0000 		.4byte	.LASF152
+ 1070 072f 01       		.byte	0x1
+ 1071 0730 0C       		.uleb128 0xc
+ 1072 0731 4A0A0000 		.4byte	.LASF153
+ 1073 0735 02       		.byte	0x2
+ 1074 0736 0C       		.uleb128 0xc
+ 1075 0737 2F0F0000 		.4byte	.LASF154
+ 1076 073b 03       		.byte	0x3
+ 1077 073c 00       		.byte	0
+ 1078 073d 0E       		.uleb128 0xe
+ 1079 073e AF0F0000 		.4byte	.LASF155
+ 1080 0742 06       		.byte	0x6
+ 1081 0743 2607     		.2byte	0x726
+ 1082 0745 17070000 		.4byte	0x717
+ 1083 0749 0B       		.uleb128 0xb
+ 1084 074a 01       		.byte	0x1
+ 1085 074b 37000000 		.4byte	0x37
+ 1086 074f 07       		.byte	0x7
+ 1087 0750 B101     		.2byte	0x1b1
+ 1088 0752 75070000 		.4byte	0x775
+ 1089 0756 0C       		.uleb128 0xc
+ 1090 0757 460F0000 		.4byte	.LASF156
+ 1091 075b 00       		.byte	0
+ 1092 075c 0C       		.uleb128 0xc
+ 1093 075d D8050000 		.4byte	.LASF157
+ 1094 0761 01       		.byte	0x1
+ 1095 0762 0C       		.uleb128 0xc
+ 1096 0763 51060000 		.4byte	.LASF158
+ 1097 0767 02       		.byte	0x2
+ 1098 0768 0C       		.uleb128 0xc
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 23
+
+
+ 1099 0769 93010000 		.4byte	.LASF159
+ 1100 076d 03       		.byte	0x3
+ 1101 076e 0C       		.uleb128 0xc
+ 1102 076f ED0D0000 		.4byte	.LASF160
+ 1103 0773 04       		.byte	0x4
+ 1104 0774 00       		.byte	0
+ 1105 0775 0E       		.uleb128 0xe
+ 1106 0776 2F0A0000 		.4byte	.LASF161
+ 1107 077a 07       		.byte	0x7
+ 1108 077b B701     		.2byte	0x1b7
+ 1109 077d 49070000 		.4byte	0x749
+ 1110 0781 0B       		.uleb128 0xb
+ 1111 0782 04       		.byte	0x4
+ 1112 0783 9B000000 		.4byte	0x9b
+ 1113 0787 07       		.byte	0x7
+ 1114 0788 BC01     		.2byte	0x1bc
+ 1115 078a 9E070000 		.4byte	0x79e
+ 1116 078e 0C       		.uleb128 0xc
+ 1117 078f DF070000 		.4byte	.LASF162
+ 1118 0793 00       		.byte	0
+ 1119 0794 0D       		.uleb128 0xd
+ 1120 0795 1E000000 		.4byte	.LASF163
+ 1121 0799 00000001 		.4byte	0x1000000
+ 1122 079d 00       		.byte	0
+ 1123 079e 0E       		.uleb128 0xe
+ 1124 079f C1100000 		.4byte	.LASF164
+ 1125 07a3 07       		.byte	0x7
+ 1126 07a4 BF01     		.2byte	0x1bf
+ 1127 07a6 81070000 		.4byte	0x781
+ 1128 07aa 0B       		.uleb128 0xb
+ 1129 07ab 04       		.byte	0x4
+ 1130 07ac 9B000000 		.4byte	0x9b
+ 1131 07b0 07       		.byte	0x7
+ 1132 07b1 C401     		.2byte	0x1c4
+ 1133 07b3 C7070000 		.4byte	0x7c7
+ 1134 07b7 0C       		.uleb128 0xc
+ 1135 07b8 BC070000 		.4byte	.LASF165
+ 1136 07bc 00       		.byte	0
+ 1137 07bd 0D       		.uleb128 0xd
+ 1138 07be 05050000 		.4byte	.LASF166
+ 1139 07c2 00000040 		.4byte	0x40000000
+ 1140 07c6 00       		.byte	0
+ 1141 07c7 0E       		.uleb128 0xe
+ 1142 07c8 F8100000 		.4byte	.LASF167
+ 1143 07cc 07       		.byte	0x7
+ 1144 07cd C701     		.2byte	0x1c7
+ 1145 07cf AA070000 		.4byte	0x7aa
+ 1146 07d3 0B       		.uleb128 0xb
+ 1147 07d4 04       		.byte	0x4
+ 1148 07d5 9B000000 		.4byte	0x9b
+ 1149 07d9 07       		.byte	0x7
+ 1150 07da CC01     		.2byte	0x1cc
+ 1151 07dc 0B080000 		.4byte	0x80b
+ 1152 07e0 0C       		.uleb128 0xc
+ 1153 07e1 D6100000 		.4byte	.LASF168
+ 1154 07e5 00       		.byte	0
+ 1155 07e6 0D       		.uleb128 0xd
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 24
+
+
+ 1156 07e7 75040000 		.4byte	.LASF169
+ 1157 07eb 00004000 		.4byte	0x400000
+ 1158 07ef 0D       		.uleb128 0xd
+ 1159 07f0 3B030000 		.4byte	.LASF170
+ 1160 07f4 0000C000 		.4byte	0xc00000
+ 1161 07f8 0D       		.uleb128 0xd
+ 1162 07f9 8B020000 		.4byte	.LASF171
+ 1163 07fd 00000008 		.4byte	0x8000000
+ 1164 0801 0D       		.uleb128 0xd
+ 1165 0802 630F0000 		.4byte	.LASF172
+ 1166 0806 00008008 		.4byte	0x8800000
+ 1167 080a 00       		.byte	0
+ 1168 080b 0E       		.uleb128 0xe
+ 1169 080c 6A0D0000 		.4byte	.LASF173
+ 1170 0810 07       		.byte	0x7
+ 1171 0811 D401     		.2byte	0x1d4
+ 1172 0813 D3070000 		.4byte	0x7d3
+ 1173 0817 0B       		.uleb128 0xb
+ 1174 0818 02       		.byte	0x2
+ 1175 0819 5B000000 		.4byte	0x5b
+ 1176 081d 07       		.byte	0x7
+ 1177 081e DA01     		.2byte	0x1da
+ 1178 0820 40080000 		.4byte	0x840
+ 1179 0824 0C       		.uleb128 0xc
+ 1180 0825 45100000 		.4byte	.LASF174
+ 1181 0829 00       		.byte	0
+ 1182 082a 0F       		.uleb128 0xf
+ 1183 082b F7050000 		.4byte	.LASF175
+ 1184 082f 0001     		.2byte	0x100
+ 1185 0831 0F       		.uleb128 0xf
+ 1186 0832 C40B0000 		.4byte	.LASF176
+ 1187 0836 0002     		.2byte	0x200
+ 1188 0838 0F       		.uleb128 0xf
+ 1189 0839 A6100000 		.4byte	.LASF177
+ 1190 083d 0003     		.2byte	0x300
+ 1191 083f 00       		.byte	0
+ 1192 0840 0E       		.uleb128 0xe
+ 1193 0841 2D010000 		.4byte	.LASF178
+ 1194 0845 07       		.byte	0x7
+ 1195 0846 E001     		.2byte	0x1e0
+ 1196 0848 17080000 		.4byte	0x817
+ 1197 084c 0B       		.uleb128 0xb
+ 1198 084d 01       		.byte	0x1
+ 1199 084e 37000000 		.4byte	0x37
+ 1200 0852 07       		.byte	0x7
+ 1201 0853 E701     		.2byte	0x1e7
+ 1202 0855 66080000 		.4byte	0x866
+ 1203 0859 0C       		.uleb128 0xc
+ 1204 085a 6C050000 		.4byte	.LASF179
+ 1205 085e 00       		.byte	0
+ 1206 085f 0C       		.uleb128 0xc
+ 1207 0860 F3090000 		.4byte	.LASF180
+ 1208 0864 01       		.byte	0x1
+ 1209 0865 00       		.byte	0
+ 1210 0866 0E       		.uleb128 0xe
+ 1211 0867 D10A0000 		.4byte	.LASF181
+ 1212 086b 07       		.byte	0x7
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 25
+
+
+ 1213 086c EA01     		.2byte	0x1ea
+ 1214 086e 4C080000 		.4byte	0x84c
+ 1215 0872 0B       		.uleb128 0xb
+ 1216 0873 01       		.byte	0x1
+ 1217 0874 37000000 		.4byte	0x37
+ 1218 0878 07       		.byte	0x7
+ 1219 0879 F101     		.2byte	0x1f1
+ 1220 087b 8C080000 		.4byte	0x88c
+ 1221 087f 0C       		.uleb128 0xc
+ 1222 0880 58000000 		.4byte	.LASF182
+ 1223 0884 00       		.byte	0
+ 1224 0885 0C       		.uleb128 0xc
+ 1225 0886 E30B0000 		.4byte	.LASF183
+ 1226 088a 01       		.byte	0x1
+ 1227 088b 00       		.byte	0
+ 1228 088c 0E       		.uleb128 0xe
+ 1229 088d EC020000 		.4byte	.LASF184
+ 1230 0891 07       		.byte	0x7
+ 1231 0892 F401     		.2byte	0x1f4
+ 1232 0894 72080000 		.4byte	0x872
+ 1233 0898 10       		.uleb128 0x10
+ 1234 0899 34       		.byte	0x34
+ 1235 089a 07       		.byte	0x7
+ 1236 089b 1702     		.2byte	0x217
+ 1237 089d 72090000 		.4byte	0x972
+ 1238 08a1 11       		.uleb128 0x11
+ 1239 08a2 81020000 		.4byte	.LASF185
+ 1240 08a6 07       		.byte	0x7
+ 1241 08a7 1902     		.2byte	0x219
+ 1242 08a9 66080000 		.4byte	0x866
+ 1243 08ad 00       		.byte	0
+ 1244 08ae 11       		.uleb128 0x11
+ 1245 08af DE0F0000 		.4byte	.LASF186
+ 1246 08b3 07       		.byte	0x7
+ 1247 08b4 1A02     		.2byte	0x21a
+ 1248 08b6 9E070000 		.4byte	0x79e
+ 1249 08ba 04       		.byte	0x4
+ 1250 08bb 11       		.uleb128 0x11
+ 1251 08bc 610A0000 		.4byte	.LASF187
+ 1252 08c0 07       		.byte	0x7
+ 1253 08c1 1B02     		.2byte	0x21b
+ 1254 08c3 75070000 		.4byte	0x775
+ 1255 08c7 08       		.byte	0x8
+ 1256 08c8 11       		.uleb128 0x11
+ 1257 08c9 430E0000 		.4byte	.LASF188
+ 1258 08cd 07       		.byte	0x7
+ 1259 08ce 1C02     		.2byte	0x21c
+ 1260 08d0 40080000 		.4byte	0x840
+ 1261 08d4 0A       		.byte	0xa
+ 1262 08d5 11       		.uleb128 0x11
+ 1263 08d6 CA030000 		.4byte	.LASF189
+ 1264 08da 07       		.byte	0x7
+ 1265 08db 1D02     		.2byte	0x21d
+ 1266 08dd 0B080000 		.4byte	0x80b
+ 1267 08e1 0C       		.byte	0xc
+ 1268 08e2 11       		.uleb128 0x11
+ 1269 08e3 F50E0000 		.4byte	.LASF190
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 26
+
+
+ 1270 08e7 07       		.byte	0x7
+ 1271 08e8 1E02     		.2byte	0x21e
+ 1272 08ea 8C080000 		.4byte	0x88c
+ 1273 08ee 10       		.byte	0x10
+ 1274 08ef 11       		.uleb128 0x11
+ 1275 08f0 610C0000 		.4byte	.LASF141
+ 1276 08f4 07       		.byte	0x7
+ 1277 08f5 1F02     		.2byte	0x21f
+ 1278 08f7 C7070000 		.4byte	0x7c7
+ 1279 08fb 14       		.byte	0x14
+ 1280 08fc 11       		.uleb128 0x11
+ 1281 08fd 4E020000 		.4byte	.LASF191
+ 1282 0901 07       		.byte	0x7
+ 1283 0902 2002     		.2byte	0x220
+ 1284 0904 F6000000 		.4byte	0xf6
+ 1285 0908 18       		.byte	0x18
+ 1286 0909 11       		.uleb128 0x11
+ 1287 090a 2D050000 		.4byte	.LASF192
+ 1288 090e 07       		.byte	0x7
+ 1289 090f 2102     		.2byte	0x221
+ 1290 0911 EB000000 		.4byte	0xeb
+ 1291 0915 1C       		.byte	0x1c
+ 1292 0916 11       		.uleb128 0x11
+ 1293 0917 57030000 		.4byte	.LASF193
+ 1294 091b 07       		.byte	0x7
+ 1295 091c 2202     		.2byte	0x222
+ 1296 091e EB000000 		.4byte	0xeb
+ 1297 0922 20       		.byte	0x20
+ 1298 0923 11       		.uleb128 0x11
+ 1299 0924 DC040000 		.4byte	.LASF194
+ 1300 0928 07       		.byte	0x7
+ 1301 0929 2302     		.2byte	0x223
+ 1302 092b 85060000 		.4byte	0x685
+ 1303 092f 24       		.byte	0x24
+ 1304 0930 11       		.uleb128 0x11
+ 1305 0931 D8010000 		.4byte	.LASF195
+ 1306 0935 07       		.byte	0x7
+ 1307 0936 2602     		.2byte	0x226
+ 1308 0938 85060000 		.4byte	0x685
+ 1309 093c 25       		.byte	0x25
+ 1310 093d 11       		.uleb128 0x11
+ 1311 093e 70070000 		.4byte	.LASF196
+ 1312 0942 07       		.byte	0x7
+ 1313 0943 2702     		.2byte	0x227
+ 1314 0945 3D070000 		.4byte	0x73d
+ 1315 0949 26       		.byte	0x26
+ 1316 094a 11       		.uleb128 0x11
+ 1317 094b A2040000 		.4byte	.LASF197
+ 1318 094f 07       		.byte	0x7
+ 1319 0950 2802     		.2byte	0x228
+ 1320 0952 F6000000 		.4byte	0xf6
+ 1321 0956 28       		.byte	0x28
+ 1322 0957 11       		.uleb128 0x11
+ 1323 0958 E5060000 		.4byte	.LASF198
+ 1324 095c 07       		.byte	0x7
+ 1325 095d 2902     		.2byte	0x229
+ 1326 095f F6000000 		.4byte	0xf6
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 27
+
+
+ 1327 0963 2C       		.byte	0x2c
+ 1328 0964 11       		.uleb128 0x11
+ 1329 0965 CB020000 		.4byte	.LASF199
+ 1330 0969 07       		.byte	0x7
+ 1331 096a 2A02     		.2byte	0x22a
+ 1332 096c F6000000 		.4byte	0xf6
+ 1333 0970 30       		.byte	0x30
+ 1334 0971 00       		.byte	0
+ 1335 0972 0E       		.uleb128 0xe
+ 1336 0973 16100000 		.4byte	.LASF200
+ 1337 0977 07       		.byte	0x7
+ 1338 0978 2B02     		.2byte	0x22b
+ 1339 097a 98080000 		.4byte	0x898
+ 1340 097e 0B       		.uleb128 0xb
+ 1341 097f 01       		.byte	0x1
+ 1342 0980 37000000 		.4byte	0x37
+ 1343 0984 08       		.byte	0x8
+ 1344 0985 1304     		.2byte	0x413
+ 1345 0987 A4090000 		.4byte	0x9a4
+ 1346 098b 0C       		.uleb128 0xc
+ 1347 098c 69020000 		.4byte	.LASF201
+ 1348 0990 00       		.byte	0
+ 1349 0991 0C       		.uleb128 0xc
+ 1350 0992 C3040000 		.4byte	.LASF202
+ 1351 0996 01       		.byte	0x1
+ 1352 0997 0C       		.uleb128 0xc
+ 1353 0998 29070000 		.4byte	.LASF203
+ 1354 099c 02       		.byte	0x2
+ 1355 099d 0C       		.uleb128 0xc
+ 1356 099e FC000000 		.4byte	.LASF204
+ 1357 09a2 03       		.byte	0x3
+ 1358 09a3 00       		.byte	0
+ 1359 09a4 0E       		.uleb128 0xe
+ 1360 09a5 6F110000 		.4byte	.LASF205
+ 1361 09a9 08       		.byte	0x8
+ 1362 09aa 1804     		.2byte	0x418
+ 1363 09ac 7E090000 		.4byte	0x97e
+ 1364 09b0 10       		.uleb128 0x10
+ 1365 09b1 78       		.byte	0x78
+ 1366 09b2 08       		.byte	0x8
+ 1367 09b3 0205     		.2byte	0x502
+ 1368 09b5 7D0A0000 		.4byte	0xa7d
+ 1369 09b9 11       		.uleb128 0x11
+ 1370 09ba 00050000 		.4byte	.LASF206
+ 1371 09be 08       		.byte	0x8
+ 1372 09bf 0405     		.2byte	0x504
+ 1373 09c1 F6000000 		.4byte	0xf6
+ 1374 09c5 00       		.byte	0
+ 1375 09c6 11       		.uleb128 0x11
+ 1376 09c7 C20E0000 		.4byte	.LASF207
+ 1377 09cb 08       		.byte	0x8
+ 1378 09cc 0505     		.2byte	0x505
+ 1379 09ce F6000000 		.4byte	0xf6
+ 1380 09d2 04       		.byte	0x4
+ 1381 09d3 11       		.uleb128 0x11
+ 1382 09d4 0C0B0000 		.4byte	.LASF208
+ 1383 09d8 08       		.byte	0x8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 28
+
+
+ 1384 09d9 0605     		.2byte	0x506
+ 1385 09db F6000000 		.4byte	0xf6
+ 1386 09df 08       		.byte	0x8
+ 1387 09e0 11       		.uleb128 0x11
+ 1388 09e1 D30D0000 		.4byte	.LASF209
+ 1389 09e5 08       		.byte	0x8
+ 1390 09e6 0705     		.2byte	0x507
+ 1391 09e8 F6000000 		.4byte	0xf6
+ 1392 09ec 0C       		.byte	0xc
+ 1393 09ed 11       		.uleb128 0x11
+ 1394 09ee AD040000 		.4byte	.LASF210
+ 1395 09f2 08       		.byte	0x8
+ 1396 09f3 0805     		.2byte	0x508
+ 1397 09f5 F6000000 		.4byte	0xf6
+ 1398 09f9 10       		.byte	0x10
+ 1399 09fa 11       		.uleb128 0x11
+ 1400 09fb 4D080000 		.4byte	.LASF211
+ 1401 09ff 08       		.byte	0x8
+ 1402 0a00 0905     		.2byte	0x509
+ 1403 0a02 A4090000 		.4byte	0x9a4
+ 1404 0a06 14       		.byte	0x14
+ 1405 0a07 11       		.uleb128 0x11
+ 1406 0a08 46070000 		.4byte	.LASF212
+ 1407 0a0c 08       		.byte	0x8
+ 1408 0a0d 0A05     		.2byte	0x50a
+ 1409 0a0f F6000000 		.4byte	0xf6
+ 1410 0a13 18       		.byte	0x18
+ 1411 0a14 11       		.uleb128 0x11
+ 1412 0a15 9B100000 		.4byte	.LASF213
+ 1413 0a19 08       		.byte	0x8
+ 1414 0a1a 0B05     		.2byte	0x50b
+ 1415 0a1c 7D0A0000 		.4byte	0xa7d
+ 1416 0a20 1C       		.byte	0x1c
+ 1417 0a21 11       		.uleb128 0x11
+ 1418 0a22 A4110000 		.4byte	.LASF214
+ 1419 0a26 08       		.byte	0x8
+ 1420 0a27 0C05     		.2byte	0x50c
+ 1421 0a29 F6000000 		.4byte	0xf6
+ 1422 0a2d 5C       		.byte	0x5c
+ 1423 0a2e 11       		.uleb128 0x11
+ 1424 0a2f 1B020000 		.4byte	.LASF215
+ 1425 0a33 08       		.byte	0x8
+ 1426 0a34 0D05     		.2byte	0x50d
+ 1427 0a36 F6000000 		.4byte	0xf6
+ 1428 0a3a 60       		.byte	0x60
+ 1429 0a3b 11       		.uleb128 0x11
+ 1430 0a3c 61110000 		.4byte	.LASF216
+ 1431 0a40 08       		.byte	0x8
+ 1432 0a41 0E05     		.2byte	0x50e
+ 1433 0a43 F6000000 		.4byte	0xf6
+ 1434 0a47 64       		.byte	0x64
+ 1435 0a48 11       		.uleb128 0x11
+ 1436 0a49 9E0A0000 		.4byte	.LASF217
+ 1437 0a4d 08       		.byte	0x8
+ 1438 0a4e 0F05     		.2byte	0x50f
+ 1439 0a50 F6000000 		.4byte	0xf6
+ 1440 0a54 68       		.byte	0x68
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 29
+
+
+ 1441 0a55 11       		.uleb128 0x11
+ 1442 0a56 1E080000 		.4byte	.LASF218
+ 1443 0a5a 08       		.byte	0x8
+ 1444 0a5b 1005     		.2byte	0x510
+ 1445 0a5d F6000000 		.4byte	0xf6
+ 1446 0a61 6C       		.byte	0x6c
+ 1447 0a62 11       		.uleb128 0x11
+ 1448 0a63 11110000 		.4byte	.LASF219
+ 1449 0a67 08       		.byte	0x8
+ 1450 0a68 1105     		.2byte	0x511
+ 1451 0a6a 85060000 		.4byte	0x685
+ 1452 0a6e 70       		.byte	0x70
+ 1453 0a6f 11       		.uleb128 0x11
+ 1454 0a70 F5060000 		.4byte	.LASF220
+ 1455 0a74 08       		.byte	0x8
+ 1456 0a75 1205     		.2byte	0x512
+ 1457 0a77 F6000000 		.4byte	0xf6
+ 1458 0a7b 74       		.byte	0x74
+ 1459 0a7c 00       		.byte	0
+ 1460 0a7d 12       		.uleb128 0x12
+ 1461 0a7e F6000000 		.4byte	0xf6
+ 1462 0a82 8D0A0000 		.4byte	0xa8d
+ 1463 0a86 13       		.uleb128 0x13
+ 1464 0a87 AB000000 		.4byte	0xab
+ 1465 0a8b 0F       		.byte	0xf
+ 1466 0a8c 00       		.byte	0
+ 1467 0a8d 0E       		.uleb128 0xe
+ 1468 0a8e EC040000 		.4byte	.LASF221
+ 1469 0a92 08       		.byte	0x8
+ 1470 0a93 1305     		.2byte	0x513
+ 1471 0a95 B0090000 		.4byte	0x9b0
+ 1472 0a99 06       		.uleb128 0x6
+ 1473 0a9a 04       		.byte	0x4
+ 1474 0a9b 9F0A0000 		.4byte	0xa9f
+ 1475 0a9f 14       		.uleb128 0x14
+ 1476 0aa0 AA0A0000 		.4byte	0xaaa
+ 1477 0aa4 15       		.uleb128 0x15
+ 1478 0aa5 F6000000 		.4byte	0xf6
+ 1479 0aa9 00       		.byte	0
+ 1480 0aaa 0E       		.uleb128 0xe
+ 1481 0aab 2E080000 		.4byte	.LASF222
+ 1482 0aaf 09       		.byte	0x9
+ 1483 0ab0 D901     		.2byte	0x1d9
+ 1484 0ab2 990A0000 		.4byte	0xa99
+ 1485 0ab6 16       		.uleb128 0x16
+ 1486 0ab7 B2030000 		.4byte	.LASF258
+ 1487 0abb 38       		.byte	0x38
+ 1488 0abc 09       		.byte	0x9
+ 1489 0abd 7502     		.2byte	0x275
+ 1490 0abf 7A0B0000 		.4byte	0xb7a
+ 1491 0ac3 11       		.uleb128 0x11
+ 1492 0ac4 A5000000 		.4byte	.LASF223
+ 1493 0ac8 09       		.byte	0x9
+ 1494 0ac9 7802     		.2byte	0x278
+ 1495 0acb 01010000 		.4byte	0x101
+ 1496 0acf 00       		.byte	0
+ 1497 0ad0 11       		.uleb128 0x11
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 30
+
+
+ 1498 0ad1 33050000 		.4byte	.LASF224
+ 1499 0ad5 09       		.byte	0x9
+ 1500 0ad6 7902     		.2byte	0x279
+ 1501 0ad8 01010000 		.4byte	0x101
+ 1502 0adc 04       		.byte	0x4
+ 1503 0add 11       		.uleb128 0x11
+ 1504 0ade BB0A0000 		.4byte	.LASF225
+ 1505 0ae2 09       		.byte	0x9
+ 1506 0ae3 7B02     		.2byte	0x27b
+ 1507 0ae5 A9000000 		.4byte	0xa9
+ 1508 0ae9 08       		.byte	0x8
+ 1509 0aea 11       		.uleb128 0x11
+ 1510 0aeb CA010000 		.4byte	.LASF226
+ 1511 0aef 09       		.byte	0x9
+ 1512 0af0 7C02     		.2byte	0x27c
+ 1513 0af2 F6000000 		.4byte	0xf6
+ 1514 0af6 0C       		.byte	0xc
+ 1515 0af7 11       		.uleb128 0x11
+ 1516 0af8 9E090000 		.4byte	.LASF227
+ 1517 0afc 09       		.byte	0x9
+ 1518 0afd 7D02     		.2byte	0x27d
+ 1519 0aff 01010000 		.4byte	0x101
+ 1520 0b03 10       		.byte	0x10
+ 1521 0b04 11       		.uleb128 0x11
+ 1522 0b05 4D070000 		.4byte	.LASF228
+ 1523 0b09 09       		.byte	0x9
+ 1524 0b0a 7E02     		.2byte	0x27e
+ 1525 0b0c 01010000 		.4byte	0x101
+ 1526 0b10 14       		.byte	0x14
+ 1527 0b11 11       		.uleb128 0x11
+ 1528 0b12 3C050000 		.4byte	.LASF229
+ 1529 0b16 09       		.byte	0x9
+ 1530 0b17 8002     		.2byte	0x280
+ 1531 0b19 A9000000 		.4byte	0xa9
+ 1532 0b1d 18       		.byte	0x18
+ 1533 0b1e 11       		.uleb128 0x11
+ 1534 0b1f CF110000 		.4byte	.LASF230
+ 1535 0b23 09       		.byte	0x9
+ 1536 0b24 8102     		.2byte	0x281
+ 1537 0b26 F6000000 		.4byte	0xf6
+ 1538 0b2a 1C       		.byte	0x1c
+ 1539 0b2b 11       		.uleb128 0x11
+ 1540 0b2c 8D070000 		.4byte	.LASF231
+ 1541 0b30 09       		.byte	0x9
+ 1542 0b31 8202     		.2byte	0x282
+ 1543 0b33 01010000 		.4byte	0x101
+ 1544 0b37 20       		.byte	0x20
+ 1545 0b38 11       		.uleb128 0x11
+ 1546 0b39 440A0000 		.4byte	.LASF232
+ 1547 0b3d 09       		.byte	0x9
+ 1548 0b3e 8402     		.2byte	0x284
+ 1549 0b40 A9000000 		.4byte	0xa9
+ 1550 0b44 24       		.byte	0x24
+ 1551 0b45 11       		.uleb128 0x11
+ 1552 0b46 C9090000 		.4byte	.LASF233
+ 1553 0b4a 09       		.byte	0x9
+ 1554 0b4b 8502     		.2byte	0x285
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 31
+
+
+ 1555 0b4d F6000000 		.4byte	0xf6
+ 1556 0b51 28       		.byte	0x28
+ 1557 0b52 11       		.uleb128 0x11
+ 1558 0b53 E10C0000 		.4byte	.LASF234
+ 1559 0b57 09       		.byte	0x9
+ 1560 0b58 8602     		.2byte	0x286
+ 1561 0b5a 01010000 		.4byte	0x101
+ 1562 0b5e 2C       		.byte	0x2c
+ 1563 0b5f 11       		.uleb128 0x11
+ 1564 0b60 AE050000 		.4byte	.LASF235
+ 1565 0b64 09       		.byte	0x9
+ 1566 0b65 8B02     		.2byte	0x28b
+ 1567 0b67 AA0A0000 		.4byte	0xaaa
+ 1568 0b6b 30       		.byte	0x30
+ 1569 0b6c 11       		.uleb128 0x11
+ 1570 0b6d A3070000 		.4byte	.LASF236
+ 1571 0b71 09       		.byte	0x9
+ 1572 0b72 8E02     		.2byte	0x28e
+ 1573 0b74 F6000000 		.4byte	0xf6
+ 1574 0b78 34       		.byte	0x34
+ 1575 0b79 00       		.byte	0
+ 1576 0b7a 0E       		.uleb128 0xe
+ 1577 0b7b 75030000 		.4byte	.LASF237
+ 1578 0b7f 09       		.byte	0x9
+ 1579 0b80 9102     		.2byte	0x291
+ 1580 0b82 B60A0000 		.4byte	0xab6
+ 1581 0b86 09       		.uleb128 0x9
+ 1582 0b87 14       		.byte	0x14
+ 1583 0b88 0A       		.byte	0xa
+ 1584 0b89 3B       		.byte	0x3b
+ 1585 0b8a CB0B0000 		.4byte	0xbcb
+ 1586 0b8e 0A       		.uleb128 0xa
+ 1587 0b8f 58010000 		.4byte	.LASF238
+ 1588 0b93 0A       		.byte	0xa
+ 1589 0b94 3D       		.byte	0x3d
+ 1590 0b95 F6000000 		.4byte	0xf6
+ 1591 0b99 00       		.byte	0
+ 1592 0b9a 0A       		.uleb128 0xa
+ 1593 0b9b 03040000 		.4byte	.LASF239
+ 1594 0b9f 0A       		.byte	0xa
+ 1595 0ba0 3E       		.byte	0x3e
+ 1596 0ba1 F6000000 		.4byte	0xf6
+ 1597 0ba5 04       		.byte	0x4
+ 1598 0ba6 0A       		.uleb128 0xa
+ 1599 0ba7 87010000 		.4byte	.LASF240
+ 1600 0bab 0A       		.byte	0xa
+ 1601 0bac 3F       		.byte	0x3f
+ 1602 0bad CB0B0000 		.4byte	0xbcb
+ 1603 0bb1 08       		.byte	0x8
+ 1604 0bb2 0A       		.uleb128 0xa
+ 1605 0bb3 110D0000 		.4byte	.LASF241
+ 1606 0bb7 0A       		.byte	0xa
+ 1607 0bb8 40       		.byte	0x40
+ 1608 0bb9 F6000000 		.4byte	0xf6
+ 1609 0bbd 0C       		.byte	0xc
+ 1610 0bbe 0A       		.uleb128 0xa
+ 1611 0bbf A40F0000 		.4byte	.LASF242
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 32
+
+
+ 1612 0bc3 0A       		.byte	0xa
+ 1613 0bc4 45       		.byte	0x45
+ 1614 0bc5 F6000000 		.4byte	0xf6
+ 1615 0bc9 10       		.byte	0x10
+ 1616 0bca 00       		.byte	0
+ 1617 0bcb 06       		.uleb128 0x6
+ 1618 0bcc 04       		.byte	0x4
+ 1619 0bcd D10B0000 		.4byte	0xbd1
+ 1620 0bd1 07       		.uleb128 0x7
+ 1621 0bd2 8D0A0000 		.4byte	0xa8d
+ 1622 0bd6 03       		.uleb128 0x3
+ 1623 0bd7 88050000 		.4byte	.LASF243
+ 1624 0bdb 0A       		.byte	0xa
+ 1625 0bdc 48       		.byte	0x48
+ 1626 0bdd 860B0000 		.4byte	0xb86
+ 1627 0be1 17       		.uleb128 0x17
+ 1628 0be2 050B0000 		.4byte	.LASF244
+ 1629 0be6 01       		.byte	0x1
+ 1630 0be7 4F       		.byte	0x4f
+ 1631 0be8 94000000 		.4byte	0x94
+ 1632 0bec 00000000 		.4byte	.LFB488
+ 1633 0bf0 24000000 		.4byte	.LFE488-.LFB488
+ 1634 0bf4 01       		.uleb128 0x1
+ 1635 0bf5 9C       		.byte	0x9c
+ 1636 0bf6 3F0C0000 		.4byte	0xc3f
+ 1637 0bfa 18       		.uleb128 0x18
+ 1638 0bfb 666400   		.ascii	"fd\000"
+ 1639 0bfe 01       		.byte	0x1
+ 1640 0bff 4F       		.byte	0x4f
+ 1641 0c00 94000000 		.4byte	0x94
+ 1642 0c04 00000000 		.4byte	.LLST0
+ 1643 0c08 18       		.uleb128 0x18
+ 1644 0c09 70747200 		.ascii	"ptr\000"
+ 1645 0c0d 01       		.byte	0x1
+ 1646 0c0e 4F       		.byte	0x4f
+ 1647 0c0f BF000000 		.4byte	0xbf
+ 1648 0c13 3A000000 		.4byte	.LLST1
+ 1649 0c17 18       		.uleb128 0x18
+ 1650 0c18 6C656E00 		.ascii	"len\000"
+ 1651 0c1c 01       		.byte	0x1
+ 1652 0c1d 4F       		.byte	0x4f
+ 1653 0c1e 94000000 		.4byte	0x94
+ 1654 0c22 6E000000 		.4byte	.LLST2
+ 1655 0c26 19       		.uleb128 0x19
+ 1656 0c27 9D0F0000 		.4byte	.LASF246
+ 1657 0c2b 01       		.byte	0x1
+ 1658 0c2c 51       		.byte	0x51
+ 1659 0c2d 94000000 		.4byte	0x94
+ 1660 0c31 B0000000 		.4byte	.LLST3
+ 1661 0c35 1A       		.uleb128 0x1a
+ 1662 0c36 14000000 		.4byte	.LVL3
+ 1663 0c3a 100D0000 		.4byte	0xd10
+ 1664 0c3e 00       		.byte	0
+ 1665 0c3f 17       		.uleb128 0x17
+ 1666 0c40 07020000 		.4byte	.LASF245
+ 1667 0c44 01       		.byte	0x1
+ 1668 0c45 85       		.byte	0x85
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 33
+
+
+ 1669 0c46 94000000 		.4byte	0x94
+ 1670 0c4a 00000000 		.4byte	.LFB489
+ 1671 0c4e 2E000000 		.4byte	.LFE489-.LFB489
+ 1672 0c52 01       		.uleb128 0x1
+ 1673 0c53 9C       		.byte	0x9c
+ 1674 0c54 9D0C0000 		.4byte	0xc9d
+ 1675 0c58 18       		.uleb128 0x18
+ 1676 0c59 666400   		.ascii	"fd\000"
+ 1677 0c5c 01       		.byte	0x1
+ 1678 0c5d 85       		.byte	0x85
+ 1679 0c5e 94000000 		.4byte	0x94
+ 1680 0c62 F1000000 		.4byte	.LLST4
+ 1681 0c66 18       		.uleb128 0x18
+ 1682 0c67 70747200 		.ascii	"ptr\000"
+ 1683 0c6b 01       		.byte	0x1
+ 1684 0c6c 85       		.byte	0x85
+ 1685 0c6d B2000000 		.4byte	0xb2
+ 1686 0c71 2B010000 		.4byte	.LLST5
+ 1687 0c75 18       		.uleb128 0x18
+ 1688 0c76 6C656E00 		.ascii	"len\000"
+ 1689 0c7a 01       		.byte	0x1
+ 1690 0c7b 85       		.byte	0x85
+ 1691 0c7c 94000000 		.4byte	0x94
+ 1692 0c80 5F010000 		.4byte	.LLST6
+ 1693 0c84 19       		.uleb128 0x19
+ 1694 0c85 9D0F0000 		.4byte	.LASF246
+ 1695 0c89 01       		.byte	0x1
+ 1696 0c8a 87       		.byte	0x87
+ 1697 0c8b 94000000 		.4byte	0x94
+ 1698 0c8f A1010000 		.4byte	.LLST7
+ 1699 0c93 1A       		.uleb128 0x1a
+ 1700 0c94 12000000 		.4byte	.LVL15
+ 1701 0c98 1B0D0000 		.4byte	0xd1b
+ 1702 0c9c 00       		.byte	0
+ 1703 0c9d 1B       		.uleb128 0x1b
+ 1704 0c9e 14000000 		.4byte	.LASF247
+ 1705 0ca2 04       		.byte	0x4
+ 1706 0ca3 A7       		.byte	0xa7
+ 1707 0ca4 A80C0000 		.4byte	0xca8
+ 1708 0ca8 06       		.uleb128 0x6
+ 1709 0ca9 04       		.byte	0x4
+ 1710 0caa AE0C0000 		.4byte	0xcae
+ 1711 0cae 07       		.uleb128 0x7
+ 1712 0caf 17050000 		.4byte	0x517
+ 1713 0cb3 1C       		.uleb128 0x1c
+ 1714 0cb4 86060000 		.4byte	.LASF248
+ 1715 0cb8 0A       		.byte	0xa
+ 1716 0cb9 6001     		.2byte	0x160
+ 1717 0cbb F6000000 		.4byte	0xf6
+ 1718 0cbf 12       		.uleb128 0x12
+ 1719 0cc0 CF0C0000 		.4byte	0xccf
+ 1720 0cc4 CF0C0000 		.4byte	0xccf
+ 1721 0cc8 13       		.uleb128 0x13
+ 1722 0cc9 AB000000 		.4byte	0xab
+ 1723 0ccd 00       		.byte	0
+ 1724 0cce 00       		.byte	0
+ 1725 0ccf 07       		.uleb128 0x7
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 34
+
+
+ 1726 0cd0 D60B0000 		.4byte	0xbd6
+ 1727 0cd4 1C       		.uleb128 0x1c
+ 1728 0cd5 AB070000 		.4byte	.LASF249
+ 1729 0cd9 0A       		.byte	0xa
+ 1730 0cda 6401     		.2byte	0x164
+ 1731 0cdc E00C0000 		.4byte	0xce0
+ 1732 0ce0 07       		.uleb128 0x7
+ 1733 0ce1 BF0C0000 		.4byte	0xcbf
+ 1734 0ce5 1B       		.uleb128 0x1b
+ 1735 0ce6 1C0D0000 		.4byte	.LASF250
+ 1736 0cea 0B       		.byte	0xb
+ 1737 0ceb 5A       		.byte	0x5a
+ 1738 0cec F00C0000 		.4byte	0xcf0
+ 1739 0cf0 07       		.uleb128 0x7
+ 1740 0cf1 72090000 		.4byte	0x972
+ 1741 0cf5 1B       		.uleb128 0x1b
+ 1742 0cf6 830C0000 		.4byte	.LASF251
+ 1743 0cfa 0B       		.byte	0xb
+ 1744 0cfb 63       		.byte	0x63
+ 1745 0cfc 000D0000 		.4byte	0xd00
+ 1746 0d00 07       		.uleb128 0x7
+ 1747 0d01 0B070000 		.4byte	0x70b
+ 1748 0d05 1B       		.uleb128 0x1b
+ 1749 0d06 38100000 		.4byte	.LASF252
+ 1750 0d0a 0C       		.byte	0xc
+ 1751 0d0b 87       		.byte	0x87
+ 1752 0d0c 7A0B0000 		.4byte	0xb7a
+ 1753 0d10 1D       		.uleb128 0x1d
+ 1754 0d11 B7000000 		.4byte	.LASF253
+ 1755 0d15 B7000000 		.4byte	.LASF253
+ 1756 0d19 0D       		.byte	0xd
+ 1757 0d1a BA       		.byte	0xba
+ 1758 0d1b 1D       		.uleb128 0x1d
+ 1759 0d1c 1F050000 		.4byte	.LASF254
+ 1760 0d20 1F050000 		.4byte	.LASF254
+ 1761 0d24 0D       		.byte	0xd
+ 1762 0d25 BE       		.byte	0xbe
+ 1763 0d26 00       		.byte	0
+ 1764              		.section	.debug_abbrev,"",%progbits
+ 1765              	.Ldebug_abbrev0:
+ 1766 0000 01       		.uleb128 0x1
+ 1767 0001 11       		.uleb128 0x11
+ 1768 0002 01       		.byte	0x1
+ 1769 0003 25       		.uleb128 0x25
+ 1770 0004 0E       		.uleb128 0xe
+ 1771 0005 13       		.uleb128 0x13
+ 1772 0006 0B       		.uleb128 0xb
+ 1773 0007 03       		.uleb128 0x3
+ 1774 0008 0E       		.uleb128 0xe
+ 1775 0009 1B       		.uleb128 0x1b
+ 1776 000a 0E       		.uleb128 0xe
+ 1777 000b 55       		.uleb128 0x55
+ 1778 000c 17       		.uleb128 0x17
+ 1779 000d 11       		.uleb128 0x11
+ 1780 000e 01       		.uleb128 0x1
+ 1781 000f 10       		.uleb128 0x10
+ 1782 0010 17       		.uleb128 0x17
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 35
+
+
+ 1783 0011 00       		.byte	0
+ 1784 0012 00       		.byte	0
+ 1785 0013 02       		.uleb128 0x2
+ 1786 0014 24       		.uleb128 0x24
+ 1787 0015 00       		.byte	0
+ 1788 0016 0B       		.uleb128 0xb
+ 1789 0017 0B       		.uleb128 0xb
+ 1790 0018 3E       		.uleb128 0x3e
+ 1791 0019 0B       		.uleb128 0xb
+ 1792 001a 03       		.uleb128 0x3
+ 1793 001b 0E       		.uleb128 0xe
+ 1794 001c 00       		.byte	0
+ 1795 001d 00       		.byte	0
+ 1796 001e 03       		.uleb128 0x3
+ 1797 001f 16       		.uleb128 0x16
+ 1798 0020 00       		.byte	0
+ 1799 0021 03       		.uleb128 0x3
+ 1800 0022 0E       		.uleb128 0xe
+ 1801 0023 3A       		.uleb128 0x3a
+ 1802 0024 0B       		.uleb128 0xb
+ 1803 0025 3B       		.uleb128 0x3b
+ 1804 0026 0B       		.uleb128 0xb
+ 1805 0027 49       		.uleb128 0x49
+ 1806 0028 13       		.uleb128 0x13
+ 1807 0029 00       		.byte	0
+ 1808 002a 00       		.byte	0
+ 1809 002b 04       		.uleb128 0x4
+ 1810 002c 24       		.uleb128 0x24
+ 1811 002d 00       		.byte	0
+ 1812 002e 0B       		.uleb128 0xb
+ 1813 002f 0B       		.uleb128 0xb
+ 1814 0030 3E       		.uleb128 0x3e
+ 1815 0031 0B       		.uleb128 0xb
+ 1816 0032 03       		.uleb128 0x3
+ 1817 0033 08       		.uleb128 0x8
+ 1818 0034 00       		.byte	0
+ 1819 0035 00       		.byte	0
+ 1820 0036 05       		.uleb128 0x5
+ 1821 0037 0F       		.uleb128 0xf
+ 1822 0038 00       		.byte	0
+ 1823 0039 0B       		.uleb128 0xb
+ 1824 003a 0B       		.uleb128 0xb
+ 1825 003b 00       		.byte	0
+ 1826 003c 00       		.byte	0
+ 1827 003d 06       		.uleb128 0x6
+ 1828 003e 0F       		.uleb128 0xf
+ 1829 003f 00       		.byte	0
+ 1830 0040 0B       		.uleb128 0xb
+ 1831 0041 0B       		.uleb128 0xb
+ 1832 0042 49       		.uleb128 0x49
+ 1833 0043 13       		.uleb128 0x13
+ 1834 0044 00       		.byte	0
+ 1835 0045 00       		.byte	0
+ 1836 0046 07       		.uleb128 0x7
+ 1837 0047 26       		.uleb128 0x26
+ 1838 0048 00       		.byte	0
+ 1839 0049 49       		.uleb128 0x49
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 36
+
+
+ 1840 004a 13       		.uleb128 0x13
+ 1841 004b 00       		.byte	0
+ 1842 004c 00       		.byte	0
+ 1843 004d 08       		.uleb128 0x8
+ 1844 004e 35       		.uleb128 0x35
+ 1845 004f 00       		.byte	0
+ 1846 0050 49       		.uleb128 0x49
+ 1847 0051 13       		.uleb128 0x13
+ 1848 0052 00       		.byte	0
+ 1849 0053 00       		.byte	0
+ 1850 0054 09       		.uleb128 0x9
+ 1851 0055 13       		.uleb128 0x13
+ 1852 0056 01       		.byte	0x1
+ 1853 0057 0B       		.uleb128 0xb
+ 1854 0058 0B       		.uleb128 0xb
+ 1855 0059 3A       		.uleb128 0x3a
+ 1856 005a 0B       		.uleb128 0xb
+ 1857 005b 3B       		.uleb128 0x3b
+ 1858 005c 0B       		.uleb128 0xb
+ 1859 005d 01       		.uleb128 0x1
+ 1860 005e 13       		.uleb128 0x13
+ 1861 005f 00       		.byte	0
+ 1862 0060 00       		.byte	0
+ 1863 0061 0A       		.uleb128 0xa
+ 1864 0062 0D       		.uleb128 0xd
+ 1865 0063 00       		.byte	0
+ 1866 0064 03       		.uleb128 0x3
+ 1867 0065 0E       		.uleb128 0xe
+ 1868 0066 3A       		.uleb128 0x3a
+ 1869 0067 0B       		.uleb128 0xb
+ 1870 0068 3B       		.uleb128 0x3b
+ 1871 0069 0B       		.uleb128 0xb
+ 1872 006a 49       		.uleb128 0x49
+ 1873 006b 13       		.uleb128 0x13
+ 1874 006c 38       		.uleb128 0x38
+ 1875 006d 0B       		.uleb128 0xb
+ 1876 006e 00       		.byte	0
+ 1877 006f 00       		.byte	0
+ 1878 0070 0B       		.uleb128 0xb
+ 1879 0071 04       		.uleb128 0x4
+ 1880 0072 01       		.byte	0x1
+ 1881 0073 0B       		.uleb128 0xb
+ 1882 0074 0B       		.uleb128 0xb
+ 1883 0075 49       		.uleb128 0x49
+ 1884 0076 13       		.uleb128 0x13
+ 1885 0077 3A       		.uleb128 0x3a
+ 1886 0078 0B       		.uleb128 0xb
+ 1887 0079 3B       		.uleb128 0x3b
+ 1888 007a 05       		.uleb128 0x5
+ 1889 007b 01       		.uleb128 0x1
+ 1890 007c 13       		.uleb128 0x13
+ 1891 007d 00       		.byte	0
+ 1892 007e 00       		.byte	0
+ 1893 007f 0C       		.uleb128 0xc
+ 1894 0080 28       		.uleb128 0x28
+ 1895 0081 00       		.byte	0
+ 1896 0082 03       		.uleb128 0x3
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 37
+
+
+ 1897 0083 0E       		.uleb128 0xe
+ 1898 0084 1C       		.uleb128 0x1c
+ 1899 0085 0B       		.uleb128 0xb
+ 1900 0086 00       		.byte	0
+ 1901 0087 00       		.byte	0
+ 1902 0088 0D       		.uleb128 0xd
+ 1903 0089 28       		.uleb128 0x28
+ 1904 008a 00       		.byte	0
+ 1905 008b 03       		.uleb128 0x3
+ 1906 008c 0E       		.uleb128 0xe
+ 1907 008d 1C       		.uleb128 0x1c
+ 1908 008e 06       		.uleb128 0x6
+ 1909 008f 00       		.byte	0
+ 1910 0090 00       		.byte	0
+ 1911 0091 0E       		.uleb128 0xe
+ 1912 0092 16       		.uleb128 0x16
+ 1913 0093 00       		.byte	0
+ 1914 0094 03       		.uleb128 0x3
+ 1915 0095 0E       		.uleb128 0xe
+ 1916 0096 3A       		.uleb128 0x3a
+ 1917 0097 0B       		.uleb128 0xb
+ 1918 0098 3B       		.uleb128 0x3b
+ 1919 0099 05       		.uleb128 0x5
+ 1920 009a 49       		.uleb128 0x49
+ 1921 009b 13       		.uleb128 0x13
+ 1922 009c 00       		.byte	0
+ 1923 009d 00       		.byte	0
+ 1924 009e 0F       		.uleb128 0xf
+ 1925 009f 28       		.uleb128 0x28
+ 1926 00a0 00       		.byte	0
+ 1927 00a1 03       		.uleb128 0x3
+ 1928 00a2 0E       		.uleb128 0xe
+ 1929 00a3 1C       		.uleb128 0x1c
+ 1930 00a4 05       		.uleb128 0x5
+ 1931 00a5 00       		.byte	0
+ 1932 00a6 00       		.byte	0
+ 1933 00a7 10       		.uleb128 0x10
+ 1934 00a8 13       		.uleb128 0x13
+ 1935 00a9 01       		.byte	0x1
+ 1936 00aa 0B       		.uleb128 0xb
+ 1937 00ab 0B       		.uleb128 0xb
+ 1938 00ac 3A       		.uleb128 0x3a
+ 1939 00ad 0B       		.uleb128 0xb
+ 1940 00ae 3B       		.uleb128 0x3b
+ 1941 00af 05       		.uleb128 0x5
+ 1942 00b0 01       		.uleb128 0x1
+ 1943 00b1 13       		.uleb128 0x13
+ 1944 00b2 00       		.byte	0
+ 1945 00b3 00       		.byte	0
+ 1946 00b4 11       		.uleb128 0x11
+ 1947 00b5 0D       		.uleb128 0xd
+ 1948 00b6 00       		.byte	0
+ 1949 00b7 03       		.uleb128 0x3
+ 1950 00b8 0E       		.uleb128 0xe
+ 1951 00b9 3A       		.uleb128 0x3a
+ 1952 00ba 0B       		.uleb128 0xb
+ 1953 00bb 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 38
+
+
+ 1954 00bc 05       		.uleb128 0x5
+ 1955 00bd 49       		.uleb128 0x49
+ 1956 00be 13       		.uleb128 0x13
+ 1957 00bf 38       		.uleb128 0x38
+ 1958 00c0 0B       		.uleb128 0xb
+ 1959 00c1 00       		.byte	0
+ 1960 00c2 00       		.byte	0
+ 1961 00c3 12       		.uleb128 0x12
+ 1962 00c4 01       		.uleb128 0x1
+ 1963 00c5 01       		.byte	0x1
+ 1964 00c6 49       		.uleb128 0x49
+ 1965 00c7 13       		.uleb128 0x13
+ 1966 00c8 01       		.uleb128 0x1
+ 1967 00c9 13       		.uleb128 0x13
+ 1968 00ca 00       		.byte	0
+ 1969 00cb 00       		.byte	0
+ 1970 00cc 13       		.uleb128 0x13
+ 1971 00cd 21       		.uleb128 0x21
+ 1972 00ce 00       		.byte	0
+ 1973 00cf 49       		.uleb128 0x49
+ 1974 00d0 13       		.uleb128 0x13
+ 1975 00d1 2F       		.uleb128 0x2f
+ 1976 00d2 0B       		.uleb128 0xb
+ 1977 00d3 00       		.byte	0
+ 1978 00d4 00       		.byte	0
+ 1979 00d5 14       		.uleb128 0x14
+ 1980 00d6 15       		.uleb128 0x15
+ 1981 00d7 01       		.byte	0x1
+ 1982 00d8 27       		.uleb128 0x27
+ 1983 00d9 19       		.uleb128 0x19
+ 1984 00da 01       		.uleb128 0x1
+ 1985 00db 13       		.uleb128 0x13
+ 1986 00dc 00       		.byte	0
+ 1987 00dd 00       		.byte	0
+ 1988 00de 15       		.uleb128 0x15
+ 1989 00df 05       		.uleb128 0x5
+ 1990 00e0 00       		.byte	0
+ 1991 00e1 49       		.uleb128 0x49
+ 1992 00e2 13       		.uleb128 0x13
+ 1993 00e3 00       		.byte	0
+ 1994 00e4 00       		.byte	0
+ 1995 00e5 16       		.uleb128 0x16
+ 1996 00e6 13       		.uleb128 0x13
+ 1997 00e7 01       		.byte	0x1
+ 1998 00e8 03       		.uleb128 0x3
+ 1999 00e9 0E       		.uleb128 0xe
+ 2000 00ea 0B       		.uleb128 0xb
+ 2001 00eb 0B       		.uleb128 0xb
+ 2002 00ec 3A       		.uleb128 0x3a
+ 2003 00ed 0B       		.uleb128 0xb
+ 2004 00ee 3B       		.uleb128 0x3b
+ 2005 00ef 05       		.uleb128 0x5
+ 2006 00f0 01       		.uleb128 0x1
+ 2007 00f1 13       		.uleb128 0x13
+ 2008 00f2 00       		.byte	0
+ 2009 00f3 00       		.byte	0
+ 2010 00f4 17       		.uleb128 0x17
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 39
+
+
+ 2011 00f5 2E       		.uleb128 0x2e
+ 2012 00f6 01       		.byte	0x1
+ 2013 00f7 3F       		.uleb128 0x3f
+ 2014 00f8 19       		.uleb128 0x19
+ 2015 00f9 03       		.uleb128 0x3
+ 2016 00fa 0E       		.uleb128 0xe
+ 2017 00fb 3A       		.uleb128 0x3a
+ 2018 00fc 0B       		.uleb128 0xb
+ 2019 00fd 3B       		.uleb128 0x3b
+ 2020 00fe 0B       		.uleb128 0xb
+ 2021 00ff 27       		.uleb128 0x27
+ 2022 0100 19       		.uleb128 0x19
+ 2023 0101 49       		.uleb128 0x49
+ 2024 0102 13       		.uleb128 0x13
+ 2025 0103 11       		.uleb128 0x11
+ 2026 0104 01       		.uleb128 0x1
+ 2027 0105 12       		.uleb128 0x12
+ 2028 0106 06       		.uleb128 0x6
+ 2029 0107 40       		.uleb128 0x40
+ 2030 0108 18       		.uleb128 0x18
+ 2031 0109 9742     		.uleb128 0x2117
+ 2032 010b 19       		.uleb128 0x19
+ 2033 010c 01       		.uleb128 0x1
+ 2034 010d 13       		.uleb128 0x13
+ 2035 010e 00       		.byte	0
+ 2036 010f 00       		.byte	0
+ 2037 0110 18       		.uleb128 0x18
+ 2038 0111 05       		.uleb128 0x5
+ 2039 0112 00       		.byte	0
+ 2040 0113 03       		.uleb128 0x3
+ 2041 0114 08       		.uleb128 0x8
+ 2042 0115 3A       		.uleb128 0x3a
+ 2043 0116 0B       		.uleb128 0xb
+ 2044 0117 3B       		.uleb128 0x3b
+ 2045 0118 0B       		.uleb128 0xb
+ 2046 0119 49       		.uleb128 0x49
+ 2047 011a 13       		.uleb128 0x13
+ 2048 011b 02       		.uleb128 0x2
+ 2049 011c 17       		.uleb128 0x17
+ 2050 011d 00       		.byte	0
+ 2051 011e 00       		.byte	0
+ 2052 011f 19       		.uleb128 0x19
+ 2053 0120 34       		.uleb128 0x34
+ 2054 0121 00       		.byte	0
+ 2055 0122 03       		.uleb128 0x3
+ 2056 0123 0E       		.uleb128 0xe
+ 2057 0124 3A       		.uleb128 0x3a
+ 2058 0125 0B       		.uleb128 0xb
+ 2059 0126 3B       		.uleb128 0x3b
+ 2060 0127 0B       		.uleb128 0xb
+ 2061 0128 49       		.uleb128 0x49
+ 2062 0129 13       		.uleb128 0x13
+ 2063 012a 02       		.uleb128 0x2
+ 2064 012b 17       		.uleb128 0x17
+ 2065 012c 00       		.byte	0
+ 2066 012d 00       		.byte	0
+ 2067 012e 1A       		.uleb128 0x1a
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 40
+
+
+ 2068 012f 898201   		.uleb128 0x4109
+ 2069 0132 00       		.byte	0
+ 2070 0133 11       		.uleb128 0x11
+ 2071 0134 01       		.uleb128 0x1
+ 2072 0135 31       		.uleb128 0x31
+ 2073 0136 13       		.uleb128 0x13
+ 2074 0137 00       		.byte	0
+ 2075 0138 00       		.byte	0
+ 2076 0139 1B       		.uleb128 0x1b
+ 2077 013a 34       		.uleb128 0x34
+ 2078 013b 00       		.byte	0
+ 2079 013c 03       		.uleb128 0x3
+ 2080 013d 0E       		.uleb128 0xe
+ 2081 013e 3A       		.uleb128 0x3a
+ 2082 013f 0B       		.uleb128 0xb
+ 2083 0140 3B       		.uleb128 0x3b
+ 2084 0141 0B       		.uleb128 0xb
+ 2085 0142 49       		.uleb128 0x49
+ 2086 0143 13       		.uleb128 0x13
+ 2087 0144 3F       		.uleb128 0x3f
+ 2088 0145 19       		.uleb128 0x19
+ 2089 0146 3C       		.uleb128 0x3c
+ 2090 0147 19       		.uleb128 0x19
+ 2091 0148 00       		.byte	0
+ 2092 0149 00       		.byte	0
+ 2093 014a 1C       		.uleb128 0x1c
+ 2094 014b 34       		.uleb128 0x34
+ 2095 014c 00       		.byte	0
+ 2096 014d 03       		.uleb128 0x3
+ 2097 014e 0E       		.uleb128 0xe
+ 2098 014f 3A       		.uleb128 0x3a
+ 2099 0150 0B       		.uleb128 0xb
+ 2100 0151 3B       		.uleb128 0x3b
+ 2101 0152 05       		.uleb128 0x5
+ 2102 0153 49       		.uleb128 0x49
+ 2103 0154 13       		.uleb128 0x13
+ 2104 0155 3F       		.uleb128 0x3f
+ 2105 0156 19       		.uleb128 0x19
+ 2106 0157 3C       		.uleb128 0x3c
+ 2107 0158 19       		.uleb128 0x19
+ 2108 0159 00       		.byte	0
+ 2109 015a 00       		.byte	0
+ 2110 015b 1D       		.uleb128 0x1d
+ 2111 015c 2E       		.uleb128 0x2e
+ 2112 015d 00       		.byte	0
+ 2113 015e 3F       		.uleb128 0x3f
+ 2114 015f 19       		.uleb128 0x19
+ 2115 0160 3C       		.uleb128 0x3c
+ 2116 0161 19       		.uleb128 0x19
+ 2117 0162 6E       		.uleb128 0x6e
+ 2118 0163 0E       		.uleb128 0xe
+ 2119 0164 03       		.uleb128 0x3
+ 2120 0165 0E       		.uleb128 0xe
+ 2121 0166 3A       		.uleb128 0x3a
+ 2122 0167 0B       		.uleb128 0xb
+ 2123 0168 3B       		.uleb128 0x3b
+ 2124 0169 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 41
+
+
+ 2125 016a 00       		.byte	0
+ 2126 016b 00       		.byte	0
+ 2127 016c 00       		.byte	0
+ 2128              		.section	.debug_loc,"",%progbits
+ 2129              	.Ldebug_loc0:
+ 2130              	.LLST0:
+ 2131 0000 00000000 		.4byte	.LVL0
+ 2132 0004 0E000000 		.4byte	.LVL2
+ 2133 0008 0100     		.2byte	0x1
+ 2134 000a 50       		.byte	0x50
+ 2135 000b 0E000000 		.4byte	.LVL2
+ 2136 000f 1A000000 		.4byte	.LVL6
+ 2137 0013 0400     		.2byte	0x4
+ 2138 0015 F3       		.byte	0xf3
+ 2139 0016 01       		.uleb128 0x1
+ 2140 0017 50       		.byte	0x50
+ 2141 0018 9F       		.byte	0x9f
+ 2142 0019 1A000000 		.4byte	.LVL6
+ 2143 001d 1C000000 		.4byte	.LVL7
+ 2144 0021 0100     		.2byte	0x1
+ 2145 0023 50       		.byte	0x50
+ 2146 0024 1C000000 		.4byte	.LVL7
+ 2147 0028 24000000 		.4byte	.LFE488
+ 2148 002c 0400     		.2byte	0x4
+ 2149 002e F3       		.byte	0xf3
+ 2150 002f 01       		.uleb128 0x1
+ 2151 0030 50       		.byte	0x50
+ 2152 0031 9F       		.byte	0x9f
+ 2153 0032 00000000 		.4byte	0
+ 2154 0036 00000000 		.4byte	0
+ 2155              	.LLST1:
+ 2156 003a 00000000 		.4byte	.LVL0
+ 2157 003e 0E000000 		.4byte	.LVL2
+ 2158 0042 0100     		.2byte	0x1
+ 2159 0044 51       		.byte	0x51
+ 2160 0045 0E000000 		.4byte	.LVL2
+ 2161 0049 1A000000 		.4byte	.LVL6
+ 2162 004d 0100     		.2byte	0x1
+ 2163 004f 55       		.byte	0x55
+ 2164 0050 1A000000 		.4byte	.LVL6
+ 2165 0054 1C000000 		.4byte	.LVL7
+ 2166 0058 0100     		.2byte	0x1
+ 2167 005a 51       		.byte	0x51
+ 2168 005b 1C000000 		.4byte	.LVL7
+ 2169 005f 22000000 		.4byte	.LVL10
+ 2170 0063 0100     		.2byte	0x1
+ 2171 0065 55       		.byte	0x55
+ 2172 0066 00000000 		.4byte	0
+ 2173 006a 00000000 		.4byte	0
+ 2174              	.LLST2:
+ 2175 006e 00000000 		.4byte	.LVL0
+ 2176 0072 0E000000 		.4byte	.LVL2
+ 2177 0076 0100     		.2byte	0x1
+ 2178 0078 52       		.byte	0x52
+ 2179 0079 0E000000 		.4byte	.LVL2
+ 2180 007d 1A000000 		.4byte	.LVL6
+ 2181 0081 0100     		.2byte	0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 42
+
+
+ 2182 0083 56       		.byte	0x56
+ 2183 0084 1A000000 		.4byte	.LVL6
+ 2184 0088 1C000000 		.4byte	.LVL7
+ 2185 008c 0100     		.2byte	0x1
+ 2186 008e 52       		.byte	0x52
+ 2187 008f 1C000000 		.4byte	.LVL7
+ 2188 0093 22000000 		.4byte	.LVL11
+ 2189 0097 0100     		.2byte	0x1
+ 2190 0099 56       		.byte	0x56
+ 2191 009a 22000000 		.4byte	.LVL11
+ 2192 009e 24000000 		.4byte	.LFE488
+ 2193 00a2 0400     		.2byte	0x4
+ 2194 00a4 F3       		.byte	0xf3
+ 2195 00a5 01       		.uleb128 0x1
+ 2196 00a6 52       		.byte	0x52
+ 2197 00a7 9F       		.byte	0x9f
+ 2198 00a8 00000000 		.4byte	0
+ 2199 00ac 00000000 		.4byte	0
+ 2200              	.LLST3:
+ 2201 00b0 06000000 		.4byte	.LVL1
+ 2202 00b4 0E000000 		.4byte	.LVL2
+ 2203 00b8 0200     		.2byte	0x2
+ 2204 00ba 30       		.byte	0x30
+ 2205 00bb 9F       		.byte	0x9f
+ 2206 00bc 0E000000 		.4byte	.LVL2
+ 2207 00c0 1A000000 		.4byte	.LVL6
+ 2208 00c4 0100     		.2byte	0x1
+ 2209 00c6 54       		.byte	0x54
+ 2210 00c7 1A000000 		.4byte	.LVL6
+ 2211 00cb 1C000000 		.4byte	.LVL7
+ 2212 00cf 0200     		.2byte	0x2
+ 2213 00d1 30       		.byte	0x30
+ 2214 00d2 9F       		.byte	0x9f
+ 2215 00d3 1C000000 		.4byte	.LVL7
+ 2216 00d7 22000000 		.4byte	.LVL9
+ 2217 00db 0100     		.2byte	0x1
+ 2218 00dd 54       		.byte	0x54
+ 2219 00de 22000000 		.4byte	.LVL9
+ 2220 00e2 24000000 		.4byte	.LFE488
+ 2221 00e6 0100     		.2byte	0x1
+ 2222 00e8 50       		.byte	0x50
+ 2223 00e9 00000000 		.4byte	0
+ 2224 00ed 00000000 		.4byte	0
+ 2225              	.LLST4:
+ 2226 00f1 00000000 		.4byte	.LVL12
+ 2227 00f5 0E000000 		.4byte	.LVL14
+ 2228 00f9 0100     		.2byte	0x1
+ 2229 00fb 50       		.byte	0x50
+ 2230 00fc 0E000000 		.4byte	.LVL14
+ 2231 0100 24000000 		.4byte	.LVL18
+ 2232 0104 0400     		.2byte	0x4
+ 2233 0106 F3       		.byte	0xf3
+ 2234 0107 01       		.uleb128 0x1
+ 2235 0108 50       		.byte	0x50
+ 2236 0109 9F       		.byte	0x9f
+ 2237 010a 24000000 		.4byte	.LVL18
+ 2238 010e 26000000 		.4byte	.LVL19
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 43
+
+
+ 2239 0112 0100     		.2byte	0x1
+ 2240 0114 50       		.byte	0x50
+ 2241 0115 26000000 		.4byte	.LVL19
+ 2242 0119 2E000000 		.4byte	.LFE489
+ 2243 011d 0400     		.2byte	0x4
+ 2244 011f F3       		.byte	0xf3
+ 2245 0120 01       		.uleb128 0x1
+ 2246 0121 50       		.byte	0x50
+ 2247 0122 9F       		.byte	0x9f
+ 2248 0123 00000000 		.4byte	0
+ 2249 0127 00000000 		.4byte	0
+ 2250              	.LLST5:
+ 2251 012b 00000000 		.4byte	.LVL12
+ 2252 012f 0E000000 		.4byte	.LVL14
+ 2253 0133 0100     		.2byte	0x1
+ 2254 0135 51       		.byte	0x51
+ 2255 0136 0E000000 		.4byte	.LVL14
+ 2256 013a 24000000 		.4byte	.LVL18
+ 2257 013e 0100     		.2byte	0x1
+ 2258 0140 55       		.byte	0x55
+ 2259 0141 24000000 		.4byte	.LVL18
+ 2260 0145 26000000 		.4byte	.LVL19
+ 2261 0149 0100     		.2byte	0x1
+ 2262 014b 51       		.byte	0x51
+ 2263 014c 26000000 		.4byte	.LVL19
+ 2264 0150 2C000000 		.4byte	.LVL22
+ 2265 0154 0100     		.2byte	0x1
+ 2266 0156 55       		.byte	0x55
+ 2267 0157 00000000 		.4byte	0
+ 2268 015b 00000000 		.4byte	0
+ 2269              	.LLST6:
+ 2270 015f 00000000 		.4byte	.LVL12
+ 2271 0163 0E000000 		.4byte	.LVL14
+ 2272 0167 0100     		.2byte	0x1
+ 2273 0169 52       		.byte	0x52
+ 2274 016a 0E000000 		.4byte	.LVL14
+ 2275 016e 24000000 		.4byte	.LVL18
+ 2276 0172 0100     		.2byte	0x1
+ 2277 0174 56       		.byte	0x56
+ 2278 0175 24000000 		.4byte	.LVL18
+ 2279 0179 26000000 		.4byte	.LVL19
+ 2280 017d 0100     		.2byte	0x1
+ 2281 017f 52       		.byte	0x52
+ 2282 0180 26000000 		.4byte	.LVL19
+ 2283 0184 2C000000 		.4byte	.LVL23
+ 2284 0188 0100     		.2byte	0x1
+ 2285 018a 56       		.byte	0x56
+ 2286 018b 2C000000 		.4byte	.LVL23
+ 2287 018f 2E000000 		.4byte	.LFE489
+ 2288 0193 0400     		.2byte	0x4
+ 2289 0195 F3       		.byte	0xf3
+ 2290 0196 01       		.uleb128 0x1
+ 2291 0197 52       		.byte	0x52
+ 2292 0198 9F       		.byte	0x9f
+ 2293 0199 00000000 		.4byte	0
+ 2294 019d 00000000 		.4byte	0
+ 2295              	.LLST7:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 44
+
+
+ 2296 01a1 06000000 		.4byte	.LVL13
+ 2297 01a5 0E000000 		.4byte	.LVL14
+ 2298 01a9 0200     		.2byte	0x2
+ 2299 01ab 30       		.byte	0x30
+ 2300 01ac 9F       		.byte	0x9f
+ 2301 01ad 0E000000 		.4byte	.LVL14
+ 2302 01b1 24000000 		.4byte	.LVL18
+ 2303 01b5 0100     		.2byte	0x1
+ 2304 01b7 54       		.byte	0x54
+ 2305 01b8 24000000 		.4byte	.LVL18
+ 2306 01bc 26000000 		.4byte	.LVL19
+ 2307 01c0 0200     		.2byte	0x2
+ 2308 01c2 30       		.byte	0x30
+ 2309 01c3 9F       		.byte	0x9f
+ 2310 01c4 26000000 		.4byte	.LVL19
+ 2311 01c8 2C000000 		.4byte	.LVL21
+ 2312 01cc 0100     		.2byte	0x1
+ 2313 01ce 54       		.byte	0x54
+ 2314 01cf 2C000000 		.4byte	.LVL21
+ 2315 01d3 2E000000 		.4byte	.LFE489
+ 2316 01d7 0100     		.2byte	0x1
+ 2317 01d9 50       		.byte	0x50
+ 2318 01da 00000000 		.4byte	0
+ 2319 01de 00000000 		.4byte	0
+ 2320              		.section	.debug_aranges,"",%progbits
+ 2321 0000 24000000 		.4byte	0x24
+ 2322 0004 0200     		.2byte	0x2
+ 2323 0006 00000000 		.4byte	.Ldebug_info0
+ 2324 000a 04       		.byte	0x4
+ 2325 000b 00       		.byte	0
+ 2326 000c 0000     		.2byte	0
+ 2327 000e 0000     		.2byte	0
+ 2328 0010 00000000 		.4byte	.LFB488
+ 2329 0014 24000000 		.4byte	.LFE488-.LFB488
+ 2330 0018 00000000 		.4byte	.LFB489
+ 2331 001c 2E000000 		.4byte	.LFE489-.LFB489
+ 2332 0020 00000000 		.4byte	0
+ 2333 0024 00000000 		.4byte	0
+ 2334              		.section	.debug_ranges,"",%progbits
+ 2335              	.Ldebug_ranges0:
+ 2336 0000 00000000 		.4byte	.LFB488
+ 2337 0004 24000000 		.4byte	.LFE488
+ 2338 0008 00000000 		.4byte	.LFB489
+ 2339 000c 2E000000 		.4byte	.LFE489
+ 2340 0010 00000000 		.4byte	0
+ 2341 0014 00000000 		.4byte	0
+ 2342              		.section	.debug_line,"",%progbits
+ 2343              	.Ldebug_line0:
+ 2344 0000 7C030000 		.section	.debug_str,"MS",%progbits,1
+ 2344      02002003 
+ 2344      00000201 
+ 2344      FB0E0D00 
+ 2344      01010101 
+ 2345              	.LASF65:
+ 2346 0000 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 2346      6843746C 
+ 2346      4D61696E 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 45
+
+
+ 2346      57733146 
+ 2346      72657100 
+ 2347              	.LASF247:
+ 2348 0014 63795F64 		.ascii	"cy_device\000"
+ 2348      65766963 
+ 2348      6500
+ 2349              	.LASF163:
+ 2350 001e 43595F43 		.ascii	"CY_CTDAC_FORMAT_SIGNED\000"
+ 2350      54444143 
+ 2350      5F464F52 
+ 2350      4D41545F 
+ 2350      5349474E 
+ 2351              	.LASF92:
+ 2352 0035 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 2352      73436D30 
+ 2352      436C6F63 
+ 2352      6B43746C 
+ 2352      4F666673 
+ 2353              	.LASF51:
+ 2354 004c 70657269 		.ascii	"periClockNr\000"
+ 2354      436C6F63 
+ 2354      6B4E7200 
+ 2355              	.LASF182:
+ 2356 0058 43595F43 		.ascii	"CY_CTDAC_OUTPUT_BUFFERED\000"
+ 2356      54444143 
+ 2356      5F4F5554 
+ 2356      5055545F 
+ 2356      42554646 
+ 2357              	.LASF134:
+ 2358 0071 43595F43 		.ascii	"CY_CTB_COMP_BYPASS_SYNC\000"
+ 2358      54425F43 
+ 2358      4F4D505F 
+ 2358      42595041 
+ 2358      53535F53 
+ 2359              	.LASF25:
+ 2360 0089 75646242 		.ascii	"udbBase\000"
+ 2360      61736500 
+ 2361              	.LASF151:
+ 2362 0091 43595F53 		.ascii	"CY_SYSCLK_DIV_8_BIT\000"
+ 2362      5953434C 
+ 2362      4B5F4449 
+ 2362      565F385F 
+ 2362      42495400 
+ 2363              	.LASF223:
+ 2364 00a5 74785374 		.ascii	"txStatus\000"
+ 2364      61747573 
+ 2364      00
+ 2365              	.LASF24:
+ 2366 00ae 70657269 		.ascii	"periBase\000"
+ 2366      42617365 
+ 2366      00
+ 2367              	.LASF253:
+ 2368 00b7 53544449 		.ascii	"STDIO_PutChar\000"
+ 2368      4F5F5075 
+ 2368      74436861 
+ 2368      7200
+ 2369              	.LASF100:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 46
+
+
+ 2370 00c5 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
+ 2370      73436D30 
+ 2370      4E6D6943 
+ 2370      746C4F66 
+ 2370      66736574 
+ 2371              	.LASF70:
+ 2372 00da 64774368 		.ascii	"dwChSize\000"
+ 2372      53697A65 
+ 2372      00
+ 2373              	.LASF146:
+ 2374 00e3 6F61436F 		.ascii	"oaCompLevel\000"
+ 2374      6D704C65 
+ 2374      76656C00 
+ 2375              	.LASF52:
+ 2376 00ef 736D6966 		.ascii	"smifDeviceNr\000"
+ 2376      44657669 
+ 2376      63654E72 
+ 2376      00
+ 2377              	.LASF204:
+ 2378 00fc 43595F53 		.ascii	"CY_SAR_RANGE_COND_OUTSIDE\000"
+ 2378      41525F52 
+ 2378      414E4745 
+ 2378      5F434F4E 
+ 2378      445F4F55 
+ 2379              	.LASF82:
+ 2380 0116 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 2380      44697643 
+ 2380      6D645061 
+ 2380      54797065 
+ 2380      53656C50 
+ 2381              	.LASF178:
+ 2382 012d 63795F65 		.ascii	"cy_en_ctdac_deglitch_t\000"
+ 2382      6E5F6374 
+ 2382      6461635F 
+ 2382      6465676C 
+ 2382      69746368 
+ 2383              	.LASF7:
+ 2384 0144 5F5F696E 		.ascii	"__int32_t\000"
+ 2384      7433325F 
+ 2384      7400
+ 2385              	.LASF22:
+ 2386 014e 63707573 		.ascii	"cpussBase\000"
+ 2386      73426173 
+ 2386      6500
+ 2387              	.LASF238:
+ 2388 0158 6368616E 		.ascii	"channelBase\000"
+ 2388      6E656C42 
+ 2388      61736500 
+ 2389              	.LASF46:
+ 2390 0164 63707573 		.ascii	"cpussFmIrq\000"
+ 2390      73466D49 
+ 2390      727100
+ 2391              	.LASF127:
+ 2392 016f 43595F43 		.ascii	"CY_CTB_COMP_EDGE_RISING\000"
+ 2392      54425F43 
+ 2392      4F4D505F 
+ 2392      45444745 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 47
+
+
+ 2392      5F524953 
+ 2393              	.LASF240:
+ 2394 0187 6877436F 		.ascii	"hwConfigStc\000"
+ 2394      6E666967 
+ 2394      53746300 
+ 2395              	.LASF159:
+ 2396 0193 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_EDGE_IMMEDIATE\000"
+ 2396      54444143 
+ 2396      5F555044 
+ 2396      4154455F 
+ 2396      5354524F 
+ 2397              	.LASF121:
+ 2398 01b9 43595F43 		.ascii	"CY_CTB_MODE_COMP\000"
+ 2398      54425F4D 
+ 2398      4F44455F 
+ 2398      434F4D50 
+ 2398      00
+ 2399              	.LASF226:
+ 2400 01ca 72785269 		.ascii	"rxRingBufSize\000"
+ 2400      6E674275 
+ 2400      6653697A 
+ 2400      6500
+ 2401              	.LASF195:
+ 2402 01d8 636F6E66 		.ascii	"configClock\000"
+ 2402      6967436C 
+ 2402      6F636B00 
+ 2403              	.LASF78:
+ 2404 01e4 70657269 		.ascii	"periTrGrSize\000"
+ 2404      54724772 
+ 2404      53697A65 
+ 2404      00
+ 2405              	.LASF81:
+ 2406 01f1 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 2406      44697643 
+ 2406      6D645061 
+ 2406      44697653 
+ 2406      656C506F 
+ 2407              	.LASF245:
+ 2408 0207 5F726561 		.ascii	"_read\000"
+ 2408      6400
+ 2409              	.LASF58:
+ 2410 020d 63727970 		.ascii	"cryptoMemSize\000"
+ 2410      746F4D65 
+ 2410      6D53697A 
+ 2410      6500
+ 2411              	.LASF215:
+ 2412 021b 73617449 		.ascii	"satIntrMask\000"
+ 2412      6E74724D 
+ 2412      61736B00 
+ 2413              	.LASF104:
+ 2414 0227 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 2414      7352616D 
+ 2414      3143746C 
+ 2414      3000
+ 2415              	.LASF49:
+ 2416 0235 73727373 		.ascii	"srssNumPll\000"
+ 2416      4E756D50 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 48
+
+
+ 2416      6C6C00
+ 2417              	.LASF106:
+ 2418 0240 69706353 		.ascii	"ipcStructSize\000"
+ 2418      74727563 
+ 2418      7453697A 
+ 2418      6500
+ 2419              	.LASF191:
+ 2420 024e 6465676C 		.ascii	"deglitchCycles\000"
+ 2420      69746368 
+ 2420      4379636C 
+ 2420      657300
+ 2421              	.LASF40:
+ 2422 025d 70726F74 		.ascii	"protVersion\000"
+ 2422      56657273 
+ 2422      696F6E00 
+ 2423              	.LASF201:
+ 2424 0269 43595F53 		.ascii	"CY_SAR_RANGE_COND_BELOW\000"
+ 2424      41525F52 
+ 2424      414E4745 
+ 2424      5F434F4E 
+ 2424      445F4245 
+ 2425              	.LASF185:
+ 2426 0281 72656653 		.ascii	"refSource\000"
+ 2426      6F757263 
+ 2426      6500
+ 2427              	.LASF171:
+ 2428 028b 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VSSA\000"
+ 2428      54444143 
+ 2428      5F4F5554 
+ 2428      5055545F 
+ 2428      56535341 
+ 2429              	.LASF80:
+ 2430 02a0 70657269 		.ascii	"periDivCmdTypeSelPos\000"
+ 2430      44697643 
+ 2430      6D645479 
+ 2430      70655365 
+ 2430      6C506F73 
+ 2431              	.LASF97:
+ 2432 02b5 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 2432      73547269 
+ 2432      6D52616D 
+ 2432      43746C4F 
+ 2432      66667365 
+ 2433              	.LASF199:
+ 2434 02cb 64697669 		.ascii	"dividerFracValue\000"
+ 2434      64657246 
+ 2434      72616356 
+ 2434      616C7565 
+ 2434      00
+ 2435              	.LASF108:
+ 2436 02dc 63795F73 		.ascii	"cy_stc_device_t\000"
+ 2436      74635F64 
+ 2436      65766963 
+ 2436      655F7400 
+ 2437              	.LASF184:
+ 2438 02ec 63795F65 		.ascii	"cy_en_ctdac_output_buffer_t\000"
+ 2438      6E5F6374 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 49
+
+
+ 2438      6461635F 
+ 2438      6F757470 
+ 2438      75745F62 
+ 2439              	.LASF138:
+ 2440 0308 43595F43 		.ascii	"CY_CTB_COMP_HYST_10MV\000"
+ 2440      54425F43 
+ 2440      4F4D505F 
+ 2440      48595354 
+ 2440      5F31304D 
+ 2441              	.LASF21:
+ 2442 031e 75696E74 		.ascii	"uint32_t\000"
+ 2442      33325F74 
+ 2442      00
+ 2443              	.LASF90:
+ 2444 0327 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 2444      50727443 
+ 2444      66674F75 
+ 2444      744F6666 
+ 2444      73657400 
+ 2445              	.LASF170:
+ 2446 033b 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VALUE_PLUS1\000"
+ 2446      54444143 
+ 2446      5F4F5554 
+ 2446      5055545F 
+ 2446      56414C55 
+ 2447              	.LASF193:
+ 2448 0357 6E657874 		.ascii	"nextValue\000"
+ 2448      56616C75 
+ 2448      6500
+ 2449              	.LASF109:
+ 2450 0361 666C6F61 		.ascii	"float\000"
+ 2450      7400
+ 2451              	.LASF33:
+ 2452 0367 63727970 		.ascii	"cryptoVersion\000"
+ 2452      746F5665 
+ 2452      7273696F 
+ 2452      6E00
+ 2453              	.LASF237:
+ 2454 0375 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
+ 2454      74635F73 
+ 2454      63625F75 
+ 2454      6172745F 
+ 2454      636F6E74 
+ 2455              	.LASF62:
+ 2456 038f 666C6173 		.ascii	"flashProgramDelay\000"
+ 2456      6850726F 
+ 2456      6772616D 
+ 2456      44656C61 
+ 2456      7900
+ 2457              	.LASF115:
+ 2458 03a1 43595F43 		.ascii	"CY_CTB_POWER_LOW\000"
+ 2458      54425F50 
+ 2458      4F574552 
+ 2458      5F4C4F57 
+ 2458      00
+ 2459              	.LASF258:
+ 2460 03b2 63795F73 		.ascii	"cy_stc_scb_uart_context\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 50
+
+
+ 2460      74635F73 
+ 2460      63625F75 
+ 2460      6172745F 
+ 2460      636F6E74 
+ 2461              	.LASF189:
+ 2462 03ca 6F757470 		.ascii	"outputMode\000"
+ 2462      75744D6F 
+ 2462      646500
+ 2463              	.LASF23:
+ 2464 03d5 666C6173 		.ascii	"flashcBase\000"
+ 2464      68634261 
+ 2464      736500
+ 2465              	.LASF18:
+ 2466 03e0 696E7431 		.ascii	"int16_t\000"
+ 2466      365F7400 
+ 2467              	.LASF142:
+ 2468 03e8 6F61506F 		.ascii	"oaPower\000"
+ 2468      77657200 
+ 2469              	.LASF89:
+ 2470 03f0 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
+ 2470      50727443 
+ 2470      6667496E 
+ 2470      4F666673 
+ 2470      657400
+ 2471              	.LASF239:
+ 2472 0403 6E756D43 		.ascii	"numChannels\000"
+ 2472      68616E6E 
+ 2472      656C7300 
+ 2473              	.LASF111:
+ 2474 040f 43595F43 		.ascii	"CY_CTB_DEEPSLEEP_DISABLE\000"
+ 2474      54425F44 
+ 2474      45455053 
+ 2474      4C454550 
+ 2474      5F444953 
+ 2475              	.LASF12:
+ 2476 0428 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2476      206C6F6E 
+ 2476      6720756E 
+ 2476      7369676E 
+ 2476      65642069 
+ 2477              	.LASF86:
+ 2478 043f 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ 2478      44697632 
+ 2478      345F3543 
+ 2478      746C4F66 
+ 2478      66736574 
+ 2479              	.LASF91:
+ 2480 0454 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
+ 2480      50727443 
+ 2480      66675369 
+ 2480      6F4F6666 
+ 2480      73657400 
+ 2481              	.LASF45:
+ 2482 0468 63707573 		.ascii	"cpussIpc0Irq\000"
+ 2482      73497063 
+ 2482      30497271 
+ 2482      00
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 51
+
+
+ 2483              	.LASF169:
+ 2484 0475 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VALUE\000"
+ 2484      54444143 
+ 2484      5F4F5554 
+ 2484      5055545F 
+ 2484      56414C55 
+ 2485              	.LASF113:
+ 2486 048b 63795F65 		.ascii	"cy_en_ctb_deep_sleep_t\000"
+ 2486      6E5F6374 
+ 2486      625F6465 
+ 2486      65705F73 
+ 2486      6C656570 
+ 2487              	.LASF197:
+ 2488 04a2 64697669 		.ascii	"dividerNum\000"
+ 2488      6465724E 
+ 2488      756D00
+ 2489              	.LASF210:
+ 2490 04ad 72616E67 		.ascii	"rangeThres\000"
+ 2490      65546872 
+ 2490      657300
+ 2491              	.LASF5:
+ 2492 04b8 5F5F7569 		.ascii	"__uint16_t\000"
+ 2492      6E743136 
+ 2492      5F7400
+ 2493              	.LASF202:
+ 2494 04c3 43595F53 		.ascii	"CY_SAR_RANGE_COND_INSIDE\000"
+ 2494      41525F52 
+ 2494      414E4745 
+ 2494      5F434F4E 
+ 2494      445F494E 
+ 2495              	.LASF194:
+ 2496 04dc 656E6162 		.ascii	"enableInterrupt\000"
+ 2496      6C65496E 
+ 2496      74657272 
+ 2496      75707400 
+ 2497              	.LASF221:
+ 2498 04ec 63795F73 		.ascii	"cy_stc_sar_config_t\000"
+ 2498      74635F73 
+ 2498      61725F63 
+ 2498      6F6E6669 
+ 2498      675F7400 
+ 2499              	.LASF206:
+ 2500 0500 6374726C 		.ascii	"ctrl\000"
+ 2500      00
+ 2501              	.LASF166:
+ 2502 0505 43595F43 		.ascii	"CY_CTDAC_DEEPSLEEP_ENABLE\000"
+ 2502      54444143 
+ 2502      5F444545 
+ 2502      50534C45 
+ 2502      45505F45 
+ 2503              	.LASF254:
+ 2504 051f 53544449 		.ascii	"STDIO_GetChar\000"
+ 2504      4F5F4765 
+ 2504      74436861 
+ 2504      7200
+ 2505              	.LASF192:
+ 2506 052d 76616C75 		.ascii	"value\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 52
+
+
+ 2506      6500
+ 2507              	.LASF224:
+ 2508 0533 72785374 		.ascii	"rxStatus\000"
+ 2508      61747573 
+ 2508      00
+ 2509              	.LASF229:
+ 2510 053c 72784275 		.ascii	"rxBuf\000"
+ 2510      6600
+ 2511              	.LASF129:
+ 2512 0542 43595F43 		.ascii	"CY_CTB_COMP_EDGE_BOTH\000"
+ 2512      54425F43 
+ 2512      4F4D505F 
+ 2512      45444745 
+ 2512      5F424F54 
+ 2513              	.LASF67:
+ 2514 0558 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
+ 2514      6843746C 
+ 2514      4D61696E 
+ 2514      57733346 
+ 2514      72657100 
+ 2515              	.LASF179:
+ 2516 056c 43595F43 		.ascii	"CY_CTDAC_REFSOURCE_EXTERNAL\000"
+ 2516      54444143 
+ 2516      5F524546 
+ 2516      534F5552 
+ 2516      43455F45 
+ 2517              	.LASF243:
+ 2518 0588 4144435F 		.ascii	"ADC_1_CONFIG_STRUCT\000"
+ 2518      315F434F 
+ 2518      4E464947 
+ 2518      5F535452 
+ 2518      55435400 
+ 2519              	.LASF60:
+ 2520 059c 666C6173 		.ascii	"flashPipeRequired\000"
+ 2520      68506970 
+ 2520      65526571 
+ 2520      75697265 
+ 2520      6400
+ 2521              	.LASF235:
+ 2522 05ae 63624576 		.ascii	"cbEvents\000"
+ 2522      656E7473 
+ 2522      00
+ 2523              	.LASF110:
+ 2524 05b7 646F7562 		.ascii	"double\000"
+ 2524      6C6500
+ 2525              	.LASF116:
+ 2526 05be 43595F43 		.ascii	"CY_CTB_POWER_MEDIUM\000"
+ 2526      54425F50 
+ 2526      4F574552 
+ 2526      5F4D4544 
+ 2526      49554D00 
+ 2527              	.LASF140:
+ 2528 05d2 5F426F6F 		.ascii	"_Bool\000"
+ 2528      6C00
+ 2529              	.LASF157:
+ 2530 05d8 43595F43 		.ascii	"CY_CTDAC_UPDATE_BUFFERED_WRITE\000"
+ 2530      54444143 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 53
+
+
+ 2530      5F555044 
+ 2530      4154455F 
+ 2530      42554646 
+ 2531              	.LASF175:
+ 2532 05f7 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_UNBUFFERED\000"
+ 2532      54444143 
+ 2532      5F444547 
+ 2532      4C495443 
+ 2532      484D4F44 
+ 2533              	.LASF64:
+ 2534 0618 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
+ 2534      6843746C 
+ 2534      4D61696E 
+ 2534      57733046 
+ 2534      72657100 
+ 2535              	.LASF74:
+ 2536 062c 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 2536      61747573 
+ 2536      43684964 
+ 2536      784D736B 
+ 2536      00
+ 2537              	.LASF28:
+ 2538 063d 6770696F 		.ascii	"gpioBase\000"
+ 2538      42617365 
+ 2538      00
+ 2539              	.LASF148:
+ 2540 0646 6F61436F 		.ascii	"oaCompHyst\000"
+ 2540      6D704879 
+ 2540      737400
+ 2541              	.LASF158:
+ 2542 0651 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_EDGE_SYNC\000"
+ 2542      54444143 
+ 2542      5F555044 
+ 2542      4154455F 
+ 2542      5354524F 
+ 2543              	.LASF123:
+ 2544 0672 43595F43 		.ascii	"CY_CTB_PUMP_DISABLE\000"
+ 2544      54425F50 
+ 2544      554D505F 
+ 2544      44495341 
+ 2544      424C4500 
+ 2545              	.LASF248:
+ 2546 0686 4144435F 		.ascii	"ADC_1_currentConfig\000"
+ 2546      315F6375 
+ 2546      7272656E 
+ 2546      74436F6E 
+ 2546      66696700 
+ 2547              	.LASF137:
+ 2548 069a 43595F43 		.ascii	"CY_CTB_COMP_HYST_DISABLE\000"
+ 2548      54425F43 
+ 2548      4F4D505F 
+ 2548      48595354 
+ 2548      5F444953 
+ 2549              	.LASF99:
+ 2550 06b3 63707573 		.ascii	"cpussSysTickCtlOffset\000"
+ 2550      73537973 
+ 2550      5469636B 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 54
+
+
+ 2550      43746C4F 
+ 2550      66667365 
+ 2551              	.LASF55:
+ 2552 06c9 75646250 		.ascii	"udbPresent\000"
+ 2552      72657365 
+ 2552      6E7400
+ 2553              	.LASF73:
+ 2554 06d4 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 2554      61747573 
+ 2554      43684964 
+ 2554      78506F73 
+ 2554      00
+ 2555              	.LASF198:
+ 2556 06e5 64697669 		.ascii	"dividerIntValue\000"
+ 2556      64657249 
+ 2556      6E745661 
+ 2556      6C756500 
+ 2557              	.LASF220:
+ 2558 06f5 76726566 		.ascii	"vrefMvValue\000"
+ 2558      4D765661 
+ 2558      6C756500 
+ 2559              	.LASF44:
+ 2560 0701 63707573 		.ascii	"cpussFlashPaSize\000"
+ 2560      73466C61 
+ 2560      73685061 
+ 2560      53697A65 
+ 2560      00
+ 2561              	.LASF133:
+ 2562 0712 63795F65 		.ascii	"cy_en_ctb_comp_level_t\000"
+ 2562      6E5F6374 
+ 2562      625F636F 
+ 2562      6D705F6C 
+ 2562      6576656C 
+ 2563              	.LASF203:
+ 2564 0729 43595F53 		.ascii	"CY_SAR_RANGE_COND_ABOVE\000"
+ 2564      41525F52 
+ 2564      414E4745 
+ 2564      5F434F4E 
+ 2564      445F4142 
+ 2565              	.LASF16:
+ 2566 0741 63686172 		.ascii	"char\000"
+ 2566      00
+ 2567              	.LASF212:
+ 2568 0746 6368616E 		.ascii	"chanEn\000"
+ 2568      456E00
+ 2569              	.LASF228:
+ 2570 074d 72785269 		.ascii	"rxRingBufTail\000"
+ 2570      6E674275 
+ 2570      66546169 
+ 2570      6C00
+ 2571              	.LASF85:
+ 2572 075b 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ 2572      44697631 
+ 2572      365F3543 
+ 2572      746C4F66 
+ 2572      66736574 
+ 2573              	.LASF196:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 55
+
+
+ 2574 0770 64697669 		.ascii	"dividerType\000"
+ 2574      64657254 
+ 2574      79706500 
+ 2575              	.LASF56:
+ 2576 077c 73797350 		.ascii	"sysPmSimoPresent\000"
+ 2576      6D53696D 
+ 2576      6F507265 
+ 2576      73656E74 
+ 2576      00
+ 2577              	.LASF231:
+ 2578 078d 72784275 		.ascii	"rxBufIdx\000"
+ 2578      66496478 
+ 2578      00
+ 2579              	.LASF13:
+ 2580 0796 756E7369 		.ascii	"unsigned int\000"
+ 2580      676E6564 
+ 2580      20696E74 
+ 2580      00
+ 2581              	.LASF236:
+ 2582 07a3 696E6974 		.ascii	"initKey\000"
+ 2582      4B657900 
+ 2583              	.LASF249:
+ 2584 07ab 4144435F 		.ascii	"ADC_1_allConfigs\000"
+ 2584      315F616C 
+ 2584      6C436F6E 
+ 2584      66696773 
+ 2584      00
+ 2585              	.LASF165:
+ 2586 07bc 43595F43 		.ascii	"CY_CTDAC_DEEPSLEEP_DISABLE\000"
+ 2586      54444143 
+ 2586      5F444545 
+ 2586      50534C45 
+ 2586      45505F44 
+ 2587              	.LASF17:
+ 2588 07d7 75696E74 		.ascii	"uint8_t\000"
+ 2588      385F7400 
+ 2589              	.LASF162:
+ 2590 07df 43595F43 		.ascii	"CY_CTDAC_FORMAT_UNSIGNED\000"
+ 2590      54444143 
+ 2590      5F464F52 
+ 2590      4D41545F 
+ 2590      554E5349 
+ 2591              	.LASF79:
+ 2592 07f8 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 2592      44697643 
+ 2592      6D644469 
+ 2592      7653656C 
+ 2592      4D736B00 
+ 2593              	.LASF117:
+ 2594 080c 43595F43 		.ascii	"CY_CTB_POWER_HIGH\000"
+ 2594      54425F50 
+ 2594      4F574552 
+ 2594      5F484947 
+ 2594      4800
+ 2595              	.LASF218:
+ 2596 081e 6D757853 		.ascii	"muxSwitchSqCtrl\000"
+ 2596      77697463 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 56
+
+
+ 2596      68537143 
+ 2596      74726C00 
+ 2597              	.LASF222:
+ 2598 082e 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
+ 2598      625F7363 
+ 2598      625F7561 
+ 2598      72745F68 
+ 2598      616E646C 
+ 2599              	.LASF211:
+ 2600 084d 72616E67 		.ascii	"rangeCond\000"
+ 2600      65436F6E 
+ 2600      6400
+ 2601              	.LASF103:
+ 2602 0857 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 2602      7352616D 
+ 2602      3043746C 
+ 2602      3000
+ 2603              	.LASF119:
+ 2604 0865 43595F43 		.ascii	"CY_CTB_MODE_OPAMP1X\000"
+ 2604      54425F4D 
+ 2604      4F44455F 
+ 2604      4F50414D 
+ 2604      50315800 
+ 2605              	.LASF11:
+ 2606 0879 6C6F6E67 		.ascii	"long long int\000"
+ 2606      206C6F6E 
+ 2606      6720696E 
+ 2606      7400
+ 2607              	.LASF30:
+ 2608 0887 69706342 		.ascii	"ipcBase\000"
+ 2608      61736500 
+ 2609              	.LASF71:
+ 2610 088f 64774368 		.ascii	"dwChCtlPrioPos\000"
+ 2610      43746C50 
+ 2610      72696F50 
+ 2610      6F7300
+ 2611              	.LASF31:
+ 2612 089e 63727970 		.ascii	"cryptoBase\000"
+ 2612      746F4261 
+ 2612      736500
+ 2613              	.LASF61:
+ 2614 08a9 666C6173 		.ascii	"flashWriteDelay\000"
+ 2614      68577269 
+ 2614      74654465 
+ 2614      6C617900 
+ 2615              	.LASF255:
+ 2616 08b9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2616      43313120 
+ 2616      352E342E 
+ 2616      31203230 
+ 2616      31363036 
+ 2617 08ec 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0plus -mthumb -"
+ 2617      20726576 
+ 2617      6973696F 
+ 2617      6E203233 
+ 2617      37373135 
+ 2618 091f 67202D4F 		.ascii	"g -Og -ffunction-sections -ffat-lto-objects\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 57
+
+
+ 2618      67202D66 
+ 2618      66756E63 
+ 2618      74696F6E 
+ 2618      2D736563 
+ 2619              	.LASF135:
+ 2620 094b 43595F43 		.ascii	"CY_CTB_COMP_BYPASS_NO_SYNC\000"
+ 2620      54425F43 
+ 2620      4F4D505F 
+ 2620      42595041 
+ 2620      53535F4E 
+ 2621              	.LASF3:
+ 2622 0966 5F5F696E 		.ascii	"__int16_t\000"
+ 2622      7431365F 
+ 2622      7400
+ 2623              	.LASF27:
+ 2624 0970 6873696F 		.ascii	"hsiomBase\000"
+ 2624      6D426173 
+ 2624      6500
+ 2625              	.LASF77:
+ 2626 097a 70657269 		.ascii	"periTrGrOffset\000"
+ 2626      54724772 
+ 2626      4F666673 
+ 2626      657400
+ 2627              	.LASF47:
+ 2628 0989 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 2628      734E6F74 
+ 2628      436F6E6E 
+ 2628      65637465 
+ 2628      64497271 
+ 2629              	.LASF227:
+ 2630 099e 72785269 		.ascii	"rxRingBufHead\000"
+ 2630      6E674275 
+ 2630      66486561 
+ 2630      6400
+ 2631              	.LASF43:
+ 2632 09ac 63707573 		.ascii	"cpussDwChNr\000"
+ 2632      73447743 
+ 2632      684E7200 
+ 2633              	.LASF122:
+ 2634 09b8 63795F65 		.ascii	"cy_en_ctb_mode_t\000"
+ 2634      6E5F6374 
+ 2634      625F6D6F 
+ 2634      64655F74 
+ 2634      00
+ 2635              	.LASF233:
+ 2636 09c9 74784275 		.ascii	"txBufSize\000"
+ 2636      6653697A 
+ 2636      6500
+ 2637              	.LASF41:
+ 2638 09d3 63707573 		.ascii	"cpussIpcNr\000"
+ 2638      73497063 
+ 2638      4E7200
+ 2639              	.LASF94:
+ 2640 09de 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 2640      73436D34 
+ 2640      53746174 
+ 2640      75734F66 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 58
+
+
+ 2640      66736574 
+ 2641              	.LASF180:
+ 2642 09f3 43595F43 		.ascii	"CY_CTDAC_REFSOURCE_VDDA\000"
+ 2642      54444143 
+ 2642      5F524546 
+ 2642      534F5552 
+ 2642      43455F56 
+ 2643              	.LASF105:
+ 2644 0a0b 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 2644      7352616D 
+ 2644      3243746C 
+ 2644      3000
+ 2645              	.LASF130:
+ 2646 0a19 63795F65 		.ascii	"cy_en_ctb_comp_edge_t\000"
+ 2646      6E5F6374 
+ 2646      625F636F 
+ 2646      6D705F65 
+ 2646      6467655F 
+ 2647              	.LASF161:
+ 2648 0a2f 63795F65 		.ascii	"cy_en_ctdac_update_t\000"
+ 2648      6E5F6374 
+ 2648      6461635F 
+ 2648      75706461 
+ 2648      74655F74 
+ 2649              	.LASF232:
+ 2650 0a44 74784275 		.ascii	"txBuf\000"
+ 2650      6600
+ 2651              	.LASF153:
+ 2652 0a4a 43595F53 		.ascii	"CY_SYSCLK_DIV_16_5_BIT\000"
+ 2652      5953434C 
+ 2652      4B5F4449 
+ 2652      565F3136 
+ 2652      5F355F42 
+ 2653              	.LASF187:
+ 2654 0a61 75706461 		.ascii	"updateMode\000"
+ 2654      74654D6F 
+ 2654      646500
+ 2655              	.LASF147:
+ 2656 0a6c 6F61436F 		.ascii	"oaCompBypass\000"
+ 2656      6D704279 
+ 2656      70617373 
+ 2656      00
+ 2657              	.LASF84:
+ 2658 0a79 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 2658      44697631 
+ 2658      3643746C 
+ 2658      4F666673 
+ 2658      657400
+ 2659              	.LASF118:
+ 2660 0a8c 63795F65 		.ascii	"cy_en_ctb_power_t\000"
+ 2660      6E5F6374 
+ 2660      625F706F 
+ 2660      7765725F 
+ 2660      7400
+ 2661              	.LASF217:
+ 2662 0a9e 6D757853 		.ascii	"muxSwitch\000"
+ 2662      77697463 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 59
+
+
+ 2662      6800
+ 2663              	.LASF6:
+ 2664 0aa8 73686F72 		.ascii	"short unsigned int\000"
+ 2664      7420756E 
+ 2664      7369676E 
+ 2664      65642069 
+ 2664      6E7400
+ 2665              	.LASF225:
+ 2666 0abb 72785269 		.ascii	"rxRingBuf\000"
+ 2666      6E674275 
+ 2666      6600
+ 2667              	.LASF14:
+ 2668 0ac5 6C6F6E67 		.ascii	"long double\000"
+ 2668      20646F75 
+ 2668      626C6500 
+ 2669              	.LASF181:
+ 2670 0ad1 63795F65 		.ascii	"cy_en_ctdac_ref_source_t\000"
+ 2670      6E5F6374 
+ 2670      6461635F 
+ 2670      7265665F 
+ 2670      736F7572 
+ 2671              	.LASF26:
+ 2672 0aea 70726F74 		.ascii	"protBase\000"
+ 2672      42617365 
+ 2672      00
+ 2673              	.LASF76:
+ 2674 0af3 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ 2674      5472436D 
+ 2674      64477253 
+ 2674      656C4D73 
+ 2674      6B00
+ 2675              	.LASF244:
+ 2676 0b05 5F777269 		.ascii	"_write\000"
+ 2676      746500
+ 2677              	.LASF208:
+ 2678 0b0c 73616D70 		.ascii	"sampleTime01\000"
+ 2678      6C655469 
+ 2678      6D653031 
+ 2678      00
+ 2679              	.LASF9:
+ 2680 0b19 5F5F7569 		.ascii	"__uint32_t\000"
+ 2680      6E743332 
+ 2680      5F7400
+ 2681              	.LASF50:
+ 2682 0b24 73727373 		.ascii	"srssNumHfroot\000"
+ 2682      4E756D48 
+ 2682      66726F6F 
+ 2682      7400
+ 2683              	.LASF152:
+ 2684 0b32 43595F53 		.ascii	"CY_SYSCLK_DIV_16_BIT\000"
+ 2684      5953434C 
+ 2684      4B5F4449 
+ 2684      565F3136 
+ 2684      5F424954 
+ 2685              	.LASF34:
+ 2686 0b47 64775665 		.ascii	"dwVersion\000"
+ 2686      7273696F 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 60
+
+
+ 2686      6E00
+ 2687              	.LASF66:
+ 2688 0b51 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ 2688      6843746C 
+ 2688      4D61696E 
+ 2688      57733246 
+ 2688      72657100 
+ 2689              	.LASF75:
+ 2690 0b65 70657269 		.ascii	"periTrCmdOffset\000"
+ 2690      5472436D 
+ 2690      644F6666 
+ 2690      73657400 
+ 2691              	.LASF15:
+ 2692 0b75 73697A65 		.ascii	"sizetype\000"
+ 2692      74797065 
+ 2692      00
+ 2693              	.LASF101:
+ 2694 0b7e 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 2694      73436D34 
+ 2694      4E6D6943 
+ 2694      746C4F66 
+ 2694      66736574 
+ 2695              	.LASF95:
+ 2696 0b93 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 2696      73436D30 
+ 2696      53746174 
+ 2696      75734F66 
+ 2696      66736574 
+ 2697              	.LASF83:
+ 2698 0ba8 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 2698      44697638 
+ 2698      43746C4F 
+ 2698      66667365 
+ 2698      7400
+ 2699              	.LASF4:
+ 2700 0bba 73686F72 		.ascii	"short int\000"
+ 2700      7420696E 
+ 2700      7400
+ 2701              	.LASF176:
+ 2702 0bc4 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_BUFFERED\000"
+ 2702      54444143 
+ 2702      5F444547 
+ 2702      4C495443 
+ 2702      484D4F44 
+ 2703              	.LASF183:
+ 2704 0be3 43595F43 		.ascii	"CY_CTDAC_OUTPUT_UNBUFFERED\000"
+ 2704      54444143 
+ 2704      5F4F5554 
+ 2704      5055545F 
+ 2704      554E4255 
+ 2705              	.LASF150:
+ 2706 0bfe 63795F73 		.ascii	"cy_stc_ctb_opamp_config_t\000"
+ 2706      74635F63 
+ 2706      74625F6F 
+ 2706      70616D70 
+ 2706      5F636F6E 
+ 2707              	.LASF8:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 61
+
+
+ 2708 0c18 6C6F6E67 		.ascii	"long int\000"
+ 2708      20696E74 
+ 2708      00
+ 2709              	.LASF32:
+ 2710 0c21 63707573 		.ascii	"cpussVersion\000"
+ 2710      73566572 
+ 2710      73696F6E 
+ 2710      00
+ 2711              	.LASF36:
+ 2712 0c2e 6770696F 		.ascii	"gpioVersion\000"
+ 2712      56657273 
+ 2712      696F6E00 
+ 2713              	.LASF144:
+ 2714 0c3a 6F615075 		.ascii	"oaPump\000"
+ 2714      6D7000
+ 2715              	.LASF35:
+ 2716 0c41 666C6173 		.ascii	"flashcVersion\000"
+ 2716      68635665 
+ 2716      7273696F 
+ 2716      6E00
+ 2717              	.LASF57:
+ 2718 0c4f 70726F74 		.ascii	"protBusMasterMask\000"
+ 2718      4275734D 
+ 2718      61737465 
+ 2718      724D6173 
+ 2718      6B00
+ 2719              	.LASF141:
+ 2720 0c61 64656570 		.ascii	"deepSleep\000"
+ 2720      536C6565 
+ 2720      7000
+ 2721              	.LASF112:
+ 2722 0c6b 43595F43 		.ascii	"CY_CTB_DEEPSLEEP_ENABLE\000"
+ 2722      54425F44 
+ 2722      45455053 
+ 2722      4C454550 
+ 2722      5F454E41 
+ 2723              	.LASF251:
+ 2724 0c83 56444143 		.ascii	"VDAC_refBufferConfig\000"
+ 2724      5F726566 
+ 2724      42756666 
+ 2724      6572436F 
+ 2724      6E666967 
+ 2725              	.LASF256:
+ 2726 0c98 47656E65 		.ascii	"Generated_Source\\PSoC6\\pdl\\utilities\\retarget_i"
+ 2726      72617465 
+ 2726      645F536F 
+ 2726      75726365 
+ 2726      5C50536F 
+ 2727 0cc7 6F5C7265 		.ascii	"o\\retarget.c\000"
+ 2727      74617267 
+ 2727      65742E63 
+ 2727      00
+ 2728              	.LASF149:
+ 2729 0cd4 6F61436F 		.ascii	"oaCompIntrEn\000"
+ 2729      6D70496E 
+ 2729      7472456E 
+ 2729      00
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 62
+
+
+ 2730              	.LASF234:
+ 2731 0ce1 74784C65 		.ascii	"txLeftToTransmit\000"
+ 2731      6674546F 
+ 2731      5472616E 
+ 2731      736D6974 
+ 2731      00
+ 2732              	.LASF96:
+ 2733 0cf2 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 2733      73436D34 
+ 2733      50777243 
+ 2733      746C4F66 
+ 2733      66736574 
+ 2734              	.LASF2:
+ 2735 0d07 5F5F7569 		.ascii	"__uint8_t\000"
+ 2735      6E74385F 
+ 2735      7400
+ 2736              	.LASF241:
+ 2737 0d11 6D697363 		.ascii	"miscConfig\000"
+ 2737      436F6E66 
+ 2737      696700
+ 2738              	.LASF250:
+ 2739 0d1c 56444143 		.ascii	"VDAC_ctdacConfig\000"
+ 2739      5F637464 
+ 2739      6163436F 
+ 2739      6E666967 
+ 2739      00
+ 2740              	.LASF87:
+ 2741 0d2d 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ 2741      50727449 
+ 2741      6E747243 
+ 2741      66674F66 
+ 2741      66736574 
+ 2742              	.LASF53:
+ 2743 0d42 70617373 		.ascii	"passSarChannels\000"
+ 2743      53617243 
+ 2743      68616E6E 
+ 2743      656C7300 
+ 2744              	.LASF136:
+ 2745 0d52 63795F65 		.ascii	"cy_en_ctb_comp_bypass_t\000"
+ 2745      6E5F6374 
+ 2745      625F636F 
+ 2745      6D705F62 
+ 2745      79706173 
+ 2746              	.LASF173:
+ 2747 0d6a 63795F65 		.ascii	"cy_en_ctdac_output_mode_t\000"
+ 2747      6E5F6374 
+ 2747      6461635F 
+ 2747      6F757470 
+ 2747      75745F6D 
+ 2748              	.LASF93:
+ 2749 0d84 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
+ 2749      73436D34 
+ 2749      436C6F63 
+ 2749      6B43746C 
+ 2749      4F666673 
+ 2750              	.LASF131:
+ 2751 0d9b 43595F43 		.ascii	"CY_CTB_COMP_DSI_TRIGGER_OUT_PULSE\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 63
+
+
+ 2751      54425F43 
+ 2751      4F4D505F 
+ 2751      4453495F 
+ 2751      54524947 
+ 2752              	.LASF98:
+ 2753 0dbd 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ 2753      73547269 
+ 2753      6D526F6D 
+ 2753      43746C4F 
+ 2753      66667365 
+ 2754              	.LASF209:
+ 2755 0dd3 73616D70 		.ascii	"sampleTime23\000"
+ 2755      6C655469 
+ 2755      6D653233 
+ 2755      00
+ 2756              	.LASF37:
+ 2757 0de0 6873696F 		.ascii	"hsiomVersion\000"
+ 2757      6D566572 
+ 2757      73696F6E 
+ 2757      00
+ 2758              	.LASF160:
+ 2759 0ded 43595F43 		.ascii	"CY_CTDAC_UPDATE_STROBE_LEVEL\000"
+ 2759      54444143 
+ 2759      5F555044 
+ 2759      4154455F 
+ 2759      5354524F 
+ 2760              	.LASF10:
+ 2761 0e0a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2761      20756E73 
+ 2761      69676E65 
+ 2761      6420696E 
+ 2761      7400
+ 2762              	.LASF102:
+ 2763 0e1c 63707573 		.ascii	"cpussRomCtl\000"
+ 2763      73526F6D 
+ 2763      43746C00 
+ 2764              	.LASF20:
+ 2765 0e28 696E7433 		.ascii	"int32_t\000"
+ 2765      325F7400 
+ 2766              	.LASF124:
+ 2767 0e30 43595F43 		.ascii	"CY_CTB_PUMP_ENABLE\000"
+ 2767      54425F50 
+ 2767      554D505F 
+ 2767      454E4142 
+ 2767      4C4500
+ 2768              	.LASF188:
+ 2769 0e43 6465676C 		.ascii	"deglitchMode\000"
+ 2769      69746368 
+ 2769      4D6F6465 
+ 2769      00
+ 2770              	.LASF257:
+ 2771 0e50 433A5C55 		.ascii	"C:\\Users\\cmila\\uni\\projects\\Neural-Stimulator-"
+ 2771      73657273 
+ 2771      5C636D69 
+ 2771      6C615C75 
+ 2771      6E695C70 
+ 2772 0e7e 4669726D 		.ascii	"Firmware\\new\\PSOC6\\dacProgramming\\dacProgram.cy"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 64
+
+
+ 2772      77617265 
+ 2772      5C6E6577 
+ 2772      5C50534F 
+ 2772      43365C64 
+ 2773 0ead 64736E00 		.ascii	"dsn\000"
+ 2774              	.LASF114:
+ 2775 0eb1 43595F43 		.ascii	"CY_CTB_POWER_OFF\000"
+ 2775      54425F50 
+ 2775      4F574552 
+ 2775      5F4F4646 
+ 2775      00
+ 2776              	.LASF207:
+ 2777 0ec2 73616D70 		.ascii	"sampleCtrl\000"
+ 2777      6C654374 
+ 2777      726C00
+ 2778              	.LASF19:
+ 2779 0ecd 75696E74 		.ascii	"uint16_t\000"
+ 2779      31365F74 
+ 2779      00
+ 2780              	.LASF1:
+ 2781 0ed6 756E7369 		.ascii	"unsigned char\000"
+ 2781      676E6564 
+ 2781      20636861 
+ 2781      7200
+ 2782              	.LASF125:
+ 2783 0ee4 63795F65 		.ascii	"cy_en_ctb_pump_t\000"
+ 2783      6E5F6374 
+ 2783      625F7075 
+ 2783      6D705F74 
+ 2783      00
+ 2784              	.LASF190:
+ 2785 0ef5 6F757470 		.ascii	"outputBuffer\000"
+ 2785      75744275 
+ 2785      66666572 
+ 2785      00
+ 2786              	.LASF107:
+ 2787 0f02 6970634C 		.ascii	"ipcLockStatusOffset\000"
+ 2787      6F636B53 
+ 2787      74617475 
+ 2787      734F6666 
+ 2787      73657400 
+ 2788              	.LASF126:
+ 2789 0f16 43595F43 		.ascii	"CY_CTB_COMP_EDGE_DISABLE\000"
+ 2789      54425F43 
+ 2789      4F4D505F 
+ 2789      45444745 
+ 2789      5F444953 
+ 2790              	.LASF154:
+ 2791 0f2f 43595F53 		.ascii	"CY_SYSCLK_DIV_24_5_BIT\000"
+ 2791      5953434C 
+ 2791      4B5F4449 
+ 2791      565F3234 
+ 2791      5F355F42 
+ 2792              	.LASF156:
+ 2793 0f46 43595F43 		.ascii	"CY_CTDAC_UPDATE_DIRECT_WRITE\000"
+ 2793      54444143 
+ 2793      5F555044 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 65
+
+
+ 2793      4154455F 
+ 2793      44495245 
+ 2794              	.LASF172:
+ 2795 0f63 43595F43 		.ascii	"CY_CTDAC_OUTPUT_VREF\000"
+ 2795      54444143 
+ 2795      5F4F5554 
+ 2795      5055545F 
+ 2795      56524546 
+ 2796              	.LASF63:
+ 2797 0f78 666C6173 		.ascii	"flashEraseDelay\000"
+ 2797      68457261 
+ 2797      73654465 
+ 2797      6C617900 
+ 2798              	.LASF120:
+ 2799 0f88 43595F43 		.ascii	"CY_CTB_MODE_OPAMP10X\000"
+ 2799      54425F4D 
+ 2799      4F44455F 
+ 2799      4F50414D 
+ 2799      50313058 
+ 2800              	.LASF246:
+ 2801 0f9d 6E436861 		.ascii	"nChars\000"
+ 2801      727300
+ 2802              	.LASF242:
+ 2803 0fa4 636C6B44 		.ascii	"clkDivider\000"
+ 2803      69766964 
+ 2803      657200
+ 2804              	.LASF155:
+ 2805 0faf 63795F65 		.ascii	"cy_en_divider_types_t\000"
+ 2805      6E5F6469 
+ 2805      76696465 
+ 2805      725F7479 
+ 2805      7065735F 
+ 2806              	.LASF128:
+ 2807 0fc5 43595F43 		.ascii	"CY_CTB_COMP_EDGE_FALLING\000"
+ 2807      54425F43 
+ 2807      4F4D505F 
+ 2807      45444745 
+ 2807      5F46414C 
+ 2808              	.LASF186:
+ 2809 0fde 666F726D 		.ascii	"formatMode\000"
+ 2809      61744D6F 
+ 2809      646500
+ 2810              	.LASF59:
+ 2811 0fe9 666C6173 		.ascii	"flashRwwRequired\000"
+ 2811      68527777 
+ 2811      52657175 
+ 2811      69726564 
+ 2811      00
+ 2812              	.LASF145:
+ 2813 0ffa 6F61436F 		.ascii	"oaCompEdge\000"
+ 2813      6D704564 
+ 2813      676500
+ 2814              	.LASF88:
+ 2815 1005 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 2815      50727443 
+ 2815      66674F66 
+ 2815      66736574 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 66
+
+
+ 2815      00
+ 2816              	.LASF200:
+ 2817 1016 63795F73 		.ascii	"cy_stc_ctdac_config_t\000"
+ 2817      74635F63 
+ 2817      74646163 
+ 2817      5F636F6E 
+ 2817      6669675F 
+ 2818              	.LASF54:
+ 2819 102c 65704D6F 		.ascii	"epMonitorNr\000"
+ 2819      6E69746F 
+ 2819      724E7200 
+ 2820              	.LASF252:
+ 2821 1038 55415254 		.ascii	"UART_context\000"
+ 2821      5F636F6E 
+ 2821      74657874 
+ 2821      00
+ 2822              	.LASF174:
+ 2823 1045 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_NONE\000"
+ 2823      54444143 
+ 2823      5F444547 
+ 2823      4C495443 
+ 2823      484D4F44 
+ 2824              	.LASF0:
+ 2825 1060 7369676E 		.ascii	"signed char\000"
+ 2825      65642063 
+ 2825      68617200 
+ 2826              	.LASF69:
+ 2827 106c 64774368 		.ascii	"dwChOffset\000"
+ 2827      4F666673 
+ 2827      657400
+ 2828              	.LASF42:
+ 2829 1077 63707573 		.ascii	"cpussIpcIrqNr\000"
+ 2829      73497063 
+ 2829      4972714E 
+ 2829      7200
+ 2830              	.LASF72:
+ 2831 1085 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 2831      43746C50 
+ 2831      7265656D 
+ 2831      70746162 
+ 2831      6C65506F 
+ 2832              	.LASF213:
+ 2833 109b 6368616E 		.ascii	"chanConfig\000"
+ 2833      436F6E66 
+ 2833      696700
+ 2834              	.LASF177:
+ 2835 10a6 43595F43 		.ascii	"CY_CTDAC_DEGLITCHMODE_BOTH\000"
+ 2835      54444143 
+ 2835      5F444547 
+ 2835      4C495443 
+ 2835      484D4F44 
+ 2836              	.LASF164:
+ 2837 10c1 63795F65 		.ascii	"cy_en_ctdac_format_t\000"
+ 2837      6E5F6374 
+ 2837      6461635F 
+ 2837      666F726D 
+ 2837      61745F74 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 67
+
+
+ 2838              	.LASF168:
+ 2839 10d6 43595F43 		.ascii	"CY_CTDAC_OUTPUT_HIGHZ\000"
+ 2839      54444143 
+ 2839      5F4F5554 
+ 2839      5055545F 
+ 2839      48494748 
+ 2840              	.LASF39:
+ 2841 10ec 70657269 		.ascii	"periVersion\000"
+ 2841      56657273 
+ 2841      696F6E00 
+ 2842              	.LASF167:
+ 2843 10f8 63795F65 		.ascii	"cy_en_ctdac_deep_sleep_t\000"
+ 2843      6E5F6374 
+ 2843      6461635F 
+ 2843      64656570 
+ 2843      5F736C65 
+ 2844              	.LASF219:
+ 2845 1111 636F6E66 		.ascii	"configRouting\000"
+ 2845      6967526F 
+ 2845      7574696E 
+ 2845      6700
+ 2846              	.LASF29:
+ 2847 111f 70617373 		.ascii	"passBase\000"
+ 2847      42617365 
+ 2847      00
+ 2848              	.LASF139:
+ 2849 1128 63795F65 		.ascii	"cy_en_ctb_comp_hyst_t\000"
+ 2849      6E5F6374 
+ 2849      625F636F 
+ 2849      6D705F68 
+ 2849      7973745F 
+ 2850              	.LASF48:
+ 2851 113e 73727373 		.ascii	"srssNumClkpath\000"
+ 2851      4E756D43 
+ 2851      6C6B7061 
+ 2851      746800
+ 2852              	.LASF68:
+ 2853 114d 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 2853      6843746C 
+ 2853      4D61696E 
+ 2853      57733446 
+ 2853      72657100 
+ 2854              	.LASF216:
+ 2855 1161 72616E67 		.ascii	"rangeIntrMask\000"
+ 2855      65496E74 
+ 2855      724D6173 
+ 2855      6B00
+ 2856              	.LASF205:
+ 2857 116f 63795F65 		.ascii	"cy_en_sar_range_detect_condition_t\000"
+ 2857      6E5F7361 
+ 2857      725F7261 
+ 2857      6E67655F 
+ 2857      64657465 
+ 2858              	.LASF143:
+ 2859 1192 6F614D6F 		.ascii	"oaMode\000"
+ 2859      646500
+ 2860              	.LASF38:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cc2TandD.s 			page 68
+
+
+ 2861 1199 69706356 		.ascii	"ipcVersion\000"
+ 2861      65727369 
+ 2861      6F6E00
+ 2862              	.LASF214:
+ 2863 11a4 696E7472 		.ascii	"intrMask\000"
+ 2863      4D61736B 
+ 2863      00
+ 2864              	.LASF132:
+ 2865 11ad 43595F43 		.ascii	"CY_CTB_COMP_DSI_TRIGGER_OUT_LEVEL\000"
+ 2865      54425F43 
+ 2865      4F4D505F 
+ 2865      4453495F 
+ 2865      54524947 
+ 2866              	.LASF230:
+ 2867 11cf 72784275 		.ascii	"rxBufSize\000"
+ 2867      6653697A 
+ 2867      6500
+ 2868              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
