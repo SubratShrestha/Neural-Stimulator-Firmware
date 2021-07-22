@@ -15,9 +15,6 @@
 #include "semphr.h"
 #include <stdio.h>
 #include <limits.h>
-#include "command_parser.h"
-#include "command_queue.h"
-#include "stdlib.h"
 
 SemaphoreHandle_t bleSemaphore;
 
@@ -28,35 +25,44 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
     switch (event) {
         case CY_BLE_EVT_STACK_ON:
         case CY_BLE_EVT_GAP_DEVICE_DISCONNECTED:
-            printf("disconnected\n");
+            printf("disconnected\r\n");
+            Cy_GPIO_Write(P6_3_PORT, P6_3_PIN, 1);                           // RED is ON
+            Cy_GPIO_Write(P7_1_PORT, P7_1_PIN, 0);                           // GREEN is OFF
             Cy_BLE_GAPP_StartAdvertisement(CY_BLE_ADVERTISING_FAST, CY_BLE_PERIPHERAL_CONFIGURATION_0_INDEX);
             break;
         case CY_BLE_EVT_GATT_CONNECT_IND:
-            printf("connected\n");
+            printf("connected\r\n");
+            Cy_GPIO_Write(P6_3_PORT, P6_3_PIN, 0);                           // RED is OFF
+            Cy_GPIO_Write(P7_1_PORT, P7_1_PIN, 1);                           // GREEN is ON
             break;
         case CY_BLE_EVT_GATTS_WRITE_REQ:
             writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
+            uint8 command[4] = {0,0,0,0};
             
-            if (CY_BLE_NS_NSCHARACTERISTIC_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
-                uint8_t *commands = writeReqParameter->handleValPair.value.val;
-                
-                
-                
-                for (int i=0; i < 5; i++) {
-                    // please null check.
-                    printf("command[%d] = %d\r\n", i, commands[i]);    
-                }
-                
-                // error handling
-                int array_size = (int)(sizeof(commands)/sizeof(commands[0]));
-                if (array_size > 5 || array_size < 0) {
-                    printf("invalid command");
-                } else {
-                    // passing to command parser
-                    execute_command(commands);
-                }
-                
+            if (CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
+                uint8_t serial_command_input_char = writeReqParameter->handleValPair.value.val[0];
+                command[0] = serial_command_input_char;
             }
+            
+            if (CY_BLE_STIMULATION_COMMAND_SERVICE_COMMAND_FEEDBACK_CHAR_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
+                uint8_t command_feedback_char = writeReqParameter->handleValPair.value.val[0];
+                command[1] = command_feedback_char;
+            }
+            
+            if (CY_BLE_STIMULATION_COMMAND_SERVICE_OTA_REQ_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
+                uint8_t ota_req = writeReqParameter->handleValPair.value.val[0];
+                command[2] = ota_req;
+            }
+            
+            if (CY_BLE_RECORDING_STREAM_SERVICE_RECORDING_STREAM_CHAR_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
+                uint8_t recording_stream_char = writeReqParameter->handleValPair.value.val[0];
+                command[3] = recording_stream_char;
+            }
+            
+            for (int i = 0; i < 4; i++) {
+                printf("command[%d] = %d\r\n", i, command[i]);
+            }
+            
             
             Cy_BLE_GATTS_WriteRsp(writeReqParameter->connHandle);
             break;
@@ -103,6 +109,7 @@ int main(void)
     printf("System started\r\n");
     
     xTaskCreate(bleTask, "bleTask", 8*1024, 0, 2, 0);
+    
     vTaskStartScheduler();
 
     for(;;)

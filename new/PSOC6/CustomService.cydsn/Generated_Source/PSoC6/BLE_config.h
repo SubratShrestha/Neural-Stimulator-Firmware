@@ -259,7 +259,6 @@ extern "C" {
 
 #define CY_BLE_ADV_PKT_0_INDEX_FLAGS   (0x00u)
 #define CY_BLE_ADV_PKT_0_INDEX_LOCAL_NAME   (0x03u)
-#define CY_BLE_ADV_PKT_0_INDEX_SERVICE_UUID_128   (0x07u)
 #define CY_BLE_PERIPHERAL_CONFIGURATION_0_INDEX   (0x00u)
 
 
@@ -275,8 +274,8 @@ extern "C" {
 #define CY_BLE_CONFIG_GATT_MTU                      (0x0017u)
 
 /** The GATT Maximum attribute length. */
-#define CY_BLE_CONFIG_GATT_DB_MAX_VALUE_LEN         (0x0030u)
-#define CY_BLE_GATT_DB_INDEX_COUNT                  (0x0013u)
+#define CY_BLE_CONFIG_GATT_DB_MAX_VALUE_LEN         (0x0008u)
+#define CY_BLE_GATT_DB_INDEX_COUNT                  (0x001Bu)
 
 /** The number of characteristics supporting the Reliable Write property. */
 #define CY_BLE_CONFIG_GATT_RELIABLE_CHAR_COUNT      (0x0000u)
@@ -307,7 +306,7 @@ extern "C" {
     #define CY_BLE_CONFIG_L2CAP_PSM_COUNT               (1u)
 #endif  /* CY_BLE_L2CAP_ENABLE != 0u */
 
-#define CY_BLE_CONFIG_GATT_DB_ATT_VAL_COUNT         (0x0Bu)
+#define CY_BLE_CONFIG_GATT_DB_ATT_VAL_COUNT         (0x13u)
 
 /** Max Tx payload size. */
 #define CY_BLE_CONFIG_LL_MAX_TX_PAYLOAD_SIZE        (0x1Bu)
@@ -317,7 +316,7 @@ extern "C" {
 
 /** GATT Role. */
 #define CY_BLE_CONFIG_GATT_ROLE                     (0x01u)
-#define CY_BLE_CONFIG_GATT_DB_CCCD_COUNT            (0x02u)
+#define CY_BLE_CONFIG_GATT_DB_CCCD_COUNT            (0x06u)
 
 /** Max unique services in the project. */
 #define CY_BLE_MAX_SRVI                             (0x01u)
@@ -363,13 +362,13 @@ extern "C" {
 
 /* CUSTOM */
 /** The maximum supported count of Custom services for the GATT Server role. */
-#define CY_BLE_CONFIG_CUSTOMS_SERVICE_COUNT         (0x01u)
+#define CY_BLE_CONFIG_CUSTOMS_SERVICE_COUNT         (0x02u)
 
 /** The maximum supported count of Custom services for the GATT Client role. */
 #define CY_BLE_CONFIG_CUSTOMC_SERVICE_COUNT         (0x00u)
 
 /** The maximum supported count of the Custom Service characteristics. */
-#define CY_BLE_CONFIG_CUSTOM_SERVICE_CHAR_COUNT     (0x01u)
+#define CY_BLE_CONFIG_CUSTOM_SERVICE_CHAR_COUNT     (0x03u)
 
 /** The maximum supported count of the Custom Service descriptors in one characteristic. */
 #define CY_BLE_CONFIG_CUSTOM_SERVICE_CHAR_DESCRIPTORS_COUNT  (0x01u)
@@ -378,15 +377,30 @@ extern "C" {
  * Below are the indexes and handles of the defined Custom Services and 
  * their characteristics.
  */
-#define CY_BLE_NS_SERVICE_INDEX   (0x00u) /* Index of NS service in the cy_ble_customs array */
-#define CY_BLE_NS_NSCHARACTERISTIC_CHAR_INDEX   (0x00u) /* Index of NSCharacteristic characteristic */
-#define CY_BLE_NS_NSCHARACTERISTIC_CUSTOM_DESCRIPTOR_DESC_INDEX   (0x00u) /* Index of Custom Descriptor descriptor */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_SERVICE_INDEX   (0x00u) /* Index of STIMULATION_COMMAND_SERVICE service in the cy_ble_customs array */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_CHAR_INDEX   (0x00u) /* Index of SERIAL_COMMAND_INPUT_CHAR characteristic */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_COMMAND_FEEDBACK_CHAR_CHAR_INDEX   (0x01u) /* Index of COMMAND_FEEDBACK_CHAR characteristic */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_COMMAND_FEEDBACK_CHAR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_INDEX   (0x00u) /* Index of Client Characteristic Configuration descriptor */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_OTA_REQ_CHAR_INDEX   (0x02u) /* Index of OTA_REQ characteristic */
+
+#define CY_BLE_RECORDING_STREAM_SERVICE_SERVICE_INDEX   (0x01u) /* Index of RECORDING_STREAM_SERVICE service in the cy_ble_customs array */
+#define CY_BLE_RECORDING_STREAM_SERVICE_RECORDING_STREAM_CHAR_CHAR_INDEX   (0x00u) /* Index of RECORDING_STREAM_CHAR characteristic */
+#define CY_BLE_RECORDING_STREAM_SERVICE_RECORDING_STREAM_CHAR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_INDEX   (0x00u) /* Index of Client Characteristic Configuration descriptor */
 
 
-#define CY_BLE_NS_SERVICE_HANDLE   (0x0010u) /* Handle of NS service */
-#define CY_BLE_NS_NSCHARACTERISTIC_DECL_HANDLE   (0x0011u) /* Handle of NSCharacteristic characteristic declaration */
-#define CY_BLE_NS_NSCHARACTERISTIC_CHAR_HANDLE   (0x0012u) /* Handle of NSCharacteristic characteristic */
-#define CY_BLE_NS_NSCHARACTERISTIC_CUSTOM_DESCRIPTOR_DESC_HANDLE   (0x0013u) /* Handle of Custom Descriptor descriptor */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_SERVICE_HANDLE   (0x0010u) /* Handle of STIMULATION_COMMAND_SERVICE service */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_DECL_HANDLE   (0x0011u) /* Handle of SERIAL_COMMAND_INPUT_CHAR characteristic declaration */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_CHAR_HANDLE   (0x0012u) /* Handle of SERIAL_COMMAND_INPUT_CHAR characteristic */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_COMMAND_FEEDBACK_CHAR_DECL_HANDLE   (0x0013u) /* Handle of COMMAND_FEEDBACK_CHAR characteristic declaration */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_COMMAND_FEEDBACK_CHAR_CHAR_HANDLE   (0x0014u) /* Handle of COMMAND_FEEDBACK_CHAR characteristic */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_COMMAND_FEEDBACK_CHAR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x0015u) /* Handle of Client Characteristic Configuration descriptor */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_OTA_REQ_DECL_HANDLE   (0x0016u) /* Handle of OTA_REQ characteristic declaration */
+#define CY_BLE_STIMULATION_COMMAND_SERVICE_OTA_REQ_CHAR_HANDLE   (0x0017u) /* Handle of OTA_REQ characteristic */
+
+#define CY_BLE_RECORDING_STREAM_SERVICE_SERVICE_HANDLE   (0x0018u) /* Handle of RECORDING_STREAM_SERVICE service */
+#define CY_BLE_RECORDING_STREAM_SERVICE_RECORDING_STREAM_CHAR_DECL_HANDLE   (0x0019u) /* Handle of RECORDING_STREAM_CHAR characteristic declaration */
+#define CY_BLE_RECORDING_STREAM_SERVICE_RECORDING_STREAM_CHAR_CHAR_HANDLE   (0x001Au) /* Handle of RECORDING_STREAM_CHAR characteristic */
+#define CY_BLE_RECORDING_STREAM_SERVICE_RECORDING_STREAM_CHAR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x001Bu) /* Handle of Client Characteristic Configuration descriptor */
 
 
 

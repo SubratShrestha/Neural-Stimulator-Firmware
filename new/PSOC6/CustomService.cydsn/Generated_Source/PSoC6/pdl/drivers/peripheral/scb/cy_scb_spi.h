@@ -1,12 +1,12 @@
 /***************************************************************************//**
 * \file cy_scb_spi.h
-* \version 2.30
+* \version 2.20
 *
 * Provides SPI API declarations of the SCB driver.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2016-2021, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2016-2018, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -17,13 +17,13 @@
 * \{
 * Driver API for SPI Peripheral.
 *
-* The functions and other declarations used in this part of the driver are in
-* cy_scb_spi.h. You can also include cy_pdl.h (ModusToolbox only) to get access
+* The functions and other declarations used in this part of the driver are in 
+* cy_scb_spi.h. You can also include cy_pdl.h (ModusToolbox only) to get access 
 * to all functions and declarations in the PDL.
 *
-* The SPI protocol is a synchronous serial interface protocol. Devices operate
-* in either master or slave mode. The master initiates the data transfer.
-* The SCB supports single-master-multiple-slaves topology for SPI. Multiple
+* The SPI protocol is a synchronous serial interface protocol. Devices operate 
+* in either master or slave mode. The master initiates the data transfer. 
+* The SCB supports single-master-multiple-slaves topology for SPI. Multiple 
 * slaves are supported with individual slave select lines.
 *
 * Features:
@@ -33,7 +33,7 @@
 *  * National Semiconductor (MicroWire) SPI - mode 0 only
 * * Master supports up to four slave select lines
 *   * Each slave select has configurable active polarity (high or low)
-*   * Slave select can be programmed to stay active for a whole transfer, or
+*   * Slave select can be programmed to stay active for a whole transfer, or 
 *     just for each byte
 * * Master supports late sampling for better timing margin
 * * Master supports continuous SPI clock
@@ -67,7 +67,7 @@
 * subMode, sclkMode, oversample, rxDataWidth, and txDataWidth. The other
 * parameters are optional for operation. To initialize the driver, call
 * \ref Cy_SCB_SPI_Init function providing a pointer to the populated
-* \ref cy_stc_scb_spi_config_t structure and the allocated
+* \ref cy_stc_scb_spi_config_t structure and the allocated 
 * \ref cy_stc_scb_spi_context_t structure.
 *
 * \snippet SCB_CompDatasheet_sut_01_revA.cydsn\spi_snippets.c SPI_CFG
@@ -76,8 +76,8 @@
 * \subsection group_scb_spi_pins Assign and Configure Pins
 ********************************************************************************
 * Only dedicated SCB pins can be used for SPI operation. The HSIOM
-* register must be configured to connect dedicated SCB SPI pins to the
-* SCB block. Also, the SPI output pins must be configured in Strong Drive Input
+* register must be configured to connect dedicated SCB SPI pins to the 
+* SCB block. Also, the SPI output pins must be configured in Strong Drive Input 
 * Off mode and SPI input pins in Digital High-Z.
 *
 * \snippet SCB_CompDatasheet_sut_01_revA.cydsn\spi_snippets.c SPI_CFG_PINS
@@ -87,7 +87,7 @@
 ********************************************************************************
 * A clock source must be connected to the SCB block to oversample input and
 * output signals, in this document this clock will be referred as clk_scb.
-* You must use one of the 8-bit or 16-bit dividers. Use the \ref group_sysclk
+* You must use one of the 8-bit or 16-bit dividers. Use the \ref group_sysclk 
 * driver API to do this.
 *
 * \snippet SCB_CompDatasheet_sut_01_revA.cydsn\spi_snippets.c SPI_CFG_ASSIGN_CLOCK
@@ -96,25 +96,25 @@
 * \subsection group_scb_spi_data_rate Configure Data Rate
 ********************************************************************************
 * To get the SPI slave to operate with the desired data rate, the clk_scb must be
-* fast enough to provide sufficient oversampling. Use the \ref group_sysclk driver
+* fast enough to provide sufficient oversampling. Use the \ref group_sysclk driver 
 * API to do that.
 *
 * \snippet SCB_CompDatasheet_sut_01_revA.cydsn\spi_snippets.c SPI_CFG_DATA_RATE_SLAVE
 *
-* To get the SPI master to operate with the desired data rate, multiply the
-* oversample factor by the desired data rate to determine the required
-* frequency for clk_scb. Use the \ref group_sysclk driver API to configure
-* clk_scb frequency. Set the <em><b>oversample parameter in configuration
-* structure</b></em> to define number of SCB clocks in one SCLK period.
-* When this value is even, the first and second phases of the SCLK period are
-* the same. Otherwise, the first phase is one SCB clock cycle longer than the
+* To get the SPI master to operate with the desired data rate, multiply the 
+* oversample factor by the desired data rate to determine the required 
+* frequency for clk_scb. Use the \ref group_sysclk driver API to configure 
+* clk_scb frequency. Set the <em><b>oversample parameter in configuration 
+* structure</b></em> to define number of SCB clocks in one SCLK period. 
+* When this value is even, the first and second phases of the SCLK period are 
+* the same. Otherwise, the first phase is one SCB clock cycle longer than the 
 * second phase. The level of the first phase of the clock period depends on CPOL
 * settings: 0 - low level and 1 - high level.
 *
 * \snippet SCB_CompDatasheet_sut_01_revA.cydsn\spi_snippets.c SPI_CFG_DATA_RATE_MASTER
 *
 * <b>Refer to the technical reference manual (TRM) section SPI sub-section
-* Oversampling and Bit Rate to get information about how to configure SPI to run
+* Oversampling and Bit Rate to get information about how to configure SPI to run 
 * with desired data rate</b>.
 *
 ********************************************************************************
@@ -153,7 +153,7 @@
 * The \ref group_scb_spi_low_level_functions functions allow
 * interacting directly with the hardware and do not use \ref Cy_SCB_SPI_Interrupt.
 * These functions do not require context for operation. Thus, NULL can be
-* passed for context parameter in \ref Cy_SCB_SPI_Init and \ref Cy_SCB_SPI_Disable
+* passed for context parameter in \ref Cy_SCB_SPI_Init and \ref Cy_SCB_SPI_Disable 
 * instead of a pointer to the context structure.
 *
 * * To write data into the TX FIFO, use one of the provided functions:
@@ -163,8 +163,8 @@
 *   transfer. Due to the nature of SPI, the received data is put into the RX FIFO.
 *
 * * To read data from the RX FIFO, use one of the provided functions:
-*   \ref Cy_SCB_SPI_Read or \ref Cy_SCB_SPI_ReadArray. Again due to the nature
-*   of SPI these functions do not start a transfer on the bus, they only read
+*   \ref Cy_SCB_SPI_Read or \ref Cy_SCB_SPI_ReadArray. Again due to the nature 
+*   of SPI these functions do not start a transfer on the bus, they only read 
 *   data out of the RX FIFO that has already been received.
 *
 * * The statuses can be polled using: \ref Cy_SCB_SPI_GetRxFifoStatus,
@@ -184,12 +184,12 @@
 * \subsection group_scb_spi_hl High-Level API
 ********************************************************************************
 * The \ref group_scb_spi_high_level_functions API use \ref Cy_SCB_SPI_Interrupt
-* to execute the transfer. Call \ref Cy_SCB_SPI_Transfer to start communication: for master
-* mode calling this function starts a transaction with the slave. For slave mode
+* to execute the transfer. Call \ref Cy_SCB_SPI_Transfer to start communication: for master 
+* mode calling this function starts a transaction with the slave. For slave mode 
 * the read and write buffers are prepared for the communication with the master.
 * After a transfer is started, the \ref Cy_SCB_SPI_Interrupt handles the
-* transfer until its completion. Therefore, the \ref Cy_SCB_SPI_Interrupt function
-* must be called inside the user interrupt handler to make the High-Level API work.
+* transfer until its completion. Therefore, the \ref Cy_SCB_SPI_Interrupt function 
+* must be called inside the user interrupt handler to make the High-Level API work. 
 * To monitor the status of the transfer operation, use \ref Cy_SCB_SPI_GetTransferStatus.
 * Alternatively, use \ref Cy_SCB_SPI_RegisterCallback to register a callback
 * function to be notified about \ref group_scb_spi_macros_callback_events.
@@ -217,7 +217,7 @@
 *   parameter to configure TX FIFO level value. \n
 *   <em>For example, the TX FIFO has 0 data elements (empty) and the TX FIFO level
 *   is 7. The TX trigger signal is active until DMA loads TX FIFO
-*   with 8 data elements (note that after the first TX load operation, the data
+*   with 8 data elements (note that after the first TX load operation, the data 
 *   element goes to the shift register and TX FIFO is empty).</em>
 *
 * To route SCB TX or RX trigger signals to the DMA controller, use \ref group_trigmux
@@ -238,23 +238,23 @@
 * callback execution, the callback must be registered before calling the
 * power mode transition function. Refer to \ref group_syspm driver for more
 * information about power mode transitions and callback registration.
-*
-* The SPI master is disabled during Deep Sleep and Hibernate and stops driving
-* the output pins. The state of the SPI master output pins SCLK, SS, and MOSI is
-* High-Z, which can cause unexpected behavior of the SPI Slave due to possible
-* glitches on these lines. These pins must keep the inactive level (the same state
-* when SPI master is enabled and does not transfer data) before entering Deep
-* Sleep or Hibernate mode. To do that, write the GPIO data register of each pin
-* to the inactive level for each output pin. Then configure High-Speed Input
-* Output Multiplexer (HSIOM) of each pin to be controlled by the GPIO (use
-* \ref group_gpio driver API). After after exiting Deep Sleep mode the SPI
-* master must be enabled and the pins configuration restored to return the
-* SPI master control of the pins (after exiting Hibernate mode, the
-* system initialization code does the same). Copy either or
-* both \ref Cy_SCB_SPI_DeepSleepCallback and \ref Cy_SCB_SPI_HibernateCallback
+* 
+* The SPI master is disabled during Deep Sleep and Hibernate and stops driving 
+* the output pins. The state of the SPI master output pins SCLK, SS, and MOSI is 
+* High-Z, which can cause unexpected behavior of the SPI Slave due to possible 
+* glitches on these lines. These pins must keep the inactive level (the same state 
+* when SPI master is enabled and does not transfer data) before entering Deep 
+* Sleep or Hibernate mode. To do that, write the GPIO data register of each pin 
+* to the inactive level for each output pin. Then configure High-Speed Input 
+* Output Multiplexer (HSIOM) of each pin to be controlled by the GPIO (use 
+* \ref group_gpio driver API). After after exiting Deep Sleep mode the SPI 
+* master must be enabled and the pins configuration restored to return the 
+* SPI master control of the pins (after exiting Hibernate mode, the 
+* system initialization code does the same). Copy either or 
+* both \ref Cy_SCB_SPI_DeepSleepCallback and \ref Cy_SCB_SPI_HibernateCallback 
 * as appropriate, and make the changes described above inside the function.
-* Alternately, external pull-up or pull-down resistors can be connected
-* to the appropriate SPI lines to keep them inactive during Deep-Sleep or
+* Alternately, external pull-up or pull-down resistors can be connected 
+* to the appropriate SPI lines to keep them inactive during Deep-Sleep or 
 * Hibernate.
 *
 * \note
@@ -334,7 +334,7 @@
 *   <tr><th>Version</th><th>Changes</th><th>Reason for Change</th></tr>
 *   <tr>
 *     <td rowspan="2">2.20</td>
-*     <td>Flattened the organization of the driver source code into the single
+*     <td>Flattened the organization of the driver source code into the single 
 *         source directory and the single include directory.
 *     </td>
 *     <td>Driver library directory-structure simplification.</td>
@@ -342,7 +342,7 @@
 *   <tr>
 *     <td>Added register access layer. Use register access macros instead
 *         of direct register access using dereferenced pointers.</td>
-*     <td>Makes register access device-independent, so that the PDL does
+*     <td>Makes register access device-independent, so that the PDL does 
 *         not need to be recompiled for each supported part number.</td>
 *   </tr>
 *   <tr>
@@ -823,8 +823,8 @@ cy_en_syspm_status_t Cy_SCB_SPI_HibernateCallback(cy_stc_syspm_callback_params_t
 /**
 * \defgroup group_scb_spi_macros_xfer_status SPI Transfer Status
 * \{
-* Macros to check current SPI transfer status returned by
-* \ref Cy_SCB_SPI_GetTransferStatus function.
+* Macros to check current SPI transfer status returned by 
+* \ref Cy_SCB_SPI_GetTransferStatus function. 
 * Each SPI transfer status is encoded in a separate bit, therefore multiple bits
 * may be set to indicate the current status.
 */
@@ -973,7 +973,7 @@ __STATIC_INLINE void Cy_SCB_SPI_Enable(CySCB_Type *base)
 *   slave select line is activated and lasts until the slave select line is
 *   deactivated.
 * * Texas Instrument sub-modes: The bus is busy the moment of the initial
-*   pulse on the slave select line and lasts until the transfer is complete
+*   pulse on the slave select line and lasts until the transfer is complete 
 *   (all bytes from the TX FIFO area shifted-out on the bus).
 *
 * \param base
@@ -987,7 +987,7 @@ __STATIC_INLINE void Cy_SCB_SPI_Enable(CySCB_Type *base)
 *   the first data element is written into the TX FIFO. It takes up to two SCLK
 *   clocks to assign the slave select line. Before this happens, the bus
 *   is considered idle.
-* * If the SPI master is configured to transmit each data element separated by
+* * If the SPI master is configured to transmit each data element separated by 
 *   a de-assertion of the slave select line, the bus is busy during each element
 *   transfer and is free between them.
 *
@@ -1352,7 +1352,7 @@ __STATIC_INLINE void Cy_SCB_SPI_ClearSlaveMasterStatus(CySCB_Type *base, uint32_
 * \note
 * * This function only reads data available in the RX FIFO. It does not
 *   initiate an SPI transfer.
-* * When in the master mode, this function writes data into the TX FIFO and
+* * When in the master mode, this function writes data into the TX FIFO and 
 *   waits until the transfer is completed before reading data from the RX FIFO.
 *
 *******************************************************************************/
@@ -1387,7 +1387,7 @@ __STATIC_INLINE uint32_t Cy_SCB_SPI_Read(CySCB_Type const *base)
 * \note
 * * This function only reads data available in the RX FIFO. It does not
 *   initiate an SPI transfer.
-* * When in the master mode, this function writes data into the TX FIFO and
+* * When in the master mode, this function writes data into the TX FIFO and 
 *   waits until the transfer is completed before reading data from the RX FIFO.
 *
 *******************************************************************************/

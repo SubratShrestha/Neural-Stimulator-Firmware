@@ -23,20 +23,73 @@
 */
 /* This array contains attribute handles for the defined Custom Services and their characteristics and descriptors.
    The array index definitions are located in the BLE_custom.h file. */
-static const cy_stc_ble_customs_t cy_ble_customs[0x01u] = {
+static const cy_stc_ble_customs_t cy_ble_customs[0x02u] = {
 
-    /* NS service */
+    /* STIMULATION_COMMAND_SERVICE service */
     {
-        0x0010u, /* Handle of the NS service */ 
+        0x0010u, /* Handle of the STIMULATION_COMMAND_SERVICE service */ 
         {
 
-            /* NSCharacteristic characteristic */
+            /* SERIAL_COMMAND_INPUT_CHAR characteristic */
             {
-                0x0012u, /* Handle of the NSCharacteristic characteristic */ 
+                0x0012u, /* Handle of the SERIAL_COMMAND_INPUT_CHAR characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x0013u, /* Handle of the Custom Descriptor descriptor */ 
+                    CY_BLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
+
+            /* COMMAND_FEEDBACK_CHAR characteristic */
+            {
+                0x0014u, /* Handle of the COMMAND_FEEDBACK_CHAR characteristic */ 
+                
+                /* Array of Descriptors handles */
+                {
+                    0x0015u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                }, 
+            },
+
+            /* OTA_REQ characteristic */
+            {
+                0x0017u, /* Handle of the OTA_REQ characteristic */ 
+                
+                /* Array of Descriptors handles */
+                {
+                    CY_BLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
+        }, 
+    },
+
+    /* RECORDING_STREAM_SERVICE service */
+    {
+        0x0018u, /* Handle of the RECORDING_STREAM_SERVICE service */ 
+        {
+
+            /* RECORDING_STREAM_CHAR characteristic */
+            {
+                0x001Au, /* Handle of the RECORDING_STREAM_CHAR characteristic */ 
+                
+                /* Array of Descriptors handles */
+                {
+                    0x001Bu, /* Handle of the Client Characteristic Configuration descriptor */ 
+                }, 
+            },
+            {
+                CY_BLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                
+                /* Array of Descriptors handles */
+                {
+                    CY_BLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
+            {
+                CY_BLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                
+                /* Array of Descriptors handles */
+                {
+                    CY_BLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
                 }, 
             },
         }, 
