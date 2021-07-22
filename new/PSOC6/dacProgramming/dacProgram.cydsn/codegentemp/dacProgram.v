@@ -1,6 +1,6 @@
 // ======================================================================
 // dacProgram.v generated from TopDesign.cysch
-// 07/15/2021 at 14:07
+// 07/22/2021 at 16:51
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -1852,9 +1852,9 @@ module top ;
           wire  Net_29;
           wire  Net_33;
           wire  Net_361;
-    electrical  Net_371;
-          wire  Net_365;
-          wire  Net_369;
+    electrical  Net_470;
+          wire  Net_469;
+          wire  Net_468;
     electrical  Net_360;
     electrical  Net_359;
     electrical [1:0] Net_358;
@@ -1865,9 +1865,9 @@ module top ;
           wire [3:0] Net_353;
           wire  Net_352;
           wire  Net_351;
-    electrical  Net_375;
           wire  Net_12;
     electrical  Net_14;
+    electrical  Net_375;
           wire  Net_258;
     electrical  Net_41;
 
@@ -1925,10 +1925,10 @@ module top ;
     VDAC12_PDL_v2_0_2 VDAC (
         .clock(Net_12),
         .strobe(1'b0),
-        .trigger(Net_365),
+        .trigger(Net_469),
         .vout(Net_14),
         .vref(Net_375),
-        .vref_out(Net_371));
+        .vref_out(Net_470));
 
 	wire [0:0] tmpFB_0__Pin_2_net;
 	wire [0:0] tmpIO_0__Pin_2_net;
