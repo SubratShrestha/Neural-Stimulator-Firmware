@@ -35,34 +35,19 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
             Cy_GPIO_Write(P6_3_PORT, P6_3_PIN, 0);                           // RED is OFF
             Cy_GPIO_Write(P7_1_PORT, P7_1_PIN, 1);                           // GREEN is ON
             break;
-        case CY_BLE_EVT_GATTS_WRITE_REQ:
+
+        case CY_BLE_EVT_GATTS_WRITE_CMD_REQ:
             writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
-            uint8 command[4] = {0,0,0,0};
             
-            if (CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
-                uint8_t serial_command_input_char = writeReqParameter->handleValPair.value.val[0];
-                command[0] = serial_command_input_char;
+            // Handle = 18, UUID = 0000fe41-8e22-4541-9d4c-21edae82ed19
+            if (writeReqParameter->handleValPair.attrHandle == CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_CHAR_HANDLE) {
+                int size = (int) sizeof(writeReqParameter->handleValPair.value.val) / sizeof(uint8_t);
+                for(int i=0; i<size; i++) {
+                    printf("handle = %d | value = %d\r\n", writeReqParameter->handleValPair.attrHandle, writeReqParameter->handleValPair.value.val[i]);  
+                }
             }
             
-            if (CY_BLE_STIMULATION_COMMAND_SERVICE_COMMAND_FEEDBACK_CHAR_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
-                uint8_t command_feedback_char = writeReqParameter->handleValPair.value.val[0];
-                command[1] = command_feedback_char;
-            }
-            
-            if (CY_BLE_STIMULATION_COMMAND_SERVICE_OTA_REQ_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
-                uint8_t ota_req = writeReqParameter->handleValPair.value.val[0];
-                command[2] = ota_req;
-            }
-            
-            if (CY_BLE_RECORDING_STREAM_SERVICE_RECORDING_STREAM_CHAR_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
-                uint8_t recording_stream_char = writeReqParameter->handleValPair.value.val[0];
-                command[3] = recording_stream_char;
-            }
-            
-            for (int i = 0; i < 4; i++) {
-                printf("command[%d] = %d\r\n", i, command[i]);
-            }
-            
+            printf("end\r\n\n");
             
             Cy_BLE_GATTS_WriteRsp(writeReqParameter->connHandle);
             break;

@@ -354,6 +354,17 @@ void Cy_SystemInit(void)
 	    (void)Cy_GPIO_Pin_Init(GPIO_PRT0, 1, &pin0_1_cfg);
 	}
 
+	/* Pin0_5 configuration */
+	{
+	    const cy_stc_gpio_pin_config_t pin0_5_cfg =
+	    {
+	        .outVal    = 0x00u,
+	        .driveMode = 0x08u,
+	        .hsiom     = P0_5_SRSS_EXT_CLK,
+	    };
+	    (void)Cy_GPIO_Pin_Init(GPIO_PRT0, 5, &pin0_5_cfg);
+	}
+
 	/* Clock */
 	ClockInit();
 	{
@@ -654,12 +665,12 @@ void Cy_SystemInit(void)
 	        .out        = 0x00000000u,
 	        .intrMask   = 0x00000000u,
 	        .intrCfg    = 0x00000000u,
-	        .cfg        = 0x00000000u,
+	        .cfg        = 0x00800000u,
 	        .cfgIn      = 0x00000000u,
 	        .cfgOut     = 0x00000000u,
 	        .cfgSIO     = 0x00000000u,
 	        .sel0Active = 0x00000000u,
-	        .sel1Active = 0x00000000u,
+	        .sel1Active = 0x00001000u,
 	    };
 	    (void)Cy_GPIO_Port_Init(GPIO_PRT0, &port0_cfg);
 	}

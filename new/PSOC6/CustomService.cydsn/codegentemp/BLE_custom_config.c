@@ -36,23 +36,23 @@ static const cy_stc_ble_customs_t cy_ble_customs[0x02u] = {
                 
                 /* Array of Descriptors handles */
                 {
-                    CY_BLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                    0x0013u, /* Handle of the Serial command input descriptor */ 
                 }, 
             },
 
             /* COMMAND_FEEDBACK_CHAR characteristic */
             {
-                0x0014u, /* Handle of the COMMAND_FEEDBACK_CHAR characteristic */ 
+                0x0015u, /* Handle of the COMMAND_FEEDBACK_CHAR characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x0015u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x0016u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* OTA_REQ characteristic */
             {
-                0x0017u, /* Handle of the OTA_REQ characteristic */ 
+                0x0018u, /* Handle of the OTA_REQ characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
@@ -64,16 +64,16 @@ static const cy_stc_ble_customs_t cy_ble_customs[0x02u] = {
 
     /* RECORDING_STREAM_SERVICE service */
     {
-        0x0018u, /* Handle of the RECORDING_STREAM_SERVICE service */ 
+        0x0019u, /* Handle of the RECORDING_STREAM_SERVICE service */ 
         {
 
             /* RECORDING_STREAM_CHAR characteristic */
             {
-                0x001Au, /* Handle of the RECORDING_STREAM_CHAR characteristic */ 
+                0x001Bu, /* Handle of the RECORDING_STREAM_CHAR characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x001Bu, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x001Cu, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
             {

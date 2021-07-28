@@ -1,5 +1,5 @@
 -- Project:   CustomService
--- Generated: 07/22/2021 15:33:20
+-- Generated: 07/28/2021 16:33:53
 -- PSoC Creator  4.4
 
 ENTITY CustomService IS
@@ -25,6 +25,7 @@ ARCHITECTURE __DEFAULT__ OF CustomService IS
     SIGNAL CPUSS_swj_swdio_tms : bit;
     SIGNAL CY_CPUSS_SWJ_SWCLK_TCLK(0)__PA : bit;
     SIGNAL CY_CPUSS_SWJ_SWDIO_TMS(0)__PA : bit;
+    SIGNAL CY_SRSS_EXT_CLK(0)__PA : bit;
     SIGNAL CY_SRSS_WCO_IN(0)__PA : bit;
     SIGNAL CY_SRSS_WCO_OUT(0)__PA : bit;
     SIGNAL ClockBlock_AltHF : bit;
@@ -68,6 +69,7 @@ ARCHITECTURE __DEFAULT__ OF CustomService IS
     SIGNAL Net_39 : bit;
     SIGNAL Net_9 : bit;
     SIGNAL RED(0)__PA : bit;
+    SIGNAL SRSS_ext_clk : bit;
     SIGNAL \BLE_1:Net_1\ : bit;
     SIGNAL \UART_1:Net_1172\ : bit;
     SIGNAL \UART_1:Net_161\ : bit;
@@ -89,23 +91,25 @@ ARCHITECTURE __DEFAULT__ OF CustomService IS
     SIGNAL periclk_App : bit;
     ATTRIBUTE Location OF ClockGenBlock : LABEL IS "F(CLK_GEN,0)";
     ATTRIBUTE Location OF ClockBlock : LABEL IS "F(Clock,0)";
-    ATTRIBUTE Location OF CPUSS : LABEL IS "F(CPUSS,0)";
-    ATTRIBUTE lib_model OF CY_CPUSS_SWJ_SWCLK_TCLK(0) : LABEL IS "iocell1";
-    ATTRIBUTE Location OF CY_CPUSS_SWJ_SWCLK_TCLK(0) : LABEL IS "P6[7]";
-    ATTRIBUTE lib_model OF CY_CPUSS_SWJ_SWDIO_TMS(0) : LABEL IS "iocell2";
-    ATTRIBUTE Location OF CY_CPUSS_SWJ_SWDIO_TMS(0) : LABEL IS "P6[6]";
     ATTRIBUTE Location OF SRSS : LABEL IS "F(SRSS,0)";
-    ATTRIBUTE lib_model OF CY_SRSS_WCO_IN(0) : LABEL IS "iocell3";
+    ATTRIBUTE lib_model OF CY_SRSS_EXT_CLK(0) : LABEL IS "iocell1";
+    ATTRIBUTE Location OF CY_SRSS_EXT_CLK(0) : LABEL IS "P0[5]";
+    ATTRIBUTE Location OF CPUSS : LABEL IS "F(CPUSS,0)";
+    ATTRIBUTE lib_model OF CY_CPUSS_SWJ_SWCLK_TCLK(0) : LABEL IS "iocell2";
+    ATTRIBUTE Location OF CY_CPUSS_SWJ_SWCLK_TCLK(0) : LABEL IS "P6[7]";
+    ATTRIBUTE lib_model OF CY_CPUSS_SWJ_SWDIO_TMS(0) : LABEL IS "iocell3";
+    ATTRIBUTE Location OF CY_CPUSS_SWJ_SWDIO_TMS(0) : LABEL IS "P6[6]";
+    ATTRIBUTE lib_model OF CY_SRSS_WCO_IN(0) : LABEL IS "iocell4";
     ATTRIBUTE Location OF CY_SRSS_WCO_IN(0) : LABEL IS "P0[0]";
-    ATTRIBUTE lib_model OF CY_SRSS_WCO_OUT(0) : LABEL IS "iocell4";
+    ATTRIBUTE lib_model OF CY_SRSS_WCO_OUT(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF CY_SRSS_WCO_OUT(0) : LABEL IS "P0[1]";
-    ATTRIBUTE lib_model OF \UART_1:tx(0)\ : LABEL IS "iocell5";
+    ATTRIBUTE lib_model OF \UART_1:tx(0)\ : LABEL IS "iocell6";
     ATTRIBUTE Location OF \UART_1:tx(0)\ : LABEL IS "P5[1]";
-    ATTRIBUTE lib_model OF \UART_1:rx(0)\ : LABEL IS "iocell6";
+    ATTRIBUTE lib_model OF \UART_1:rx(0)\ : LABEL IS "iocell7";
     ATTRIBUTE Location OF \UART_1:rx(0)\ : LABEL IS "P5[0]";
-    ATTRIBUTE lib_model OF RED(0) : LABEL IS "iocell7";
+    ATTRIBUTE lib_model OF RED(0) : LABEL IS "iocell8";
     ATTRIBUTE Location OF RED(0) : LABEL IS "P6[3]";
-    ATTRIBUTE lib_model OF GREEN(0) : LABEL IS "iocell8";
+    ATTRIBUTE lib_model OF GREEN(0) : LABEL IS "iocell9";
     ATTRIBUTE Location OF GREEN(0) : LABEL IS "P7[1]";
     ATTRIBUTE Location OF \BLE_1:cy_mxs40_ble\ : LABEL IS "F(BLE,0)";
     ATTRIBUTE Location OF \BLE_1:bless_isr\ : LABEL IS "[IntrContainer=(0)][IntrId=(24)]";
@@ -530,6 +534,63 @@ BEGIN
             ff_div_5 => \UART_1:Net_847_ff0\,
             periclk_App => periclk_App);
 
+    SRSS:SRSS
+        PORT MAP(
+            ext_clk => SRSS_ext_clk);
+
+    CY_SRSS_EXT_CLK:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "1",
+            id => "8be0f17d-4e68-5d46-b8ba-440c256d685a",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    CY_SRSS_EXT_CLK(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "CY_SRSS_EXT_CLK",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => CY_SRSS_EXT_CLK(0)__PA,
+            fb => SRSS_ext_clk,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
     CPUSS:CPUSS
         PORT MAP(
             swj_swclk_tclk => CPUSS_swj_swclk_tclk,
@@ -640,8 +701,6 @@ BEGIN
             out_clock => open,
             out_clock_en => open,
             out_reset => open);
-
-    SRSS:SRSS;
 
     CY_SRSS_WCO_IN:logicalport
         GENERIC MAP(

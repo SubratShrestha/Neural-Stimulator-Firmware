@@ -64,6 +64,14 @@ net Net_37_ff11
 	switch ":Clockcontainer:ff_permute.Clock[0]ff_div_20==>:TCPWMcontainer:TCPWM[1].clock"
 	term   ":TCPWMcontainer:TCPWM[1].clock"
 end Net_37_ff11
+net SRSS_ext_clk
+	term   ":ioport0:pin5.fb"
+	switch ":ioport0:pin5.fb==>:ioport0:smartio_mux_out5.direct_in"
+	switch ":ioport0:smartio_mux_out5.smartio_mux_out==>:ioport0:hsiomIn5.hsiomIn5"
+	switch ":ioport0:hsiomIn5.fixedOut5_ACT_4==>:SRSS[0]ext_clk_input_permute.ioport0_fixedOut5_ACT_4"
+	switch ":SRSS[0]ext_clk_input_permute.SRSS[0]ext_clk==>:SRSScontainer:SRSS[0].ext_clk"
+	term   ":SRSScontainer:SRSS[0].ext_clk"
+end SRSS_ext_clk
 net \BLE_1:Net_1\
 	term   ":BLEcontainer:BLE[0].interrupt"
 	switch ":BLEcontainer:BLE[0].interrupt==>:intc_0:interrupt24.interrupt"
