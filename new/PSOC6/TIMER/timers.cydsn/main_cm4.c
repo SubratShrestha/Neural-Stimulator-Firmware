@@ -50,7 +50,7 @@ int main(void)
     (void)Cy_TCPWM_Counter_Init(Timer_HW, Timer_CNT_NUM, &Timer_config);
     Cy_TCPWM_Enable_Multiple(Timer_HW, MY_TCPWM_CNT_MULT_MASK); /* Enable the counter instance */
     Cy_TCPWM_TriggerStart(Timer_HW, MY_TCPWM_CNT_MULT_MASK);
-    Cy_TCPWM_SetInterrupt(TCPWM0, MY_TCPWM_CNT_NUM, CY_TCPWM_INT_ON_CC);
+    Cy_TCPWM_SetInterrupt(Timer_HW, MY_TCPWM_CNT_NUM, CY_TCPWM_INT_ON_CC);
     for(;;)
     {
         /* Place your application code here. */
