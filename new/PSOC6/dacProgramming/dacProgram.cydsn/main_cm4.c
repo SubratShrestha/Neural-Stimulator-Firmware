@@ -14,6 +14,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include <time.h>
+#include "ctdac/cy_ctdac.h"
 
 // Make an RTOS task which makes the dac send biphasic pulses
 
@@ -157,8 +158,6 @@ int main(void)
         CyDelay(1000);
         Cy_CTDAC_SetValue(VDAC_CTDAC_HW, 0x7FF);
         
-        CyDelay(1000);
-        Cy_CTDAC_SetValue(VDAC_CTDAC_HW, 0x800);
     }
 }
 
