@@ -1,0 +1,2772 @@
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0plus
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"retarget.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.syntax divided
+  20              		.global _printf_float
+  21              		.global _scanf_float
+  22              		.thumb
+  23              		.syntax unified
+  24              		.section	.text._write,"ax",%progbits
+  25              		.align	2
+  26              		.weak	_write
+  27              		.code	16
+  28              		.thumb_func
+  29              		.type	_write, %function
+  30              	_write:
+  31              	.LFB495:
+  32              		.file 1 "Generated_Source\\PSoC6\\pdl\\utilities\\retarget_io\\retarget.c"
+   1:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \file retarget.c
+   3:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \version 1.20
+   4:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** *
+   5:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \brief
+   6:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * 'Retarget' layer for target-dependent low level function.
+   7:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** *
+   8:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** ********************************************************************************
+   9:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * \copyright
+  10:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * Copyright 2016-2018, Cypress Semiconductor Corporation. All rights reserved.
+  11:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** *******************************************************************************/
+  15:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  16:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #include <stdio.h>
+  17:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #include "stdio_user.h"
+  18:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  19:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(__cplusplus)
+  20:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** extern "C" {
+  21:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #endif
+  22:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  23:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #ifdef IO_STDOUT_ENABLE
+  24:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  25:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(__ARMCC_VERSION) /* ARM-MDK */
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 2
+
+
+  26:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+  27:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: fputc
+  28:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+  29:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int fputc(int ch, FILE *f)
+  30:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  31:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)f;
+  32:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     #if (STDOUT_CR_LF != 0)
+  33:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if ((char)ch == '\n')
+  34:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  35:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             STDIO_PutChar('\r');
+  36:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  37:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     #endif /* STDOUT_CR_LF != 0 */
+  38:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         STDIO_PutChar(ch);
+  39:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (ch);
+  40:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+  41:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #elif defined (__ICCARM__) /* IAR */
+  42:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     #include <yfuns.h>
+  43:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+  44:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+  45:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: __write
+  46:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+  47:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __weak size_t __write(int handle, const unsigned char * buffer, size_t size)
+  48:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  49:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         size_t nChars = 0;
+  50:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         /* This template only writes to "standard out", for all other file
+  51:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         * handles it returns failure. */
+  52:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (handle != _LLIO_STDOUT)
+  53:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  54:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             return (_LLIO_ERROR);
+  55:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  56:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (buffer != NULL)
+  57:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  58:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             for (/* Empty */; nChars < size; ++nChars)
+  59:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  60:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #if (STDOUT_CR_LF != 0)
+  61:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 if(*buffer == '\n')
+  62:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 {
+  63:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                     STDIO_PutChar('\r');
+  64:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 }
+  65:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #endif /* STDOUT_CR_LF != 0 */
+  66:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 STDIO_PutChar(*buffer);
+  67:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 ++buffer;
+  68:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             }
+  69:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  70:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (nChars);
+  71:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+  72:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #else /* (__GNUC__)  GCC */    
+  73:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /* Add an explicit reference to the floating point printf library to allow
+  74:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     the usage of floating point conversion specifier. */
+  75:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __asm (".global _printf_float");
+  76:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+  77:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: _write
+  78:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+  79:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int _write (int fd, const char *ptr, int len)
+  80:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  33              		.loc 1 80 0
+  34              		.cfi_startproc
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 3
+
+
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              	.LVL0:
+  38 0000 70B5     		push	{r4, r5, r6, lr}
+  39              		.cfi_def_cfa_offset 16
+  40              		.cfi_offset 4, -16
+  41              		.cfi_offset 5, -12
+  42              		.cfi_offset 6, -8
+  43              		.cfi_offset 14, -4
+  44 0002 0D00     		movs	r5, r1
+  45 0004 1600     		movs	r6, r2
+  46              	.LVL1:
+  81:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+  82:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)fd;
+  83:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (ptr != NULL)
+  47              		.loc 1 83 0
+  48 0006 0029     		cmp	r1, #0
+  49 0008 07D1     		bne	.L5
+  81:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+  50              		.loc 1 81 0
+  51 000a 0024     		movs	r4, #0
+  52 000c 08E0     		b	.L3
+  53              	.LVL2:
+  54              	.L4:
+  84:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+  85:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             for (/* Empty */; nChars < len; ++nChars)
+  86:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  87:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #if (STDOUT_CR_LF != 0)
+  88:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 if(*ptr == '\n')
+  89:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 {
+  90:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                     STDIO_PutChar('\r');
+  91:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 }
+  92:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             #endif /* STDOUT_CR_LF != 0 */
+  93:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 STDIO_PutChar((uint32_t)*ptr);
+  55              		.loc 1 93 0 discriminator 2
+  56 000e 2878     		ldrb	r0, [r5]
+  57 0010 FFF7FEFF 		bl	STDIO_PutChar
+  58              	.LVL3:
+  94:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 ++ptr;
+  59              		.loc 1 94 0 discriminator 2
+  60 0014 0135     		adds	r5, r5, #1
+  61              	.LVL4:
+  85:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  62              		.loc 1 85 0 discriminator 2
+  63 0016 0134     		adds	r4, r4, #1
+  64              	.LVL5:
+  65 0018 00E0     		b	.L2
+  66              	.LVL6:
+  67              	.L5:
+  68 001a 0024     		movs	r4, #0
+  69              	.LVL7:
+  70              	.L2:
+  85:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+  71              		.loc 1 85 0 is_stmt 0 discriminator 1
+  72 001c B442     		cmp	r4, r6
+  73 001e F6DB     		blt	.L4
+  74              	.LVL8:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 4
+
+
+  75              	.L3:
+  95:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             }
+  96:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+  97:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (nChars);
+  98:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+  76              		.loc 1 98 0 is_stmt 1
+  77 0020 2000     		movs	r0, r4
+  78              		@ sp needed
+  79              	.LVL9:
+  80              	.LVL10:
+  81              	.LVL11:
+  82 0022 70BD     		pop	{r4, r5, r6, pc}
+  83              		.cfi_endproc
+  84              	.LFE495:
+  85              		.size	_write, .-_write
+  86              		.section	.text._read,"ax",%progbits
+  87              		.align	2
+  88              		.weak	_read
+  89              		.code	16
+  90              		.thumb_func
+  91              		.type	_read, %function
+  92              	_read:
+  93              	.LFB496:
+  99:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #endif
+ 100:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+ 101:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #endif /* IO_STDOUT_ENABLE */
+ 102:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+ 103:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(IO_STDIN_ENABLE)
+ 104:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** 
+ 105:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #if defined(__ARMCC_VERSION) /* ARM-MDK */
+ 106:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /***************************************************************************
+ 107:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     * Function Name: fgetc
+ 108:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     ***************************************************************************/
+ 109:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int fgetc(FILE *f) 
+ 110:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+ 111:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)f;
+ 112:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (STDIO_GetChar());
+ 113:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+ 114:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #elif defined (__ICCARM__) /* IAR */
+ 115:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __weak size_t __read(int handle, unsigned char * buffer, size_t size)
+ 116:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+ 117:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         /* This template only reads from "standard in", for all other file
+ 118:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         handles it returns failure. */
+ 119:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if ((handle != _LLIO_STDIN) || (buffer == NULL))
+ 120:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+ 121:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             return (_LLIO_ERROR);
+ 122:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+ 123:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         else
+ 124:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+ 125:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             *buffer = STDIO_GetChar();
+ 126:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             return (1);
+ 127:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+ 128:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+ 129:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c **** #else /* (__GNUC__)  GCC */
+ 130:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     /* Add an explicit reference to the floating point scanf library to allow
+ 131:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     the usage of floating point conversion specifier. */
+ 132:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __asm (".global _scanf_float");
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 5
+
+
+ 133:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     __attribute__((weak)) int _read (int fd, char *ptr, int len)
+ 134:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     {
+  94              		.loc 1 134 0
+  95              		.cfi_startproc
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              	.LVL12:
+  99 0000 70B5     		push	{r4, r5, r6, lr}
+ 100              		.cfi_def_cfa_offset 16
+ 101              		.cfi_offset 4, -16
+ 102              		.cfi_offset 5, -12
+ 103              		.cfi_offset 6, -8
+ 104              		.cfi_offset 14, -4
+ 105 0002 0D00     		movs	r5, r1
+ 106 0004 1600     		movs	r6, r2
+ 107              	.LVL13:
+ 135:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+ 136:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         (void)fd;
+ 137:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         if (ptr != NULL)
+ 108              		.loc 1 137 0
+ 109 0006 0029     		cmp	r1, #0
+ 110 0008 0CD1     		bne	.L10
+ 135:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         int nChars = 0;
+ 111              		.loc 1 135 0
+ 112 000a 0024     		movs	r4, #0
+ 113 000c 0DE0     		b	.L8
+ 114              	.LVL14:
+ 115              	.L9:
+ 138:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         {
+ 139:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             for(/* Empty */;nChars < len;++ptr)
+ 140:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+ 141:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 *ptr = (char)STDIO_GetChar();
+ 116              		.loc 1 141 0
+ 117 000e FFF7FEFF 		bl	STDIO_GetChar
+ 118              	.LVL15:
+ 119 0012 C0B2     		uxtb	r0, r0
+ 120 0014 2870     		strb	r0, [r5]
+ 142:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 ++nChars;
+ 121              		.loc 1 142 0
+ 122 0016 0134     		adds	r4, r4, #1
+ 123              	.LVL16:
+ 143:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 if((*ptr == '\n') || (*ptr == '\r'))
+ 124              		.loc 1 143 0
+ 125 0018 0A28     		cmp	r0, #10
+ 126 001a 06D0     		beq	.L8
+ 127              		.loc 1 143 0 is_stmt 0 discriminator 1
+ 128 001c 0D28     		cmp	r0, #13
+ 129 001e 04D0     		beq	.L8
+ 139:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+ 130              		.loc 1 139 0 is_stmt 1
+ 131 0020 0135     		adds	r5, r5, #1
+ 132              	.LVL17:
+ 133 0022 00E0     		b	.L7
+ 134              	.LVL18:
+ 135              	.L10:
+ 136 0024 0024     		movs	r4, #0
+ 137              	.LVL19:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 6
+
+
+ 138              	.L7:
+ 139:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             {
+ 139              		.loc 1 139 0 is_stmt 0 discriminator 1
+ 140 0026 B442     		cmp	r4, r6
+ 141 0028 F1DB     		blt	.L9
+ 142              	.LVL20:
+ 143              	.L8:
+ 144:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 {
+ 145:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                     break;
+ 146:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****                 }
+ 147:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****             }
+ 148:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         }
+ 149:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****         return (nChars);
+ 150:Generated_Source\PSoC6\pdl\utilities\retarget_io/retarget.c ****     }
+ 144              		.loc 1 150 0 is_stmt 1
+ 145 002a 2000     		movs	r0, r4
+ 146              		@ sp needed
+ 147              	.LVL21:
+ 148              	.LVL22:
+ 149              	.LVL23:
+ 150 002c 70BD     		pop	{r4, r5, r6, pc}
+ 151              		.cfi_endproc
+ 152              	.LFE496:
+ 153              		.size	_read, .-_read
+ 154 002e C046     		.text
+ 155              	.Letext0:
+ 156              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 157              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 158              		.file 4 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
+ 159              		.file 5 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/scb/cy_scb_uart.h"
+ 160              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/tcpwm/cy_tcpwm_counter.h"
+ 161              		.file 7 "Generated_Source\\PSoC6/Timer.h"
+ 162              		.file 8 "Generated_Source\\PSoC6/UART.h"
+ 163              		.file 9 "Generated_Source\\PSoC6/Timer_1.h"
+ 164              		.file 10 "./stdio_user.h"
+ 165              		.section	.debug_info,"",%progbits
+ 166              	.Ldebug_info0:
+ 167 0000 15080000 		.4byte	0x815
+ 168 0004 0400     		.2byte	0x4
+ 169 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 170 000a 04       		.byte	0x4
+ 171 000b 01       		.uleb128 0x1
+ 172 000c A1060000 		.4byte	.LASF157
+ 173 0010 0C       		.byte	0xc
+ 174 0011 54090000 		.4byte	.LASF158
+ 175 0015 90070000 		.4byte	.LASF159
+ 176 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 177 001d 00000000 		.4byte	0
+ 178 0021 00000000 		.4byte	.Ldebug_line0
+ 179 0025 02       		.uleb128 0x2
+ 180 0026 01       		.byte	0x1
+ 181 0027 06       		.byte	0x6
+ 182 0028 94080000 		.4byte	.LASF0
+ 183 002c 03       		.uleb128 0x3
+ 184 002d 93000000 		.4byte	.LASF2
+ 185 0031 02       		.byte	0x2
+ 186 0032 1D       		.byte	0x1d
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 7
+
+
+ 187 0033 37000000 		.4byte	0x37
+ 188 0037 02       		.uleb128 0x2
+ 189 0038 01       		.byte	0x1
+ 190 0039 08       		.byte	0x8
+ 191 003a F5050000 		.4byte	.LASF1
+ 192 003e 03       		.uleb128 0x3
+ 193 003f 11030000 		.4byte	.LASF3
+ 194 0043 02       		.byte	0x2
+ 195 0044 29       		.byte	0x29
+ 196 0045 49000000 		.4byte	0x49
+ 197 0049 02       		.uleb128 0x2
+ 198 004a 02       		.byte	0x2
+ 199 004b 05       		.byte	0x5
+ 200 004c 17060000 		.4byte	.LASF4
+ 201 0050 03       		.uleb128 0x3
+ 202 0051 72070000 		.4byte	.LASF5
+ 203 0055 02       		.byte	0x2
+ 204 0056 2B       		.byte	0x2b
+ 205 0057 5B000000 		.4byte	0x5b
+ 206 005b 02       		.uleb128 0x2
+ 207 005c 02       		.byte	0x2
+ 208 005d 07       		.byte	0x7
+ 209 005e 05080000 		.4byte	.LASF6
+ 210 0062 02       		.uleb128 0x2
+ 211 0063 04       		.byte	0x4
+ 212 0064 05       		.byte	0x5
+ 213 0065 4E020000 		.4byte	.LASF7
+ 214 0069 03       		.uleb128 0x3
+ 215 006a F6020000 		.4byte	.LASF8
+ 216 006e 02       		.byte	0x2
+ 217 006f 41       		.byte	0x41
+ 218 0070 74000000 		.4byte	0x74
+ 219 0074 02       		.uleb128 0x2
+ 220 0075 04       		.byte	0x4
+ 221 0076 07       		.byte	0x7
+ 222 0077 B6030000 		.4byte	.LASF9
+ 223 007b 02       		.uleb128 0x2
+ 224 007c 08       		.byte	0x8
+ 225 007d 05       		.byte	0x5
+ 226 007e BD010000 		.4byte	.LASF10
+ 227 0082 02       		.uleb128 0x2
+ 228 0083 08       		.byte	0x8
+ 229 0084 07       		.byte	0x7
+ 230 0085 1F010000 		.4byte	.LASF11
+ 231 0089 04       		.uleb128 0x4
+ 232 008a 04       		.byte	0x4
+ 233 008b 05       		.byte	0x5
+ 234 008c 696E7400 		.ascii	"int\000"
+ 235 0090 02       		.uleb128 0x2
+ 236 0091 04       		.byte	0x4
+ 237 0092 07       		.byte	0x7
+ 238 0093 7A030000 		.4byte	.LASF12
+ 239 0097 02       		.uleb128 0x2
+ 240 0098 08       		.byte	0x8
+ 241 0099 04       		.byte	0x4
+ 242 009a 3C070000 		.4byte	.LASF13
+ 243 009e 05       		.uleb128 0x5
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 8
+
+
+ 244 009f 04       		.byte	0x4
+ 245 00a0 02       		.uleb128 0x2
+ 246 00a1 04       		.byte	0x4
+ 247 00a2 07       		.byte	0x7
+ 248 00a3 FE040000 		.4byte	.LASF14
+ 249 00a7 06       		.uleb128 0x6
+ 250 00a8 04       		.byte	0x4
+ 251 00a9 AD000000 		.4byte	0xad
+ 252 00ad 02       		.uleb128 0x2
+ 253 00ae 01       		.byte	0x1
+ 254 00af 08       		.byte	0x8
+ 255 00b0 48070000 		.4byte	.LASF15
+ 256 00b4 06       		.uleb128 0x6
+ 257 00b5 04       		.byte	0x4
+ 258 00b6 BA000000 		.4byte	0xba
+ 259 00ba 07       		.uleb128 0x7
+ 260 00bb AD000000 		.4byte	0xad
+ 261 00bf 03       		.uleb128 0x3
+ 262 00c0 DF080000 		.4byte	.LASF16
+ 263 00c4 03       		.byte	0x3
+ 264 00c5 18       		.byte	0x18
+ 265 00c6 2C000000 		.4byte	0x2c
+ 266 00ca 03       		.uleb128 0x3
+ 267 00cb B5010000 		.4byte	.LASF17
+ 268 00cf 03       		.byte	0x3
+ 269 00d0 20       		.byte	0x20
+ 270 00d1 3E000000 		.4byte	0x3e
+ 271 00d5 03       		.uleb128 0x3
+ 272 00d6 87030000 		.4byte	.LASF18
+ 273 00da 03       		.byte	0x3
+ 274 00db 24       		.byte	0x24
+ 275 00dc 50000000 		.4byte	0x50
+ 276 00e0 03       		.uleb128 0x3
+ 277 00e1 83060000 		.4byte	.LASF19
+ 278 00e5 03       		.byte	0x3
+ 279 00e6 30       		.byte	0x30
+ 280 00e7 69000000 		.4byte	0x69
+ 281 00eb 08       		.uleb128 0x8
+ 282 00ec E0000000 		.4byte	0xe0
+ 283 00f0 09       		.uleb128 0x9
+ 284 00f1 B8       		.byte	0xb8
+ 285 00f2 04       		.byte	0x4
+ 286 00f3 34       		.byte	0x34
+ 287 00f4 01050000 		.4byte	0x501
+ 288 00f8 0A       		.uleb128 0xa
+ 289 00f9 E6000000 		.4byte	.LASF20
+ 290 00fd 04       		.byte	0x4
+ 291 00fe 37       		.byte	0x37
+ 292 00ff E0000000 		.4byte	0xe0
+ 293 0103 00       		.byte	0
+ 294 0104 0A       		.uleb128 0xa
+ 295 0105 49060000 		.4byte	.LASF21
+ 296 0109 04       		.byte	0x4
+ 297 010a 38       		.byte	0x38
+ 298 010b E0000000 		.4byte	0xe0
+ 299 010f 04       		.byte	0x4
+ 300 0110 0A       		.uleb128 0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 9
+
+
+ 301 0111 65020000 		.4byte	.LASF22
+ 302 0115 04       		.byte	0x4
+ 303 0116 39       		.byte	0x39
+ 304 0117 E0000000 		.4byte	0xe0
+ 305 011b 08       		.byte	0x8
+ 306 011c 0A       		.uleb128 0xa
+ 307 011d E7050000 		.4byte	.LASF23
+ 308 0121 04       		.byte	0x4
+ 309 0122 3A       		.byte	0x3a
+ 310 0123 E0000000 		.4byte	0xe0
+ 311 0127 0C       		.byte	0xc
+ 312 0128 0A       		.uleb128 0xa
+ 313 0129 0C020000 		.4byte	.LASF24
+ 314 012d 04       		.byte	0x4
+ 315 012e 3B       		.byte	0x3b
+ 316 012f E0000000 		.4byte	0xe0
+ 317 0133 10       		.byte	0x10
+ 318 0134 0A       		.uleb128 0xa
+ 319 0135 44020000 		.4byte	.LASF25
+ 320 0139 04       		.byte	0x4
+ 321 013a 3C       		.byte	0x3c
+ 322 013b E0000000 		.4byte	0xe0
+ 323 013f 14       		.byte	0x14
+ 324 0140 0A       		.uleb128 0xa
+ 325 0141 11040000 		.4byte	.LASF26
+ 326 0145 04       		.byte	0x4
+ 327 0146 3D       		.byte	0x3d
+ 328 0147 E0000000 		.4byte	0xe0
+ 329 014b 18       		.byte	0x18
+ 330 014c 0A       		.uleb128 0xa
+ 331 014d 7C000000 		.4byte	.LASF27
+ 332 0151 04       		.byte	0x4
+ 333 0152 3E       		.byte	0x3e
+ 334 0153 E0000000 		.4byte	0xe0
+ 335 0157 1C       		.byte	0x1c
+ 336 0158 0A       		.uleb128 0xa
+ 337 0159 9A090000 		.4byte	.LASF28
+ 338 015d 04       		.byte	0x4
+ 339 015e 3F       		.byte	0x3f
+ 340 015f E0000000 		.4byte	0xe0
+ 341 0163 20       		.byte	0x20
+ 342 0164 0A       		.uleb128 0xa
+ 343 0165 7B050000 		.4byte	.LASF29
+ 344 0169 04       		.byte	0x4
+ 345 016a 40       		.byte	0x40
+ 346 016b E0000000 		.4byte	0xe0
+ 347 016f 24       		.byte	0x24
+ 348 0170 0A       		.uleb128 0xa
+ 349 0171 B4040000 		.4byte	.LASF30
+ 350 0175 04       		.byte	0x4
+ 351 0176 43       		.byte	0x43
+ 352 0177 BF000000 		.4byte	0xbf
+ 353 017b 28       		.byte	0x28
+ 354 017c 0A       		.uleb128 0xa
+ 355 017d 5F000000 		.4byte	.LASF31
+ 356 0181 04       		.byte	0x4
+ 357 0182 44       		.byte	0x44
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 10
+
+
+ 358 0183 BF000000 		.4byte	0xbf
+ 359 0187 29       		.byte	0x29
+ 360 0188 0A       		.uleb128 0xa
+ 361 0189 90090000 		.4byte	.LASF32
+ 362 018d 04       		.byte	0x4
+ 363 018e 45       		.byte	0x45
+ 364 018f BF000000 		.4byte	0xbf
+ 365 0193 2A       		.byte	0x2a
+ 366 0194 0A       		.uleb128 0xa
+ 367 0195 6D050000 		.4byte	.LASF33
+ 368 0199 04       		.byte	0x4
+ 369 019a 46       		.byte	0x46
+ 370 019b BF000000 		.4byte	0xbf
+ 371 019f 2B       		.byte	0x2b
+ 372 01a0 0A       		.uleb128 0xa
+ 373 01a1 56040000 		.4byte	.LASF34
+ 374 01a5 04       		.byte	0x4
+ 375 01a6 47       		.byte	0x47
+ 376 01a7 BF000000 		.4byte	0xbf
+ 377 01ab 2C       		.byte	0x2c
+ 378 01ac 0A       		.uleb128 0xa
+ 379 01ad CC070000 		.4byte	.LASF35
+ 380 01b1 04       		.byte	0x4
+ 381 01b2 48       		.byte	0x48
+ 382 01b3 BF000000 		.4byte	0xbf
+ 383 01b7 2D       		.byte	0x2d
+ 384 01b8 0A       		.uleb128 0xa
+ 385 01b9 15020000 		.4byte	.LASF36
+ 386 01bd 04       		.byte	0x4
+ 387 01be 49       		.byte	0x49
+ 388 01bf BF000000 		.4byte	0xbf
+ 389 01c3 2E       		.byte	0x2e
+ 390 01c4 0A       		.uleb128 0xa
+ 391 01c5 C1040000 		.4byte	.LASF37
+ 392 01c9 04       		.byte	0x4
+ 393 01ca 4A       		.byte	0x4a
+ 394 01cb BF000000 		.4byte	0xbf
+ 395 01cf 2F       		.byte	0x2f
+ 396 01d0 0A       		.uleb128 0xa
+ 397 01d1 58070000 		.4byte	.LASF38
+ 398 01d5 04       		.byte	0x4
+ 399 01d6 4B       		.byte	0x4b
+ 400 01d7 BF000000 		.4byte	0xbf
+ 401 01db 30       		.byte	0x30
+ 402 01dc 0A       		.uleb128 0xa
+ 403 01dd 06040000 		.4byte	.LASF39
+ 404 01e1 04       		.byte	0x4
+ 405 01e2 4E       		.byte	0x4e
+ 406 01e3 BF000000 		.4byte	0xbf
+ 407 01e7 31       		.byte	0x31
+ 408 01e8 0A       		.uleb128 0xa
+ 409 01e9 85000000 		.4byte	.LASF40
+ 410 01ed 04       		.byte	0x4
+ 411 01ee 4F       		.byte	0x4f
+ 412 01ef BF000000 		.4byte	0xbf
+ 413 01f3 32       		.byte	0x32
+ 414 01f4 0A       		.uleb128 0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 11
+
+
+ 415 01f5 6E030000 		.4byte	.LASF41
+ 416 01f9 04       		.byte	0x4
+ 417 01fa 50       		.byte	0x50
+ 418 01fb BF000000 		.4byte	0xbf
+ 419 01ff 33       		.byte	0x33
+ 420 0200 0A       		.uleb128 0xa
+ 421 0201 12050000 		.4byte	.LASF42
+ 422 0205 04       		.byte	0x4
+ 423 0206 51       		.byte	0x51
+ 424 0207 BF000000 		.4byte	0xbf
+ 425 020b 34       		.byte	0x34
+ 426 020c 0A       		.uleb128 0xa
+ 427 020d 48080000 		.4byte	.LASF43
+ 428 0211 04       		.byte	0x4
+ 429 0212 52       		.byte	0x52
+ 430 0213 CA000000 		.4byte	0xca
+ 431 0217 36       		.byte	0x36
+ 432 0218 0A       		.uleb128 0xa
+ 433 0219 7F020000 		.4byte	.LASF44
+ 434 021d 04       		.byte	0x4
+ 435 021e 53       		.byte	0x53
+ 436 021f CA000000 		.4byte	0xca
+ 437 0223 38       		.byte	0x38
+ 438 0224 0A       		.uleb128 0xa
+ 439 0225 BA080000 		.4byte	.LASF45
+ 440 0229 04       		.byte	0x4
+ 441 022a 54       		.byte	0x54
+ 442 022b CA000000 		.4byte	0xca
+ 443 022f 3A       		.byte	0x3a
+ 444 0230 0A       		.uleb128 0xa
+ 445 0231 35020000 		.4byte	.LASF46
+ 446 0235 04       		.byte	0x4
+ 447 0236 55       		.byte	0x55
+ 448 0237 BF000000 		.4byte	0xbf
+ 449 023b 3C       		.byte	0x3c
+ 450 023c 0A       		.uleb128 0xa
+ 451 023d A6020000 		.4byte	.LASF47
+ 452 0241 04       		.byte	0x4
+ 453 0242 56       		.byte	0x56
+ 454 0243 BF000000 		.4byte	0xbf
+ 455 0247 3D       		.byte	0x3d
+ 456 0248 0A       		.uleb128 0xa
+ 457 0249 65060000 		.4byte	.LASF48
+ 458 024d 04       		.byte	0x4
+ 459 024e 57       		.byte	0x57
+ 460 024f BF000000 		.4byte	0xbf
+ 461 0253 3E       		.byte	0x3e
+ 462 0254 0A       		.uleb128 0xa
+ 463 0255 F7000000 		.4byte	.LASF49
+ 464 0259 04       		.byte	0x4
+ 465 025a 58       		.byte	0x58
+ 466 025b BF000000 		.4byte	0xbf
+ 467 025f 3F       		.byte	0x3f
+ 468 0260 0A       		.uleb128 0xa
+ 469 0261 86050000 		.4byte	.LASF50
+ 470 0265 04       		.byte	0x4
+ 471 0266 59       		.byte	0x59
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 12
+
+
+ 472 0267 BF000000 		.4byte	0xbf
+ 473 026b 40       		.byte	0x40
+ 474 026c 0A       		.uleb128 0xa
+ 475 026d 01030000 		.4byte	.LASF51
+ 476 0271 04       		.byte	0x4
+ 477 0272 5A       		.byte	0x5a
+ 478 0273 BF000000 		.4byte	0xbf
+ 479 0277 41       		.byte	0x41
+ 480 0278 0A       		.uleb128 0xa
+ 481 0279 72040000 		.4byte	.LASF52
+ 482 027d 04       		.byte	0x4
+ 483 027e 5B       		.byte	0x5b
+ 484 027f BF000000 		.4byte	0xbf
+ 485 0283 42       		.byte	0x42
+ 486 0284 0A       		.uleb128 0xa
+ 487 0285 59050000 		.4byte	.LASF53
+ 488 0289 04       		.byte	0x4
+ 489 028a 5C       		.byte	0x5c
+ 490 028b BF000000 		.4byte	0xbf
+ 491 028f 43       		.byte	0x43
+ 492 0290 0A       		.uleb128 0xa
+ 493 0291 6E020000 		.4byte	.LASF54
+ 494 0295 04       		.byte	0x4
+ 495 0296 5D       		.byte	0x5d
+ 496 0297 BF000000 		.4byte	0xbf
+ 497 029b 44       		.byte	0x44
+ 498 029c 0A       		.uleb128 0xa
+ 499 029d 00000000 		.4byte	.LASF55
+ 500 02a1 04       		.byte	0x4
+ 501 02a2 5E       		.byte	0x5e
+ 502 02a3 E0000000 		.4byte	0xe0
+ 503 02a7 48       		.byte	0x48
+ 504 02a8 0A       		.uleb128 0xa
+ 505 02a9 57020000 		.4byte	.LASF56
+ 506 02ad 04       		.byte	0x4
+ 507 02ae 5F       		.byte	0x5f
+ 508 02af E0000000 		.4byte	0xe0
+ 509 02b3 4C       		.byte	0x4c
+ 510 02b4 0A       		.uleb128 0xa
+ 511 02b5 D0090000 		.4byte	.LASF57
+ 512 02b9 04       		.byte	0x4
+ 513 02ba 60       		.byte	0x60
+ 514 02bb BF000000 		.4byte	0xbf
+ 515 02bf 50       		.byte	0x50
+ 516 02c0 0A       		.uleb128 0xa
+ 517 02c1 8F010000 		.4byte	.LASF58
+ 518 02c5 04       		.byte	0x4
+ 519 02c6 61       		.byte	0x61
+ 520 02c7 BF000000 		.4byte	0xbf
+ 521 02cb 51       		.byte	0x51
+ 522 02cc 0A       		.uleb128 0xa
+ 523 02cd CF080000 		.4byte	.LASF59
+ 524 02d1 04       		.byte	0x4
+ 525 02d2 62       		.byte	0x62
+ 526 02d3 BF000000 		.4byte	0xbf
+ 527 02d7 52       		.byte	0x52
+ 528 02d8 0A       		.uleb128 0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 13
+
+
+ 529 02d9 D9070000 		.4byte	.LASF60
+ 530 02dd 04       		.byte	0x4
+ 531 02de 63       		.byte	0x63
+ 532 02df BF000000 		.4byte	0xbf
+ 533 02e3 53       		.byte	0x53
+ 534 02e4 0A       		.uleb128 0xa
+ 535 02e5 73060000 		.4byte	.LASF61
+ 536 02e9 04       		.byte	0x4
+ 537 02ea 64       		.byte	0x64
+ 538 02eb BF000000 		.4byte	0xbf
+ 539 02ef 54       		.byte	0x54
+ 540 02f0 0A       		.uleb128 0xa
+ 541 02f1 A1010000 		.4byte	.LASF62
+ 542 02f5 04       		.byte	0x4
+ 543 02f6 65       		.byte	0x65
+ 544 02f7 BF000000 		.4byte	0xbf
+ 545 02fb 55       		.byte	0x55
+ 546 02fc 0A       		.uleb128 0xa
+ 547 02fd A2030000 		.4byte	.LASF63
+ 548 0301 04       		.byte	0x4
+ 549 0302 66       		.byte	0x66
+ 550 0303 BF000000 		.4byte	0xbf
+ 551 0307 56       		.byte	0x56
+ 552 0308 0A       		.uleb128 0xa
+ 553 0309 35060000 		.4byte	.LASF64
+ 554 030d 04       		.byte	0x4
+ 555 030e 67       		.byte	0x67
+ 556 030f BF000000 		.4byte	0xbf
+ 557 0313 57       		.byte	0x57
+ 558 0314 0A       		.uleb128 0xa
+ 559 0315 24000000 		.4byte	.LASF65
+ 560 0319 04       		.byte	0x4
+ 561 031a 68       		.byte	0x68
+ 562 031b BF000000 		.4byte	0xbf
+ 563 031f 58       		.byte	0x58
+ 564 0320 0A       		.uleb128 0xa
+ 565 0321 03060000 		.4byte	.LASF66
+ 566 0325 04       		.byte	0x4
+ 567 0326 69       		.byte	0x69
+ 568 0327 BF000000 		.4byte	0xbf
+ 569 032b 59       		.byte	0x59
+ 570 032c 0A       		.uleb128 0xa
+ 571 032d 07050000 		.4byte	.LASF67
+ 572 0331 04       		.byte	0x4
+ 573 0332 6E       		.byte	0x6e
+ 574 0333 D5000000 		.4byte	0xd5
+ 575 0337 5A       		.byte	0x5a
+ 576 0338 0A       		.uleb128 0xa
+ 577 0339 18080000 		.4byte	.LASF68
+ 578 033d 04       		.byte	0x4
+ 579 033e 6F       		.byte	0x6f
+ 580 033f D5000000 		.4byte	0xd5
+ 581 0343 5C       		.byte	0x5c
+ 582 0344 0A       		.uleb128 0xa
+ 583 0345 6D000000 		.4byte	.LASF69
+ 584 0349 04       		.byte	0x4
+ 585 034a 70       		.byte	0x70
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 14
+
+
+ 586 034b BF000000 		.4byte	0xbf
+ 587 034f 5E       		.byte	0x5e
+ 588 0350 0A       		.uleb128 0xa
+ 589 0351 C0050000 		.4byte	.LASF70
+ 590 0355 04       		.byte	0x4
+ 591 0356 71       		.byte	0x71
+ 592 0357 BF000000 		.4byte	0xbf
+ 593 035b 5F       		.byte	0x5f
+ 594 035c 0A       		.uleb128 0xa
+ 595 035d 48050000 		.4byte	.LASF71
+ 596 0361 04       		.byte	0x4
+ 597 0362 72       		.byte	0x72
+ 598 0363 BF000000 		.4byte	0xbf
+ 599 0367 60       		.byte	0x60
+ 600 0368 0A       		.uleb128 0xa
+ 601 0369 99050000 		.4byte	.LASF72
+ 602 036d 04       		.byte	0x4
+ 603 036e 73       		.byte	0x73
+ 604 036f E0000000 		.4byte	0xe0
+ 605 0373 64       		.byte	0x64
+ 606 0374 0A       		.uleb128 0xa
+ 607 0375 45010000 		.4byte	.LASF73
+ 608 0379 04       		.byte	0x4
+ 609 037a 76       		.byte	0x76
+ 610 037b D5000000 		.4byte	0xd5
+ 611 037f 68       		.byte	0x68
+ 612 0380 0A       		.uleb128 0xa
+ 613 0381 90030000 		.4byte	.LASF74
+ 614 0385 04       		.byte	0x4
+ 615 0386 77       		.byte	0x77
+ 616 0387 D5000000 		.4byte	0xd5
+ 617 038b 6A       		.byte	0x6a
+ 618 038c 0A       		.uleb128 0xa
+ 619 038d 23040000 		.4byte	.LASF75
+ 620 0391 04       		.byte	0x4
+ 621 0392 78       		.byte	0x78
+ 622 0393 D5000000 		.4byte	0xd5
+ 623 0397 6C       		.byte	0x6c
+ 624 0398 0A       		.uleb128 0xa
+ 625 0399 49040000 		.4byte	.LASF76
+ 626 039d 04       		.byte	0x4
+ 627 039e 79       		.byte	0x79
+ 628 039f D5000000 		.4byte	0xd5
+ 629 03a3 6E       		.byte	0x6e
+ 630 03a4 0A       		.uleb128 0xa
+ 631 03a5 21060000 		.4byte	.LASF77
+ 632 03a9 04       		.byte	0x4
+ 633 03aa 7B       		.byte	0x7b
+ 634 03ab BF000000 		.4byte	0xbf
+ 635 03af 70       		.byte	0x70
+ 636 03b0 0A       		.uleb128 0xa
+ 637 03b1 E9010000 		.4byte	.LASF78
+ 638 03b5 04       		.byte	0x4
+ 639 03b6 7C       		.byte	0x7c
+ 640 03b7 BF000000 		.4byte	0xbf
+ 641 03bb 71       		.byte	0x71
+ 642 03bc 0A       		.uleb128 0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 15
+
+
+ 643 03bd A2090000 		.4byte	.LASF79
+ 644 03c1 04       		.byte	0x4
+ 645 03c2 7D       		.byte	0x7d
+ 646 03c3 BF000000 		.4byte	0xbf
+ 647 03c7 72       		.byte	0x72
+ 648 03c8 0A       		.uleb128 0xa
+ 649 03c9 23050000 		.4byte	.LASF80
+ 650 03cd 04       		.byte	0x4
+ 651 03ce 7E       		.byte	0x7e
+ 652 03cf BF000000 		.4byte	0xbf
+ 653 03d3 73       		.byte	0x73
+ 654 03d4 0A       		.uleb128 0xa
+ 655 03d5 D0020000 		.4byte	.LASF81
+ 656 03d9 04       		.byte	0x4
+ 657 03da 80       		.byte	0x80
+ 658 03db D5000000 		.4byte	0xd5
+ 659 03df 74       		.byte	0x74
+ 660 03e0 0A       		.uleb128 0xa
+ 661 03e1 7D070000 		.4byte	.LASF82
+ 662 03e5 04       		.byte	0x4
+ 663 03e6 81       		.byte	0x81
+ 664 03e7 D5000000 		.4byte	0xd5
+ 665 03eb 76       		.byte	0x76
+ 666 03ec 0A       		.uleb128 0xa
+ 667 03ed 91020000 		.4byte	.LASF83
+ 668 03f1 04       		.byte	0x4
+ 669 03f2 82       		.byte	0x82
+ 670 03f3 D5000000 		.4byte	0xd5
+ 671 03f7 78       		.byte	0x78
+ 672 03f8 0A       		.uleb128 0xa
+ 673 03f9 9D000000 		.4byte	.LASF84
+ 674 03fd 04       		.byte	0x4
+ 675 03fe 83       		.byte	0x83
+ 676 03ff D5000000 		.4byte	0xd5
+ 677 0403 7A       		.byte	0x7a
+ 678 0404 0A       		.uleb128 0xa
+ 679 0405 FC080000 		.4byte	.LASF85
+ 680 0409 04       		.byte	0x4
+ 681 040a 86       		.byte	0x86
+ 682 040b BF000000 		.4byte	0xbf
+ 683 040f 7C       		.byte	0x7c
+ 684 0410 0A       		.uleb128 0xa
+ 685 0411 75080000 		.4byte	.LASF86
+ 686 0415 04       		.byte	0x4
+ 687 0416 87       		.byte	0x87
+ 688 0417 BF000000 		.4byte	0xbf
+ 689 041b 7D       		.byte	0x7d
+ 690 041c 0A       		.uleb128 0xa
+ 691 041d 38000000 		.4byte	.LASF87
+ 692 0421 04       		.byte	0x4
+ 693 0422 88       		.byte	0x88
+ 694 0423 BF000000 		.4byte	0xbf
+ 695 0427 7E       		.byte	0x7e
+ 696 0428 0A       		.uleb128 0xa
+ 697 0429 E2020000 		.4byte	.LASF88
+ 698 042d 04       		.byte	0x4
+ 699 042e 89       		.byte	0x89
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 16
+
+
+ 700 042f BF000000 		.4byte	0xbf
+ 701 0433 7F       		.byte	0x7f
+ 702 0434 0A       		.uleb128 0xa
+ 703 0435 5A030000 		.4byte	.LASF89
+ 704 0439 04       		.byte	0x4
+ 705 043a 8A       		.byte	0x8a
+ 706 043b BF000000 		.4byte	0xbf
+ 707 043f 80       		.byte	0x80
+ 708 0440 0A       		.uleb128 0xa
+ 709 0441 5E080000 		.4byte	.LASF90
+ 710 0445 04       		.byte	0x4
+ 711 0446 8D       		.byte	0x8d
+ 712 0447 E0000000 		.4byte	0xe0
+ 713 044b 84       		.byte	0x84
+ 714 044c 0A       		.uleb128 0xa
+ 715 044d B2000000 		.4byte	.LASF91
+ 716 0451 04       		.byte	0x4
+ 717 0452 8E       		.byte	0x8e
+ 718 0453 E0000000 		.4byte	0xe0
+ 719 0457 88       		.byte	0x88
+ 720 0458 0A       		.uleb128 0xa
+ 721 0459 E7080000 		.4byte	.LASF92
+ 722 045d 04       		.byte	0x4
+ 723 045e 8F       		.byte	0x8f
+ 724 045f E0000000 		.4byte	0xe0
+ 725 0463 8C       		.byte	0x8c
+ 726 0464 0A       		.uleb128 0xa
+ 727 0465 CD040000 		.4byte	.LASF93
+ 728 0469 04       		.byte	0x4
+ 729 046a 90       		.byte	0x90
+ 730 046b E0000000 		.4byte	0xe0
+ 731 046f 90       		.byte	0x90
+ 732 0470 0A       		.uleb128 0xa
+ 733 0471 2A030000 		.4byte	.LASF94
+ 734 0475 04       		.byte	0x4
+ 735 0476 91       		.byte	0x91
+ 736 0477 E0000000 		.4byte	0xe0
+ 737 047b 94       		.byte	0x94
+ 738 047c 0A       		.uleb128 0xa
+ 739 047d 8C040000 		.4byte	.LASF95
+ 740 0481 04       		.byte	0x4
+ 741 0482 92       		.byte	0x92
+ 742 0483 E0000000 		.4byte	0xe0
+ 743 0487 98       		.byte	0x98
+ 744 0488 0A       		.uleb128 0xa
+ 745 0489 2F090000 		.4byte	.LASF96
+ 746 048d 04       		.byte	0x4
+ 747 048e 93       		.byte	0x93
+ 748 048f E0000000 		.4byte	0xe0
+ 749 0493 9C       		.byte	0x9c
+ 750 0494 0A       		.uleb128 0xa
+ 751 0495 5F010000 		.4byte	.LASF97
+ 752 0499 04       		.byte	0x4
+ 753 049a 94       		.byte	0x94
+ 754 049b E0000000 		.4byte	0xe0
+ 755 049f A0       		.byte	0xa0
+ 756 04a0 0A       		.uleb128 0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 17
+
+
+ 757 04a1 20020000 		.4byte	.LASF98
+ 758 04a5 04       		.byte	0x4
+ 759 04a6 95       		.byte	0x95
+ 760 04a7 D5000000 		.4byte	0xd5
+ 761 04ab A4       		.byte	0xa4
+ 762 04ac 0A       		.uleb128 0xa
+ 763 04ad 8C060000 		.4byte	.LASF99
+ 764 04b1 04       		.byte	0x4
+ 765 04b2 96       		.byte	0x96
+ 766 04b3 D5000000 		.4byte	0xd5
+ 767 04b7 A6       		.byte	0xa6
+ 768 04b8 0A       		.uleb128 0xa
+ 769 04b9 B4050000 		.4byte	.LASF100
+ 770 04bd 04       		.byte	0x4
+ 771 04be 97       		.byte	0x97
+ 772 04bf D5000000 		.4byte	0xd5
+ 773 04c3 A8       		.byte	0xa8
+ 774 04c4 0A       		.uleb128 0xa
+ 775 04c5 64070000 		.4byte	.LASF101
+ 776 04c9 04       		.byte	0x4
+ 777 04ca 98       		.byte	0x98
+ 778 04cb D5000000 		.4byte	0xd5
+ 779 04cf AA       		.byte	0xaa
+ 780 04d0 0A       		.uleb128 0xa
+ 781 04d1 32040000 		.4byte	.LASF102
+ 782 04d5 04       		.byte	0x4
+ 783 04d6 99       		.byte	0x99
+ 784 04d7 D5000000 		.4byte	0xd5
+ 785 04db AC       		.byte	0xac
+ 786 04dc 0A       		.uleb128 0xa
+ 787 04dd 3A050000 		.4byte	.LASF103
+ 788 04e1 04       		.byte	0x4
+ 789 04e2 9A       		.byte	0x9a
+ 790 04e3 D5000000 		.4byte	0xd5
+ 791 04e7 AE       		.byte	0xae
+ 792 04e8 0A       		.uleb128 0xa
+ 793 04e9 2B080000 		.4byte	.LASF104
+ 794 04ed 04       		.byte	0x4
+ 795 04ee 9D       		.byte	0x9d
+ 796 04ef D5000000 		.4byte	0xd5
+ 797 04f3 B0       		.byte	0xb0
+ 798 04f4 0A       		.uleb128 0xa
+ 799 04f5 4B000000 		.4byte	.LASF105
+ 800 04f9 04       		.byte	0x4
+ 801 04fa 9E       		.byte	0x9e
+ 802 04fb E0000000 		.4byte	0xe0
+ 803 04ff B4       		.byte	0xb4
+ 804 0500 00       		.byte	0
+ 805 0501 03       		.uleb128 0x3
+ 806 0502 62040000 		.4byte	.LASF106
+ 807 0506 04       		.byte	0x4
+ 808 0507 9F       		.byte	0x9f
+ 809 0508 F0000000 		.4byte	0xf0
+ 810 050c 02       		.uleb128 0x2
+ 811 050d 04       		.byte	0x4
+ 812 050e 04       		.byte	0x4
+ 813 050f 93050000 		.4byte	.LASF107
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 18
+
+
+ 814 0513 02       		.uleb128 0x2
+ 815 0514 08       		.byte	0x8
+ 816 0515 04       		.byte	0x4
+ 817 0516 8A020000 		.4byte	.LASF108
+ 818 051a 02       		.uleb128 0x2
+ 819 051b 01       		.byte	0x1
+ 820 051c 02       		.byte	0x2
+ 821 051d EF050000 		.4byte	.LASF109
+ 822 0521 06       		.uleb128 0x6
+ 823 0522 04       		.byte	0x4
+ 824 0523 27050000 		.4byte	0x527
+ 825 0527 0B       		.uleb128 0xb
+ 826 0528 32050000 		.4byte	0x532
+ 827 052c 0C       		.uleb128 0xc
+ 828 052d E0000000 		.4byte	0xe0
+ 829 0531 00       		.byte	0
+ 830 0532 0D       		.uleb128 0xd
+ 831 0533 DA030000 		.4byte	.LASF110
+ 832 0537 05       		.byte	0x5
+ 833 0538 D901     		.2byte	0x1d9
+ 834 053a 21050000 		.4byte	0x521
+ 835 053e 0E       		.uleb128 0xe
+ 836 053f B8090000 		.4byte	.LASF126
+ 837 0543 38       		.byte	0x38
+ 838 0544 05       		.byte	0x5
+ 839 0545 7502     		.2byte	0x275
+ 840 0547 02060000 		.4byte	0x602
+ 841 054b 0F       		.uleb128 0xf
+ 842 054c 1A040000 		.4byte	.LASF111
+ 843 0550 05       		.byte	0x5
+ 844 0551 7802     		.2byte	0x278
+ 845 0553 EB000000 		.4byte	0xeb
+ 846 0557 00       		.byte	0
+ 847 0558 0F       		.uleb128 0xf
+ 848 0559 64050000 		.4byte	.LASF112
+ 849 055d 05       		.byte	0x5
+ 850 055e 7902     		.2byte	0x279
+ 851 0560 EB000000 		.4byte	0xeb
+ 852 0564 04       		.byte	0x4
+ 853 0565 0F       		.uleb128 0xf
+ 854 0566 55010000 		.4byte	.LASF113
+ 855 056a 05       		.byte	0x5
+ 856 056b 7B02     		.2byte	0x27b
+ 857 056d 9E000000 		.4byte	0x9e
+ 858 0571 08       		.byte	0x8
+ 859 0572 0F       		.uleb128 0xf
+ 860 0573 EB070000 		.4byte	.LASF114
+ 861 0577 05       		.byte	0x5
+ 862 0578 7C02     		.2byte	0x27c
+ 863 057a E0000000 		.4byte	0xe0
+ 864 057e 0C       		.byte	0xc
+ 865 057f 0F       		.uleb128 0xf
+ 866 0580 7E040000 		.4byte	.LASF115
+ 867 0584 05       		.byte	0x5
+ 868 0585 7D02     		.2byte	0x27d
+ 869 0587 EB000000 		.4byte	0xeb
+ 870 058b 10       		.byte	0x10
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 19
+
+
+ 871 058c 0F       		.uleb128 0xf
+ 872 058d 21090000 		.4byte	.LASF116
+ 873 0591 05       		.byte	0x5
+ 874 0592 7E02     		.2byte	0x27e
+ 875 0594 EB000000 		.4byte	0xeb
+ 876 0598 14       		.byte	0x14
+ 877 0599 0F       		.uleb128 0xf
+ 878 059a 8E080000 		.4byte	.LASF117
+ 879 059e 05       		.byte	0x5
+ 880 059f 8002     		.2byte	0x280
+ 881 05a1 9E000000 		.4byte	0x9e
+ 882 05a5 18       		.byte	0x18
+ 883 05a6 0F       		.uleb128 0xf
+ 884 05a7 1A000000 		.4byte	.LASF118
+ 885 05ab 05       		.byte	0x5
+ 886 05ac 8102     		.2byte	0x281
+ 887 05ae E0000000 		.4byte	0xe0
+ 888 05b2 1C       		.byte	0x1c
+ 889 05b3 0F       		.uleb128 0xf
+ 890 05b4 1B030000 		.4byte	.LASF119
+ 891 05b8 05       		.byte	0x5
+ 892 05b9 8202     		.2byte	0x282
+ 893 05bb EB000000 		.4byte	0xeb
+ 894 05bf 20       		.byte	0x20
+ 895 05c0 0F       		.uleb128 0xf
+ 896 05c1 75010000 		.4byte	.LASF120
+ 897 05c5 05       		.byte	0x5
+ 898 05c6 8402     		.2byte	0x284
+ 899 05c8 9E000000 		.4byte	0x9e
+ 900 05cc 24       		.byte	0x24
+ 901 05cd 0F       		.uleb128 0xf
+ 902 05ce 3F030000 		.4byte	.LASF121
+ 903 05d2 05       		.byte	0x5
+ 904 05d3 8502     		.2byte	0x285
+ 905 05d5 E0000000 		.4byte	0xe0
+ 906 05d9 28       		.byte	0x28
+ 907 05da 0F       		.uleb128 0xf
+ 908 05db D6050000 		.4byte	.LASF122
+ 909 05df 05       		.byte	0x5
+ 910 05e0 8602     		.2byte	0x286
+ 911 05e2 EB000000 		.4byte	0xeb
+ 912 05e6 2C       		.byte	0x2c
+ 913 05e7 0F       		.uleb128 0xf
+ 914 05e8 40040000 		.4byte	.LASF123
+ 915 05ec 05       		.byte	0x5
+ 916 05ed 8B02     		.2byte	0x28b
+ 917 05ef 32050000 		.4byte	0x532
+ 918 05f3 30       		.byte	0x30
+ 919 05f4 0F       		.uleb128 0xf
+ 920 05f5 86080000 		.4byte	.LASF124
+ 921 05f9 05       		.byte	0x5
+ 922 05fa 8E02     		.2byte	0x28e
+ 923 05fc E0000000 		.4byte	0xe0
+ 924 0600 34       		.byte	0x34
+ 925 0601 00       		.byte	0
+ 926 0602 0D       		.uleb128 0xd
+ 927 0603 A0080000 		.4byte	.LASF125
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 20
+
+
+ 928 0607 05       		.byte	0x5
+ 929 0608 9102     		.2byte	0x291
+ 930 060a 3E050000 		.4byte	0x53e
+ 931 060e 10       		.uleb128 0x10
+ 932 060f E2040000 		.4byte	.LASF127
+ 933 0613 4C       		.byte	0x4c
+ 934 0614 06       		.byte	0x6
+ 935 0615 2F       		.byte	0x2f
+ 936 0616 FF060000 		.4byte	0x6ff
+ 937 061a 0A       		.uleb128 0xa
+ 938 061b F0000000 		.4byte	.LASF128
+ 939 061f 06       		.byte	0x6
+ 940 0620 31       		.byte	0x31
+ 941 0621 E0000000 		.4byte	0xe0
+ 942 0625 00       		.byte	0
+ 943 0626 0A       		.uleb128 0xa
+ 944 0627 36010000 		.4byte	.LASF129
+ 945 062b 06       		.byte	0x6
+ 946 062c 33       		.byte	0x33
+ 947 062d E0000000 		.4byte	0xe0
+ 948 0631 04       		.byte	0x4
+ 949 0632 0A       		.uleb128 0xa
+ 950 0633 12000000 		.4byte	.LASF130
+ 951 0637 06       		.byte	0x6
+ 952 0638 34       		.byte	0x34
+ 953 0639 E0000000 		.4byte	0xe0
+ 954 063d 08       		.byte	0x8
+ 955 063e 0A       		.uleb128 0xa
+ 956 063f C9000000 		.4byte	.LASF131
+ 957 0643 06       		.byte	0x6
+ 958 0644 35       		.byte	0x35
+ 959 0645 E0000000 		.4byte	0xe0
+ 960 0649 0C       		.byte	0xc
+ 961 064a 0A       		.uleb128 0xa
+ 962 064b 54060000 		.4byte	.LASF132
+ 963 064f 06       		.byte	0x6
+ 964 0650 37       		.byte	0x37
+ 965 0651 E0000000 		.4byte	0xe0
+ 966 0655 10       		.byte	0x10
+ 967 0656 0A       		.uleb128 0xa
+ 968 0657 33070000 		.4byte	.LASF133
+ 969 065b 06       		.byte	0x6
+ 970 065c 38       		.byte	0x38
+ 971 065d E0000000 		.4byte	0xe0
+ 972 0661 14       		.byte	0x14
+ 973 0662 0A       		.uleb128 0xa
+ 974 0663 55080000 		.4byte	.LASF134
+ 975 0667 06       		.byte	0x6
+ 976 0668 39       		.byte	0x39
+ 977 0669 E0000000 		.4byte	0xe0
+ 978 066d 18       		.byte	0x18
+ 979 066e 0A       		.uleb128 0xa
+ 980 066f C8030000 		.4byte	.LASF135
+ 981 0673 06       		.byte	0x6
+ 982 0674 3A       		.byte	0x3a
+ 983 0675 1A050000 		.4byte	0x51a
+ 984 0679 1C       		.byte	0x1c
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 21
+
+
+ 985 067a 0A       		.uleb128 0xa
+ 986 067b 49030000 		.4byte	.LASF136
+ 987 067f 06       		.byte	0x6
+ 988 0680 3C       		.byte	0x3c
+ 989 0681 E0000000 		.4byte	0xe0
+ 990 0685 20       		.byte	0x20
+ 991 0686 0A       		.uleb128 0xa
+ 992 0687 BF020000 		.4byte	.LASF137
+ 993 068b 06       		.byte	0x6
+ 994 068c 3D       		.byte	0x3d
+ 995 068d E0000000 		.4byte	0xe0
+ 996 0691 24       		.byte	0x24
+ 997 0692 0A       		.uleb128 0xa
+ 998 0693 03010000 		.4byte	.LASF138
+ 999 0697 06       		.byte	0x6
+ 1000 0698 3F       		.byte	0x3f
+ 1001 0699 E0000000 		.4byte	0xe0
+ 1002 069d 28       		.byte	0x28
+ 1003 069e 0A       		.uleb128 0xa
+ 1004 069f 11090000 		.4byte	.LASF139
+ 1005 06a3 06       		.byte	0x6
+ 1006 06a4 40       		.byte	0x40
+ 1007 06a5 E0000000 		.4byte	0xe0
+ 1008 06a9 2C       		.byte	0x2c
+ 1009 06aa 0A       		.uleb128 0xa
+ 1010 06ab F9070000 		.4byte	.LASF140
+ 1011 06af 06       		.byte	0x6
+ 1012 06b0 42       		.byte	0x42
+ 1013 06b1 E0000000 		.4byte	0xe0
+ 1014 06b5 30       		.byte	0x30
+ 1015 06b6 0A       		.uleb128 0xa
+ 1016 06b7 39080000 		.4byte	.LASF141
+ 1017 06bb 06       		.byte	0x6
+ 1018 06bc 43       		.byte	0x43
+ 1019 06bd E0000000 		.4byte	0xe0
+ 1020 06c1 34       		.byte	0x34
+ 1021 06c2 0A       		.uleb128 0xa
+ 1022 06c3 A2040000 		.4byte	.LASF142
+ 1023 06c7 06       		.byte	0x6
+ 1024 06c8 45       		.byte	0x45
+ 1025 06c9 E0000000 		.4byte	0xe0
+ 1026 06cd 38       		.byte	0x38
+ 1027 06ce 0A       		.uleb128 0xa
+ 1028 06cf D8000000 		.4byte	.LASF143
+ 1029 06d3 06       		.byte	0x6
+ 1030 06d4 46       		.byte	0x46
+ 1031 06d5 E0000000 		.4byte	0xe0
+ 1032 06d9 3C       		.byte	0x3c
+ 1033 06da 0A       		.uleb128 0xa
+ 1034 06db 21080000 		.4byte	.LASF144
+ 1035 06df 06       		.byte	0x6
+ 1036 06e0 48       		.byte	0x48
+ 1037 06e1 E0000000 		.4byte	0xe0
+ 1038 06e5 40       		.byte	0x40
+ 1039 06e6 0A       		.uleb128 0xa
+ 1040 06e7 45090000 		.4byte	.LASF145
+ 1041 06eb 06       		.byte	0x6
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 22
+
+
+ 1042 06ec 49       		.byte	0x49
+ 1043 06ed E0000000 		.4byte	0xe0
+ 1044 06f1 44       		.byte	0x44
+ 1045 06f2 0A       		.uleb128 0xa
+ 1046 06f3 4D070000 		.4byte	.LASF146
+ 1047 06f7 06       		.byte	0x6
+ 1048 06f8 4B       		.byte	0x4b
+ 1049 06f9 E0000000 		.4byte	0xe0
+ 1050 06fd 48       		.byte	0x48
+ 1051 06fe 00       		.byte	0
+ 1052 06ff 03       		.uleb128 0x3
+ 1053 0700 CB010000 		.4byte	.LASF147
+ 1054 0704 06       		.byte	0x6
+ 1055 0705 4C       		.byte	0x4c
+ 1056 0706 0E060000 		.4byte	0x60e
+ 1057 070a 11       		.uleb128 0x11
+ 1058 070b AD040000 		.4byte	.LASF148
+ 1059 070f 01       		.byte	0x1
+ 1060 0710 4F       		.byte	0x4f
+ 1061 0711 89000000 		.4byte	0x89
+ 1062 0715 00000000 		.4byte	.LFB495
+ 1063 0719 24000000 		.4byte	.LFE495-.LFB495
+ 1064 071d 01       		.uleb128 0x1
+ 1065 071e 9C       		.byte	0x9c
+ 1066 071f 68070000 		.4byte	0x768
+ 1067 0723 12       		.uleb128 0x12
+ 1068 0724 666400   		.ascii	"fd\000"
+ 1069 0727 01       		.byte	0x1
+ 1070 0728 4F       		.byte	0x4f
+ 1071 0729 89000000 		.4byte	0x89
+ 1072 072d 00000000 		.4byte	.LLST0
+ 1073 0731 12       		.uleb128 0x12
+ 1074 0732 70747200 		.ascii	"ptr\000"
+ 1075 0736 01       		.byte	0x1
+ 1076 0737 4F       		.byte	0x4f
+ 1077 0738 B4000000 		.4byte	0xb4
+ 1078 073c 3A000000 		.4byte	.LLST1
+ 1079 0740 12       		.uleb128 0x12
+ 1080 0741 6C656E00 		.ascii	"len\000"
+ 1081 0745 01       		.byte	0x1
+ 1082 0746 4F       		.byte	0x4f
+ 1083 0747 89000000 		.4byte	0x89
+ 1084 074b 6E000000 		.4byte	.LLST2
+ 1085 074f 13       		.uleb128 0x13
+ 1086 0750 88010000 		.4byte	.LASF150
+ 1087 0754 01       		.byte	0x1
+ 1088 0755 51       		.byte	0x51
+ 1089 0756 89000000 		.4byte	0x89
+ 1090 075a B0000000 		.4byte	.LLST3
+ 1091 075e 14       		.uleb128 0x14
+ 1092 075f 14000000 		.4byte	.LVL3
+ 1093 0763 02080000 		.4byte	0x802
+ 1094 0767 00       		.byte	0
+ 1095 0768 11       		.uleb128 0x11
+ 1096 0769 24030000 		.4byte	.LASF149
+ 1097 076d 01       		.byte	0x1
+ 1098 076e 85       		.byte	0x85
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 23
+
+
+ 1099 076f 89000000 		.4byte	0x89
+ 1100 0773 00000000 		.4byte	.LFB496
+ 1101 0777 2E000000 		.4byte	.LFE496-.LFB496
+ 1102 077b 01       		.uleb128 0x1
+ 1103 077c 9C       		.byte	0x9c
+ 1104 077d C6070000 		.4byte	0x7c6
+ 1105 0781 12       		.uleb128 0x12
+ 1106 0782 666400   		.ascii	"fd\000"
+ 1107 0785 01       		.byte	0x1
+ 1108 0786 85       		.byte	0x85
+ 1109 0787 89000000 		.4byte	0x89
+ 1110 078b F1000000 		.4byte	.LLST4
+ 1111 078f 12       		.uleb128 0x12
+ 1112 0790 70747200 		.ascii	"ptr\000"
+ 1113 0794 01       		.byte	0x1
+ 1114 0795 85       		.byte	0x85
+ 1115 0796 A7000000 		.4byte	0xa7
+ 1116 079a 2B010000 		.4byte	.LLST5
+ 1117 079e 12       		.uleb128 0x12
+ 1118 079f 6C656E00 		.ascii	"len\000"
+ 1119 07a3 01       		.byte	0x1
+ 1120 07a4 85       		.byte	0x85
+ 1121 07a5 89000000 		.4byte	0x89
+ 1122 07a9 5F010000 		.4byte	.LLST6
+ 1123 07ad 13       		.uleb128 0x13
+ 1124 07ae 88010000 		.4byte	.LASF150
+ 1125 07b2 01       		.byte	0x1
+ 1126 07b3 87       		.byte	0x87
+ 1127 07b4 89000000 		.4byte	0x89
+ 1128 07b8 A1010000 		.4byte	.LLST7
+ 1129 07bc 14       		.uleb128 0x14
+ 1130 07bd 12000000 		.4byte	.LVL15
+ 1131 07c1 0D080000 		.4byte	0x80d
+ 1132 07c5 00       		.byte	0
+ 1133 07c6 15       		.uleb128 0x15
+ 1134 07c7 AA050000 		.4byte	.LASF151
+ 1135 07cb 04       		.byte	0x4
+ 1136 07cc A7       		.byte	0xa7
+ 1137 07cd D1070000 		.4byte	0x7d1
+ 1138 07d1 06       		.uleb128 0x6
+ 1139 07d2 04       		.byte	0x4
+ 1140 07d3 D7070000 		.4byte	0x7d7
+ 1141 07d7 07       		.uleb128 0x7
+ 1142 07d8 01050000 		.4byte	0x501
+ 1143 07dc 15       		.uleb128 0x15
+ 1144 07dd 7B010000 		.4byte	.LASF152
+ 1145 07e1 07       		.byte	0x7
+ 1146 07e2 1F       		.byte	0x1f
+ 1147 07e3 E7070000 		.4byte	0x7e7
+ 1148 07e7 07       		.uleb128 0x7
+ 1149 07e8 FF060000 		.4byte	0x6ff
+ 1150 07ec 15       		.uleb128 0x15
+ 1151 07ed F9030000 		.4byte	.LASF153
+ 1152 07f1 08       		.byte	0x8
+ 1153 07f2 87       		.byte	0x87
+ 1154 07f3 02060000 		.4byte	0x602
+ 1155 07f7 15       		.uleb128 0x15
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 24
+
+
+ 1156 07f8 10010000 		.4byte	.LASF154
+ 1157 07fc 09       		.byte	0x9
+ 1158 07fd 1F       		.byte	0x1f
+ 1159 07fe E7070000 		.4byte	0x7e7
+ 1160 0802 16       		.uleb128 0x16
+ 1161 0803 B1020000 		.4byte	.LASF155
+ 1162 0807 B1020000 		.4byte	.LASF155
+ 1163 080b 0A       		.byte	0xa
+ 1164 080c BA       		.byte	0xba
+ 1165 080d 16       		.uleb128 0x16
+ 1166 080e FE010000 		.4byte	.LASF156
+ 1167 0812 FE010000 		.4byte	.LASF156
+ 1168 0816 0A       		.byte	0xa
+ 1169 0817 BE       		.byte	0xbe
+ 1170 0818 00       		.byte	0
+ 1171              		.section	.debug_abbrev,"",%progbits
+ 1172              	.Ldebug_abbrev0:
+ 1173 0000 01       		.uleb128 0x1
+ 1174 0001 11       		.uleb128 0x11
+ 1175 0002 01       		.byte	0x1
+ 1176 0003 25       		.uleb128 0x25
+ 1177 0004 0E       		.uleb128 0xe
+ 1178 0005 13       		.uleb128 0x13
+ 1179 0006 0B       		.uleb128 0xb
+ 1180 0007 03       		.uleb128 0x3
+ 1181 0008 0E       		.uleb128 0xe
+ 1182 0009 1B       		.uleb128 0x1b
+ 1183 000a 0E       		.uleb128 0xe
+ 1184 000b 55       		.uleb128 0x55
+ 1185 000c 17       		.uleb128 0x17
+ 1186 000d 11       		.uleb128 0x11
+ 1187 000e 01       		.uleb128 0x1
+ 1188 000f 10       		.uleb128 0x10
+ 1189 0010 17       		.uleb128 0x17
+ 1190 0011 00       		.byte	0
+ 1191 0012 00       		.byte	0
+ 1192 0013 02       		.uleb128 0x2
+ 1193 0014 24       		.uleb128 0x24
+ 1194 0015 00       		.byte	0
+ 1195 0016 0B       		.uleb128 0xb
+ 1196 0017 0B       		.uleb128 0xb
+ 1197 0018 3E       		.uleb128 0x3e
+ 1198 0019 0B       		.uleb128 0xb
+ 1199 001a 03       		.uleb128 0x3
+ 1200 001b 0E       		.uleb128 0xe
+ 1201 001c 00       		.byte	0
+ 1202 001d 00       		.byte	0
+ 1203 001e 03       		.uleb128 0x3
+ 1204 001f 16       		.uleb128 0x16
+ 1205 0020 00       		.byte	0
+ 1206 0021 03       		.uleb128 0x3
+ 1207 0022 0E       		.uleb128 0xe
+ 1208 0023 3A       		.uleb128 0x3a
+ 1209 0024 0B       		.uleb128 0xb
+ 1210 0025 3B       		.uleb128 0x3b
+ 1211 0026 0B       		.uleb128 0xb
+ 1212 0027 49       		.uleb128 0x49
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 25
+
+
+ 1213 0028 13       		.uleb128 0x13
+ 1214 0029 00       		.byte	0
+ 1215 002a 00       		.byte	0
+ 1216 002b 04       		.uleb128 0x4
+ 1217 002c 24       		.uleb128 0x24
+ 1218 002d 00       		.byte	0
+ 1219 002e 0B       		.uleb128 0xb
+ 1220 002f 0B       		.uleb128 0xb
+ 1221 0030 3E       		.uleb128 0x3e
+ 1222 0031 0B       		.uleb128 0xb
+ 1223 0032 03       		.uleb128 0x3
+ 1224 0033 08       		.uleb128 0x8
+ 1225 0034 00       		.byte	0
+ 1226 0035 00       		.byte	0
+ 1227 0036 05       		.uleb128 0x5
+ 1228 0037 0F       		.uleb128 0xf
+ 1229 0038 00       		.byte	0
+ 1230 0039 0B       		.uleb128 0xb
+ 1231 003a 0B       		.uleb128 0xb
+ 1232 003b 00       		.byte	0
+ 1233 003c 00       		.byte	0
+ 1234 003d 06       		.uleb128 0x6
+ 1235 003e 0F       		.uleb128 0xf
+ 1236 003f 00       		.byte	0
+ 1237 0040 0B       		.uleb128 0xb
+ 1238 0041 0B       		.uleb128 0xb
+ 1239 0042 49       		.uleb128 0x49
+ 1240 0043 13       		.uleb128 0x13
+ 1241 0044 00       		.byte	0
+ 1242 0045 00       		.byte	0
+ 1243 0046 07       		.uleb128 0x7
+ 1244 0047 26       		.uleb128 0x26
+ 1245 0048 00       		.byte	0
+ 1246 0049 49       		.uleb128 0x49
+ 1247 004a 13       		.uleb128 0x13
+ 1248 004b 00       		.byte	0
+ 1249 004c 00       		.byte	0
+ 1250 004d 08       		.uleb128 0x8
+ 1251 004e 35       		.uleb128 0x35
+ 1252 004f 00       		.byte	0
+ 1253 0050 49       		.uleb128 0x49
+ 1254 0051 13       		.uleb128 0x13
+ 1255 0052 00       		.byte	0
+ 1256 0053 00       		.byte	0
+ 1257 0054 09       		.uleb128 0x9
+ 1258 0055 13       		.uleb128 0x13
+ 1259 0056 01       		.byte	0x1
+ 1260 0057 0B       		.uleb128 0xb
+ 1261 0058 0B       		.uleb128 0xb
+ 1262 0059 3A       		.uleb128 0x3a
+ 1263 005a 0B       		.uleb128 0xb
+ 1264 005b 3B       		.uleb128 0x3b
+ 1265 005c 0B       		.uleb128 0xb
+ 1266 005d 01       		.uleb128 0x1
+ 1267 005e 13       		.uleb128 0x13
+ 1268 005f 00       		.byte	0
+ 1269 0060 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 26
+
+
+ 1270 0061 0A       		.uleb128 0xa
+ 1271 0062 0D       		.uleb128 0xd
+ 1272 0063 00       		.byte	0
+ 1273 0064 03       		.uleb128 0x3
+ 1274 0065 0E       		.uleb128 0xe
+ 1275 0066 3A       		.uleb128 0x3a
+ 1276 0067 0B       		.uleb128 0xb
+ 1277 0068 3B       		.uleb128 0x3b
+ 1278 0069 0B       		.uleb128 0xb
+ 1279 006a 49       		.uleb128 0x49
+ 1280 006b 13       		.uleb128 0x13
+ 1281 006c 38       		.uleb128 0x38
+ 1282 006d 0B       		.uleb128 0xb
+ 1283 006e 00       		.byte	0
+ 1284 006f 00       		.byte	0
+ 1285 0070 0B       		.uleb128 0xb
+ 1286 0071 15       		.uleb128 0x15
+ 1287 0072 01       		.byte	0x1
+ 1288 0073 27       		.uleb128 0x27
+ 1289 0074 19       		.uleb128 0x19
+ 1290 0075 01       		.uleb128 0x1
+ 1291 0076 13       		.uleb128 0x13
+ 1292 0077 00       		.byte	0
+ 1293 0078 00       		.byte	0
+ 1294 0079 0C       		.uleb128 0xc
+ 1295 007a 05       		.uleb128 0x5
+ 1296 007b 00       		.byte	0
+ 1297 007c 49       		.uleb128 0x49
+ 1298 007d 13       		.uleb128 0x13
+ 1299 007e 00       		.byte	0
+ 1300 007f 00       		.byte	0
+ 1301 0080 0D       		.uleb128 0xd
+ 1302 0081 16       		.uleb128 0x16
+ 1303 0082 00       		.byte	0
+ 1304 0083 03       		.uleb128 0x3
+ 1305 0084 0E       		.uleb128 0xe
+ 1306 0085 3A       		.uleb128 0x3a
+ 1307 0086 0B       		.uleb128 0xb
+ 1308 0087 3B       		.uleb128 0x3b
+ 1309 0088 05       		.uleb128 0x5
+ 1310 0089 49       		.uleb128 0x49
+ 1311 008a 13       		.uleb128 0x13
+ 1312 008b 00       		.byte	0
+ 1313 008c 00       		.byte	0
+ 1314 008d 0E       		.uleb128 0xe
+ 1315 008e 13       		.uleb128 0x13
+ 1316 008f 01       		.byte	0x1
+ 1317 0090 03       		.uleb128 0x3
+ 1318 0091 0E       		.uleb128 0xe
+ 1319 0092 0B       		.uleb128 0xb
+ 1320 0093 0B       		.uleb128 0xb
+ 1321 0094 3A       		.uleb128 0x3a
+ 1322 0095 0B       		.uleb128 0xb
+ 1323 0096 3B       		.uleb128 0x3b
+ 1324 0097 05       		.uleb128 0x5
+ 1325 0098 01       		.uleb128 0x1
+ 1326 0099 13       		.uleb128 0x13
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 27
+
+
+ 1327 009a 00       		.byte	0
+ 1328 009b 00       		.byte	0
+ 1329 009c 0F       		.uleb128 0xf
+ 1330 009d 0D       		.uleb128 0xd
+ 1331 009e 00       		.byte	0
+ 1332 009f 03       		.uleb128 0x3
+ 1333 00a0 0E       		.uleb128 0xe
+ 1334 00a1 3A       		.uleb128 0x3a
+ 1335 00a2 0B       		.uleb128 0xb
+ 1336 00a3 3B       		.uleb128 0x3b
+ 1337 00a4 05       		.uleb128 0x5
+ 1338 00a5 49       		.uleb128 0x49
+ 1339 00a6 13       		.uleb128 0x13
+ 1340 00a7 38       		.uleb128 0x38
+ 1341 00a8 0B       		.uleb128 0xb
+ 1342 00a9 00       		.byte	0
+ 1343 00aa 00       		.byte	0
+ 1344 00ab 10       		.uleb128 0x10
+ 1345 00ac 13       		.uleb128 0x13
+ 1346 00ad 01       		.byte	0x1
+ 1347 00ae 03       		.uleb128 0x3
+ 1348 00af 0E       		.uleb128 0xe
+ 1349 00b0 0B       		.uleb128 0xb
+ 1350 00b1 0B       		.uleb128 0xb
+ 1351 00b2 3A       		.uleb128 0x3a
+ 1352 00b3 0B       		.uleb128 0xb
+ 1353 00b4 3B       		.uleb128 0x3b
+ 1354 00b5 0B       		.uleb128 0xb
+ 1355 00b6 01       		.uleb128 0x1
+ 1356 00b7 13       		.uleb128 0x13
+ 1357 00b8 00       		.byte	0
+ 1358 00b9 00       		.byte	0
+ 1359 00ba 11       		.uleb128 0x11
+ 1360 00bb 2E       		.uleb128 0x2e
+ 1361 00bc 01       		.byte	0x1
+ 1362 00bd 3F       		.uleb128 0x3f
+ 1363 00be 19       		.uleb128 0x19
+ 1364 00bf 03       		.uleb128 0x3
+ 1365 00c0 0E       		.uleb128 0xe
+ 1366 00c1 3A       		.uleb128 0x3a
+ 1367 00c2 0B       		.uleb128 0xb
+ 1368 00c3 3B       		.uleb128 0x3b
+ 1369 00c4 0B       		.uleb128 0xb
+ 1370 00c5 27       		.uleb128 0x27
+ 1371 00c6 19       		.uleb128 0x19
+ 1372 00c7 49       		.uleb128 0x49
+ 1373 00c8 13       		.uleb128 0x13
+ 1374 00c9 11       		.uleb128 0x11
+ 1375 00ca 01       		.uleb128 0x1
+ 1376 00cb 12       		.uleb128 0x12
+ 1377 00cc 06       		.uleb128 0x6
+ 1378 00cd 40       		.uleb128 0x40
+ 1379 00ce 18       		.uleb128 0x18
+ 1380 00cf 9742     		.uleb128 0x2117
+ 1381 00d1 19       		.uleb128 0x19
+ 1382 00d2 01       		.uleb128 0x1
+ 1383 00d3 13       		.uleb128 0x13
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 28
+
+
+ 1384 00d4 00       		.byte	0
+ 1385 00d5 00       		.byte	0
+ 1386 00d6 12       		.uleb128 0x12
+ 1387 00d7 05       		.uleb128 0x5
+ 1388 00d8 00       		.byte	0
+ 1389 00d9 03       		.uleb128 0x3
+ 1390 00da 08       		.uleb128 0x8
+ 1391 00db 3A       		.uleb128 0x3a
+ 1392 00dc 0B       		.uleb128 0xb
+ 1393 00dd 3B       		.uleb128 0x3b
+ 1394 00de 0B       		.uleb128 0xb
+ 1395 00df 49       		.uleb128 0x49
+ 1396 00e0 13       		.uleb128 0x13
+ 1397 00e1 02       		.uleb128 0x2
+ 1398 00e2 17       		.uleb128 0x17
+ 1399 00e3 00       		.byte	0
+ 1400 00e4 00       		.byte	0
+ 1401 00e5 13       		.uleb128 0x13
+ 1402 00e6 34       		.uleb128 0x34
+ 1403 00e7 00       		.byte	0
+ 1404 00e8 03       		.uleb128 0x3
+ 1405 00e9 0E       		.uleb128 0xe
+ 1406 00ea 3A       		.uleb128 0x3a
+ 1407 00eb 0B       		.uleb128 0xb
+ 1408 00ec 3B       		.uleb128 0x3b
+ 1409 00ed 0B       		.uleb128 0xb
+ 1410 00ee 49       		.uleb128 0x49
+ 1411 00ef 13       		.uleb128 0x13
+ 1412 00f0 02       		.uleb128 0x2
+ 1413 00f1 17       		.uleb128 0x17
+ 1414 00f2 00       		.byte	0
+ 1415 00f3 00       		.byte	0
+ 1416 00f4 14       		.uleb128 0x14
+ 1417 00f5 898201   		.uleb128 0x4109
+ 1418 00f8 00       		.byte	0
+ 1419 00f9 11       		.uleb128 0x11
+ 1420 00fa 01       		.uleb128 0x1
+ 1421 00fb 31       		.uleb128 0x31
+ 1422 00fc 13       		.uleb128 0x13
+ 1423 00fd 00       		.byte	0
+ 1424 00fe 00       		.byte	0
+ 1425 00ff 15       		.uleb128 0x15
+ 1426 0100 34       		.uleb128 0x34
+ 1427 0101 00       		.byte	0
+ 1428 0102 03       		.uleb128 0x3
+ 1429 0103 0E       		.uleb128 0xe
+ 1430 0104 3A       		.uleb128 0x3a
+ 1431 0105 0B       		.uleb128 0xb
+ 1432 0106 3B       		.uleb128 0x3b
+ 1433 0107 0B       		.uleb128 0xb
+ 1434 0108 49       		.uleb128 0x49
+ 1435 0109 13       		.uleb128 0x13
+ 1436 010a 3F       		.uleb128 0x3f
+ 1437 010b 19       		.uleb128 0x19
+ 1438 010c 3C       		.uleb128 0x3c
+ 1439 010d 19       		.uleb128 0x19
+ 1440 010e 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 29
+
+
+ 1441 010f 00       		.byte	0
+ 1442 0110 16       		.uleb128 0x16
+ 1443 0111 2E       		.uleb128 0x2e
+ 1444 0112 00       		.byte	0
+ 1445 0113 3F       		.uleb128 0x3f
+ 1446 0114 19       		.uleb128 0x19
+ 1447 0115 3C       		.uleb128 0x3c
+ 1448 0116 19       		.uleb128 0x19
+ 1449 0117 6E       		.uleb128 0x6e
+ 1450 0118 0E       		.uleb128 0xe
+ 1451 0119 03       		.uleb128 0x3
+ 1452 011a 0E       		.uleb128 0xe
+ 1453 011b 3A       		.uleb128 0x3a
+ 1454 011c 0B       		.uleb128 0xb
+ 1455 011d 3B       		.uleb128 0x3b
+ 1456 011e 0B       		.uleb128 0xb
+ 1457 011f 00       		.byte	0
+ 1458 0120 00       		.byte	0
+ 1459 0121 00       		.byte	0
+ 1460              		.section	.debug_loc,"",%progbits
+ 1461              	.Ldebug_loc0:
+ 1462              	.LLST0:
+ 1463 0000 00000000 		.4byte	.LVL0
+ 1464 0004 0E000000 		.4byte	.LVL2
+ 1465 0008 0100     		.2byte	0x1
+ 1466 000a 50       		.byte	0x50
+ 1467 000b 0E000000 		.4byte	.LVL2
+ 1468 000f 1A000000 		.4byte	.LVL6
+ 1469 0013 0400     		.2byte	0x4
+ 1470 0015 F3       		.byte	0xf3
+ 1471 0016 01       		.uleb128 0x1
+ 1472 0017 50       		.byte	0x50
+ 1473 0018 9F       		.byte	0x9f
+ 1474 0019 1A000000 		.4byte	.LVL6
+ 1475 001d 1C000000 		.4byte	.LVL7
+ 1476 0021 0100     		.2byte	0x1
+ 1477 0023 50       		.byte	0x50
+ 1478 0024 1C000000 		.4byte	.LVL7
+ 1479 0028 24000000 		.4byte	.LFE495
+ 1480 002c 0400     		.2byte	0x4
+ 1481 002e F3       		.byte	0xf3
+ 1482 002f 01       		.uleb128 0x1
+ 1483 0030 50       		.byte	0x50
+ 1484 0031 9F       		.byte	0x9f
+ 1485 0032 00000000 		.4byte	0
+ 1486 0036 00000000 		.4byte	0
+ 1487              	.LLST1:
+ 1488 003a 00000000 		.4byte	.LVL0
+ 1489 003e 0E000000 		.4byte	.LVL2
+ 1490 0042 0100     		.2byte	0x1
+ 1491 0044 51       		.byte	0x51
+ 1492 0045 0E000000 		.4byte	.LVL2
+ 1493 0049 1A000000 		.4byte	.LVL6
+ 1494 004d 0100     		.2byte	0x1
+ 1495 004f 55       		.byte	0x55
+ 1496 0050 1A000000 		.4byte	.LVL6
+ 1497 0054 1C000000 		.4byte	.LVL7
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 30
+
+
+ 1498 0058 0100     		.2byte	0x1
+ 1499 005a 51       		.byte	0x51
+ 1500 005b 1C000000 		.4byte	.LVL7
+ 1501 005f 22000000 		.4byte	.LVL10
+ 1502 0063 0100     		.2byte	0x1
+ 1503 0065 55       		.byte	0x55
+ 1504 0066 00000000 		.4byte	0
+ 1505 006a 00000000 		.4byte	0
+ 1506              	.LLST2:
+ 1507 006e 00000000 		.4byte	.LVL0
+ 1508 0072 0E000000 		.4byte	.LVL2
+ 1509 0076 0100     		.2byte	0x1
+ 1510 0078 52       		.byte	0x52
+ 1511 0079 0E000000 		.4byte	.LVL2
+ 1512 007d 1A000000 		.4byte	.LVL6
+ 1513 0081 0100     		.2byte	0x1
+ 1514 0083 56       		.byte	0x56
+ 1515 0084 1A000000 		.4byte	.LVL6
+ 1516 0088 1C000000 		.4byte	.LVL7
+ 1517 008c 0100     		.2byte	0x1
+ 1518 008e 52       		.byte	0x52
+ 1519 008f 1C000000 		.4byte	.LVL7
+ 1520 0093 22000000 		.4byte	.LVL11
+ 1521 0097 0100     		.2byte	0x1
+ 1522 0099 56       		.byte	0x56
+ 1523 009a 22000000 		.4byte	.LVL11
+ 1524 009e 24000000 		.4byte	.LFE495
+ 1525 00a2 0400     		.2byte	0x4
+ 1526 00a4 F3       		.byte	0xf3
+ 1527 00a5 01       		.uleb128 0x1
+ 1528 00a6 52       		.byte	0x52
+ 1529 00a7 9F       		.byte	0x9f
+ 1530 00a8 00000000 		.4byte	0
+ 1531 00ac 00000000 		.4byte	0
+ 1532              	.LLST3:
+ 1533 00b0 06000000 		.4byte	.LVL1
+ 1534 00b4 0E000000 		.4byte	.LVL2
+ 1535 00b8 0200     		.2byte	0x2
+ 1536 00ba 30       		.byte	0x30
+ 1537 00bb 9F       		.byte	0x9f
+ 1538 00bc 0E000000 		.4byte	.LVL2
+ 1539 00c0 1A000000 		.4byte	.LVL6
+ 1540 00c4 0100     		.2byte	0x1
+ 1541 00c6 54       		.byte	0x54
+ 1542 00c7 1A000000 		.4byte	.LVL6
+ 1543 00cb 1C000000 		.4byte	.LVL7
+ 1544 00cf 0200     		.2byte	0x2
+ 1545 00d1 30       		.byte	0x30
+ 1546 00d2 9F       		.byte	0x9f
+ 1547 00d3 1C000000 		.4byte	.LVL7
+ 1548 00d7 22000000 		.4byte	.LVL9
+ 1549 00db 0100     		.2byte	0x1
+ 1550 00dd 54       		.byte	0x54
+ 1551 00de 22000000 		.4byte	.LVL9
+ 1552 00e2 24000000 		.4byte	.LFE495
+ 1553 00e6 0100     		.2byte	0x1
+ 1554 00e8 50       		.byte	0x50
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 31
+
+
+ 1555 00e9 00000000 		.4byte	0
+ 1556 00ed 00000000 		.4byte	0
+ 1557              	.LLST4:
+ 1558 00f1 00000000 		.4byte	.LVL12
+ 1559 00f5 0E000000 		.4byte	.LVL14
+ 1560 00f9 0100     		.2byte	0x1
+ 1561 00fb 50       		.byte	0x50
+ 1562 00fc 0E000000 		.4byte	.LVL14
+ 1563 0100 24000000 		.4byte	.LVL18
+ 1564 0104 0400     		.2byte	0x4
+ 1565 0106 F3       		.byte	0xf3
+ 1566 0107 01       		.uleb128 0x1
+ 1567 0108 50       		.byte	0x50
+ 1568 0109 9F       		.byte	0x9f
+ 1569 010a 24000000 		.4byte	.LVL18
+ 1570 010e 26000000 		.4byte	.LVL19
+ 1571 0112 0100     		.2byte	0x1
+ 1572 0114 50       		.byte	0x50
+ 1573 0115 26000000 		.4byte	.LVL19
+ 1574 0119 2E000000 		.4byte	.LFE496
+ 1575 011d 0400     		.2byte	0x4
+ 1576 011f F3       		.byte	0xf3
+ 1577 0120 01       		.uleb128 0x1
+ 1578 0121 50       		.byte	0x50
+ 1579 0122 9F       		.byte	0x9f
+ 1580 0123 00000000 		.4byte	0
+ 1581 0127 00000000 		.4byte	0
+ 1582              	.LLST5:
+ 1583 012b 00000000 		.4byte	.LVL12
+ 1584 012f 0E000000 		.4byte	.LVL14
+ 1585 0133 0100     		.2byte	0x1
+ 1586 0135 51       		.byte	0x51
+ 1587 0136 0E000000 		.4byte	.LVL14
+ 1588 013a 24000000 		.4byte	.LVL18
+ 1589 013e 0100     		.2byte	0x1
+ 1590 0140 55       		.byte	0x55
+ 1591 0141 24000000 		.4byte	.LVL18
+ 1592 0145 26000000 		.4byte	.LVL19
+ 1593 0149 0100     		.2byte	0x1
+ 1594 014b 51       		.byte	0x51
+ 1595 014c 26000000 		.4byte	.LVL19
+ 1596 0150 2C000000 		.4byte	.LVL22
+ 1597 0154 0100     		.2byte	0x1
+ 1598 0156 55       		.byte	0x55
+ 1599 0157 00000000 		.4byte	0
+ 1600 015b 00000000 		.4byte	0
+ 1601              	.LLST6:
+ 1602 015f 00000000 		.4byte	.LVL12
+ 1603 0163 0E000000 		.4byte	.LVL14
+ 1604 0167 0100     		.2byte	0x1
+ 1605 0169 52       		.byte	0x52
+ 1606 016a 0E000000 		.4byte	.LVL14
+ 1607 016e 24000000 		.4byte	.LVL18
+ 1608 0172 0100     		.2byte	0x1
+ 1609 0174 56       		.byte	0x56
+ 1610 0175 24000000 		.4byte	.LVL18
+ 1611 0179 26000000 		.4byte	.LVL19
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 32
+
+
+ 1612 017d 0100     		.2byte	0x1
+ 1613 017f 52       		.byte	0x52
+ 1614 0180 26000000 		.4byte	.LVL19
+ 1615 0184 2C000000 		.4byte	.LVL23
+ 1616 0188 0100     		.2byte	0x1
+ 1617 018a 56       		.byte	0x56
+ 1618 018b 2C000000 		.4byte	.LVL23
+ 1619 018f 2E000000 		.4byte	.LFE496
+ 1620 0193 0400     		.2byte	0x4
+ 1621 0195 F3       		.byte	0xf3
+ 1622 0196 01       		.uleb128 0x1
+ 1623 0197 52       		.byte	0x52
+ 1624 0198 9F       		.byte	0x9f
+ 1625 0199 00000000 		.4byte	0
+ 1626 019d 00000000 		.4byte	0
+ 1627              	.LLST7:
+ 1628 01a1 06000000 		.4byte	.LVL13
+ 1629 01a5 0E000000 		.4byte	.LVL14
+ 1630 01a9 0200     		.2byte	0x2
+ 1631 01ab 30       		.byte	0x30
+ 1632 01ac 9F       		.byte	0x9f
+ 1633 01ad 0E000000 		.4byte	.LVL14
+ 1634 01b1 24000000 		.4byte	.LVL18
+ 1635 01b5 0100     		.2byte	0x1
+ 1636 01b7 54       		.byte	0x54
+ 1637 01b8 24000000 		.4byte	.LVL18
+ 1638 01bc 26000000 		.4byte	.LVL19
+ 1639 01c0 0200     		.2byte	0x2
+ 1640 01c2 30       		.byte	0x30
+ 1641 01c3 9F       		.byte	0x9f
+ 1642 01c4 26000000 		.4byte	.LVL19
+ 1643 01c8 2C000000 		.4byte	.LVL21
+ 1644 01cc 0100     		.2byte	0x1
+ 1645 01ce 54       		.byte	0x54
+ 1646 01cf 2C000000 		.4byte	.LVL21
+ 1647 01d3 2E000000 		.4byte	.LFE496
+ 1648 01d7 0100     		.2byte	0x1
+ 1649 01d9 50       		.byte	0x50
+ 1650 01da 00000000 		.4byte	0
+ 1651 01de 00000000 		.4byte	0
+ 1652              		.section	.debug_aranges,"",%progbits
+ 1653 0000 24000000 		.4byte	0x24
+ 1654 0004 0200     		.2byte	0x2
+ 1655 0006 00000000 		.4byte	.Ldebug_info0
+ 1656 000a 04       		.byte	0x4
+ 1657 000b 00       		.byte	0
+ 1658 000c 0000     		.2byte	0
+ 1659 000e 0000     		.2byte	0
+ 1660 0010 00000000 		.4byte	.LFB495
+ 1661 0014 24000000 		.4byte	.LFE495-.LFB495
+ 1662 0018 00000000 		.4byte	.LFB496
+ 1663 001c 2E000000 		.4byte	.LFE496-.LFB496
+ 1664 0020 00000000 		.4byte	0
+ 1665 0024 00000000 		.4byte	0
+ 1666              		.section	.debug_ranges,"",%progbits
+ 1667              	.Ldebug_ranges0:
+ 1668 0000 00000000 		.4byte	.LFB495
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 33
+
+
+ 1669 0004 24000000 		.4byte	.LFE495
+ 1670 0008 00000000 		.4byte	.LFB496
+ 1671 000c 2E000000 		.4byte	.LFE496
+ 1672 0010 00000000 		.4byte	0
+ 1673 0014 00000000 		.4byte	0
+ 1674              		.section	.debug_line,"",%progbits
+ 1675              	.Ldebug_line0:
+ 1676 0000 C7020000 		.section	.debug_str,"MS",%progbits,1
+ 1676      02006B02 
+ 1676      00000201 
+ 1676      FB0E0D00 
+ 1676      01010101 
+ 1677              	.LASF55:
+ 1678 0000 70726F74 		.ascii	"protBusMasterMask\000"
+ 1678      4275734D 
+ 1678      61737465 
+ 1678      724D6173 
+ 1678      6B00
+ 1679              	.LASF130:
+ 1680 0012 72756E4D 		.ascii	"runMode\000"
+ 1680      6F646500 
+ 1681              	.LASF118:
+ 1682 001a 72784275 		.ascii	"rxBufSize\000"
+ 1682      6653697A 
+ 1682      6500
+ 1683              	.LASF65:
+ 1684 0024 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
+ 1684      6843746C 
+ 1684      4D61696E 
+ 1684      57733346 
+ 1684      72657100 
+ 1685              	.LASF87:
+ 1686 0038 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
+ 1686      50727443 
+ 1686      6667496E 
+ 1686      4F666673 
+ 1686      657400
+ 1687              	.LASF105:
+ 1688 004b 6970634C 		.ascii	"ipcLockStatusOffset\000"
+ 1688      6F636B53 
+ 1688      74617475 
+ 1688      734F6666 
+ 1688      73657400 
+ 1689              	.LASF31:
+ 1690 005f 63727970 		.ascii	"cryptoVersion\000"
+ 1690      746F5665 
+ 1690      7273696F 
+ 1690      6E00
+ 1691              	.LASF69:
+ 1692 006d 64774368 		.ascii	"dwChCtlPrioPos\000"
+ 1692      43746C50 
+ 1692      72696F50 
+ 1692      6F7300
+ 1693              	.LASF27:
+ 1694 007c 70617373 		.ascii	"passBase\000"
+ 1694      42617365 
+ 1694      00
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 34
+
+
+ 1695              	.LASF40:
+ 1696 0085 63707573 		.ascii	"cpussIpcIrqNr\000"
+ 1696      73497063 
+ 1696      4972714E 
+ 1696      7200
+ 1697              	.LASF2:
+ 1698 0093 5F5F7569 		.ascii	"__uint8_t\000"
+ 1698      6E74385F 
+ 1698      7400
+ 1699              	.LASF84:
+ 1700 009d 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ 1700      44697632 
+ 1700      345F3543 
+ 1700      746C4F66 
+ 1700      66736574 
+ 1701              	.LASF91:
+ 1702 00b2 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
+ 1702      73436D34 
+ 1702      436C6F63 
+ 1702      6B43746C 
+ 1702      4F666673 
+ 1703              	.LASF131:
+ 1704 00c9 636F756E 		.ascii	"countDirection\000"
+ 1704      74446972 
+ 1704      65637469 
+ 1704      6F6E00
+ 1705              	.LASF143:
+ 1706 00d8 73746F70 		.ascii	"stopInputMode\000"
+ 1706      496E7075 
+ 1706      744D6F64 
+ 1706      6500
+ 1707              	.LASF20:
+ 1708 00e6 63707573 		.ascii	"cpussBase\000"
+ 1708      73426173 
+ 1708      6500
+ 1709              	.LASF128:
+ 1710 00f0 70657269 		.ascii	"period\000"
+ 1710      6F6400
+ 1711              	.LASF49:
+ 1712 00f7 70657269 		.ascii	"periClockNr\000"
+ 1712      436C6F63 
+ 1712      6B4E7200 
+ 1713              	.LASF138:
+ 1714 0103 63617074 		.ascii	"captureInput\000"
+ 1714      75726549 
+ 1714      6E707574 
+ 1714      00
+ 1715              	.LASF154:
+ 1716 0110 54696D65 		.ascii	"Timer_1_config\000"
+ 1716      725F315F 
+ 1716      636F6E66 
+ 1716      696700
+ 1717              	.LASF11:
+ 1718 011f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1718      206C6F6E 
+ 1718      6720756E 
+ 1718      7369676E 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 35
+
+
+ 1718      65642069 
+ 1719              	.LASF129:
+ 1720 0136 636C6F63 		.ascii	"clockPrescaler\000"
+ 1720      6B507265 
+ 1720      7363616C 
+ 1720      657200
+ 1721              	.LASF73:
+ 1722 0145 70657269 		.ascii	"periTrCmdOffset\000"
+ 1722      5472436D 
+ 1722      644F6666 
+ 1722      73657400 
+ 1723              	.LASF113:
+ 1724 0155 72785269 		.ascii	"rxRingBuf\000"
+ 1724      6E674275 
+ 1724      6600
+ 1725              	.LASF97:
+ 1726 015f 63707573 		.ascii	"cpussSysTickCtlOffset\000"
+ 1726      73537973 
+ 1726      5469636B 
+ 1726      43746C4F 
+ 1726      66667365 
+ 1727              	.LASF120:
+ 1728 0175 74784275 		.ascii	"txBuf\000"
+ 1728      6600
+ 1729              	.LASF152:
+ 1730 017b 54696D65 		.ascii	"Timer_config\000"
+ 1730      725F636F 
+ 1730      6E666967 
+ 1730      00
+ 1731              	.LASF150:
+ 1732 0188 6E436861 		.ascii	"nChars\000"
+ 1732      727300
+ 1733              	.LASF58:
+ 1734 018f 666C6173 		.ascii	"flashPipeRequired\000"
+ 1734      68506970 
+ 1734      65526571 
+ 1734      75697265 
+ 1734      6400
+ 1735              	.LASF62:
+ 1736 01a1 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
+ 1736      6843746C 
+ 1736      4D61696E 
+ 1736      57733046 
+ 1736      72657100 
+ 1737              	.LASF17:
+ 1738 01b5 696E7431 		.ascii	"int16_t\000"
+ 1738      365F7400 
+ 1739              	.LASF10:
+ 1740 01bd 6C6F6E67 		.ascii	"long long int\000"
+ 1740      206C6F6E 
+ 1740      6720696E 
+ 1740      7400
+ 1741              	.LASF147:
+ 1742 01cb 63795F73 		.ascii	"cy_stc_tcpwm_counter_config_t\000"
+ 1742      74635F74 
+ 1742      6370776D 
+ 1742      5F636F75 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 36
+
+
+ 1742      6E746572 
+ 1743              	.LASF78:
+ 1744 01e9 70657269 		.ascii	"periDivCmdTypeSelPos\000"
+ 1744      44697643 
+ 1744      6D645479 
+ 1744      70655365 
+ 1744      6C506F73 
+ 1745              	.LASF156:
+ 1746 01fe 53544449 		.ascii	"STDIO_GetChar\000"
+ 1746      4F5F4765 
+ 1746      74436861 
+ 1746      7200
+ 1747              	.LASF24:
+ 1748 020c 70726F74 		.ascii	"protBase\000"
+ 1748      42617365 
+ 1748      00
+ 1749              	.LASF36:
+ 1750 0215 69706356 		.ascii	"ipcVersion\000"
+ 1750      65727369 
+ 1750      6F6E00
+ 1751              	.LASF98:
+ 1752 0220 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
+ 1752      73436D30 
+ 1752      4E6D6943 
+ 1752      746C4F66 
+ 1752      66736574 
+ 1753              	.LASF46:
+ 1754 0235 73727373 		.ascii	"srssNumClkpath\000"
+ 1754      4E756D43 
+ 1754      6C6B7061 
+ 1754      746800
+ 1755              	.LASF25:
+ 1756 0244 6873696F 		.ascii	"hsiomBase\000"
+ 1756      6D426173 
+ 1756      6500
+ 1757              	.LASF7:
+ 1758 024e 6C6F6E67 		.ascii	"long int\000"
+ 1758      20696E74 
+ 1758      00
+ 1759              	.LASF56:
+ 1760 0257 63727970 		.ascii	"cryptoMemSize\000"
+ 1760      746F4D65 
+ 1760      6D53697A 
+ 1760      6500
+ 1761              	.LASF22:
+ 1762 0265 70657269 		.ascii	"periBase\000"
+ 1762      42617365 
+ 1762      00
+ 1763              	.LASF54:
+ 1764 026e 73797350 		.ascii	"sysPmSimoPresent\000"
+ 1764      6D53696D 
+ 1764      6F507265 
+ 1764      73656E74 
+ 1764      00
+ 1765              	.LASF44:
+ 1766 027f 63707573 		.ascii	"cpussFmIrq\000"
+ 1766      73466D49 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 37
+
+
+ 1766      727100
+ 1767              	.LASF108:
+ 1768 028a 646F7562 		.ascii	"double\000"
+ 1768      6C6500
+ 1769              	.LASF83:
+ 1770 0291 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ 1770      44697631 
+ 1770      365F3543 
+ 1770      746C4F66 
+ 1770      66736574 
+ 1771              	.LASF47:
+ 1772 02a6 73727373 		.ascii	"srssNumPll\000"
+ 1772      4E756D50 
+ 1772      6C6C00
+ 1773              	.LASF155:
+ 1774 02b1 53544449 		.ascii	"STDIO_PutChar\000"
+ 1774      4F5F5075 
+ 1774      74436861 
+ 1774      7200
+ 1775              	.LASF137:
+ 1776 02bf 63617074 		.ascii	"captureInputMode\000"
+ 1776      75726549 
+ 1776      6E707574 
+ 1776      4D6F6465 
+ 1776      00
+ 1777              	.LASF81:
+ 1778 02d0 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 1778      44697638 
+ 1778      43746C4F 
+ 1778      66667365 
+ 1778      7400
+ 1779              	.LASF88:
+ 1780 02e2 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 1780      50727443 
+ 1780      66674F75 
+ 1780      744F6666 
+ 1780      73657400 
+ 1781              	.LASF8:
+ 1782 02f6 5F5F7569 		.ascii	"__uint32_t\000"
+ 1782      6E743332 
+ 1782      5F7400
+ 1783              	.LASF51:
+ 1784 0301 70617373 		.ascii	"passSarChannels\000"
+ 1784      53617243 
+ 1784      68616E6E 
+ 1784      656C7300 
+ 1785              	.LASF3:
+ 1786 0311 5F5F696E 		.ascii	"__int16_t\000"
+ 1786      7431365F 
+ 1786      7400
+ 1787              	.LASF119:
+ 1788 031b 72784275 		.ascii	"rxBufIdx\000"
+ 1788      66496478 
+ 1788      00
+ 1789              	.LASF149:
+ 1790 0324 5F726561 		.ascii	"_read\000"
+ 1790      6400
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 38
+
+
+ 1791              	.LASF94:
+ 1792 032a 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 1792      73436D34 
+ 1792      50777243 
+ 1792      746C4F66 
+ 1792      66736574 
+ 1793              	.LASF121:
+ 1794 033f 74784275 		.ascii	"txBufSize\000"
+ 1794      6653697A 
+ 1794      6500
+ 1795              	.LASF136:
+ 1796 0349 696E7465 		.ascii	"interruptSources\000"
+ 1796      72727570 
+ 1796      74536F75 
+ 1796      72636573 
+ 1796      00
+ 1797              	.LASF89:
+ 1798 035a 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
+ 1798      50727443 
+ 1798      66675369 
+ 1798      6F4F6666 
+ 1798      73657400 
+ 1799              	.LASF41:
+ 1800 036e 63707573 		.ascii	"cpussDwChNr\000"
+ 1800      73447743 
+ 1800      684E7200 
+ 1801              	.LASF12:
+ 1802 037a 756E7369 		.ascii	"unsigned int\000"
+ 1802      676E6564 
+ 1802      20696E74 
+ 1802      00
+ 1803              	.LASF18:
+ 1804 0387 75696E74 		.ascii	"uint16_t\000"
+ 1804      31365F74 
+ 1804      00
+ 1805              	.LASF74:
+ 1806 0390 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ 1806      5472436D 
+ 1806      64477253 
+ 1806      656C4D73 
+ 1806      6B00
+ 1807              	.LASF63:
+ 1808 03a2 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 1808      6843746C 
+ 1808      4D61696E 
+ 1808      57733146 
+ 1808      72657100 
+ 1809              	.LASF9:
+ 1810 03b6 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1810      20756E73 
+ 1810      69676E65 
+ 1810      6420696E 
+ 1810      7400
+ 1811              	.LASF135:
+ 1812 03c8 656E6162 		.ascii	"enableCompareSwap\000"
+ 1812      6C65436F 
+ 1812      6D706172 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 39
+
+
+ 1812      65537761 
+ 1812      7000
+ 1813              	.LASF110:
+ 1814 03da 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
+ 1814      625F7363 
+ 1814      625F7561 
+ 1814      72745F68 
+ 1814      616E646C 
+ 1815              	.LASF153:
+ 1816 03f9 55415254 		.ascii	"UART_context\000"
+ 1816      5F636F6E 
+ 1816      74657874 
+ 1816      00
+ 1817              	.LASF39:
+ 1818 0406 63707573 		.ascii	"cpussIpcNr\000"
+ 1818      73497063 
+ 1818      4E7200
+ 1819              	.LASF26:
+ 1820 0411 6770696F 		.ascii	"gpioBase\000"
+ 1820      42617365 
+ 1820      00
+ 1821              	.LASF111:
+ 1822 041a 74785374 		.ascii	"txStatus\000"
+ 1822      61747573 
+ 1822      00
+ 1823              	.LASF75:
+ 1824 0423 70657269 		.ascii	"periTrGrOffset\000"
+ 1824      54724772 
+ 1824      4F666673 
+ 1824      657400
+ 1825              	.LASF102:
+ 1826 0432 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 1826      7352616D 
+ 1826      3143746C 
+ 1826      3000
+ 1827              	.LASF123:
+ 1828 0440 63624576 		.ascii	"cbEvents\000"
+ 1828      656E7473 
+ 1828      00
+ 1829              	.LASF76:
+ 1830 0449 70657269 		.ascii	"periTrGrSize\000"
+ 1830      54724772 
+ 1830      53697A65 
+ 1830      00
+ 1831              	.LASF34:
+ 1832 0456 6770696F 		.ascii	"gpioVersion\000"
+ 1832      56657273 
+ 1832      696F6E00 
+ 1833              	.LASF106:
+ 1834 0462 63795F73 		.ascii	"cy_stc_device_t\000"
+ 1834      74635F64 
+ 1834      65766963 
+ 1834      655F7400 
+ 1835              	.LASF52:
+ 1836 0472 65704D6F 		.ascii	"epMonitorNr\000"
+ 1836      6E69746F 
+ 1836      724E7200 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 40
+
+
+ 1837              	.LASF115:
+ 1838 047e 72785269 		.ascii	"rxRingBufHead\000"
+ 1838      6E674275 
+ 1838      66486561 
+ 1838      6400
+ 1839              	.LASF95:
+ 1840 048c 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 1840      73547269 
+ 1840      6D52616D 
+ 1840      43746C4F 
+ 1840      66667365 
+ 1841              	.LASF142:
+ 1842 04a2 73746172 		.ascii	"startInput\000"
+ 1842      74496E70 
+ 1842      757400
+ 1843              	.LASF148:
+ 1844 04ad 5F777269 		.ascii	"_write\000"
+ 1844      746500
+ 1845              	.LASF30:
+ 1846 04b4 63707573 		.ascii	"cpussVersion\000"
+ 1846      73566572 
+ 1846      73696F6E 
+ 1846      00
+ 1847              	.LASF37:
+ 1848 04c1 70657269 		.ascii	"periVersion\000"
+ 1848      56657273 
+ 1848      696F6E00 
+ 1849              	.LASF93:
+ 1850 04cd 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 1850      73436D30 
+ 1850      53746174 
+ 1850      75734F66 
+ 1850      66736574 
+ 1851              	.LASF127:
+ 1852 04e2 63795F73 		.ascii	"cy_stc_tcpwm_counter_config\000"
+ 1852      74635F74 
+ 1852      6370776D 
+ 1852      5F636F75 
+ 1852      6E746572 
+ 1853              	.LASF14:
+ 1854 04fe 73697A65 		.ascii	"sizetype\000"
+ 1854      74797065 
+ 1854      00
+ 1855              	.LASF67:
+ 1856 0507 64774368 		.ascii	"dwChOffset\000"
+ 1856      4F666673 
+ 1856      657400
+ 1857              	.LASF42:
+ 1858 0512 63707573 		.ascii	"cpussFlashPaSize\000"
+ 1858      73466C61 
+ 1858      73685061 
+ 1858      53697A65 
+ 1858      00
+ 1859              	.LASF80:
+ 1860 0523 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 1860      44697643 
+ 1860      6D645061 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 41
+
+
+ 1860      54797065 
+ 1860      53656C50 
+ 1861              	.LASF103:
+ 1862 053a 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 1862      7352616D 
+ 1862      3243746C 
+ 1862      3000
+ 1863              	.LASF71:
+ 1864 0548 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 1864      61747573 
+ 1864      43684964 
+ 1864      78506F73 
+ 1864      00
+ 1865              	.LASF53:
+ 1866 0559 75646250 		.ascii	"udbPresent\000"
+ 1866      72657365 
+ 1866      6E7400
+ 1867              	.LASF112:
+ 1868 0564 72785374 		.ascii	"rxStatus\000"
+ 1868      61747573 
+ 1868      00
+ 1869              	.LASF33:
+ 1870 056d 666C6173 		.ascii	"flashcVersion\000"
+ 1870      68635665 
+ 1870      7273696F 
+ 1870      6E00
+ 1871              	.LASF29:
+ 1872 057b 63727970 		.ascii	"cryptoBase\000"
+ 1872      746F4261 
+ 1872      736500
+ 1873              	.LASF50:
+ 1874 0586 736D6966 		.ascii	"smifDeviceNr\000"
+ 1874      44657669 
+ 1874      63654E72 
+ 1874      00
+ 1875              	.LASF107:
+ 1876 0593 666C6F61 		.ascii	"float\000"
+ 1876      7400
+ 1877              	.LASF72:
+ 1878 0599 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 1878      61747573 
+ 1878      43684964 
+ 1878      784D736B 
+ 1878      00
+ 1879              	.LASF151:
+ 1880 05aa 63795F64 		.ascii	"cy_device\000"
+ 1880      65766963 
+ 1880      6500
+ 1881              	.LASF100:
+ 1882 05b4 63707573 		.ascii	"cpussRomCtl\000"
+ 1882      73526F6D 
+ 1882      43746C00 
+ 1883              	.LASF70:
+ 1884 05c0 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 1884      43746C50 
+ 1884      7265656D 
+ 1884      70746162 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 42
+
+
+ 1884      6C65506F 
+ 1885              	.LASF122:
+ 1886 05d6 74784C65 		.ascii	"txLeftToTransmit\000"
+ 1886      6674546F 
+ 1886      5472616E 
+ 1886      736D6974 
+ 1886      00
+ 1887              	.LASF23:
+ 1888 05e7 75646242 		.ascii	"udbBase\000"
+ 1888      61736500 
+ 1889              	.LASF109:
+ 1890 05ef 5F426F6F 		.ascii	"_Bool\000"
+ 1890      6C00
+ 1891              	.LASF1:
+ 1892 05f5 756E7369 		.ascii	"unsigned char\000"
+ 1892      676E6564 
+ 1892      20636861 
+ 1892      7200
+ 1893              	.LASF66:
+ 1894 0603 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 1894      6843746C 
+ 1894      4D61696E 
+ 1894      57733446 
+ 1894      72657100 
+ 1895              	.LASF4:
+ 1896 0617 73686F72 		.ascii	"short int\000"
+ 1896      7420696E 
+ 1896      7400
+ 1897              	.LASF77:
+ 1898 0621 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 1898      44697643 
+ 1898      6D644469 
+ 1898      7653656C 
+ 1898      4D736B00 
+ 1899              	.LASF64:
+ 1900 0635 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ 1900      6843746C 
+ 1900      4D61696E 
+ 1900      57733246 
+ 1900      72657100 
+ 1901              	.LASF21:
+ 1902 0649 666C6173 		.ascii	"flashcBase\000"
+ 1902      68634261 
+ 1902      736500
+ 1903              	.LASF132:
+ 1904 0654 636F6D70 		.ascii	"compareOrCapture\000"
+ 1904      6172654F 
+ 1904      72436170 
+ 1904      74757265 
+ 1904      00
+ 1905              	.LASF48:
+ 1906 0665 73727373 		.ascii	"srssNumHfroot\000"
+ 1906      4E756D48 
+ 1906      66726F6F 
+ 1906      7400
+ 1907              	.LASF61:
+ 1908 0673 666C6173 		.ascii	"flashEraseDelay\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 43
+
+
+ 1908      68457261 
+ 1908      73654465 
+ 1908      6C617900 
+ 1909              	.LASF19:
+ 1910 0683 75696E74 		.ascii	"uint32_t\000"
+ 1910      33325F74 
+ 1910      00
+ 1911              	.LASF99:
+ 1912 068c 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 1912      73436D34 
+ 1912      4E6D6943 
+ 1912      746C4F66 
+ 1912      66736574 
+ 1913              	.LASF157:
+ 1914 06a1 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1914      43313120 
+ 1914      352E342E 
+ 1914      31203230 
+ 1914      31363036 
+ 1915 06d4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0plus -mthumb -"
+ 1915      20726576 
+ 1915      6973696F 
+ 1915      6E203233 
+ 1915      37373135 
+ 1916 0707 67202D4F 		.ascii	"g -Og -ffunction-sections -ffat-lto-objects\000"
+ 1916      67202D66 
+ 1916      66756E63 
+ 1916      74696F6E 
+ 1916      2D736563 
+ 1917              	.LASF133:
+ 1918 0733 636F6D70 		.ascii	"compare0\000"
+ 1918      61726530 
+ 1918      00
+ 1919              	.LASF13:
+ 1920 073c 6C6F6E67 		.ascii	"long double\000"
+ 1920      20646F75 
+ 1920      626C6500 
+ 1921              	.LASF15:
+ 1922 0748 63686172 		.ascii	"char\000"
+ 1922      00
+ 1923              	.LASF146:
+ 1924 074d 636F756E 		.ascii	"countInput\000"
+ 1924      74496E70 
+ 1924      757400
+ 1925              	.LASF38:
+ 1926 0758 70726F74 		.ascii	"protVersion\000"
+ 1926      56657273 
+ 1926      696F6E00 
+ 1927              	.LASF101:
+ 1928 0764 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 1928      7352616D 
+ 1928      3043746C 
+ 1928      3000
+ 1929              	.LASF5:
+ 1930 0772 5F5F7569 		.ascii	"__uint16_t\000"
+ 1930      6E743136 
+ 1930      5F7400
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 44
+
+
+ 1931              	.LASF82:
+ 1932 077d 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 1932      44697631 
+ 1932      3643746C 
+ 1932      4F666673 
+ 1932      657400
+ 1933              	.LASF159:
+ 1934 0790 433A5C55 		.ascii	"C:\\Users\\cmila\\Documents\\PSoC Creator\\timers\\"
+ 1934      73657273 
+ 1934      5C636D69 
+ 1934      6C615C44 
+ 1934      6F63756D 
+ 1935 07bd 44657369 		.ascii	"Design01.cydsn\000"
+ 1935      676E3031 
+ 1935      2E637964 
+ 1935      736E00
+ 1936              	.LASF35:
+ 1937 07cc 6873696F 		.ascii	"hsiomVersion\000"
+ 1937      6D566572 
+ 1937      73696F6E 
+ 1937      00
+ 1938              	.LASF60:
+ 1939 07d9 666C6173 		.ascii	"flashProgramDelay\000"
+ 1939      6850726F 
+ 1939      6772616D 
+ 1939      44656C61 
+ 1939      7900
+ 1940              	.LASF114:
+ 1941 07eb 72785269 		.ascii	"rxRingBufSize\000"
+ 1941      6E674275 
+ 1941      6653697A 
+ 1941      6500
+ 1942              	.LASF140:
+ 1943 07f9 72656C6F 		.ascii	"reloadInput\000"
+ 1943      6164496E 
+ 1943      70757400 
+ 1944              	.LASF6:
+ 1945 0805 73686F72 		.ascii	"short unsigned int\000"
+ 1945      7420756E 
+ 1945      7369676E 
+ 1945      65642069 
+ 1945      6E7400
+ 1946              	.LASF68:
+ 1947 0818 64774368 		.ascii	"dwChSize\000"
+ 1947      53697A65 
+ 1947      00
+ 1948              	.LASF144:
+ 1949 0821 73746F70 		.ascii	"stopInput\000"
+ 1949      496E7075 
+ 1949      7400
+ 1950              	.LASF104:
+ 1951 082b 69706353 		.ascii	"ipcStructSize\000"
+ 1951      74727563 
+ 1951      7453697A 
+ 1951      6500
+ 1952              	.LASF141:
+ 1953 0839 73746172 		.ascii	"startInputMode\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 45
+
+
+ 1953      74496E70 
+ 1953      75744D6F 
+ 1953      646500
+ 1954              	.LASF43:
+ 1955 0848 63707573 		.ascii	"cpussIpc0Irq\000"
+ 1955      73497063 
+ 1955      30497271 
+ 1955      00
+ 1956              	.LASF134:
+ 1957 0855 636F6D70 		.ascii	"compare1\000"
+ 1957      61726531 
+ 1957      00
+ 1958              	.LASF90:
+ 1959 085e 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 1959      73436D30 
+ 1959      436C6F63 
+ 1959      6B43746C 
+ 1959      4F666673 
+ 1960              	.LASF86:
+ 1961 0875 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 1961      50727443 
+ 1961      66674F66 
+ 1961      66736574 
+ 1961      00
+ 1962              	.LASF124:
+ 1963 0886 696E6974 		.ascii	"initKey\000"
+ 1963      4B657900 
+ 1964              	.LASF117:
+ 1965 088e 72784275 		.ascii	"rxBuf\000"
+ 1965      6600
+ 1966              	.LASF0:
+ 1967 0894 7369676E 		.ascii	"signed char\000"
+ 1967      65642063 
+ 1967      68617200 
+ 1968              	.LASF125:
+ 1969 08a0 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
+ 1969      74635F73 
+ 1969      63625F75 
+ 1969      6172745F 
+ 1969      636F6E74 
+ 1970              	.LASF45:
+ 1971 08ba 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 1971      734E6F74 
+ 1971      436F6E6E 
+ 1971      65637465 
+ 1971      64497271 
+ 1972              	.LASF59:
+ 1973 08cf 666C6173 		.ascii	"flashWriteDelay\000"
+ 1973      68577269 
+ 1973      74654465 
+ 1973      6C617900 
+ 1974              	.LASF16:
+ 1975 08df 75696E74 		.ascii	"uint8_t\000"
+ 1975      385F7400 
+ 1976              	.LASF92:
+ 1977 08e7 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 1977      73436D34 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 46
+
+
+ 1977      53746174 
+ 1977      75734F66 
+ 1977      66736574 
+ 1978              	.LASF85:
+ 1979 08fc 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ 1979      50727449 
+ 1979      6E747243 
+ 1979      66674F66 
+ 1979      66736574 
+ 1980              	.LASF139:
+ 1981 0911 72656C6F 		.ascii	"reloadInputMode\000"
+ 1981      6164496E 
+ 1981      7075744D 
+ 1981      6F646500 
+ 1982              	.LASF116:
+ 1983 0921 72785269 		.ascii	"rxRingBufTail\000"
+ 1983      6E674275 
+ 1983      66546169 
+ 1983      6C00
+ 1984              	.LASF96:
+ 1985 092f 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ 1985      73547269 
+ 1985      6D526F6D 
+ 1985      43746C4F 
+ 1985      66667365 
+ 1986              	.LASF145:
+ 1987 0945 636F756E 		.ascii	"countInputMode\000"
+ 1987      74496E70 
+ 1987      75744D6F 
+ 1987      646500
+ 1988              	.LASF158:
+ 1989 0954 47656E65 		.ascii	"Generated_Source\\PSoC6\\pdl\\utilities\\retarget_i"
+ 1989      72617465 
+ 1989      645F536F 
+ 1989      75726365 
+ 1989      5C50536F 
+ 1990 0983 6F5C7265 		.ascii	"o\\retarget.c\000"
+ 1990      74617267 
+ 1990      65742E63 
+ 1990      00
+ 1991              	.LASF32:
+ 1992 0990 64775665 		.ascii	"dwVersion\000"
+ 1992      7273696F 
+ 1992      6E00
+ 1993              	.LASF28:
+ 1994 099a 69706342 		.ascii	"ipcBase\000"
+ 1994      61736500 
+ 1995              	.LASF79:
+ 1996 09a2 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 1996      44697643 
+ 1996      6D645061 
+ 1996      44697653 
+ 1996      656C506F 
+ 1997              	.LASF126:
+ 1998 09b8 63795F73 		.ascii	"cy_stc_scb_uart_context\000"
+ 1998      74635F73 
+ 1998      63625F75 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccSZRtV4.s 			page 47
+
+
+ 1998      6172745F 
+ 1998      636F6E74 
+ 1999              	.LASF57:
+ 2000 09d0 666C6173 		.ascii	"flashRwwRequired\000"
+ 2000      68527777 
+ 2000      52657175 
+ 2000      69726564 
+ 2000      00
+ 2001              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
