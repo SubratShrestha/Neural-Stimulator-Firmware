@@ -12,8 +12,9 @@
 #include "project.h"
 #include <stdio.h>
 
-int triggered = 0;
+int triggered = 1;
 uint32_t dacWrite = 0x800;
+int current_phase = 0;
 
 void TimerInterruptHandler(void)
 {
@@ -25,13 +26,15 @@ void TimerInterruptHandler(void)
  
     printf("in the interrupt\r\n");
     VDAC_1_SetValue(dacWrite);
-    if (dacWrite == 0x800) {
-            dacWrite = 0x000;
-        } else if (dacWrite == 0x000) {
-            dacWrite = 0x7FF;  
-        } else {
-            dacWrite = 0x800;   
-        }
+    if (current_phase == 0) {
+        dacWrite = 0x800;   
+    } else if (current_phase == 1) {
+        dacWrite = 0x000;   
+    } else if (current_phase == 2) {
+        dacWrite = 0x7FF;
+    } else if (current_phase == 3) {
+        dacWrite = 0x000;   
+    }
 }
 
 
@@ -56,41 +59,33 @@ int main(void)
     
     /* phase timings */
     uint32_t phase_1 = 10; /* defuault to 10us for all values */
-    uint32_t phase_2 = 20;
-    uint32_t inter_phase_gap = 10;
-    uint32_t inter_stim_delay = 10;
-    int num_pulses = 0;
+    uint32_t phase_2 = 10;
+    uint32_t inter_phase_gap = 40;
+    uint32_t inter_stim_delay = 200;
+    int num_pulses = 200;
     uint32_t phases[4] = {phase_1, phase_2, inter_phase_gap, inter_stim_delay};
 
     /* condition checks */
-    int current_phase = 0;
     int curr_num_pulses = 0;
     
-    /* Set the timer period in milliseconds. To count N cycles, period should be
-     * set to N-1. */
-    Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phases[0] - 1); // timer is in miliseconds
-    
-    /* Trigger a software reload on the counter instance. This is required when 
-     * no other hardware input signal is connected to the component to act as
-     * a trigger source. */
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
     for(;;)
     {
         /* Place your application code here. */
         if (triggered) {
-            if (current_phase == 3) {
+            triggered = 0;
+            Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phases[current_phase] - 1);
+            if (current_phase < 3) {
+                current_phase++;
+            } else if (current_phase == 3) {
                 current_phase = 0;
                 curr_num_pulses++;
                 printf("%d\r\n", curr_num_pulses);
-            } else if (current_phase < 3) {
-                current_phase++;
             }
-            Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phases[current_phase] - 1);
-            Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
-            triggered = 0;
             if (curr_num_pulses == num_pulses && num_pulses != 0) {
                 // number of pulses reached stop outputting
                 Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);
+                VDAC_1_Stop();
             }
         }
  
