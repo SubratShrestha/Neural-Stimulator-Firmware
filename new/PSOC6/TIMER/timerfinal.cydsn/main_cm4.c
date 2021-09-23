@@ -13,6 +13,7 @@
 #include <stdio.h>
 
 int triggered = 0;
+uint32_t dacWrite = 0x800;
 
 void TimerInterruptHandler(void)
 {
@@ -23,6 +24,14 @@ void TimerInterruptHandler(void)
     triggered = 1;
  
     printf("in the interrupt\r\n");
+    VDAC_1_SetValue(dacWrite);
+    if (dacWrite == 0x800) {
+            dacWrite = 0x000;
+        } else if (dacWrite == 0x000) {
+            dacWrite = 0x7FF;  
+        } else {
+            dacWrite = 0x800;   
+        }
 }
 
 
@@ -35,6 +44,7 @@ int main(void)
     NVIC_EnableIRQ(isrTimer_cfg.intrSrc); /* Enable the core interrupt */
     __enable_irq(); /* Enable global interrupts. */
     
+    VDAC_1_Start();
     UART_Start();
     setvbuf ( stdin, NULL, _IONBF, 0 );
     /* Start the TCPWM component in timer/counter mode. The return value of the
@@ -45,11 +55,11 @@ int main(void)
     
     
     /* phase timings */
-    uint32_t phase_1 = 5000; /* defuault to 10us for all values */
-    uint32_t phase_2 = 1000;
-    uint32_t inter_phase_gap = 500;
-    uint32_t inter_stim_delay = 100;
-    int num_pulses = 10;
+    uint32_t phase_1 = 10; /* defuault to 10us for all values */
+    uint32_t phase_2 = 20;
+    uint32_t inter_phase_gap = 10;
+    uint32_t inter_stim_delay = 10;
+    int num_pulses = 0;
     uint32_t phases[4] = {phase_1, phase_2, inter_phase_gap, inter_stim_delay};
 
     /* condition checks */
@@ -72,7 +82,7 @@ int main(void)
                 current_phase = 0;
                 curr_num_pulses++;
                 printf("%d\r\n", curr_num_pulses);
-            } else if (current_phase != 3) {
+            } else if (current_phase < 3) {
                 current_phase++;
             }
             Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phases[current_phase] - 1);

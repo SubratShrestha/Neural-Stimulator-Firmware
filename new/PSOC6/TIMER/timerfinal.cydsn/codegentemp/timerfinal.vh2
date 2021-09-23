@@ -2,7 +2,7 @@
 --	Conversion of timerfinal.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu Sep 23 22:55:12 2021
+--	Fri Sep 24 01:41:06 2021
 --
 
 USE cypress.cypress.all;
@@ -59,6 +59,27 @@ SIGNAL Net_14 : bit;
 SIGNAL Net_17 : bit;
 SIGNAL Net_19 : bit;
 SIGNAL Net_20 : bit;
+SIGNAL Net_61 : bit;
+SIGNAL \VDAC_1:Net_1\ : bit;
+TERMINAL \VDAC_1:ref_drive\ : bit;
+TERMINAL \VDAC_1:Net_3\ : bit;
+TERMINAL \VDAC_1:ct_vout\ : bit;
+TERMINAL \VDAC_1:ct_vout_sw\ : bit;
+SIGNAL \VDAC_1:strobe\ : bit;
+SIGNAL Net_63 : bit;
+TERMINAL \VDAC_1:Net_9\ : bit;
+TERMINAL \VDAC_1:Net_10\ : bit;
+SIGNAL \VDAC_1:Net_34\ : bit;
+TERMINAL Net_64 : bit;
+TERMINAL \VDAC_1:ct_vout_buf\ : bit;
+TERMINAL \VDAC_1:Net_16\ : bit;
+TERMINAL Net_65 : bit;
+TERMINAL \VDAC_1:Net_42\ : bit;
+SIGNAL \VDAC_1:Net_44\ : bit;
+TERMINAL Net_66 : bit;
+SIGNAL tmpFB_0__VDAC_Out_net_0 : bit;
+SIGNAL tmpIO_0__VDAC_Out_net_0 : bit;
+TERMINAL tmpSIOVREF__VDAC_Out_net_0 : bit;
 BEGIN
 
 one <=  ('1') ;
@@ -200,5 +221,98 @@ isrTimer:cy_mxs40_isr_v1_0
 		tr_tx_req=>Net_18,
 		tr_rx_req=>Net_15,
 		tr_i2c_scl_filtered=>\UART:Net_161\);
+Clock_1:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"f6ef5c51-13e5-4cf8-8ba2-f98c3e4f65d4",
+		source_clock_id=>"2FB4EC85-8328-4C5A-9ED9-8B63060178EB",
+		divisor=>0,
+		period=>"40000000000",
+		is_direct=>'0',
+		is_digital=>'0')
+	PORT MAP(clock_out=>Net_61,
+		dig_domain_out=>open);
+\VDAC_1:CTDAC\:cy_mxs40_ctdac_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>zero,
+		ctdrefdrive=>\VDAC_1:ref_drive\,
+		ctdrefsense=>\VDAC_1:Net_3\,
+		ctdvout=>\VDAC_1:ct_vout\,
+		ctdvoutsw=>\VDAC_1:ct_vout_sw\,
+		dsi_ctdac_strobe=>zero,
+		tr_ctdac_empty=>Net_63);
+\VDAC_1:REFBUF\:cy_mxs40_opamp_v1_0
+	GENERIC MAP(cy_registers=>"",
+		has_resistor=>'0',
+		deepsleep_available=>'0',
+		needs_dsab=>'0')
+	PORT MAP(out_1x=>\VDAC_1:ref_drive\,
+		out_10x=>\VDAC_1:Net_9\,
+		vplus=>\VDAC_1:Net_10\,
+		vminus=>\VDAC_1:ref_drive\,
+		ctb_dsi_comp=>\VDAC_1:Net_34\);
+\VDAC_1:cy_analog_virtualmux_1_connect\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>Net_64,
+		signal2=>\VDAC_1:ct_vout_sw\);
+\VDAC_1:cy_analog_virtualmux_3_connect\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>\VDAC_1:ct_vout_buf\,
+		signal2=>\VDAC_1:Net_16\);
+\VDAC_1:cy_analog_noconnect_2\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\VDAC_1:Net_9\);
+\VDAC_1:cy_analog_virtualmux_2_connect\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>\VDAC_1:Net_10\,
+		signal2=>Net_65);
+\VDAC_1:cy_analog_noconnect_3\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\VDAC_1:Net_42\);
+\VDAC_1:cy_analog_noconnect_4\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\VDAC_1:Net_3\);
+\VDAC_1:vref_out__cy_connect_v1_0\:cy_connect_v1_0
+	GENERIC MAP(sig_width=>1,
+		is_net_join=>'0')
+	PORT MAP(signal1=>Net_66,
+		signal2=>\VDAC_1:ref_drive\);
+VDAC_Out:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"0113321b-4a37-46f6-8407-2f8646c68756",
+		drive_mode=>"0",
+		ibuf_enabled=>"0",
+		init_dr_st=>"1",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"A",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__VDAC_Out_net_0),
+		analog=>Net_64,
+		io=>(tmpIO_0__VDAC_Out_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__VDAC_Out_net_0));
+vRef_1:cy_vref_v1_0
+	GENERIC MAP(guid=>"6E0C5DC9-D531-4D01-9B49-536487FE4A82",
+		name=>"Bandgap Reference",
+		autoenable=>'1',
+		ignoresleep=>'0')
+	PORT MAP(vout=>Net_65);
 
 END R_T_L;

@@ -1,6 +1,6 @@
 // ======================================================================
 // timerfinal.v generated from TopDesign.cysch
-// 09/23/2021 at 22:55
+// 09/24/2021 at 01:41
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -386,9 +386,153 @@ module SCB_UART_PDL_v2_0_1 (
 
 endmodule
 
+// Component: cy_analog_virtualmux_v1_0
+`ifdef CY_BLK_DIR
+`undef CY_BLK_DIR
+`endif
+
+`ifdef WARP
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v"
+`else
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v"
+`endif
+
+// Component: cy_constant_v1_0
+`ifdef CY_BLK_DIR
+`undef CY_BLK_DIR
+`endif
+
+`ifdef WARP
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
+`else
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
+`endif
+
+// bIncludeDriverToComponent_v1_0(PDL_DRIVER_NAME=ctb, PDL_DRIVER_REQ_VERSION=1.10, PDL_DRIVER_SUBGROUP=, PDL_DRIVER_VARIANT=, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=bIncludeDriverToComponent_v1_0, CY_CONFIG_TITLE=IncludeDriver_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=VDAC_1:IncludeDriver_1, CY_INSTANCE_SHORT_NAME=IncludeDriver_1, CY_MAJOR_VERSION=1, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=ctb, CY_PDL_DRIVER_REQ_VERSION=1.10, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=VDAC_1_IncludeDriver_1, )
+module bIncludeDriverToComponent_v1_0_2 ;
+
+
+
+
+
+endmodule
+
+// VDAC12_PDL_v2_0(DacCodeMode=1, DebugEnable=false, DeepSleep=false, DwrExtAfterCustomized=false, DwrRefExternal=0, GainBandwidth=2, InitialCode=0, InitialVoltage_mV=1500, OpampIDD=2, OpAmpUsage=1, OutputBuffer=0, OutputBufferPower=2, OutputBufferRange=0, RefBufferRange=0, ReferenceCurrentHigh=true, SampleAndHold=false, ShowClk=false, ShowStrobe=false, ShowTrig=false, UpdateMode=0, VrefSource=0, VrefVoltage=3, VrefVoltage_mV=3000, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=VDAC12_PDL_v2_0, CY_CONFIG_TITLE=VDAC_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=VDAC_1, CY_INSTANCE_SHORT_NAME=VDAC_1, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=ctdac, CY_PDL_DRIVER_REQ_VERSION=2.0, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=VDAC_1, )
+module VDAC12_PDL_v2_0_3 (
+    clock,
+    strobe,
+    trigger,
+    vout,
+    vref,
+    vref_out);
+    input       clock;
+    input       strobe;
+    output      trigger;
+    inout       vout;
+    electrical  vout;
+    inout       vref;
+    electrical  vref;
+    inout       vref_out;
+    electrical  vref_out;
+
+
+    electrical  ct_vout_sw;
+    electrical  ct_vout_buf;
+    electrical  ct_vout;
+    electrical  ref_drive;
+          wire  Net_58;
+          wire  Net_48;
+          wire  Net_44;
+    electrical  Net_43;
+    electrical  Net_42;
+          wire  Net_36;
+          wire  Net_34;
+    electrical  Net_3;
+    electrical  Net_14;
+    electrical  Net_16;
+          wire  Net_1;
+    electrical  Net_9;
+    electrical  Net_10;
+
+    cy_mxs40_ctdac_v1_0 CTDAC (
+        .clock(Net_1),
+        .ctdrefdrive(ref_drive),
+        .ctdrefsense(Net_3),
+        .ctdvout(ct_vout),
+        .ctdvoutsw(ct_vout_sw),
+        .dsi_ctdac_strobe(strobe),
+        .tr_ctdac_empty(trigger));
+
+    cy_mxs40_opamp_v1_0 REFBUF (
+        .ctb_dsi_comp(Net_34),
+        .out_10x(Net_9),
+        .out_1x(ref_drive),
+        .vminus(ref_drive),
+        .vplus(Net_10));
+    defparam REFBUF.deepsleep_available = 0;
+    defparam REFBUF.has_resistor = 0;
+    defparam REFBUF.needs_dsab = 0;
+
+	// cy_analog_virtualmux_1 (cy_analog_virtualmux_v1_0)
+	cy_connect_v1_0 cy_analog_virtualmux_1_connect(vout, ct_vout_sw);
+	defparam cy_analog_virtualmux_1_connect.sig_width = 1;
+
+	// cy_analog_virtualmux_3 (cy_analog_virtualmux_v1_0)
+	cy_connect_v1_0 cy_analog_virtualmux_3_connect(ct_vout_buf, Net_16);
+	defparam cy_analog_virtualmux_3_connect.sig_width = 1;
+
+    cy_analog_noconnect_v1_0 cy_analog_noconnect_2 (
+        .noconnect(Net_9));
+
+	// cy_analog_virtualmux_2 (cy_analog_virtualmux_v1_0)
+	cy_connect_v1_0 cy_analog_virtualmux_2_connect(Net_10, vref);
+	defparam cy_analog_virtualmux_2_connect.sig_width = 1;
+
+    cy_analog_noconnect_v1_0 cy_analog_noconnect_3 (
+        .noconnect(Net_42));
+
+    cy_analog_noconnect_v1_0 cy_analog_noconnect_4 (
+        .noconnect(Net_3));
+
+    assign Net_44 = 1'h0;
+
+	// VirtualMux_1 (cy_virtualmux_v1_0)
+	assign Net_1 = Net_44;
+
+    bIncludeDriverToComponent_v1_0_2 IncludeDriver_1 ();
+
+
+    cy_connect_v1_0 vref_out__cy_connect_v1_0(vref_out, ref_drive);
+    defparam vref_out__cy_connect_v1_0.sig_width = 1;
+
+
+endmodule
+
+// Component: cy_vref_v1_70
+`ifdef CY_BLK_DIR
+`undef CY_BLK_DIR
+`endif
+
+`ifdef WARP
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_vref_v1_70"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_vref_v1_70\cy_vref_v1_70.v"
+`else
+`define CY_BLK_DIR "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_vref_v1_70"
+`include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_vref_v1_70\cy_vref_v1_70.v"
+`endif
+
 // top
 module top ;
 
+    electrical  Net_66;
+          wire  Net_63;
+          wire  Net_62;
+          wire  Net_77;
+          wire  Net_78;
           wire  Net_20;
           wire  Net_19;
           wire  Net_18;
@@ -408,6 +552,9 @@ module top ;
           wire  Net_3;
           wire  Net_2;
           wire  Net_1;
+    electrical  Net_65;
+    electrical  Net_64;
+          wire  Net_61;
           wire  Net_28;
           wire  Net_10;
 
@@ -454,6 +601,72 @@ module top ;
         .tx_dma(Net_18),
         .tx_en_out(Net_19),
         .tx_out(Net_20));
+
+
+	cy_clock_v1_0
+		#(.id("f6ef5c51-13e5-4cf8-8ba2-f98c3e4f65d4"),
+		  .source_clock_id("2FB4EC85-8328-4C5A-9ED9-8B63060178EB"),
+		  .divisor(0),
+		  .period("40000000000"),
+		  .is_direct(0),
+		  .is_digital(0))
+		Clock_1
+		 (.clock_out(Net_61));
+
+
+    VDAC12_PDL_v2_0_3 VDAC_1 (
+        .clock(1'b0),
+        .strobe(1'b0),
+        .trigger(Net_63),
+        .vout(Net_64),
+        .vref(Net_65),
+        .vref_out(Net_66));
+
+	wire [0:0] tmpFB_0__VDAC_Out_net;
+	wire [0:0] tmpIO_0__VDAC_Out_net;
+	electrical [0:0] tmpSIOVREF__VDAC_Out_net;
+
+	cy_mxs40_gpio_v1_0
+		#(.id("0113321b-4a37-46f6-8407-2f8646c68756"),
+		  .width(1),
+		  .sio_grp_cnt(0),
+		  .drive_mode("0"),
+		  .ibuf_enabled("0"),
+		  .init_dr_st("1"),
+		  .input_sync("0"),
+		  .intr_mode("0"),
+		  .io_voltage(""),
+		  .output_conn("0"),
+		  .oe_conn("0"),
+		  .output_sync("0"),
+		  .oe_sync("0"),
+		  .drive_strength("0"),
+		  .max_frequency("100"),
+		  .i2c_mode("0"),
+		  .output_current_cap("8"),
+		  .pin_aliases(""),
+		  .pin_mode("A"),
+		  .slew_rate("0"),
+		  .vtrip("0"),
+		  .use_annotation("0"),
+		  .hotswap_needed("0"))
+		VDAC_Out
+		 (.oe({1'b1}),
+		  .y({1'b0}),
+		  .fb({tmpFB_0__VDAC_Out_net[0:0]}),
+		  .analog({Net_64}),
+		  .io({tmpIO_0__VDAC_Out_net[0:0]}),
+		  .siovref(tmpSIOVREF__VDAC_Out_net));
+
+
+
+	cy_vref_v1_0
+		#(.guid("6E0C5DC9-D531-4D01-9B49-536487FE4A82"),
+		  .name("Bandgap Reference"),
+		  .autoenable(1))
+		vRef_1
+		 (.vout(Net_65));
+
 
 
 

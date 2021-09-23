@@ -1,5 +1,5 @@
 -- Project:   timerfinal
--- Generated: 09/23/2021 22:55:17
+-- Generated: 09/24/2021 01:41:11
 -- PSoC Creator  4.4
 
 ENTITY timerfinal IS
@@ -48,7 +48,9 @@ ARCHITECTURE __DEFAULT__ OF timerfinal IS
     SIGNAL Net_2 : bit;
     SIGNAL Net_28 : bit;
     SIGNAL Net_4 : bit;
+    SIGNAL Net_63 : bit;
     SIGNAL Net_8 : bit;
+    SIGNAL VDAC_Out(0)__PA : bit;
     SIGNAL \Timer:Net_1\ : bit;
     SIGNAL \Timer:Net_2\ : bit;
     SIGNAL \UART:Net_1172\ : bit;
@@ -60,6 +62,7 @@ ARCHITECTURE __DEFAULT__ OF timerfinal IS
     SIGNAL \\\UART:rx(0)\\__PA\ : bit;
     SIGNAL \\\UART:tx(0)\\__PA\ : bit;
     SIGNAL \UART:tx_wire\ : bit;
+    SIGNAL \VDAC_1:Net_34\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
@@ -76,6 +79,10 @@ ARCHITECTURE __DEFAULT__ OF timerfinal IS
     ATTRIBUTE Location OF CY_CPUSS_SWJ_SWDIO_TMS(0) : LABEL IS "P6[6]";
     ATTRIBUTE lib_model OF \UART:tx(0)\ : LABEL IS "iocell3";
     ATTRIBUTE lib_model OF \UART:rx(0)\ : LABEL IS "iocell4";
+    ATTRIBUTE lib_model OF VDAC_Out(0) : LABEL IS "iocell5";
+    ATTRIBUTE Location OF VDAC_Out(0) : LABEL IS "P9[6]";
+    ATTRIBUTE Location OF \VDAC_1:CTDAC\ : LABEL IS "F(CTDAC,0)";
+    ATTRIBUTE Location OF \VDAC_1:REFBUF\ : LABEL IS "F(OA,1)";
     COMPONENT CLK_GEN
         PORT (
             gen_clk_in_0 : IN std_ulogic;
@@ -372,6 +379,13 @@ ARCHITECTURE __DEFAULT__ OF timerfinal IS
             trace_data_3 : OUT std_ulogic;
             clock_trace_in : IN std_ulogic);
     END COMPONENT;
+    COMPONENT CTDAC
+        PORT (
+            clock : IN std_ulogic;
+            dsi_ctdac_strobe : IN std_ulogic;
+            tr_ctdac_empty : OUT std_ulogic;
+            interrupt_dac : OUT std_ulogic);
+    END COMPONENT;
     COMPONENT interrupt
         PORT (
             interrupt : IN std_ulogic;
@@ -404,6 +418,10 @@ ARCHITECTURE __DEFAULT__ OF timerfinal IS
             out_clock : IN std_ulogic;
             out_clock_en : IN std_ulogic;
             out_reset : IN std_ulogic);
+    END COMPONENT;
+    COMPONENT OA
+        PORT (
+            ctb_dsi_comp : OUT std_ulogic);
     END COMPONENT;
     COMPONENT SCB
         PORT (
@@ -690,6 +708,59 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
+    VDAC_Out:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "0113321b-4a37-46f6-8407-2f8646c68756",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    VDAC_Out(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "VDAC_Out",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => VDAC_Out(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
     \Timer:TCPWM\:TCPWM
         GENERIC MAP(
             cy_registers => "",
@@ -750,5 +821,22 @@ BEGIN
             tr_tx_req => Net_18,
             tr_rx_req => Net_15,
             tr_i2c_scl_filtered => \UART:Net_161\);
+
+    \VDAC_1:CTDAC\:CTDAC
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => open,
+            dsi_ctdac_strobe => open,
+            tr_ctdac_empty => Net_63);
+
+    \VDAC_1:REFBUF\:OA
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_available => 0,
+            has_resistor => 0,
+            needs_dsab => 0)
+        PORT MAP(
+            ctb_dsi_comp => \VDAC_1:Net_34\);
 
 END __DEFAULT__;

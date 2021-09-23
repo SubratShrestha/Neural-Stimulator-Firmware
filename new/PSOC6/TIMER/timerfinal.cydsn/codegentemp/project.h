@@ -15,6 +15,8 @@
 ********************************************************************************/
 
 #include "cyble_416045_02.h"
+#include "cy_ctb.h"
+#include "cy_ctdac.h"
 #include "cy_efuse.h"
 #include "cy_flash.h"
 #include "cy_gpio.h"
@@ -109,6 +111,8 @@
 #include "Timer.h"
 #include "Clock.h"
 #include "UART.h"
+#include "Clock_1.h"
+#include "VDAC_1.h"
 #include "UART_SCBCLK.h"
 
 /*[]*/
