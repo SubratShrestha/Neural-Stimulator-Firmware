@@ -1,6 +1,6 @@
 -- ======================================================================
 -- timer_compare_capture.ctl generated from timer_compare_capture
--- 09/27/2021 at 17:24
+-- 09/28/2021 at 18:28
 -- This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 -- ======================================================================
 

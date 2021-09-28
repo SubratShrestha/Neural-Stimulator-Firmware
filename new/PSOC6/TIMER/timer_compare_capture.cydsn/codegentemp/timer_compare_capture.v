@@ -1,6 +1,6 @@
 // ======================================================================
 // timer_compare_capture.v generated from TopDesign.cysch
-// 09/27/2021 at 17:24
+// 09/28/2021 at 18:28
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -573,7 +573,7 @@ module top ;
 		#(.id("14057e51-5afe-49bf-b541-a7e855d128f7"),
 		  .source_clock_id("2FB4EC85-8328-4C5A-9ED9-8B63060178EB"),
 		  .divisor(0),
-		  .period("1000000000000"),
+		  .period("2000000"),
 		  .is_direct(0),
 		  .is_digital(0))
 		Clock

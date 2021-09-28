@@ -34,19 +34,19 @@ void TimerInterruptHandler(void)
     if (current_phase == 0) {
         dacWrite = 0x800;
         current_phase = 1;
-        Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phase_1 - 1);
+        // Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phase_1 - 1);
     } else if (current_phase == 1) {
         dacWrite = 0x000;
         current_phase = 2;
-        Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, inter_phase_gap - 1);
+        // Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, inter_phase_gap - 1);
     } else if (current_phase == 2) {
         dacWrite = 0x7FF;
         current_phase = 3;
-        Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phase_2 - 1);
+        // Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phase_2 - 1);
     } else if (current_phase == 3) {
         dacWrite = 0x000;   
         current_phase = 0;
-        Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, inter_stim_delay - 1);
+        // Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, inter_stim_delay - 1);
     }
 }
 
@@ -68,7 +68,7 @@ int main(void)
      * here for simplicity. */
     (void)Cy_TCPWM_Counter_Init(Timer_HW, Timer_CNT_NUM, &Timer_config);
     Cy_TCPWM_Enable_Multiple(Timer_HW, Timer_CNT_MASK); /* Enable the counter instance */
-    Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, phase_1 - 1);
+    Cy_TCPWM_Counter_SetPeriod(Timer_HW, Timer_CNT_NUM, 10 - 1);
     
     /* phase timings */
 
