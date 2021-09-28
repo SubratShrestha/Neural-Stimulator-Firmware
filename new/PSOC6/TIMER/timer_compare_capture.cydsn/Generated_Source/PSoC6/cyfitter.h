@@ -27,14 +27,14 @@
 #define UART_SCB__SS1_POSITION 1u
 #define UART_SCB__SS2_POSITION 2u
 #define UART_SCB__SS3_POSITION 3u
-#define UART_SCBCLK__DIV_IDX 1
-#define UART_SCBCLK__DIV_NUM 1
+#define UART_SCBCLK__DIV_IDX 0
+#define UART_SCBCLK__DIV_NUM 0
 #define UART_SCBCLK__DIV_TYPE CY_SYSCLK_DIV_8_BIT
 
 /* Clock */
-#define Clock__DIV_IDX 0
+#define Clock__DIV_IDX 24
 #define Clock__DIV_NUM 0
-#define Clock__DIV_TYPE CY_SYSCLK_DIV_8_BIT
+#define Clock__DIV_TYPE CY_SYSCLK_DIV_16_5_BIT
 
 /* Timer */
 #define Timer_TCPWM__CNT_HW TCPWM0_CNT0
