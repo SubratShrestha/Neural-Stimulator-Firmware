@@ -2,7 +2,7 @@
 --	Conversion of timerfinal.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Fri Sep 24 01:41:06 2021
+--	Mon Sep 27 13:51:24 2021
 --
 
 USE cypress.cypress.all;
@@ -59,7 +59,6 @@ SIGNAL Net_14 : bit;
 SIGNAL Net_17 : bit;
 SIGNAL Net_19 : bit;
 SIGNAL Net_20 : bit;
-SIGNAL Net_61 : bit;
 SIGNAL \VDAC_1:Net_1\ : bit;
 TERMINAL \VDAC_1:ref_drive\ : bit;
 TERMINAL \VDAC_1:Net_3\ : bit;
@@ -221,16 +220,6 @@ isrTimer:cy_mxs40_isr_v1_0
 		tr_tx_req=>Net_18,
 		tr_rx_req=>Net_15,
 		tr_i2c_scl_filtered=>\UART:Net_161\);
-Clock_1:cy_clock_v1_0
-	GENERIC MAP(cy_registers=>"",
-		id=>"f6ef5c51-13e5-4cf8-8ba2-f98c3e4f65d4",
-		source_clock_id=>"2FB4EC85-8328-4C5A-9ED9-8B63060178EB",
-		divisor=>0,
-		period=>"40000000000",
-		is_direct=>'0',
-		is_digital=>'0')
-	PORT MAP(clock_out=>Net_61,
-		dig_domain_out=>open);
 \VDAC_1:CTDAC\:cy_mxs40_ctdac_v1_0
 	GENERIC MAP(cy_registers=>"")
 	PORT MAP(clock=>zero,

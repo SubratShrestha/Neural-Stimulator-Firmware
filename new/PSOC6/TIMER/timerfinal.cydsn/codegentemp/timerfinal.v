@@ -1,6 +1,6 @@
 // ======================================================================
 // timerfinal.v generated from TopDesign.cysch
-// 09/24/2021 at 01:41
+// 09/27/2021 at 13:51
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -532,7 +532,6 @@ module top ;
           wire  Net_63;
           wire  Net_62;
           wire  Net_77;
-          wire  Net_78;
           wire  Net_20;
           wire  Net_19;
           wire  Net_18;
@@ -554,7 +553,6 @@ module top ;
           wire  Net_1;
     electrical  Net_65;
     electrical  Net_64;
-          wire  Net_61;
           wire  Net_28;
           wire  Net_10;
 
@@ -601,18 +599,6 @@ module top ;
         .tx_dma(Net_18),
         .tx_en_out(Net_19),
         .tx_out(Net_20));
-
-
-	cy_clock_v1_0
-		#(.id("f6ef5c51-13e5-4cf8-8ba2-f98c3e4f65d4"),
-		  .source_clock_id("2FB4EC85-8328-4C5A-9ED9-8B63060178EB"),
-		  .divisor(0),
-		  .period("40000000000"),
-		  .is_direct(0),
-		  .is_digital(0))
-		Clock_1
-		 (.clock_out(Net_61));
-
 
     VDAC12_PDL_v2_0_3 VDAC_1 (
         .clock(1'b0),

@@ -32,12 +32,9 @@
 #define UART_SCBCLK__DIV_TYPE CY_SYSCLK_DIV_8_BIT
 
 /* Clock */
-#define Clock__DIV_IDX 9
-#define Clock__DIV_NUM 1
+#define Clock__DIV_IDX 8
+#define Clock__DIV_NUM 0
 #define Clock__DIV_TYPE CY_SYSCLK_DIV_16_BIT
-#define Clock_1__DIV_IDX 8
-#define Clock_1__DIV_NUM 0
-#define Clock_1__DIV_TYPE CY_SYSCLK_DIV_16_BIT
 
 /* Timer */
 #define Timer_TCPWM__CNT_HW TCPWM0_CNT0

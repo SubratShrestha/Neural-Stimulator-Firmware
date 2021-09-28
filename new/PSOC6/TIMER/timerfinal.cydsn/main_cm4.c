@@ -60,10 +60,10 @@ int main(void)
     /* phase timings */
     uint32_t phase_1 = 10; /* defuault to 10us for all values */
     uint32_t phase_2 = 10;
-    uint32_t inter_phase_gap = 40;
-    uint32_t inter_stim_delay = 200;
-    int num_pulses = 200;
-    uint32_t phases[4] = {phase_1, phase_2, inter_phase_gap, inter_stim_delay};
+    uint32_t inter_phase_gap = 1;
+    uint32_t inter_stim_delay = 10;
+    int num_pulses = 0;
+    uint32_t phases[4] = {phase_1, inter_phase_gap, phase_2, inter_stim_delay};
 
     /* condition checks */
     int curr_num_pulses = 0;
