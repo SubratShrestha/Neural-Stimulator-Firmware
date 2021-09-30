@@ -28,12 +28,12 @@ uint8_t Timer_initVar = 0U;
 */ 
 cy_stc_tcpwm_counter_config_t const Timer_config =
 {
-        .period = 10000UL,
+        .period = 1000000UL,
         .clockPrescaler = 0UL,
         .runMode = 0UL,
         .countDirection = 0UL,
         .compareOrCapture = 0UL,
-        .compare0 = 500UL,
+        .compare0 = 10UL,
         .compare1 = 5UL,
         .enableCompareSwap = false,
         .interruptSources = 2UL,

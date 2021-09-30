@@ -16,21 +16,49 @@
 
 uint32_t dacWrite = 0x800;
 uint32_t comparevalue = 0;
-uint32_t interrupts;
+uint32_t phase_1 = 10;
+uint32_t inter_stim_gap = 0;
+uint32_t phase_2 = 30;
+uint32_t inter_stim_delay = 40;
+uint32_t phases[4];
+int current_phase = 0;
 
 void TimerInterruptHandler(void)
 {
-    comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
+    comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
 
     VDAC_1_SetValue(dacWrite);
-    if (dacWrite == 0x000) {
+    if (current_phase == 0) {
         dacWrite = 0x800;   
-    } else if (dacWrite == 0x800) {
+    } else if (current_phase == 1) {
+        dacWrite = 0x000;   
+    } else if (current_phase == 2) {
         dacWrite = 0x7FF;
-    } else if (dacWrite == 0x7FF) {
+    } else if (current_phase == 3) {
         dacWrite = 0x000;   
     }
+    
+    while (1) {
+        if (phases[current_phase] != 0) {
+            break;   
+        } else {
+            if (current_phase == 3) {
+                current_phase = 0;   
+            } else {
+                current_phase++;
+            }   
+        }
+    }
+    
+    Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[current_phase] - 1);
+    if (current_phase == 3) {
+        current_phase = 0;   
+    } else {
+        current_phase++;
+    }
+    
+    Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
 }
 
 int main(void)
@@ -48,7 +76,14 @@ int main(void)
      * here for simplicity. */
     (void)Cy_TCPWM_Counter_Init(Timer_HW, Timer_CNT_NUM, &Timer_config);
     Cy_TCPWM_Enable_Multiple(Timer_HW, Timer_CNT_MASK); /* Enable the counter instance */
-    Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, 10);
+
+    phases[0] = phase_1;
+    phases[1] = inter_stim_gap;
+    phases[2] = phase_2;
+    phases[3] = inter_stim_delay;
+  
+    
+    Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[0]);
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
     
     for(;;)
