@@ -15,15 +15,14 @@
 #include "stdint.h"
 
 uint32_t dacWrite = 0x800;
+uint32_t comparevalue = 0;
+uint32_t interrupts;
 
 void TimerInterruptHandler(void)
 {
-    /* Clear the terminal count interrupt */
-    Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_TC);
+    comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
+    Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
 
-    // printf("%" PRIu32 "\r\n", Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM));
-
-    
     VDAC_1_SetValue(dacWrite);
     if (dacWrite == 0x000) {
         dacWrite = 0x800;   
@@ -49,13 +48,13 @@ int main(void)
      * here for simplicity. */
     (void)Cy_TCPWM_Counter_Init(Timer_HW, Timer_CNT_NUM, &Timer_config);
     Cy_TCPWM_Enable_Multiple(Timer_HW, Timer_CNT_MASK); /* Enable the counter instance */
-    // Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, 5);
-    
+    Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, 10);
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
     
     for(;;)
     {
         /* Place your application code here. */
+        printf("%" PRIu32 "\r\n", comparevalue);
     }
 }
 
