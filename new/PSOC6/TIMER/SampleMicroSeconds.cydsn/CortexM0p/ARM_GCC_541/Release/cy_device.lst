@@ -1,0 +1,2070 @@
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0plus
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cy_device.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Cy_PDL_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	Cy_PDL_Init
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	Cy_PDL_Init, %function
+  25              	Cy_PDL_Init:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\device\\cy_device.c"
+   1:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * \file cy_device.c
+   3:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * \version 1.0
+   4:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *
+   5:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * This file provides the definitions for core and peripheral block HW base
+   6:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * addresses, versions, and parameters.
+   7:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *
+   8:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** ********************************************************************************
+   9:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * \copyright
+  10:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * Copyright 2018, Cypress Semiconductor Corporation. All rights reserved.
+  11:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *******************************************************************************/
+  15:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  16:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** #include "cy_device.h"
+  17:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  18:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** /*******************************************************************************
+  19:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *                   Global Variables
+  20:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *******************************************************************************/
+  21:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  22:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** /* This is set in Cy_PDL_Init() to the device information relevant
+  23:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****  * for the current target.
+  24:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****  */
+  25:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** const cy_stc_device_t * cy_device;
+  26:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  27:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** /* Platform and peripheral block configuration */
+  28:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** const cy_stc_device_t cy_deviceIpBlockCfgPSoC6_01 =
+  29:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** {
+  30:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* Base HW addresses */
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 2
+
+
+  31:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussBase                 */ 0x40210000UL,
+  32:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashcBase                */ 0x40250000UL,
+  33:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periBase                  */ 0x40010000UL,
+  34:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* udbBase                   */ 0x40340000UL,
+  35:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* protBase                  */ 0x40240000UL,
+  36:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* hsiomBase                 */ 0x40310000UL,
+  37:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioBase                  */ 0x40320000UL,
+  38:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* passBase                  */ 0x411F0000UL,
+  39:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcBase                   */ 0x40230000UL,
+  40:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cryptoBase                */ 0x40110000UL,
+  41:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  42:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* IP block versions */
+  43:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussVersion              */ 1U,
+  44:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cryptoVersion             */ 1U,
+  45:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwVersion                 */ 1U,
+  46:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashcVersion             */ 1U,
+  47:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioVersion               */ 1U,
+  48:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* hsiomVersion              */ 1U,
+  49:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcVersion                */ 1U,
+  50:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periVersion               */ 1U,
+  51:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* protVersion               */ 1U,
+  52:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  53:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* Parameters  */
+  54:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussIpcNr                */ 16U,
+  55:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussIpcIrqNr             */ 16U,
+  56:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussDwChNr               */ 16U,
+  57:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussFlashPaSize          */ 128U,
+  58:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussIpc0Irq              */ 25,
+  59:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussFmIrq                */ 85,
+  60:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussNotConnectedIrq      */ 240,
+  61:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* srssNumClkpath            */ 5U,
+  62:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* srssNumPll                */ 1U,
+  63:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* srssNumHfroot             */ 5U,
+  64:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periClockNr               */ 59U,
+  65:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* smifDeviceNr              */ 4U,
+  66:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* passSarChannels           */ 16U,
+  67:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* epMonitorNr               */ 28u,
+  68:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* udbPresent                */ 1U,
+  69:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* sysPmSimoPresent          */ 1U,
+  70:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* protBusMasterMask         */ 0xC00FUL,
+  71:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cryptoMemSize             */ 1024u,
+  72:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashRwwRequired          */ 1U,
+  73:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashPipeRequired         */ 1U,
+  74:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashWriteDelay           */ 1U,
+  75:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashProgramDelay         */ 1U,
+  76:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashEraseDelay           */ 1U,
+  77:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs0Freq       */ 29U,
+  78:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs1Freq       */ 58U,
+  79:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs2Freq       */ 87U,
+  80:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs3Freq       */ 120U,
+  81:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs4Freq       */ 150U,
+  82:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  83:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* Peripheral register offsets */
+  84:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  85:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* DW registers */
+  86:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChOffset                */ offsetof(DW_V1_Type, CH_STRUCT),
+  87:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChSize                  */ sizeof(DW_CH_STRUCT_V1_Type),
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 3
+
+
+  88:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChCtlPrioPos            */ (uint8_t)DW_CH_STRUCT_CH_CTL_PRIO_Pos,
+  89:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChCtlPreemptablePos     */ (uint8_t)DW_CH_STRUCT_CH_CTL_PREEMPTABLE_Pos,
+  90:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwStatusChIdxPos          */ (uint8_t)DW_STATUS_CH_IDX_Pos,
+  91:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwStatusChIdxMsk          */ DW_STATUS_CH_IDX_Msk,
+  92:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  93:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* PERI registers */
+  94:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrCmdOffset           */ offsetof(PERI_V1_Type, TR_CMD),
+  95:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrCmdGrSelMsk         */ PERI_TR_CMD_GROUP_SEL_Msk,
+  96:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrGrOffset            */ offsetof(PERI_V1_Type, TR_GR),
+  97:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrGrSize              */ sizeof(PERI_TR_GR_V1_Type),
+  98:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+  99:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdDivSelMsk       */ PERI_DIV_CMD_DIV_SEL_Msk,
+ 100:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdTypeSelPos      */ PERI_DIV_CMD_TYPE_SEL_Pos,
+ 101:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdPaDivSelPos     */ PERI_DIV_CMD_PA_DIV_SEL_Pos,
+ 102:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdPaTypeSelPos    */ PERI_DIV_CMD_PA_TYPE_SEL_Pos,
+ 103:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 104:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv8CtlOffset         */ offsetof(PERI_V1_Type, DIV_8_CTL),
+ 105:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv16CtlOffset        */ offsetof(PERI_V1_Type, DIV_16_CTL),
+ 106:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv16_5CtlOffset      */ offsetof(PERI_V1_Type, DIV_16_5_CTL),
+ 107:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv24_5CtlOffset      */ offsetof(PERI_V1_Type, DIV_24_5_CTL),
+ 108:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 109:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* GPIO registers */
+ 110:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtIntrCfgOffset      */ offsetof(GPIO_PRT_V1_Type, INTR_CFG),
+ 111:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgOffset          */ offsetof(GPIO_PRT_V1_Type, CFG),
+ 112:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgInOffset        */ offsetof(GPIO_PRT_V1_Type, CFG_IN),
+ 113:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgOutOffset       */ offsetof(GPIO_PRT_V1_Type, CFG_OUT),
+ 114:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgSioOffset       */ offsetof(GPIO_PRT_V1_Type, CFG_SIO),
+ 115:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 116:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* CPUSS registers  */
+ 117:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm0ClockCtlOffset    */ offsetof(CPUSS_V1_Type, CM0_CLOCK_CTL),
+ 118:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4ClockCtlOffset    */ offsetof(CPUSS_V1_Type, CM4_CLOCK_CTL),
+ 119:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4StatusOffset      */ offsetof(CPUSS_V1_Type, CM4_STATUS),
+ 120:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm0StatusOffset      */ offsetof(CPUSS_V1_Type, CM0_STATUS),
+ 121:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4PwrCtlOffset      */ offsetof(CPUSS_V1_Type, CM4_PWR_CTL),
+ 122:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussTrimRamCtlOffset     */ offsetof(CPUSS_V1_Type, TRIM_RAM_CTL),
+ 123:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussTrimRomCtlOffset     */ offsetof(CPUSS_V1_Type, TRIM_ROM_CTL),
+ 124:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussSysTickCtlOffset     */ offsetof(CPUSS_V1_Type, SYSTICK_CTL),
+ 125:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 126:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm0NmiCtlOffset      */ (uint16_t)offsetof(CPUSS_V1_Type, CM0_NMI_CTL),
+ 127:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4NmiCtlOffset      */ (uint16_t)offsetof(CPUSS_V1_Type, CM4_NMI_CTL),
+ 128:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRomCtl               */ (uint16_t)offsetof(CPUSS_V1_Type, ROM_CTL),
+ 129:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRam0Ctl0             */ (uint16_t)offsetof(CPUSS_V1_Type, RAM0_CTL0),
+ 130:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRam1Ctl0             */ (uint16_t)offsetof(CPUSS_V1_Type, RAM1_CTL0),
+ 131:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRam2Ctl0             */ (uint16_t)offsetof(CPUSS_V1_Type, RAM2_CTL0),
+ 132:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 133:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* IPC registers */
+ 134:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcStructSize             */ sizeof(IPC_STRUCT_V1_Type),
+ 135:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcLockStatusOffset       */ offsetof(IPC_STRUCT_V1_Type, LOCK_STATUS),
+ 136:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** };
+ 137:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 138:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** const cy_stc_device_t cy_deviceIpBlockCfgPSoC6_02 =
+ 139:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** {
+ 140:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* Base HW addresses */
+ 141:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussBase                 */ 0x40200000UL,
+ 142:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashcBase                */ 0x40240000UL,
+ 143:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periBase                  */ 0x40000000UL,
+ 144:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* udbBase                   */ 0UL,
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 4
+
+
+ 145:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* protBase                  */ 0x40230000UL,
+ 146:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* hsiomBase                 */ 0x40300000UL,
+ 147:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioBase                  */ 0x40310000UL,
+ 148:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* passBase                  */ 0x409F0000UL,
+ 149:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcBase                   */ 0x40220000UL,
+ 150:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cryptoBase                */ 0x40100000UL,
+ 151:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 152:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* IP block versions */
+ 153:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussVersion              */ 2U,
+ 154:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cryptoVersion             */ 2U,
+ 155:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwVersion                 */ 2U,
+ 156:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashcVersion             */ 2U,
+ 157:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioVersion               */ 2U,
+ 158:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* hsiomVersion              */ 2U,
+ 159:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcVersion                */ 2U,
+ 160:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periVersion               */ 2U,
+ 161:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* protVersion               */ 2U,
+ 162:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 163:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* Parameters */
+ 164:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussIpcNr                */ 16U,
+ 165:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussIpcIrqNr             */ 16U,
+ 166:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussDwChNr               */ 29U,
+ 167:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussFlashPaSize          */ 128U,
+ 168:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussIpc0Irq              */ 23,
+ 169:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussFmIrq                */ 117,
+ 170:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussNotConnectedIrq      */ 1023,
+ 171:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* srssNumClkpath            */ 6U,
+ 172:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* srssNumPll                */ 2U,
+ 173:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* srssNumHfroot             */ 6U,
+ 174:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periClockNr               */ 54U,
+ 175:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* smifDeviceNr              */ 4,
+ 176:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* passSarChannels           */ 16U,
+ 177:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* epMonitorNr               */ 32u,
+ 178:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* udbPresent                */ 0U,
+ 179:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* sysPmSimoPresent          */ 0U,
+ 180:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* protBusMasterMask         */ 0xC07FUL,
+ 181:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cryptoMemSize             */ 1024u,
+ 182:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashRwwRequired          */ 0U,
+ 183:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashPipeRequired         */ 0U,
+ 184:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashWriteDelay           */ 0U,
+ 185:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashProgramDelay         */ 0U,
+ 186:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashEraseDelay           */ 0U,
+ 187:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs0Freq       */ 25U,
+ 188:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs1Freq       */ 50U,
+ 189:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs2Freq       */ 75U,
+ 190:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs3Freq       */ 100U,
+ 191:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* flashCtlMainWs4Freq       */ 125U,
+ 192:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 193:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* Peripheral register offsets */
+ 194:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 195:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* DW registers */
+ 196:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChOffset                */ offsetof(DW_V2_Type, CH_STRUCT),
+ 197:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChSize                  */ sizeof(DW_CH_STRUCT_V2_Type),
+ 198:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChCtlPrioPos            */ (uint8_t)DW_CH_STRUCT_V2_CH_CTL_PRIO_Pos,
+ 199:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwChCtlPreemptablePos     */ (uint8_t)DW_CH_STRUCT_V2_CH_CTL_PREEMPTABLE_Pos,
+ 200:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwStatusChIdxPos          */ (uint8_t)DW_V2_STATUS_CH_IDX_Pos,
+ 201:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* dwStatusChIdxMsk          */ DW_V2_STATUS_CH_IDX_Msk,
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 5
+
+
+ 202:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 203:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* PERI registers  */
+ 204:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrCmdOffset           */ offsetof(PERI_V2_Type, TR_CMD),
+ 205:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrCmdGrSelMsk         */ PERI_V2_TR_CMD_GROUP_SEL_Msk,
+ 206:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrGrOffset            */ offsetof(PERI_V2_Type, TR_GR),
+ 207:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periTrGrSize              */ sizeof(PERI_TR_GR_V2_Type),
+ 208:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 209:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdDivSelMsk       */ (uint8_t)PERI_V2_DIV_CMD_DIV_SEL_Msk,
+ 210:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdTypeSelPos      */ (uint8_t)PERI_V2_DIV_CMD_TYPE_SEL_Pos,
+ 211:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdPaDivSelPos     */ (uint8_t)PERI_V2_DIV_CMD_PA_DIV_SEL_Pos,
+ 212:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDivCmdPaTypeSelPos    */ (uint8_t)PERI_V2_DIV_CMD_PA_TYPE_SEL_Pos,
+ 213:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 214:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv8CtlOffset         */ offsetof(PERI_V2_Type, DIV_8_CTL),
+ 215:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv16CtlOffset        */ offsetof(PERI_V2_Type, DIV_16_CTL),
+ 216:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv16_5CtlOffset      */ offsetof(PERI_V2_Type, DIV_16_5_CTL),
+ 217:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* periDiv24_5CtlOffset      */ offsetof(PERI_V2_Type, DIV_24_5_CTL),
+ 218:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 219:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* GPIO registers  */
+ 220:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtIntrCfgOffset      */ offsetof(GPIO_PRT_V2_Type, INTR_CFG),
+ 221:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgOffset          */ offsetof(GPIO_PRT_V2_Type, CFG),
+ 222:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgInOffset        */ offsetof(GPIO_PRT_V2_Type, CFG_IN),
+ 223:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgOutOffset       */ offsetof(GPIO_PRT_V2_Type, CFG_OUT),
+ 224:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* gpioPrtCfgSioOffset       */ offsetof(GPIO_PRT_V2_Type, CFG_SIO),
+ 225:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 226:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* CPUSS registers */
+ 227:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm0ClockCtlOffset    */ offsetof(CPUSS_V2_Type, CM0_CLOCK_CTL),
+ 228:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4ClockCtlOffset    */ offsetof(CPUSS_V2_Type, CM4_CLOCK_CTL),
+ 229:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4StatusOffset      */ offsetof(CPUSS_V2_Type, CM4_STATUS),
+ 230:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm0StatusOffset      */ offsetof(CPUSS_V2_Type, CM0_STATUS),
+ 231:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4PwrCtlOffset      */ offsetof(CPUSS_V2_Type, CM4_PWR_CTL),
+ 232:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussTrimRamCtlOffset     */ offsetof(CPUSS_V2_Type, TRIM_RAM_CTL),
+ 233:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussTrimRomCtlOffset     */ offsetof(CPUSS_V2_Type, TRIM_ROM_CTL),
+ 234:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussSysTickCtlOffset     */ offsetof(CPUSS_V2_Type, SYSTICK_CTL),
+ 235:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm0NmiCtlOffset      */ (uint16_t)offsetof(CPUSS_V2_Type, CM0_NMI_CTL),
+ 236:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussCm4NmiCtlOffset      */ (uint16_t)offsetof(CPUSS_V2_Type, CM4_NMI_CTL),
+ 237:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRomCtl               */ (uint16_t)offsetof(CPUSS_V2_Type, ROM_CTL),
+ 238:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRam0Ctl0             */ (uint16_t)offsetof(CPUSS_V2_Type, RAM0_CTL0),
+ 239:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRam1Ctl0             */ (uint16_t)offsetof(CPUSS_V2_Type, RAM1_CTL0),
+ 240:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* cpussRam2Ctl0             */ (uint16_t)offsetof(CPUSS_V2_Type, RAM2_CTL0),
+ 241:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 242:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* IPC registers */
+ 243:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcStructSize             */ sizeof(IPC_STRUCT_V2_Type),
+ 244:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     /* ipcLockStatusOffset       */ offsetof(IPC_STRUCT_V2_Type, LOCK_STATUS),
+ 245:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** };
+ 246:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 247:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** 
+ 248:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** /******************************************************************************
+ 249:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * Function Name: Cy_PDL_Init
+ 250:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** ****************************************************************************//**
+ 251:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *
+ 252:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * \brief Initializes the platform and peripheral block configuration for the
+ 253:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * given target device.
+ 254:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *
+ 255:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * \param device
+ 256:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * Pointer to the platform and peripheral block configuration
+ 257:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *
+ 258:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * \note
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 6
+
+
+ 259:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** * This function must be called prior calling any function in PDL.
+ 260:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *
+ 261:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** *******************************************************************************/
+ 262:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** void Cy_PDL_Init(const cy_stc_device_t * device)
+ 263:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** {
+  28              		.loc 1 263 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+ 264:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     cy_device = device;
+  34              		.loc 1 264 0
+  35 0000 014B     		ldr	r3, .L2
+ 265:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c **** }
+  36              		.loc 1 265 0
+  37              		@ sp needed
+ 264:Generated_Source\PSoC6\pdl\drivers\peripheral\device/cy_device.c ****     cy_device = device;
+  38              		.loc 1 264 0
+  39 0002 1860     		str	r0, [r3]
+  40              		.loc 1 265 0
+  41 0004 7047     		bx	lr
+  42              	.L3:
+  43 0006 C046     		.align	2
+  44              	.L2:
+  45 0008 00000000 		.word	cy_device
+  46              		.cfi_endproc
+  47              	.LFE0:
+  48              		.size	Cy_PDL_Init, .-Cy_PDL_Init
+  49              		.global	cy_deviceIpBlockCfgPSoC6_02
+  50              		.global	cy_deviceIpBlockCfgPSoC6_01
+  51              		.comm	cy_device,4,4
+  52              		.section	.rodata
+  53              		.align	2
+  54              		.type	cy_deviceIpBlockCfgPSoC6_02, %object
+  55              		.size	cy_deviceIpBlockCfgPSoC6_02, 184
+  56              	cy_deviceIpBlockCfgPSoC6_02:
+  57 0000 00002040 		.word	1075838976
+  58 0004 00002440 		.word	1076101120
+  59 0008 00000040 		.word	1073741824
+  60 000c 00000000 		.word	0
+  61 0010 00002340 		.word	1076035584
+  62 0014 00003040 		.word	1076887552
+  63 0018 00003140 		.word	1076953088
+  64 001c 00009F40 		.word	1084162048
+  65 0020 00002240 		.word	1075970048
+  66 0024 00001040 		.word	1074790400
+  67 0028 02       		.byte	2
+  68 0029 02       		.byte	2
+  69 002a 02       		.byte	2
+  70 002b 02       		.byte	2
+  71 002c 02       		.byte	2
+  72 002d 02       		.byte	2
+  73 002e 02       		.byte	2
+  74 002f 02       		.byte	2
+  75 0030 02       		.byte	2
+  76 0031 10       		.byte	16
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 7
+
+
+  77 0032 10       		.byte	16
+  78 0033 1D       		.byte	29
+  79 0034 80       		.byte	-128
+  80 0035 00       		.space	1
+  81 0036 1700     		.short	23
+  82 0038 7500     		.short	117
+  83 003a FF03     		.short	1023
+  84 003c 06       		.byte	6
+  85 003d 02       		.byte	2
+  86 003e 06       		.byte	6
+  87 003f 36       		.byte	54
+  88 0040 04       		.byte	4
+  89 0041 10       		.byte	16
+  90 0042 20       		.byte	32
+  91 0043 00       		.byte	0
+  92 0044 00       		.byte	0
+  93 0045 000000   		.space	3
+  94 0048 7FC00000 		.word	49279
+  95 004c 00040000 		.word	1024
+  96 0050 00       		.byte	0
+  97 0051 00       		.byte	0
+  98 0052 00       		.byte	0
+  99 0053 00       		.byte	0
+ 100 0054 00       		.byte	0
+ 101 0055 19       		.byte	25
+ 102 0056 32       		.byte	50
+ 103 0057 4B       		.byte	75
+ 104 0058 64       		.byte	100
+ 105 0059 7D       		.byte	125
+ 106 005a 0080     		.short	-32768
+ 107 005c 4000     		.short	64
+ 108 005e 08       		.byte	8
+ 109 005f 0B       		.byte	11
+ 110 0060 10       		.byte	16
+ 111 0061 000000   		.space	3
+ 112 0064 0000FF01 		.word	33488896
+ 113 0068 2002     		.short	544
+ 114 006a 001F     		.short	7936
+ 115 006c 0080     		.short	-32768
+ 116 006e 0004     		.short	1024
+ 117 0070 FF       		.byte	-1
+ 118 0071 08       		.byte	8
+ 119 0072 10       		.byte	16
+ 120 0073 18       		.byte	24
+ 121 0074 0010     		.short	4096
+ 122 0076 0014     		.short	5120
+ 123 0078 0018     		.short	6144
+ 124 007a 001C     		.short	7168
+ 125 007c 40       		.byte	64
+ 126 007d 44       		.byte	68
+ 127 007e 48       		.byte	72
+ 128 007f 4C       		.byte	76
+ 129 0080 50       		.byte	80
+ 130 0081 000000   		.space	3
+ 131 0084 08100000 		.word	4104
+ 132 0088 08000000 		.word	8
+ 133 008c 04000000 		.word	4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 8
+
+
+ 134 0090 04100000 		.word	4100
+ 135 0094 00120000 		.word	4608
+ 136 0098 04210000 		.word	8452
+ 137 009c 00210000 		.word	8448
+ 138 00a0 00160000 		.word	5632
+ 139 00a4 4011     		.short	4416
+ 140 00a6 4002     		.short	576
+ 141 00a8 C413     		.short	5060
+ 142 00aa 0013     		.short	4864
+ 143 00ac 8013     		.short	4992
+ 144 00ae A013     		.short	5024
+ 145 00b0 2000     		.short	32
+ 146 00b2 0000     		.space	2
+ 147 00b4 1C000000 		.word	28
+ 148              		.type	cy_deviceIpBlockCfgPSoC6_01, %object
+ 149              		.size	cy_deviceIpBlockCfgPSoC6_01, 184
+ 150              	cy_deviceIpBlockCfgPSoC6_01:
+ 151 00b8 00002140 		.word	1075904512
+ 152 00bc 00002540 		.word	1076166656
+ 153 00c0 00000140 		.word	1073807360
+ 154 00c4 00003440 		.word	1077149696
+ 155 00c8 00002440 		.word	1076101120
+ 156 00cc 00003140 		.word	1076953088
+ 157 00d0 00003240 		.word	1077018624
+ 158 00d4 00001F41 		.word	1092550656
+ 159 00d8 00002340 		.word	1076035584
+ 160 00dc 00001140 		.word	1074855936
+ 161 00e0 01       		.byte	1
+ 162 00e1 01       		.byte	1
+ 163 00e2 01       		.byte	1
+ 164 00e3 01       		.byte	1
+ 165 00e4 01       		.byte	1
+ 166 00e5 01       		.byte	1
+ 167 00e6 01       		.byte	1
+ 168 00e7 01       		.byte	1
+ 169 00e8 01       		.byte	1
+ 170 00e9 10       		.byte	16
+ 171 00ea 10       		.byte	16
+ 172 00eb 10       		.byte	16
+ 173 00ec 80       		.byte	-128
+ 174 00ed 00       		.space	1
+ 175 00ee 1900     		.short	25
+ 176 00f0 5500     		.short	85
+ 177 00f2 F000     		.short	240
+ 178 00f4 05       		.byte	5
+ 179 00f5 01       		.byte	1
+ 180 00f6 05       		.byte	5
+ 181 00f7 3B       		.byte	59
+ 182 00f8 04       		.byte	4
+ 183 00f9 10       		.byte	16
+ 184 00fa 1C       		.byte	28
+ 185 00fb 01       		.byte	1
+ 186 00fc 01       		.byte	1
+ 187 00fd 000000   		.space	3
+ 188 0100 0FC00000 		.word	49167
+ 189 0104 00040000 		.word	1024
+ 190 0108 01       		.byte	1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 9
+
+
+ 191 0109 01       		.byte	1
+ 192 010a 01       		.byte	1
+ 193 010b 01       		.byte	1
+ 194 010c 01       		.byte	1
+ 195 010d 1D       		.byte	29
+ 196 010e 3A       		.byte	58
+ 197 010f 57       		.byte	87
+ 198 0110 78       		.byte	120
+ 199 0111 96       		.byte	-106
+ 200 0112 0008     		.short	2048
+ 201 0114 2000     		.short	32
+ 202 0116 10       		.byte	16
+ 203 0117 12       		.byte	18
+ 204 0118 08       		.byte	8
+ 205 0119 000000   		.space	3
+ 206 011c 001F0000 		.word	7936
+ 207 0120 0010     		.short	4096
+ 208 0122 000F     		.short	3840
+ 209 0124 0020     		.short	8192
+ 210 0126 0002     		.short	512
+ 211 0128 3F       		.byte	63
+ 212 0129 06       		.byte	6
+ 213 012a 08       		.byte	8
+ 214 012b 0E       		.byte	14
+ 215 012c 0008     		.short	2048
+ 216 012e 0009     		.short	2304
+ 217 0130 000A     		.short	2560
+ 218 0132 000B     		.short	2816
+ 219 0134 24       		.byte	36
+ 220 0135 28       		.byte	40
+ 221 0136 2C       		.byte	44
+ 222 0137 30       		.byte	48
+ 223 0138 34       		.byte	52
+ 224 0139 000000   		.space	3
+ 225 013c 10000000 		.word	16
+ 226 0140 90000000 		.word	144
+ 227 0144 88000000 		.word	136
+ 228 0148 08000000 		.word	8
+ 229 014c 80000000 		.word	128
+ 230 0150 04F00000 		.word	61444
+ 231 0154 00F00000 		.word	61440
+ 232 0158 40020000 		.word	576
+ 233 015c 2005     		.short	1312
+ 234 015e A000     		.short	160
+ 235 0160 D001     		.short	464
+ 236 0162 0001     		.short	256
+ 237 0164 8001     		.short	384
+ 238 0166 A001     		.short	416
+ 239 0168 2000     		.short	32
+ 240 016a 0000     		.space	2
+ 241 016c 10000000 		.word	16
+ 242              		.text
+ 243              	.Letext0:
+ 244              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 245              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 246              		.file 4 "Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\device\\cy_device.h"
+ 247              		.section	.debug_info,"",%progbits
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 10
+
+
+ 248              	.Ldebug_info0:
+ 249 0000 4D050000 		.4byte	0x54d
+ 250 0004 0400     		.2byte	0x4
+ 251 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 252 000a 04       		.byte	0x4
+ 253 000b 01       		.uleb128 0x1
+ 254 000c C9000000 		.4byte	.LASF109
+ 255 0010 0C       		.byte	0xc
+ 256 0011 3E070000 		.4byte	.LASF110
+ 257 0015 C4040000 		.4byte	.LASF111
+ 258 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 259 001d 00000000 		.4byte	0
+ 260 0021 00000000 		.4byte	.Ldebug_line0
+ 261 0025 02       		.uleb128 0x2
+ 262 0026 01       		.byte	0x1
+ 263 0027 06       		.byte	0x6
+ 264 0028 BD030000 		.4byte	.LASF0
+ 265 002c 03       		.uleb128 0x3
+ 266 002d E0020000 		.4byte	.LASF2
+ 267 0031 02       		.byte	0x2
+ 268 0032 1D       		.byte	0x1d
+ 269 0033 37000000 		.4byte	0x37
+ 270 0037 02       		.uleb128 0x2
+ 271 0038 01       		.byte	0x1
+ 272 0039 08       		.byte	0x8
+ 273 003a 95030000 		.4byte	.LASF1
+ 274 003e 03       		.uleb128 0x3
+ 275 003f 72060000 		.4byte	.LASF3
+ 276 0043 02       		.byte	0x2
+ 277 0044 29       		.byte	0x29
+ 278 0045 49000000 		.4byte	0x49
+ 279 0049 02       		.uleb128 0x2
+ 280 004a 02       		.byte	0x2
+ 281 004b 05       		.byte	0x5
+ 282 004c 8D000000 		.4byte	.LASF4
+ 283 0050 03       		.uleb128 0x3
+ 284 0051 99010000 		.4byte	.LASF5
+ 285 0055 02       		.byte	0x2
+ 286 0056 2B       		.byte	0x2b
+ 287 0057 5B000000 		.4byte	0x5b
+ 288 005b 02       		.uleb128 0x2
+ 289 005c 02       		.byte	0x2
+ 290 005d 07       		.byte	0x7
+ 291 005e 96040000 		.4byte	.LASF6
+ 292 0062 02       		.uleb128 0x2
+ 293 0063 04       		.byte	0x4
+ 294 0064 05       		.byte	0x5
+ 295 0065 AE020000 		.4byte	.LASF7
+ 296 0069 03       		.uleb128 0x3
+ 297 006a 77010000 		.4byte	.LASF8
+ 298 006e 02       		.byte	0x2
+ 299 006f 41       		.byte	0x41
+ 300 0070 74000000 		.4byte	0x74
+ 301 0074 02       		.uleb128 0x2
+ 302 0075 04       		.byte	0x4
+ 303 0076 07       		.byte	0x7
+ 304 0077 E0050000 		.4byte	.LASF9
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 11
+
+
+ 305 007b 02       		.uleb128 0x2
+ 306 007c 08       		.byte	0x8
+ 307 007d 05       		.byte	0x5
+ 308 007e 6A020000 		.4byte	.LASF10
+ 309 0082 02       		.uleb128 0x2
+ 310 0083 08       		.byte	0x8
+ 311 0084 07       		.byte	0x7
+ 312 0085 C9030000 		.4byte	.LASF11
+ 313 0089 04       		.uleb128 0x4
+ 314 008a 04       		.byte	0x4
+ 315 008b 05       		.byte	0x5
+ 316 008c 696E7400 		.ascii	"int\000"
+ 317 0090 02       		.uleb128 0x2
+ 318 0091 04       		.byte	0x4
+ 319 0092 07       		.byte	0x7
+ 320 0093 24070000 		.4byte	.LASF12
+ 321 0097 03       		.uleb128 0x3
+ 322 0098 D4010000 		.4byte	.LASF13
+ 323 009c 03       		.byte	0x3
+ 324 009d 18       		.byte	0x18
+ 325 009e 2C000000 		.4byte	0x2c
+ 326 00a2 03       		.uleb128 0x3
+ 327 00a3 57050000 		.4byte	.LASF14
+ 328 00a7 03       		.byte	0x3
+ 329 00a8 20       		.byte	0x20
+ 330 00a9 3E000000 		.4byte	0x3e
+ 331 00ad 03       		.uleb128 0x3
+ 332 00ae A9040000 		.4byte	.LASF15
+ 333 00b2 03       		.byte	0x3
+ 334 00b3 24       		.byte	0x24
+ 335 00b4 50000000 		.4byte	0x50
+ 336 00b8 03       		.uleb128 0x3
+ 337 00b9 10020000 		.4byte	.LASF16
+ 338 00bd 03       		.byte	0x3
+ 339 00be 30       		.byte	0x30
+ 340 00bf 69000000 		.4byte	0x69
+ 341 00c3 02       		.uleb128 0x2
+ 342 00c4 08       		.byte	0x8
+ 343 00c5 04       		.byte	0x4
+ 344 00c6 70030000 		.4byte	.LASF17
+ 345 00ca 02       		.uleb128 0x2
+ 346 00cb 04       		.byte	0x4
+ 347 00cc 07       		.byte	0x7
+ 348 00cd A7000000 		.4byte	.LASF18
+ 349 00d1 05       		.uleb128 0x5
+ 350 00d2 B8       		.byte	0xb8
+ 351 00d3 04       		.byte	0x4
+ 352 00d4 34       		.byte	0x34
+ 353 00d5 E2040000 		.4byte	0x4e2
+ 354 00d9 06       		.uleb128 0x6
+ 355 00da 82010000 		.4byte	.LASF19
+ 356 00de 04       		.byte	0x4
+ 357 00df 37       		.byte	0x37
+ 358 00e0 B8000000 		.4byte	0xb8
+ 359 00e4 00       		.byte	0
+ 360 00e5 06       		.uleb128 0x6
+ 361 00e6 33060000 		.4byte	.LASF20
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 12
+
+
+ 362 00ea 04       		.byte	0x4
+ 363 00eb 38       		.byte	0x38
+ 364 00ec B8000000 		.4byte	0xb8
+ 365 00f0 04       		.byte	0x4
+ 366 00f1 06       		.uleb128 0x6
+ 367 00f2 B4030000 		.4byte	.LASF21
+ 368 00f6 04       		.byte	0x4
+ 369 00f7 39       		.byte	0x39
+ 370 00f8 B8000000 		.4byte	0xb8
+ 371 00fc 08       		.byte	0x8
+ 372 00fd 06       		.uleb128 0x6
+ 373 00fe 38050000 		.4byte	.LASF22
+ 374 0102 04       		.byte	0x4
+ 375 0103 3A       		.byte	0x3a
+ 376 0104 B8000000 		.4byte	0xb8
+ 377 0108 0C       		.byte	0xc
+ 378 0109 06       		.uleb128 0x6
+ 379 010a 0F070000 		.4byte	.LASF23
+ 380 010e 04       		.byte	0x4
+ 381 010f 3B       		.byte	0x3b
+ 382 0110 B8000000 		.4byte	0xb8
+ 383 0114 10       		.byte	0x10
+ 384 0115 06       		.uleb128 0x6
+ 385 0116 50020000 		.4byte	.LASF24
+ 386 011a 04       		.byte	0x4
+ 387 011b 3C       		.byte	0x3c
+ 388 011c B8000000 		.4byte	0xb8
+ 389 0120 14       		.byte	0x14
+ 390 0121 06       		.uleb128 0x6
+ 391 0122 E0030000 		.4byte	.LASF25
+ 392 0126 04       		.byte	0x4
+ 393 0127 3D       		.byte	0x3d
+ 394 0128 B8000000 		.4byte	0xb8
+ 395 012c 18       		.byte	0x18
+ 396 012d 06       		.uleb128 0x6
+ 397 012e 61020000 		.4byte	.LASF26
+ 398 0132 04       		.byte	0x4
+ 399 0133 3E       		.byte	0x3e
+ 400 0134 B8000000 		.4byte	0xb8
+ 401 0138 1C       		.byte	0x1c
+ 402 0139 06       		.uleb128 0x6
+ 403 013a 07070000 		.4byte	.LASF27
+ 404 013e 04       		.byte	0x4
+ 405 013f 3F       		.byte	0x3f
+ 406 0140 B8000000 		.4byte	0xb8
+ 407 0144 20       		.byte	0x20
+ 408 0145 06       		.uleb128 0x6
+ 409 0146 82000000 		.4byte	.LASF28
+ 410 014a 04       		.byte	0x4
+ 411 014b 40       		.byte	0x40
+ 412 014c B8000000 		.4byte	0xb8
+ 413 0150 24       		.byte	0x24
+ 414 0151 06       		.uleb128 0x6
+ 415 0152 8C010000 		.4byte	.LASF29
+ 416 0156 04       		.byte	0x4
+ 417 0157 43       		.byte	0x43
+ 418 0158 97000000 		.4byte	0x97
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 13
+
+
+ 419 015c 28       		.byte	0x28
+ 420 015d 06       		.uleb128 0x6
+ 421 015e 9D050000 		.4byte	.LASF30
+ 422 0162 04       		.byte	0x4
+ 423 0163 44       		.byte	0x44
+ 424 0164 97000000 		.4byte	0x97
+ 425 0168 29       		.byte	0x29
+ 426 0169 06       		.uleb128 0x6
+ 427 016a 00060000 		.4byte	.LASF31
+ 428 016e 04       		.byte	0x4
+ 429 016f 45       		.byte	0x45
+ 430 0170 97000000 		.4byte	0x97
+ 431 0174 2A       		.byte	0x2a
+ 432 0175 06       		.uleb128 0x6
+ 433 0176 88040000 		.4byte	.LASF32
+ 434 017a 04       		.byte	0x4
+ 435 017b 46       		.byte	0x46
+ 436 017c 97000000 		.4byte	0x97
+ 437 0180 2B       		.byte	0x2b
+ 438 0181 06       		.uleb128 0x6
+ 439 0182 AB050000 		.4byte	.LASF33
+ 440 0186 04       		.byte	0x4
+ 441 0187 47       		.byte	0x47
+ 442 0188 97000000 		.4byte	0x97
+ 443 018c 2C       		.byte	0x2c
+ 444 018d 06       		.uleb128 0x6
+ 445 018e 54000000 		.4byte	.LASF34
+ 446 0192 04       		.byte	0x4
+ 447 0193 48       		.byte	0x48
+ 448 0194 97000000 		.4byte	0x97
+ 449 0198 2D       		.byte	0x2d
+ 450 0199 06       		.uleb128 0x6
+ 451 019a B0000000 		.4byte	.LASF35
+ 452 019e 04       		.byte	0x4
+ 453 019f 49       		.byte	0x49
+ 454 01a0 97000000 		.4byte	0x97
+ 455 01a4 2E       		.byte	0x2e
+ 456 01a5 06       		.uleb128 0x6
+ 457 01a6 DC010000 		.4byte	.LASF36
+ 458 01aa 04       		.byte	0x4
+ 459 01ab 4A       		.byte	0x4a
+ 460 01ac 97000000 		.4byte	0x97
+ 461 01b0 2F       		.byte	0x2f
+ 462 01b1 06       		.uleb128 0x6
+ 463 01b2 6B010000 		.4byte	.LASF37
+ 464 01b6 04       		.byte	0x4
+ 465 01b7 4B       		.byte	0x4b
+ 466 01b8 97000000 		.4byte	0x97
+ 467 01bc 30       		.byte	0x30
+ 468 01bd 06       		.uleb128 0x6
+ 469 01be A4010000 		.4byte	.LASF38
+ 470 01c2 04       		.byte	0x4
+ 471 01c3 4E       		.byte	0x4e
+ 472 01c4 97000000 		.4byte	0x97
+ 473 01c8 31       		.byte	0x31
+ 474 01c9 06       		.uleb128 0x6
+ 475 01ca 64060000 		.4byte	.LASF39
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 14
+
+
+ 476 01ce 04       		.byte	0x4
+ 477 01cf 4F       		.byte	0x4f
+ 478 01d0 97000000 		.4byte	0x97
+ 479 01d4 32       		.byte	0x32
+ 480 01d5 06       		.uleb128 0x6
+ 481 01d6 76000000 		.4byte	.LASF40
+ 482 01da 04       		.byte	0x4
+ 483 01db 50       		.byte	0x50
+ 484 01dc 97000000 		.4byte	0x97
+ 485 01e0 33       		.byte	0x33
+ 486 01e1 06       		.uleb128 0x6
+ 487 01e2 00000000 		.4byte	.LASF41
+ 488 01e6 04       		.byte	0x4
+ 489 01e7 51       		.byte	0x51
+ 490 01e8 97000000 		.4byte	0x97
+ 491 01ec 34       		.byte	0x34
+ 492 01ed 06       		.uleb128 0x6
+ 493 01ee 2E020000 		.4byte	.LASF42
+ 494 01f2 04       		.byte	0x4
+ 495 01f3 52       		.byte	0x52
+ 496 01f4 A2000000 		.4byte	0xa2
+ 497 01f8 36       		.byte	0x36
+ 498 01f9 06       		.uleb128 0x6
+ 499 01fa 3F040000 		.4byte	.LASF43
+ 500 01fe 04       		.byte	0x4
+ 501 01ff 53       		.byte	0x53
+ 502 0200 A2000000 		.4byte	0xa2
+ 503 0204 38       		.byte	0x38
+ 504 0205 06       		.uleb128 0x6
+ 505 0206 4A040000 		.4byte	.LASF44
+ 506 020a 04       		.byte	0x4
+ 507 020b 54       		.byte	0x54
+ 508 020c A2000000 		.4byte	0xa2
+ 509 0210 3A       		.byte	0x3a
+ 510 0211 06       		.uleb128 0x6
+ 511 0212 5F050000 		.4byte	.LASF45
+ 512 0216 04       		.byte	0x4
+ 513 0217 55       		.byte	0x55
+ 514 0218 97000000 		.4byte	0x97
+ 515 021c 3C       		.byte	0x3c
+ 516 021d 06       		.uleb128 0x6
+ 517 021e 4C050000 		.4byte	.LASF46
+ 518 0222 04       		.byte	0x4
+ 519 0223 56       		.byte	0x56
+ 520 0224 97000000 		.4byte	0x97
+ 521 0228 3D       		.byte	0x3d
+ 522 0229 06       		.uleb128 0x6
+ 523 022a 32000000 		.4byte	.LASF47
+ 524 022e 04       		.byte	0x4
+ 525 022f 57       		.byte	0x57
+ 526 0230 97000000 		.4byte	0x97
+ 527 0234 3E       		.byte	0x3e
+ 528 0235 06       		.uleb128 0x6
+ 529 0236 40050000 		.4byte	.LASF48
+ 530 023a 04       		.byte	0x4
+ 531 023b 58       		.byte	0x58
+ 532 023c 97000000 		.4byte	0x97
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 15
+
+
+ 533 0240 3F       		.byte	0x3f
+ 534 0241 06       		.uleb128 0x6
+ 535 0242 31070000 		.4byte	.LASF49
+ 536 0246 04       		.byte	0x4
+ 537 0247 59       		.byte	0x59
+ 538 0248 97000000 		.4byte	0x97
+ 539 024c 40       		.byte	0x40
+ 540 024d 06       		.uleb128 0x6
+ 541 024e 54060000 		.4byte	.LASF50
+ 542 0252 04       		.byte	0x4
+ 543 0253 5A       		.byte	0x5a
+ 544 0254 97000000 		.4byte	0x97
+ 545 0258 41       		.byte	0x41
+ 546 0259 06       		.uleb128 0x6
+ 547 025a 0A060000 		.4byte	.LASF51
+ 548 025e 04       		.byte	0x4
+ 549 025f 5B       		.byte	0x5b
+ 550 0260 97000000 		.4byte	0x97
+ 551 0264 42       		.byte	0x42
+ 552 0265 06       		.uleb128 0x6
+ 553 0266 8A030000 		.4byte	.LASF52
+ 554 026a 04       		.byte	0x4
+ 555 026b 5C       		.byte	0x5c
+ 556 026c 97000000 		.4byte	0x97
+ 557 0270 43       		.byte	0x43
+ 558 0271 06       		.uleb128 0x6
+ 559 0272 A3030000 		.4byte	.LASF53
+ 560 0276 04       		.byte	0x4
+ 561 0277 5D       		.byte	0x5d
+ 562 0278 97000000 		.4byte	0x97
+ 563 027c 44       		.byte	0x44
+ 564 027d 06       		.uleb128 0x6
+ 565 027e B2040000 		.4byte	.LASF54
+ 566 0282 04       		.byte	0x4
+ 567 0283 5E       		.byte	0x5e
+ 568 0284 B8000000 		.4byte	0xb8
+ 569 0288 48       		.byte	0x48
+ 570 0289 06       		.uleb128 0x6
+ 571 028a 7E050000 		.4byte	.LASF55
+ 572 028e 04       		.byte	0x4
+ 573 028f 5F       		.byte	0x5f
+ 574 0290 B8000000 		.4byte	0xb8
+ 575 0294 4C       		.byte	0x4c
+ 576 0295 06       		.uleb128 0x6
+ 577 0296 AF010000 		.4byte	.LASF56
+ 578 029a 04       		.byte	0x4
+ 579 029b 60       		.byte	0x60
+ 580 029c 97000000 		.4byte	0x97
+ 581 02a0 50       		.byte	0x50
+ 582 02a1 06       		.uleb128 0x6
+ 583 02a2 E7060000 		.4byte	.LASF57
+ 584 02a6 04       		.byte	0x4
+ 585 02a7 61       		.byte	0x61
+ 586 02a8 97000000 		.4byte	0x97
+ 587 02ac 51       		.byte	0x51
+ 588 02ad 06       		.uleb128 0x6
+ 589 02ae 97000000 		.4byte	.LASF58
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 16
+
+
+ 590 02b2 04       		.byte	0x4
+ 591 02b3 62       		.byte	0x62
+ 592 02b4 97000000 		.4byte	0x97
+ 593 02b8 52       		.byte	0x52
+ 594 02b9 06       		.uleb128 0x6
+ 595 02ba 2D040000 		.4byte	.LASF59
+ 596 02be 04       		.byte	0x4
+ 597 02bf 63       		.byte	0x63
+ 598 02c0 97000000 		.4byte	0x97
+ 599 02c4 53       		.byte	0x53
+ 600 02c5 06       		.uleb128 0x6
+ 601 02c6 F1010000 		.4byte	.LASF60
+ 602 02ca 04       		.byte	0x4
+ 603 02cb 64       		.byte	0x64
+ 604 02cc 97000000 		.4byte	0x97
+ 605 02d0 54       		.byte	0x54
+ 606 02d1 06       		.uleb128 0x6
+ 607 02d2 CC020000 		.4byte	.LASF61
+ 608 02d6 04       		.byte	0x4
+ 609 02d7 65       		.byte	0x65
+ 610 02d8 97000000 		.4byte	0x97
+ 611 02dc 55       		.byte	0x55
+ 612 02dd 06       		.uleb128 0x6
+ 613 02de CC050000 		.4byte	.LASF62
+ 614 02e2 04       		.byte	0x4
+ 615 02e3 66       		.byte	0x66
+ 616 02e4 97000000 		.4byte	0x97
+ 617 02e8 56       		.byte	0x56
+ 618 02e9 06       		.uleb128 0x6
+ 619 02ea A8060000 		.4byte	.LASF63
+ 620 02ee 04       		.byte	0x4
+ 621 02ef 67       		.byte	0x67
+ 622 02f0 97000000 		.4byte	0x97
+ 623 02f4 57       		.byte	0x57
+ 624 02f5 06       		.uleb128 0x6
+ 625 02f6 14030000 		.4byte	.LASF64
+ 626 02fa 04       		.byte	0x4
+ 627 02fb 68       		.byte	0x68
+ 628 02fc 97000000 		.4byte	0x97
+ 629 0300 58       		.byte	0x58
+ 630 0301 06       		.uleb128 0x6
+ 631 0302 94070000 		.4byte	.LASF65
+ 632 0306 04       		.byte	0x4
+ 633 0307 69       		.byte	0x69
+ 634 0308 97000000 		.4byte	0x97
+ 635 030c 59       		.byte	0x59
+ 636 030d 06       		.uleb128 0x6
+ 637 030e 27000000 		.4byte	.LASF66
+ 638 0312 04       		.byte	0x4
+ 639 0313 6E       		.byte	0x6e
+ 640 0314 AD000000 		.4byte	0xad
+ 641 0318 5A       		.byte	0x5a
+ 642 0319 06       		.uleb128 0x6
+ 643 031a E8010000 		.4byte	.LASF67
+ 644 031e 04       		.byte	0x4
+ 645 031f 6F       		.byte	0x6f
+ 646 0320 AD000000 		.4byte	0xad
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 17
+
+
+ 647 0324 5C       		.byte	0x5c
+ 648 0325 06       		.uleb128 0x6
+ 649 0326 01020000 		.4byte	.LASF68
+ 650 032a 04       		.byte	0x4
+ 651 032b 70       		.byte	0x70
+ 652 032c 97000000 		.4byte	0x97
+ 653 0330 5E       		.byte	0x5e
+ 654 0331 06       		.uleb128 0x6
+ 655 0332 B9070000 		.4byte	.LASF69
+ 656 0336 04       		.byte	0x4
+ 657 0337 71       		.byte	0x71
+ 658 0338 97000000 		.4byte	0x97
+ 659 033c 5F       		.byte	0x5f
+ 660 033d 06       		.uleb128 0x6
+ 661 033e A8070000 		.4byte	.LASF70
+ 662 0342 04       		.byte	0x4
+ 663 0343 72       		.byte	0x72
+ 664 0344 97000000 		.4byte	0x97
+ 665 0348 60       		.byte	0x60
+ 666 0349 06       		.uleb128 0x6
+ 667 034a 87020000 		.4byte	.LASF71
+ 668 034e 04       		.byte	0x4
+ 669 034f 73       		.byte	0x73
+ 670 0350 B8000000 		.4byte	0xb8
+ 671 0354 64       		.byte	0x64
+ 672 0355 06       		.uleb128 0x6
+ 673 0356 6E050000 		.4byte	.LASF72
+ 674 035a 04       		.byte	0x4
+ 675 035b 76       		.byte	0x76
+ 676 035c AD000000 		.4byte	0xad
+ 677 0360 68       		.byte	0x68
+ 678 0361 06       		.uleb128 0x6
+ 679 0362 51030000 		.4byte	.LASF73
+ 680 0366 04       		.byte	0x4
+ 681 0367 77       		.byte	0x77
+ 682 0368 AD000000 		.4byte	0xad
+ 683 036c 6A       		.byte	0x6a
+ 684 036d 06       		.uleb128 0x6
+ 685 036e 78020000 		.4byte	.LASF74
+ 686 0372 04       		.byte	0x4
+ 687 0373 78       		.byte	0x78
+ 688 0374 AD000000 		.4byte	0xad
+ 689 0378 6C       		.byte	0x6c
+ 690 0379 06       		.uleb128 0x6
+ 691 037a 63030000 		.4byte	.LASF75
+ 692 037e 04       		.byte	0x4
+ 693 037f 79       		.byte	0x79
+ 694 0380 AD000000 		.4byte	0xad
+ 695 0384 6E       		.byte	0x6e
+ 696 0385 06       		.uleb128 0x6
+ 697 0386 24050000 		.4byte	.LASF76
+ 698 038a 04       		.byte	0x4
+ 699 038b 7B       		.byte	0x7b
+ 700 038c 97000000 		.4byte	0x97
+ 701 0390 70       		.byte	0x70
+ 702 0391 06       		.uleb128 0x6
+ 703 0392 19020000 		.4byte	.LASF77
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 18
+
+
+ 704 0396 04       		.byte	0x4
+ 705 0397 7C       		.byte	0x7c
+ 706 0398 97000000 		.4byte	0x97
+ 707 039c 71       		.byte	0x71
+ 708 039d 06       		.uleb128 0x6
+ 709 039e 3E060000 		.4byte	.LASF78
+ 710 03a2 04       		.byte	0x4
+ 711 03a3 7D       		.byte	0x7d
+ 712 03a4 97000000 		.4byte	0x97
+ 713 03a8 72       		.byte	0x72
+ 714 03a9 06       		.uleb128 0x6
+ 715 03aa 91060000 		.4byte	.LASF79
+ 716 03ae 04       		.byte	0x4
+ 717 03af 7E       		.byte	0x7e
+ 718 03b0 97000000 		.4byte	0x97
+ 719 03b4 73       		.byte	0x73
+ 720 03b5 06       		.uleb128 0x6
+ 721 03b6 28030000 		.4byte	.LASF80
+ 722 03ba 04       		.byte	0x4
+ 723 03bb 80       		.byte	0x80
+ 724 03bc AD000000 		.4byte	0xad
+ 725 03c0 74       		.byte	0x74
+ 726 03c1 06       		.uleb128 0x6
+ 727 03c2 01030000 		.4byte	.LASF81
+ 728 03c6 04       		.byte	0x4
+ 729 03c7 81       		.byte	0x81
+ 730 03c8 AD000000 		.4byte	0xad
+ 731 03cc 76       		.byte	0x76
+ 732 03cd 06       		.uleb128 0x6
+ 733 03ce BC060000 		.4byte	.LASF82
+ 734 03d2 04       		.byte	0x4
+ 735 03d3 82       		.byte	0x82
+ 736 03d4 AD000000 		.4byte	0xad
+ 737 03d8 78       		.byte	0x78
+ 738 03d9 06       		.uleb128 0x6
+ 739 03da 73040000 		.4byte	.LASF83
+ 740 03de 04       		.byte	0x4
+ 741 03df 83       		.byte	0x83
+ 742 03e0 AD000000 		.4byte	0xad
+ 743 03e4 7A       		.byte	0x7a
+ 744 03e5 06       		.uleb128 0x6
+ 745 03e6 B7020000 		.4byte	.LASF84
+ 746 03ea 04       		.byte	0x4
+ 747 03eb 86       		.byte	0x86
+ 748 03ec 97000000 		.4byte	0x97
+ 749 03f0 7C       		.byte	0x7c
+ 750 03f1 06       		.uleb128 0x6
+ 751 03f2 8C050000 		.4byte	.LASF85
+ 752 03f6 04       		.byte	0x4
+ 753 03f7 87       		.byte	0x87
+ 754 03f8 97000000 		.4byte	0x97
+ 755 03fc 7D       		.byte	0x7d
+ 756 03fd 06       		.uleb128 0x6
+ 757 03fe 16060000 		.4byte	.LASF86
+ 758 0402 04       		.byte	0x4
+ 759 0403 88       		.byte	0x88
+ 760 0404 97000000 		.4byte	0x97
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 19
+
+
+ 761 0408 7E       		.byte	0x7e
+ 762 0409 06       		.uleb128 0x6
+ 763 040a 40000000 		.4byte	.LASF87
+ 764 040e 04       		.byte	0x4
+ 765 040f 89       		.byte	0x89
+ 766 0410 97000000 		.4byte	0x97
+ 767 0414 7F       		.byte	0x7f
+ 768 0415 06       		.uleb128 0x6
+ 769 0416 C0010000 		.4byte	.LASF88
+ 770 041a 04       		.byte	0x4
+ 771 041b 8A       		.byte	0x8a
+ 772 041c 97000000 		.4byte	0x97
+ 773 0420 80       		.byte	0x80
+ 774 0421 06       		.uleb128 0x6
+ 775 0422 EA020000 		.4byte	.LASF89
+ 776 0426 04       		.byte	0x4
+ 777 0427 8D       		.byte	0x8d
+ 778 0428 B8000000 		.4byte	0xb8
+ 779 042c 84       		.byte	0x84
+ 780 042d 06       		.uleb128 0x6
+ 781 042e 3A030000 		.4byte	.LASF90
+ 782 0432 04       		.byte	0x4
+ 783 0433 8E       		.byte	0x8e
+ 784 0434 B8000000 		.4byte	0xb8
+ 785 0438 88       		.byte	0x88
+ 786 0439 06       		.uleb128 0x6
+ 787 043a 61000000 		.4byte	.LASF91
+ 788 043e 04       		.byte	0x4
+ 789 043f 8F       		.byte	0x8f
+ 790 0440 B8000000 		.4byte	0xb8
+ 791 0444 8C       		.byte	0x8c
+ 792 0445 06       		.uleb128 0x6
+ 793 0446 7F070000 		.4byte	.LASF92
+ 794 044a 04       		.byte	0x4
+ 795 044b 90       		.byte	0x90
+ 796 044c B8000000 		.4byte	0xb8
+ 797 0450 90       		.byte	0x90
+ 798 0451 06       		.uleb128 0x6
+ 799 0452 B7050000 		.4byte	.LASF93
+ 800 0456 04       		.byte	0x4
+ 801 0457 91       		.byte	0x91
+ 802 0458 B8000000 		.4byte	0xb8
+ 803 045c 94       		.byte	0x94
+ 804 045d 06       		.uleb128 0x6
+ 805 045e 11000000 		.4byte	.LASF94
+ 806 0462 04       		.byte	0x4
+ 807 0463 92       		.byte	0x92
+ 808 0464 B8000000 		.4byte	0xb8
+ 809 0468 98       		.byte	0x98
+ 810 0469 06       		.uleb128 0x6
+ 811 046a D1060000 		.4byte	.LASF95
+ 812 046e 04       		.byte	0x4
+ 813 046f 93       		.byte	0x93
+ 814 0470 B8000000 		.4byte	0xb8
+ 815 0474 9C       		.byte	0x9c
+ 816 0475 06       		.uleb128 0x6
+ 817 0476 98020000 		.4byte	.LASF96
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 20
+
+
+ 818 047a 04       		.byte	0x4
+ 819 047b 94       		.byte	0x94
+ 820 047c B8000000 		.4byte	0xb8
+ 821 0480 A0       		.byte	0xa0
+ 822 0481 06       		.uleb128 0x6
+ 823 0482 3B020000 		.4byte	.LASF97
+ 824 0486 04       		.byte	0x4
+ 825 0487 95       		.byte	0x95
+ 826 0488 AD000000 		.4byte	0xad
+ 827 048c A4       		.byte	0xa4
+ 828 048d 06       		.uleb128 0x6
+ 829 048e 7C060000 		.4byte	.LASF98
+ 830 0492 04       		.byte	0x4
+ 831 0493 96       		.byte	0x96
+ 832 0494 AD000000 		.4byte	0xad
+ 833 0498 A6       		.byte	0xa6
+ 834 0499 06       		.uleb128 0x6
+ 835 049a 18070000 		.4byte	.LASF99
+ 836 049e 04       		.byte	0x4
+ 837 049f 97       		.byte	0x97
+ 838 04a0 AD000000 		.4byte	0xad
+ 839 04a4 A8       		.byte	0xa8
+ 840 04a5 06       		.uleb128 0x6
+ 841 04a6 F2050000 		.4byte	.LASF100
+ 842 04aa 04       		.byte	0x4
+ 843 04ab 98       		.byte	0x98
+ 844 04ac AD000000 		.4byte	0xad
+ 845 04b0 AA       		.byte	0xaa
+ 846 04b1 06       		.uleb128 0x6
+ 847 04b2 BB000000 		.4byte	.LASF101
+ 848 04b6 04       		.byte	0x4
+ 849 04b7 99       		.byte	0x99
+ 850 04b8 AD000000 		.4byte	0xad
+ 851 04bc AC       		.byte	0xac
+ 852 04bd 06       		.uleb128 0x6
+ 853 04be 7C030000 		.4byte	.LASF102
+ 854 04c2 04       		.byte	0x4
+ 855 04c3 9A       		.byte	0x9a
+ 856 04c4 AD000000 		.4byte	0xad
+ 857 04c8 AE       		.byte	0xae
+ 858 04c9 06       		.uleb128 0x6
+ 859 04ca F9060000 		.4byte	.LASF103
+ 860 04ce 04       		.byte	0x4
+ 861 04cf 9D       		.byte	0x9d
+ 862 04d0 AD000000 		.4byte	0xad
+ 863 04d4 B0       		.byte	0xb0
+ 864 04d5 06       		.uleb128 0x6
+ 865 04d6 5F040000 		.4byte	.LASF104
+ 866 04da 04       		.byte	0x4
+ 867 04db 9E       		.byte	0x9e
+ 868 04dc B8000000 		.4byte	0xb8
+ 869 04e0 B4       		.byte	0xb4
+ 870 04e1 00       		.byte	0
+ 871 04e2 03       		.uleb128 0x3
+ 872 04e3 5B010000 		.4byte	.LASF105
+ 873 04e7 04       		.byte	0x4
+ 874 04e8 9F       		.byte	0x9f
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 21
+
+
+ 875 04e9 D1000000 		.4byte	0xd1
+ 876 04ed 07       		.uleb128 0x7
+ 877 04ee 21040000 		.4byte	.LASF112
+ 878 04f2 01       		.byte	0x1
+ 879 04f3 0601     		.2byte	0x106
+ 880 04f5 00000000 		.4byte	.LFB0
+ 881 04f9 0C000000 		.4byte	.LFE0-.LFB0
+ 882 04fd 01       		.uleb128 0x1
+ 883 04fe 9C       		.byte	0x9c
+ 884 04ff 12050000 		.4byte	0x512
+ 885 0503 08       		.uleb128 0x8
+ 886 0504 5A020000 		.4byte	.LASF113
+ 887 0508 01       		.byte	0x1
+ 888 0509 0601     		.2byte	0x106
+ 889 050b 12050000 		.4byte	0x512
+ 890 050f 01       		.uleb128 0x1
+ 891 0510 50       		.byte	0x50
+ 892 0511 00       		.byte	0
+ 893 0512 09       		.uleb128 0x9
+ 894 0513 04       		.byte	0x4
+ 895 0514 18050000 		.4byte	0x518
+ 896 0518 0A       		.uleb128 0xa
+ 897 0519 E2040000 		.4byte	0x4e2
+ 898 051d 0B       		.uleb128 0xb
+ 899 051e E9030000 		.4byte	.LASF106
+ 900 0522 01       		.byte	0x1
+ 901 0523 1C       		.byte	0x1c
+ 902 0524 18050000 		.4byte	0x518
+ 903 0528 05       		.uleb128 0x5
+ 904 0529 03       		.byte	0x3
+ 905 052a 00000000 		.4byte	cy_deviceIpBlockCfgPSoC6_01
+ 906 052e 0B       		.uleb128 0xb
+ 907 052f 05040000 		.4byte	.LASF107
+ 908 0533 01       		.byte	0x1
+ 909 0534 8A       		.byte	0x8a
+ 910 0535 18050000 		.4byte	0x518
+ 911 0539 05       		.uleb128 0x5
+ 912 053a 03       		.byte	0x3
+ 913 053b 00000000 		.4byte	cy_deviceIpBlockCfgPSoC6_02
+ 914 053f 0B       		.uleb128 0xb
+ 915 0540 29060000 		.4byte	.LASF108
+ 916 0544 01       		.byte	0x1
+ 917 0545 19       		.byte	0x19
+ 918 0546 12050000 		.4byte	0x512
+ 919 054a 05       		.uleb128 0x5
+ 920 054b 03       		.byte	0x3
+ 921 054c 00000000 		.4byte	cy_device
+ 922 0550 00       		.byte	0
+ 923              		.section	.debug_abbrev,"",%progbits
+ 924              	.Ldebug_abbrev0:
+ 925 0000 01       		.uleb128 0x1
+ 926 0001 11       		.uleb128 0x11
+ 927 0002 01       		.byte	0x1
+ 928 0003 25       		.uleb128 0x25
+ 929 0004 0E       		.uleb128 0xe
+ 930 0005 13       		.uleb128 0x13
+ 931 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 22
+
+
+ 932 0007 03       		.uleb128 0x3
+ 933 0008 0E       		.uleb128 0xe
+ 934 0009 1B       		.uleb128 0x1b
+ 935 000a 0E       		.uleb128 0xe
+ 936 000b 55       		.uleb128 0x55
+ 937 000c 17       		.uleb128 0x17
+ 938 000d 11       		.uleb128 0x11
+ 939 000e 01       		.uleb128 0x1
+ 940 000f 10       		.uleb128 0x10
+ 941 0010 17       		.uleb128 0x17
+ 942 0011 00       		.byte	0
+ 943 0012 00       		.byte	0
+ 944 0013 02       		.uleb128 0x2
+ 945 0014 24       		.uleb128 0x24
+ 946 0015 00       		.byte	0
+ 947 0016 0B       		.uleb128 0xb
+ 948 0017 0B       		.uleb128 0xb
+ 949 0018 3E       		.uleb128 0x3e
+ 950 0019 0B       		.uleb128 0xb
+ 951 001a 03       		.uleb128 0x3
+ 952 001b 0E       		.uleb128 0xe
+ 953 001c 00       		.byte	0
+ 954 001d 00       		.byte	0
+ 955 001e 03       		.uleb128 0x3
+ 956 001f 16       		.uleb128 0x16
+ 957 0020 00       		.byte	0
+ 958 0021 03       		.uleb128 0x3
+ 959 0022 0E       		.uleb128 0xe
+ 960 0023 3A       		.uleb128 0x3a
+ 961 0024 0B       		.uleb128 0xb
+ 962 0025 3B       		.uleb128 0x3b
+ 963 0026 0B       		.uleb128 0xb
+ 964 0027 49       		.uleb128 0x49
+ 965 0028 13       		.uleb128 0x13
+ 966 0029 00       		.byte	0
+ 967 002a 00       		.byte	0
+ 968 002b 04       		.uleb128 0x4
+ 969 002c 24       		.uleb128 0x24
+ 970 002d 00       		.byte	0
+ 971 002e 0B       		.uleb128 0xb
+ 972 002f 0B       		.uleb128 0xb
+ 973 0030 3E       		.uleb128 0x3e
+ 974 0031 0B       		.uleb128 0xb
+ 975 0032 03       		.uleb128 0x3
+ 976 0033 08       		.uleb128 0x8
+ 977 0034 00       		.byte	0
+ 978 0035 00       		.byte	0
+ 979 0036 05       		.uleb128 0x5
+ 980 0037 13       		.uleb128 0x13
+ 981 0038 01       		.byte	0x1
+ 982 0039 0B       		.uleb128 0xb
+ 983 003a 0B       		.uleb128 0xb
+ 984 003b 3A       		.uleb128 0x3a
+ 985 003c 0B       		.uleb128 0xb
+ 986 003d 3B       		.uleb128 0x3b
+ 987 003e 0B       		.uleb128 0xb
+ 988 003f 01       		.uleb128 0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 23
+
+
+ 989 0040 13       		.uleb128 0x13
+ 990 0041 00       		.byte	0
+ 991 0042 00       		.byte	0
+ 992 0043 06       		.uleb128 0x6
+ 993 0044 0D       		.uleb128 0xd
+ 994 0045 00       		.byte	0
+ 995 0046 03       		.uleb128 0x3
+ 996 0047 0E       		.uleb128 0xe
+ 997 0048 3A       		.uleb128 0x3a
+ 998 0049 0B       		.uleb128 0xb
+ 999 004a 3B       		.uleb128 0x3b
+ 1000 004b 0B       		.uleb128 0xb
+ 1001 004c 49       		.uleb128 0x49
+ 1002 004d 13       		.uleb128 0x13
+ 1003 004e 38       		.uleb128 0x38
+ 1004 004f 0B       		.uleb128 0xb
+ 1005 0050 00       		.byte	0
+ 1006 0051 00       		.byte	0
+ 1007 0052 07       		.uleb128 0x7
+ 1008 0053 2E       		.uleb128 0x2e
+ 1009 0054 01       		.byte	0x1
+ 1010 0055 3F       		.uleb128 0x3f
+ 1011 0056 19       		.uleb128 0x19
+ 1012 0057 03       		.uleb128 0x3
+ 1013 0058 0E       		.uleb128 0xe
+ 1014 0059 3A       		.uleb128 0x3a
+ 1015 005a 0B       		.uleb128 0xb
+ 1016 005b 3B       		.uleb128 0x3b
+ 1017 005c 05       		.uleb128 0x5
+ 1018 005d 27       		.uleb128 0x27
+ 1019 005e 19       		.uleb128 0x19
+ 1020 005f 11       		.uleb128 0x11
+ 1021 0060 01       		.uleb128 0x1
+ 1022 0061 12       		.uleb128 0x12
+ 1023 0062 06       		.uleb128 0x6
+ 1024 0063 40       		.uleb128 0x40
+ 1025 0064 18       		.uleb128 0x18
+ 1026 0065 9742     		.uleb128 0x2117
+ 1027 0067 19       		.uleb128 0x19
+ 1028 0068 01       		.uleb128 0x1
+ 1029 0069 13       		.uleb128 0x13
+ 1030 006a 00       		.byte	0
+ 1031 006b 00       		.byte	0
+ 1032 006c 08       		.uleb128 0x8
+ 1033 006d 05       		.uleb128 0x5
+ 1034 006e 00       		.byte	0
+ 1035 006f 03       		.uleb128 0x3
+ 1036 0070 0E       		.uleb128 0xe
+ 1037 0071 3A       		.uleb128 0x3a
+ 1038 0072 0B       		.uleb128 0xb
+ 1039 0073 3B       		.uleb128 0x3b
+ 1040 0074 05       		.uleb128 0x5
+ 1041 0075 49       		.uleb128 0x49
+ 1042 0076 13       		.uleb128 0x13
+ 1043 0077 02       		.uleb128 0x2
+ 1044 0078 18       		.uleb128 0x18
+ 1045 0079 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 24
+
+
+ 1046 007a 00       		.byte	0
+ 1047 007b 09       		.uleb128 0x9
+ 1048 007c 0F       		.uleb128 0xf
+ 1049 007d 00       		.byte	0
+ 1050 007e 0B       		.uleb128 0xb
+ 1051 007f 0B       		.uleb128 0xb
+ 1052 0080 49       		.uleb128 0x49
+ 1053 0081 13       		.uleb128 0x13
+ 1054 0082 00       		.byte	0
+ 1055 0083 00       		.byte	0
+ 1056 0084 0A       		.uleb128 0xa
+ 1057 0085 26       		.uleb128 0x26
+ 1058 0086 00       		.byte	0
+ 1059 0087 49       		.uleb128 0x49
+ 1060 0088 13       		.uleb128 0x13
+ 1061 0089 00       		.byte	0
+ 1062 008a 00       		.byte	0
+ 1063 008b 0B       		.uleb128 0xb
+ 1064 008c 34       		.uleb128 0x34
+ 1065 008d 00       		.byte	0
+ 1066 008e 03       		.uleb128 0x3
+ 1067 008f 0E       		.uleb128 0xe
+ 1068 0090 3A       		.uleb128 0x3a
+ 1069 0091 0B       		.uleb128 0xb
+ 1070 0092 3B       		.uleb128 0x3b
+ 1071 0093 0B       		.uleb128 0xb
+ 1072 0094 49       		.uleb128 0x49
+ 1073 0095 13       		.uleb128 0x13
+ 1074 0096 3F       		.uleb128 0x3f
+ 1075 0097 19       		.uleb128 0x19
+ 1076 0098 02       		.uleb128 0x2
+ 1077 0099 18       		.uleb128 0x18
+ 1078 009a 00       		.byte	0
+ 1079 009b 00       		.byte	0
+ 1080 009c 00       		.byte	0
+ 1081              		.section	.debug_aranges,"",%progbits
+ 1082 0000 1C000000 		.4byte	0x1c
+ 1083 0004 0200     		.2byte	0x2
+ 1084 0006 00000000 		.4byte	.Ldebug_info0
+ 1085 000a 04       		.byte	0x4
+ 1086 000b 00       		.byte	0
+ 1087 000c 0000     		.2byte	0
+ 1088 000e 0000     		.2byte	0
+ 1089 0010 00000000 		.4byte	.LFB0
+ 1090 0014 0C000000 		.4byte	.LFE0-.LFB0
+ 1091 0018 00000000 		.4byte	0
+ 1092 001c 00000000 		.4byte	0
+ 1093              		.section	.debug_ranges,"",%progbits
+ 1094              	.Ldebug_ranges0:
+ 1095 0000 00000000 		.4byte	.LFB0
+ 1096 0004 0C000000 		.4byte	.LFE0
+ 1097 0008 00000000 		.4byte	0
+ 1098 000c 00000000 		.4byte	0
+ 1099              		.section	.debug_line,"",%progbits
+ 1100              	.Ldebug_line0:
+ 1101 0000 7D010000 		.section	.debug_str,"MS",%progbits,1
+ 1101      02006301 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 25
+
+
+ 1101      00000201 
+ 1101      FB0E0D00 
+ 1101      01010101 
+ 1102              	.LASF41:
+ 1103 0000 63707573 		.ascii	"cpussFlashPaSize\000"
+ 1103      73466C61 
+ 1103      73685061 
+ 1103      53697A65 
+ 1103      00
+ 1104              	.LASF94:
+ 1105 0011 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 1105      73547269 
+ 1105      6D52616D 
+ 1105      43746C4F 
+ 1105      66667365 
+ 1106              	.LASF66:
+ 1107 0027 64774368 		.ascii	"dwChOffset\000"
+ 1107      4F666673 
+ 1107      657400
+ 1108              	.LASF47:
+ 1109 0032 73727373 		.ascii	"srssNumHfroot\000"
+ 1109      4E756D48 
+ 1109      66726F6F 
+ 1109      7400
+ 1110              	.LASF87:
+ 1111 0040 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 1111      50727443 
+ 1111      66674F75 
+ 1111      744F6666 
+ 1111      73657400 
+ 1112              	.LASF34:
+ 1113 0054 6873696F 		.ascii	"hsiomVersion\000"
+ 1113      6D566572 
+ 1113      73696F6E 
+ 1113      00
+ 1114              	.LASF91:
+ 1115 0061 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 1115      73436D34 
+ 1115      53746174 
+ 1115      75734F66 
+ 1115      66736574 
+ 1116              	.LASF40:
+ 1117 0076 63707573 		.ascii	"cpussDwChNr\000"
+ 1117      73447743 
+ 1117      684E7200 
+ 1118              	.LASF28:
+ 1119 0082 63727970 		.ascii	"cryptoBase\000"
+ 1119      746F4261 
+ 1119      736500
+ 1120              	.LASF4:
+ 1121 008d 73686F72 		.ascii	"short int\000"
+ 1121      7420696E 
+ 1121      7400
+ 1122              	.LASF58:
+ 1123 0097 666C6173 		.ascii	"flashWriteDelay\000"
+ 1123      68577269 
+ 1123      74654465 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 26
+
+
+ 1123      6C617900 
+ 1124              	.LASF18:
+ 1125 00a7 73697A65 		.ascii	"sizetype\000"
+ 1125      74797065 
+ 1125      00
+ 1126              	.LASF35:
+ 1127 00b0 69706356 		.ascii	"ipcVersion\000"
+ 1127      65727369 
+ 1127      6F6E00
+ 1128              	.LASF101:
+ 1129 00bb 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 1129      7352616D 
+ 1129      3143746C 
+ 1129      3000
+ 1130              	.LASF109:
+ 1131 00c9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1131      43313120 
+ 1131      352E342E 
+ 1131      31203230 
+ 1131      31363036 
+ 1132 00fc 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0plus -mthumb -"
+ 1132      20726576 
+ 1132      6973696F 
+ 1132      6E203233 
+ 1132      37373135 
+ 1133 012f 67202D4F 		.ascii	"g -Os -ffunction-sections -ffat-lto-objects\000"
+ 1133      73202D66 
+ 1133      66756E63 
+ 1133      74696F6E 
+ 1133      2D736563 
+ 1134              	.LASF105:
+ 1135 015b 63795F73 		.ascii	"cy_stc_device_t\000"
+ 1135      74635F64 
+ 1135      65766963 
+ 1135      655F7400 
+ 1136              	.LASF37:
+ 1137 016b 70726F74 		.ascii	"protVersion\000"
+ 1137      56657273 
+ 1137      696F6E00 
+ 1138              	.LASF8:
+ 1139 0177 5F5F7569 		.ascii	"__uint32_t\000"
+ 1139      6E743332 
+ 1139      5F7400
+ 1140              	.LASF19:
+ 1141 0182 63707573 		.ascii	"cpussBase\000"
+ 1141      73426173 
+ 1141      6500
+ 1142              	.LASF29:
+ 1143 018c 63707573 		.ascii	"cpussVersion\000"
+ 1143      73566572 
+ 1143      73696F6E 
+ 1143      00
+ 1144              	.LASF5:
+ 1145 0199 5F5F7569 		.ascii	"__uint16_t\000"
+ 1145      6E743136 
+ 1145      5F7400
+ 1146              	.LASF38:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 27
+
+
+ 1147 01a4 63707573 		.ascii	"cpussIpcNr\000"
+ 1147      73497063 
+ 1147      4E7200
+ 1148              	.LASF56:
+ 1149 01af 666C6173 		.ascii	"flashRwwRequired\000"
+ 1149      68527777 
+ 1149      52657175 
+ 1149      69726564 
+ 1149      00
+ 1150              	.LASF88:
+ 1151 01c0 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
+ 1151      50727443 
+ 1151      66675369 
+ 1151      6F4F6666 
+ 1151      73657400 
+ 1152              	.LASF13:
+ 1153 01d4 75696E74 		.ascii	"uint8_t\000"
+ 1153      385F7400 
+ 1154              	.LASF36:
+ 1155 01dc 70657269 		.ascii	"periVersion\000"
+ 1155      56657273 
+ 1155      696F6E00 
+ 1156              	.LASF67:
+ 1157 01e8 64774368 		.ascii	"dwChSize\000"
+ 1157      53697A65 
+ 1157      00
+ 1158              	.LASF60:
+ 1159 01f1 666C6173 		.ascii	"flashEraseDelay\000"
+ 1159      68457261 
+ 1159      73654465 
+ 1159      6C617900 
+ 1160              	.LASF68:
+ 1161 0201 64774368 		.ascii	"dwChCtlPrioPos\000"
+ 1161      43746C50 
+ 1161      72696F50 
+ 1161      6F7300
+ 1162              	.LASF16:
+ 1163 0210 75696E74 		.ascii	"uint32_t\000"
+ 1163      33325F74 
+ 1163      00
+ 1164              	.LASF77:
+ 1165 0219 70657269 		.ascii	"periDivCmdTypeSelPos\000"
+ 1165      44697643 
+ 1165      6D645479 
+ 1165      70655365 
+ 1165      6C506F73 
+ 1166              	.LASF42:
+ 1167 022e 63707573 		.ascii	"cpussIpc0Irq\000"
+ 1167      73497063 
+ 1167      30497271 
+ 1167      00
+ 1168              	.LASF97:
+ 1169 023b 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
+ 1169      73436D30 
+ 1169      4E6D6943 
+ 1169      746C4F66 
+ 1169      66736574 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 28
+
+
+ 1170              	.LASF24:
+ 1171 0250 6873696F 		.ascii	"hsiomBase\000"
+ 1171      6D426173 
+ 1171      6500
+ 1172              	.LASF113:
+ 1173 025a 64657669 		.ascii	"device\000"
+ 1173      636500
+ 1174              	.LASF26:
+ 1175 0261 70617373 		.ascii	"passBase\000"
+ 1175      42617365 
+ 1175      00
+ 1176              	.LASF10:
+ 1177 026a 6C6F6E67 		.ascii	"long long int\000"
+ 1177      206C6F6E 
+ 1177      6720696E 
+ 1177      7400
+ 1178              	.LASF74:
+ 1179 0278 70657269 		.ascii	"periTrGrOffset\000"
+ 1179      54724772 
+ 1179      4F666673 
+ 1179      657400
+ 1180              	.LASF71:
+ 1181 0287 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 1181      61747573 
+ 1181      43684964 
+ 1181      784D736B 
+ 1181      00
+ 1182              	.LASF96:
+ 1183 0298 63707573 		.ascii	"cpussSysTickCtlOffset\000"
+ 1183      73537973 
+ 1183      5469636B 
+ 1183      43746C4F 
+ 1183      66667365 
+ 1184              	.LASF7:
+ 1185 02ae 6C6F6E67 		.ascii	"long int\000"
+ 1185      20696E74 
+ 1185      00
+ 1186              	.LASF84:
+ 1187 02b7 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ 1187      50727449 
+ 1187      6E747243 
+ 1187      66674F66 
+ 1187      66736574 
+ 1188              	.LASF61:
+ 1189 02cc 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
+ 1189      6843746C 
+ 1189      4D61696E 
+ 1189      57733046 
+ 1189      72657100 
+ 1190              	.LASF2:
+ 1191 02e0 5F5F7569 		.ascii	"__uint8_t\000"
+ 1191      6E74385F 
+ 1191      7400
+ 1192              	.LASF89:
+ 1193 02ea 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 1193      73436D30 
+ 1193      436C6F63 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 29
+
+
+ 1193      6B43746C 
+ 1193      4F666673 
+ 1194              	.LASF81:
+ 1195 0301 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 1195      44697631 
+ 1195      3643746C 
+ 1195      4F666673 
+ 1195      657400
+ 1196              	.LASF64:
+ 1197 0314 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
+ 1197      6843746C 
+ 1197      4D61696E 
+ 1197      57733346 
+ 1197      72657100 
+ 1198              	.LASF80:
+ 1199 0328 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 1199      44697638 
+ 1199      43746C4F 
+ 1199      66667365 
+ 1199      7400
+ 1200              	.LASF90:
+ 1201 033a 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
+ 1201      73436D34 
+ 1201      436C6F63 
+ 1201      6B43746C 
+ 1201      4F666673 
+ 1202              	.LASF73:
+ 1203 0351 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ 1203      5472436D 
+ 1203      64477253 
+ 1203      656C4D73 
+ 1203      6B00
+ 1204              	.LASF75:
+ 1205 0363 70657269 		.ascii	"periTrGrSize\000"
+ 1205      54724772 
+ 1205      53697A65 
+ 1205      00
+ 1206              	.LASF17:
+ 1207 0370 6C6F6E67 		.ascii	"long double\000"
+ 1207      20646F75 
+ 1207      626C6500 
+ 1208              	.LASF102:
+ 1209 037c 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 1209      7352616D 
+ 1209      3243746C 
+ 1209      3000
+ 1210              	.LASF52:
+ 1211 038a 75646250 		.ascii	"udbPresent\000"
+ 1211      72657365 
+ 1211      6E7400
+ 1212              	.LASF1:
+ 1213 0395 756E7369 		.ascii	"unsigned char\000"
+ 1213      676E6564 
+ 1213      20636861 
+ 1213      7200
+ 1214              	.LASF53:
+ 1215 03a3 73797350 		.ascii	"sysPmSimoPresent\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 30
+
+
+ 1215      6D53696D 
+ 1215      6F507265 
+ 1215      73656E74 
+ 1215      00
+ 1216              	.LASF21:
+ 1217 03b4 70657269 		.ascii	"periBase\000"
+ 1217      42617365 
+ 1217      00
+ 1218              	.LASF0:
+ 1219 03bd 7369676E 		.ascii	"signed char\000"
+ 1219      65642063 
+ 1219      68617200 
+ 1220              	.LASF11:
+ 1221 03c9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1221      206C6F6E 
+ 1221      6720756E 
+ 1221      7369676E 
+ 1221      65642069 
+ 1222              	.LASF25:
+ 1223 03e0 6770696F 		.ascii	"gpioBase\000"
+ 1223      42617365 
+ 1223      00
+ 1224              	.LASF106:
+ 1225 03e9 63795F64 		.ascii	"cy_deviceIpBlockCfgPSoC6_01\000"
+ 1225      65766963 
+ 1225      65497042 
+ 1225      6C6F636B 
+ 1225      43666750 
+ 1226              	.LASF107:
+ 1227 0405 63795F64 		.ascii	"cy_deviceIpBlockCfgPSoC6_02\000"
+ 1227      65766963 
+ 1227      65497042 
+ 1227      6C6F636B 
+ 1227      43666750 
+ 1228              	.LASF112:
+ 1229 0421 43795F50 		.ascii	"Cy_PDL_Init\000"
+ 1229      444C5F49 
+ 1229      6E697400 
+ 1230              	.LASF59:
+ 1231 042d 666C6173 		.ascii	"flashProgramDelay\000"
+ 1231      6850726F 
+ 1231      6772616D 
+ 1231      44656C61 
+ 1231      7900
+ 1232              	.LASF43:
+ 1233 043f 63707573 		.ascii	"cpussFmIrq\000"
+ 1233      73466D49 
+ 1233      727100
+ 1234              	.LASF44:
+ 1235 044a 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 1235      734E6F74 
+ 1235      436F6E6E 
+ 1235      65637465 
+ 1235      64497271 
+ 1236              	.LASF104:
+ 1237 045f 6970634C 		.ascii	"ipcLockStatusOffset\000"
+ 1237      6F636B53 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 31
+
+
+ 1237      74617475 
+ 1237      734F6666 
+ 1237      73657400 
+ 1238              	.LASF83:
+ 1239 0473 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ 1239      44697632 
+ 1239      345F3543 
+ 1239      746C4F66 
+ 1239      66736574 
+ 1240              	.LASF32:
+ 1241 0488 666C6173 		.ascii	"flashcVersion\000"
+ 1241      68635665 
+ 1241      7273696F 
+ 1241      6E00
+ 1242              	.LASF6:
+ 1243 0496 73686F72 		.ascii	"short unsigned int\000"
+ 1243      7420756E 
+ 1243      7369676E 
+ 1243      65642069 
+ 1243      6E7400
+ 1244              	.LASF15:
+ 1245 04a9 75696E74 		.ascii	"uint16_t\000"
+ 1245      31365F74 
+ 1245      00
+ 1246              	.LASF54:
+ 1247 04b2 70726F74 		.ascii	"protBusMasterMask\000"
+ 1247      4275734D 
+ 1247      61737465 
+ 1247      724D6173 
+ 1247      6B00
+ 1248              	.LASF111:
+ 1249 04c4 433A5C55 		.ascii	"C:\\Users\\cmila\\uni\\projects\\Neural-Stimulator-"
+ 1249      73657273 
+ 1249      5C636D69 
+ 1249      6C615C75 
+ 1249      6E695C70 
+ 1250 04f2 4669726D 		.ascii	"Firmware\\new\\PSOC6\\TIMER\\SampleMicroSeconds.cyd"
+ 1250      77617265 
+ 1250      5C6E6577 
+ 1250      5C50534F 
+ 1250      43365C54 
+ 1251 0521 736E00   		.ascii	"sn\000"
+ 1252              	.LASF76:
+ 1253 0524 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 1253      44697643 
+ 1253      6D644469 
+ 1253      7653656C 
+ 1253      4D736B00 
+ 1254              	.LASF22:
+ 1255 0538 75646242 		.ascii	"udbBase\000"
+ 1255      61736500 
+ 1256              	.LASF48:
+ 1257 0540 70657269 		.ascii	"periClockNr\000"
+ 1257      436C6F63 
+ 1257      6B4E7200 
+ 1258              	.LASF46:
+ 1259 054c 73727373 		.ascii	"srssNumPll\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 32
+
+
+ 1259      4E756D50 
+ 1259      6C6C00
+ 1260              	.LASF14:
+ 1261 0557 696E7431 		.ascii	"int16_t\000"
+ 1261      365F7400 
+ 1262              	.LASF45:
+ 1263 055f 73727373 		.ascii	"srssNumClkpath\000"
+ 1263      4E756D43 
+ 1263      6C6B7061 
+ 1263      746800
+ 1264              	.LASF72:
+ 1265 056e 70657269 		.ascii	"periTrCmdOffset\000"
+ 1265      5472436D 
+ 1265      644F6666 
+ 1265      73657400 
+ 1266              	.LASF55:
+ 1267 057e 63727970 		.ascii	"cryptoMemSize\000"
+ 1267      746F4D65 
+ 1267      6D53697A 
+ 1267      6500
+ 1268              	.LASF85:
+ 1269 058c 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 1269      50727443 
+ 1269      66674F66 
+ 1269      66736574 
+ 1269      00
+ 1270              	.LASF30:
+ 1271 059d 63727970 		.ascii	"cryptoVersion\000"
+ 1271      746F5665 
+ 1271      7273696F 
+ 1271      6E00
+ 1272              	.LASF33:
+ 1273 05ab 6770696F 		.ascii	"gpioVersion\000"
+ 1273      56657273 
+ 1273      696F6E00 
+ 1274              	.LASF93:
+ 1275 05b7 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 1275      73436D34 
+ 1275      50777243 
+ 1275      746C4F66 
+ 1275      66736574 
+ 1276              	.LASF62:
+ 1277 05cc 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 1277      6843746C 
+ 1277      4D61696E 
+ 1277      57733146 
+ 1277      72657100 
+ 1278              	.LASF9:
+ 1279 05e0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1279      20756E73 
+ 1279      69676E65 
+ 1279      6420696E 
+ 1279      7400
+ 1280              	.LASF100:
+ 1281 05f2 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 1281      7352616D 
+ 1281      3043746C 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 33
+
+
+ 1281      3000
+ 1282              	.LASF31:
+ 1283 0600 64775665 		.ascii	"dwVersion\000"
+ 1283      7273696F 
+ 1283      6E00
+ 1284              	.LASF51:
+ 1285 060a 65704D6F 		.ascii	"epMonitorNr\000"
+ 1285      6E69746F 
+ 1285      724E7200 
+ 1286              	.LASF86:
+ 1287 0616 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
+ 1287      50727443 
+ 1287      6667496E 
+ 1287      4F666673 
+ 1287      657400
+ 1288              	.LASF108:
+ 1289 0629 63795F64 		.ascii	"cy_device\000"
+ 1289      65766963 
+ 1289      6500
+ 1290              	.LASF20:
+ 1291 0633 666C6173 		.ascii	"flashcBase\000"
+ 1291      68634261 
+ 1291      736500
+ 1292              	.LASF78:
+ 1293 063e 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 1293      44697643 
+ 1293      6D645061 
+ 1293      44697653 
+ 1293      656C506F 
+ 1294              	.LASF50:
+ 1295 0654 70617373 		.ascii	"passSarChannels\000"
+ 1295      53617243 
+ 1295      68616E6E 
+ 1295      656C7300 
+ 1296              	.LASF39:
+ 1297 0664 63707573 		.ascii	"cpussIpcIrqNr\000"
+ 1297      73497063 
+ 1297      4972714E 
+ 1297      7200
+ 1298              	.LASF3:
+ 1299 0672 5F5F696E 		.ascii	"__int16_t\000"
+ 1299      7431365F 
+ 1299      7400
+ 1300              	.LASF98:
+ 1301 067c 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 1301      73436D34 
+ 1301      4E6D6943 
+ 1301      746C4F66 
+ 1301      66736574 
+ 1302              	.LASF79:
+ 1303 0691 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 1303      44697643 
+ 1303      6D645061 
+ 1303      54797065 
+ 1303      53656C50 
+ 1304              	.LASF63:
+ 1305 06a8 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 34
+
+
+ 1305      6843746C 
+ 1305      4D61696E 
+ 1305      57733246 
+ 1305      72657100 
+ 1306              	.LASF82:
+ 1307 06bc 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ 1307      44697631 
+ 1307      365F3543 
+ 1307      746C4F66 
+ 1307      66736574 
+ 1308              	.LASF95:
+ 1309 06d1 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ 1309      73547269 
+ 1309      6D526F6D 
+ 1309      43746C4F 
+ 1309      66667365 
+ 1310              	.LASF57:
+ 1311 06e7 666C6173 		.ascii	"flashPipeRequired\000"
+ 1311      68506970 
+ 1311      65526571 
+ 1311      75697265 
+ 1311      6400
+ 1312              	.LASF103:
+ 1313 06f9 69706353 		.ascii	"ipcStructSize\000"
+ 1313      74727563 
+ 1313      7453697A 
+ 1313      6500
+ 1314              	.LASF27:
+ 1315 0707 69706342 		.ascii	"ipcBase\000"
+ 1315      61736500 
+ 1316              	.LASF23:
+ 1317 070f 70726F74 		.ascii	"protBase\000"
+ 1317      42617365 
+ 1317      00
+ 1318              	.LASF99:
+ 1319 0718 63707573 		.ascii	"cpussRomCtl\000"
+ 1319      73526F6D 
+ 1319      43746C00 
+ 1320              	.LASF12:
+ 1321 0724 756E7369 		.ascii	"unsigned int\000"
+ 1321      676E6564 
+ 1321      20696E74 
+ 1321      00
+ 1322              	.LASF49:
+ 1323 0731 736D6966 		.ascii	"smifDeviceNr\000"
+ 1323      44657669 
+ 1323      63654E72 
+ 1323      00
+ 1324              	.LASF110:
+ 1325 073e 47656E65 		.ascii	"Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\"
+ 1325      72617465 
+ 1325      645F536F 
+ 1325      75726365 
+ 1325      5C50536F 
+ 1326 076c 64657669 		.ascii	"device\\cy_device.c\000"
+ 1326      63655C63 
+ 1326      795F6465 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\cctLsnxh.s 			page 35
+
+
+ 1326      76696365 
+ 1326      2E6300
+ 1327              	.LASF92:
+ 1328 077f 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 1328      73436D30 
+ 1328      53746174 
+ 1328      75734F66 
+ 1328      66736574 
+ 1329              	.LASF65:
+ 1330 0794 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 1330      6843746C 
+ 1330      4D61696E 
+ 1330      57733446 
+ 1330      72657100 
+ 1331              	.LASF70:
+ 1332 07a8 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 1332      61747573 
+ 1332      43684964 
+ 1332      78506F73 
+ 1332      00
+ 1333              	.LASF69:
+ 1334 07b9 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 1334      43746C50 
+ 1334      7265656D 
+ 1334      70746162 
+ 1334      6C65506F 
+ 1335              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

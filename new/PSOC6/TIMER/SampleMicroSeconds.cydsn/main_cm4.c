@@ -14,12 +14,12 @@
 #include "inttypes.h"
 #include "stdint.h"
 
-uint32_t dacWrite = 0x800;
+uint32_t dacWrite = 0x000;
 uint32_t comparevalue = 0;
 uint32_t phase_1 = 10;
-uint32_t inter_stim_gap = 0;
-uint32_t phase_2 = 30;
-uint32_t inter_stim_delay = 40;
+uint32_t inter_stim_gap = 10;
+uint32_t phase_2 = 10;
+uint32_t inter_stim_delay = 10;
 uint32_t phases[4];
 int current_phase = 0;
 
@@ -27,31 +27,33 @@ void TimerInterruptHandler(void)
 {
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
-
-    VDAC_1_SetValue(dacWrite);
+    
     if (current_phase == 0) {
-        dacWrite = 0x800;   
+        dacWrite = 0x000;   
     } else if (current_phase == 1) {
         dacWrite = 0x000;   
     } else if (current_phase == 2) {
         dacWrite = 0x7FF;
     } else if (current_phase == 3) {
-        dacWrite = 0x000;   
+        dacWrite = 0x3FF;   
     }
+    VDAC_1_SetValue(dacWrite);
+    
     
     while (1) {
         if (phases[current_phase] != 0) {
-            break;   
+            break;
         } else {
             if (current_phase == 3) {
                 current_phase = 0;   
             } else {
                 current_phase++;
-            }   
+            }
         }
     }
     
     Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[current_phase] - 1);
+    
     if (current_phase == 3) {
         current_phase = 0;   
     } else {
