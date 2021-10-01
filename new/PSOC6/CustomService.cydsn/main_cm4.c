@@ -20,6 +20,7 @@
 #include "stdlib.h"
 
 SemaphoreHandle_t bleSemaphore;
+int commands[20] = {0};
 
 void genericEventHandler(uint32_t event, void *eventParameter) {
     cy_stc_ble_gatts_write_cmd_req_param_t *writeReqParameter;
@@ -38,9 +39,7 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
             writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
             
             if (CY_BLE_NS_NSCHARACTERISTIC_CHAR_HANDLE == writeReqParameter->handleValPair.attrHandle) {
-                uint8_t *commands = writeReqParameter->handleValPair.value.val;
-                
-                
+                uint8_t *new_commands = writeReqParameter->handleValPair.value.val;
                 
                 for (int i=0; i < 5; i++) {
                     // please null check.

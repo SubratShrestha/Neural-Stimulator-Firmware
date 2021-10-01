@@ -1,0 +1,30 @@
+net CPUSS_swj_swclk_tclk
+	term   ":ioport6:pin7.fb"
+	switch ":ioport6:pin7.fb==>:ioport6:smartio_mux_out7.direct_in"
+	switch ":ioport6:smartio_mux_out7.smartio_mux_out==>:ioport6:hsiomIn7.hsiomIn7"
+	switch ":ioport6:hsiomIn7.fixedOut7_DPSLP_5==>:CPUSS[0]swj_swclk_tclk_input_permute.ioport6_fixedOut7_DPSLP_5"
+	switch ":CPUSS[0]swj_swclk_tclk_input_permute.CPUSS[0]swj_swclk_tclk==>:CPUSScontainer:CPUSS[0].swj_swclk_tclk"
+	term   ":CPUSScontainer:CPUSS[0].swj_swclk_tclk"
+end CPUSS_swj_swclk_tclk
+net CPUSS_swj_swdio_tms
+	term   ":ioport6:pin6.fb"
+	switch ":ioport6:pin6.fb==>:ioport6:smartio_mux_out6.direct_in"
+	switch ":ioport6:smartio_mux_out6.smartio_mux_out==>:ioport6:hsiomIn6.hsiomIn6"
+	switch ":ioport6:hsiomIn6.fixedOut6_DPSLP_5==>:CPUSS[0]swj_swdio_tms_input_permute.ioport6_fixedOut6_DPSLP_5"
+	switch ":CPUSS[0]swj_swdio_tms_input_permute.CPUSS[0]swj_swdio_tms==>:CPUSScontainer:CPUSS[0].swj_swdio_tms"
+	term   ":CPUSScontainer:CPUSS[0].swj_swdio_tms"
+end CPUSS_swj_swdio_tms
+net Net_43
+	term   ":CTDACcontainer:CTDAC[0].tr_ctdac_empty"
+	switch ":CTDACcontainer:CTDAC[0].tr_ctdac_empty==>:tr_group_permute_14.in_22"
+	switch ":tr_group_permute_14.out_7==>:tr_group_permute_14.out_7_limit"
+	switch ":tr_group_permute_14.out_7_limit==>:tr_group_permute_0.in_50"
+	switch ":tr_group_permute_0.out_0==>:CPUSScontainer:DMAC[0]:dma_0.dmareq"
+	term   ":CPUSScontainer:DMAC[0]:dma_0.dmareq"
+end Net_43
+net Net_70_ff47
+	term   ":Clockcontainer:Clock[0].ff_div_47"
+	switch ":Clockcontainer:Clock[0].ff_div_47==>:Clockcontainer:ff_permute.ff_div_47"
+	switch ":Clockcontainer:ff_permute.Clock[0]ff_div_55==>:CTDACcontainer:CTDAC[0].clock"
+	term   ":CTDACcontainer:CTDAC[0].clock"
+end Net_70_ff47
