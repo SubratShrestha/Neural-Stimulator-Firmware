@@ -241,9 +241,6 @@ static void ClockInit(void)
 static void AnalogSetDefault(void);
 static void AnalogSetDefault(void)
 {
-	CY_SET_REG32(CYREG_CTBM0_CTB_CTRL, 0x80000000u);
-	CY_SET_REG32(CYREG_CTBM0_OA1_SW, 0x00004080u);
-	CY_SET_REG32(CYREG_CTBM0_CTD_SW, 0x00000002u);
 	CY_SET_REG32(CYREG_PASS_AREF_AREF_CTRL, 0x80110001u);
 }
 

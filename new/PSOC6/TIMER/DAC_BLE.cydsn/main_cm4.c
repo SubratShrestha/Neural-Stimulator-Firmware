@@ -9,37 +9,29 @@
  *
  * ========================================
 */
-#include "project.h"
-#include <stdio.h>
-#include "inttypes.h"
-#include "stdint.h"
 
-uint32_t dacWrite = 0x000;
-uint32_t comparevalue = 0;
-uint32_t phase_1 = 10;
-uint32_t inter_stim_gap = 0;
-uint32_t phase_2 = 10;
-uint32_t inter_stim_delay = 0;
+#include "main.h"
+
+uint32_t dac_write = 0x000;
+uint32_t compare_value = 0;
 uint32_t phases[4];
-int num_pulses = 0; /* could need to change to uint32_t based on how data format is sent/recieved */
-int curr_num_pulses = 0;
 int current_phase = 0;
 
 void TimerInterruptHandler(void)
 {
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
-    comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
+    compare_value = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
     if (current_phase == 0) {
-        dacWrite = 0x000;   
+        dac_write = 0x000;   
     } else if (current_phase == 1) {
-        dacWrite = 0x000;   
+        dac_write = 0x000;   
     } else if (current_phase == 2) {
-        dacWrite = 0x7FF;
+        dac_write = 0x7FF;
     } else if (current_phase == 3) {
-        dacWrite = 0x3FF;   
+        dac_write = 0x3FF;   
     }
-    VDAC_1_SetValue(dacWrite);
+    VDAC_1_SetValue(dac_write);
     
     
     while (1) {
@@ -92,6 +84,7 @@ int main(void)
     phases[2] = phase_2;
     phases[3] = inter_stim_delay;
   
+    // add dummy data here for command queue.
     
     Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[0]);
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
@@ -99,7 +92,12 @@ int main(void)
     for(;;)
     {
         /* Place your application code here. */
-        printf("%" PRIu32 "\r\n", comparevalue);
+        if (IsEmptyQueue(&COMMAND_QUEUE) == 0) {
+            uint8_t *command = calloc(5, sizeof(uint8_t));
+            DeQueue(&COMMAND_QUEUE, command);
+            execute_command(command);
+        }
+        printf("%" PRIu32 "\r\n", compare_value);
     }
 }
 

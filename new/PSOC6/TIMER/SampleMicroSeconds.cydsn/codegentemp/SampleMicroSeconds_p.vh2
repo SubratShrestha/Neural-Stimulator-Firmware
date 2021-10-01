@@ -1,5 +1,5 @@
 -- Project:   SampleMicroSeconds
--- Generated: 09/30/2021 21:05:00
+-- Generated: 10/01/2021 15:17:33
 -- PSoC Creator  4.4
 
 ENTITY SampleMicroSeconds IS
@@ -62,7 +62,6 @@ ARCHITECTURE __DEFAULT__ OF SampleMicroSeconds IS
     SIGNAL \\\UART:rx(0)\\__PA\ : bit;
     SIGNAL \\\UART:tx(0)\\__PA\ : bit;
     SIGNAL \UART:tx_wire\ : bit;
-    SIGNAL \VDAC_1:Net_34\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
@@ -82,7 +81,6 @@ ARCHITECTURE __DEFAULT__ OF SampleMicroSeconds IS
     ATTRIBUTE lib_model OF VDAC_Out(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF VDAC_Out(0) : LABEL IS "P9[6]";
     ATTRIBUTE Location OF \VDAC_1:CTDAC\ : LABEL IS "F(CTDAC,0)";
-    ATTRIBUTE Location OF \VDAC_1:REFBUF\ : LABEL IS "F(OA,1)";
     COMPONENT CLK_GEN
         PORT (
             gen_clk_in_0 : IN std_ulogic;
@@ -418,10 +416,6 @@ ARCHITECTURE __DEFAULT__ OF SampleMicroSeconds IS
             out_clock : IN std_ulogic;
             out_clock_en : IN std_ulogic;
             out_reset : IN std_ulogic);
-    END COMPONENT;
-    COMPONENT OA
-        PORT (
-            ctb_dsi_comp : OUT std_ulogic);
     END COMPONENT;
     COMPONENT SCB
         PORT (
@@ -829,14 +823,5 @@ BEGIN
             clock => open,
             dsi_ctdac_strobe => open,
             tr_ctdac_empty => Net_50);
-
-    \VDAC_1:REFBUF\:OA
-        GENERIC MAP(
-            cy_registers => "",
-            deepsleep_available => 0,
-            has_resistor => 0,
-            needs_dsab => 0)
-        PORT MAP(
-            ctb_dsi_comp => \VDAC_1:Net_34\);
 
 END __DEFAULT__;

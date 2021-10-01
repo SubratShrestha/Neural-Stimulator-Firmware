@@ -58,17 +58,17 @@ The data types that are used in the customizer are redefined as constants here.
                                   Parameters
 The parameters that are set in the customizer are redefined as constants here.
 *******************************************************************************/
-#define VDAC_1_PARAM_VrefSource           (0uL)
+#define VDAC_1_PARAM_VrefSource           (1uL)
 #define VDAC_1_PARAM_InitialCode          (0)
 #define VDAC_1_PARAM_OutputBuffer         (0uL)
 #define VDAC_1_PARAM_SampleAndHold        (0uL)
 #define VDAC_1_PARAM_OutputBufferPower    (2uL)
-#define VDAC_1_PARAM_DacCodeMode          (1uL)
+#define VDAC_1_PARAM_DacCodeMode          (0uL)
 #define VDAC_1_PARAM_UpdateMode           (0uL)
 #define VDAC_1_PARAM_DeepSleep            (0uL)
 #define VDAC_1_PARAM_ShowTrig             (0uL)
-#define VDAC_1_PARAM_OpAmpUsage           (1uL)
-#define VDAC_1_PARAM_VrefVoltage_mV       (3000uL)
+#define VDAC_1_PARAM_OpAmpUsage           (0uL)
+#define VDAC_1_PARAM_VrefVoltage_mV       (3300uL)
 #define VDAC_1_PARAM_ReferenceBufferUsed  (VDAC_1_PARAM_VrefSource != VDAC_1_COMP_REFSOURCE_VDDA)
 #define VDAC_1_PARAM_OutputBufferUsed     (VDAC_1_PARAM_OutputBuffer > VDAC_1_COMP_OUTPUT_UNBUFFERED_INTERNAL)
 

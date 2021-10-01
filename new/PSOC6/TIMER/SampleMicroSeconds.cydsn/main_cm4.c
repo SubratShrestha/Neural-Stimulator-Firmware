@@ -16,10 +16,10 @@
 
 uint32_t dacWrite = 0x000;
 uint32_t comparevalue = 0;
-uint32_t phase_1 = 10;
-uint32_t inter_stim_gap = 0;
-uint32_t phase_2 = 10;
-uint32_t inter_stim_delay = 0;
+uint32_t phase_1 = 500;
+uint32_t inter_stim_gap = 10;
+uint32_t phase_2 = 500;
+uint32_t inter_stim_delay = 8990;
 uint32_t phases[4];
 int num_pulses = 0; /* could need to change to uint32_t based on how data format is sent/recieved */
 int curr_num_pulses = 0;
@@ -31,13 +31,13 @@ void TimerInterruptHandler(void)
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
     if (current_phase == 0) {
-        dacWrite = 0x000;   
+        dacWrite = 0xFFF;   
     } else if (current_phase == 1) {
-        dacWrite = 0x000;   
+        dacWrite = 0x800;   
     } else if (current_phase == 2) {
-        dacWrite = 0x7FF;
+        dacWrite = 0x000;
     } else if (current_phase == 3) {
-        dacWrite = 0x3FF;   
+        dacWrite = 0x800;   
     }
     VDAC_1_SetValue(dacWrite);
     

@@ -1,6 +1,6 @@
 // ======================================================================
 // SampleMicroSeconds.v generated from TopDesign.cysch
-// 09/30/2021 at 21:04
+// 10/01/2021 at 15:17
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -421,7 +421,7 @@ module bIncludeDriverToComponent_v1_0_2 ;
 
 endmodule
 
-// VDAC12_PDL_v2_0(DacCodeMode=1, DebugEnable=false, DeepSleep=false, DwrExtAfterCustomized=false, DwrRefExternal=0, GainBandwidth=2, InitialCode=0, InitialVoltage_mV=1500, OpampIDD=2, OpAmpUsage=1, OutputBuffer=0, OutputBufferPower=2, OutputBufferRange=0, RefBufferRange=0, ReferenceCurrentHigh=true, SampleAndHold=false, ShowClk=false, ShowStrobe=false, ShowTrig=false, UpdateMode=0, VrefSource=0, VrefVoltage=3, VrefVoltage_mV=3000, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=VDAC12_PDL_v2_0, CY_CONFIG_TITLE=VDAC_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=VDAC_1, CY_INSTANCE_SHORT_NAME=VDAC_1, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=ctdac, CY_PDL_DRIVER_REQ_VERSION=2.0, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=VDAC_1, )
+// VDAC12_PDL_v2_0(DacCodeMode=0, DebugEnable=false, DeepSleep=false, DwrExtAfterCustomized=false, DwrRefExternal=0, GainBandwidth=2, InitialCode=0, InitialVoltage_mV=0, OpampIDD=2, OpAmpUsage=0, OutputBuffer=0, OutputBufferPower=2, OutputBufferRange=0, RefBufferRange=0, ReferenceCurrentHigh=true, SampleAndHold=false, ShowClk=false, ShowStrobe=false, ShowTrig=false, UpdateMode=0, VrefSource=1, VrefVoltage=3, VrefVoltage_mV=3300, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=VDAC12_PDL_v2_0, CY_CONFIG_TITLE=VDAC_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=VDAC_1, CY_INSTANCE_SHORT_NAME=VDAC_1, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=0, CY_PDL_DRIVER_NAME=ctdac, CY_PDL_DRIVER_REQ_VERSION=2.0, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=VDAC_1, )
 module VDAC12_PDL_v2_0_3 (
     clock,
     strobe,
@@ -467,16 +467,6 @@ module VDAC12_PDL_v2_0_3 (
         .dsi_ctdac_strobe(strobe),
         .tr_ctdac_empty(trigger));
 
-    cy_mxs40_opamp_v1_0 REFBUF (
-        .ctb_dsi_comp(Net_34),
-        .out_10x(Net_9),
-        .out_1x(ref_drive),
-        .vminus(ref_drive),
-        .vplus(Net_10));
-    defparam REFBUF.deepsleep_available = 0;
-    defparam REFBUF.has_resistor = 0;
-    defparam REFBUF.needs_dsab = 0;
-
 	// cy_analog_virtualmux_1 (cy_analog_virtualmux_v1_0)
 	cy_connect_v1_0 cy_analog_virtualmux_1_connect(vout, ct_vout_sw);
 	defparam cy_analog_virtualmux_1_connect.sig_width = 1;
@@ -489,7 +479,7 @@ module VDAC12_PDL_v2_0_3 (
         .noconnect(Net_9));
 
 	// cy_analog_virtualmux_2 (cy_analog_virtualmux_v1_0)
-	cy_connect_v1_0 cy_analog_virtualmux_2_connect(Net_10, vref);
+	cy_connect_v1_0 cy_analog_virtualmux_2_connect(Net_10, Net_42);
 	defparam cy_analog_virtualmux_2_connect.sig_width = 1;
 
     cy_analog_noconnect_v1_0 cy_analog_noconnect_3 (
@@ -529,6 +519,7 @@ endmodule
 module top ;
 
     electrical  Net_51;
+    electrical  Net_71;
           wire  Net_50;
           wire  Net_49;
           wire  Net_48;
@@ -605,7 +596,7 @@ module top ;
         .strobe(1'b0),
         .trigger(Net_50),
         .vout(Net_64),
-        .vref(Net_65),
+        .vref(Net_71),
         .vref_out(Net_51));
 
 	wire [0:0] tmpFB_0__VDAC_Out_net;
