@@ -1,5 +1,5 @@
 -- Project:   ADC
--- Generated: 10/03/2021 14:04:18
+-- Generated: 10/03/2021 21:46:03
 -- PSoC Creator  4.4
 
 ENTITY ADC IS
@@ -41,8 +41,42 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
     ATTRIBUTE global_signal OF ClockBlock_PeriClk : SIGNAL IS true;
     SIGNAL ClockBlock_SlowClk : bit;
     SIGNAL ClockBlock_WCO : bit;
+    SIGNAL DAC_out(0)__PA : bit;
+    SIGNAL DAC_to_ADC(0)__PA : bit;
+    SIGNAL Net_157 : bit;
+    SIGNAL Net_158 : bit;
+    SIGNAL Net_159_0 : bit;
+    SIGNAL Net_159_1 : bit;
+    SIGNAL Net_159_2 : bit;
+    SIGNAL Net_159_3 : bit;
+    SIGNAL Net_160 : bit;
+    SIGNAL Net_161_0 : bit;
+    SIGNAL Net_161_1 : bit;
+    SIGNAL Net_161_10 : bit;
+    SIGNAL Net_161_11 : bit;
+    SIGNAL Net_161_2 : bit;
+    SIGNAL Net_161_3 : bit;
+    SIGNAL Net_161_4 : bit;
+    SIGNAL Net_161_5 : bit;
+    SIGNAL Net_161_6 : bit;
+    SIGNAL Net_161_7 : bit;
+    SIGNAL Net_161_8 : bit;
+    SIGNAL Net_161_9 : bit;
+    SIGNAL Net_162 : bit;
+    SIGNAL Net_47 : bit;
+    SIGNAL Net_50_ff11 : bit;
+    ATTRIBUTE global_signal OF Net_50_ff11 : SIGNAL IS true;
+    SIGNAL Net_51 : bit;
+    SIGNAL Net_53 : bit;
+    SIGNAL Net_54 : bit;
+    SIGNAL Net_58 : bit;
     SIGNAL Net_6 : bit;
     SIGNAL Net_7 : bit;
+    SIGNAL \ADC:Net_423\ : bit;
+    SIGNAL \ADC:Net_428_ff49\ : bit;
+    ATTRIBUTE global_signal OF \ADC:Net_428_ff49\ : SIGNAL IS true;
+    SIGNAL \Timer:Net_1\ : bit;
+    SIGNAL \Timer:Net_2\ : bit;
     SIGNAL \UART_1:Net_1172\ : bit;
     SIGNAL \UART_1:Net_161\ : bit;
     SIGNAL \UART_1:Net_847_ff0\ : bit;
@@ -52,6 +86,7 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
     SIGNAL \\\UART_1:rx(0)\\__PA\ : bit;
     SIGNAL \\\UART_1:tx(0)\\__PA\ : bit;
     SIGNAL \UART_1:tx_wire\ : bit;
+    SIGNAL \VDAC_1:Net_34\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
@@ -72,8 +107,18 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
     ATTRIBUTE Location OF \UART_1:tx(0)\ : LABEL IS "P5[1]";
     ATTRIBUTE lib_model OF \UART_1:rx(0)\ : LABEL IS "iocell4";
     ATTRIBUTE Location OF \UART_1:rx(0)\ : LABEL IS "P5[0]";
+    ATTRIBUTE lib_model OF DAC_to_ADC(0) : LABEL IS "iocell5";
+    ATTRIBUTE Location OF DAC_to_ADC(0) : LABEL IS "P10[1]";
+    ATTRIBUTE lib_model OF DAC_out(0) : LABEL IS "iocell6";
+    ATTRIBUTE Location OF DAC_out(0) : LABEL IS "P10[0]";
     ATTRIBUTE Location OF \UART_1:SCB_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(46)]";
     ATTRIBUTE Location OF \UART_1:SCB\ : LABEL IS "F(SCB,5)";
+    ATTRIBUTE Location OF \ADC:IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(138)]";
+    ATTRIBUTE Location OF \ADC:SAR\ : LABEL IS "F(SARADC,0)";
+    ATTRIBUTE Location OF \VDAC_1:CTDAC\ : LABEL IS "F(CTDAC,0)";
+    ATTRIBUTE Location OF \VDAC_1:REFBUF\ : LABEL IS "F(OA,1)";
+    ATTRIBUTE Location OF \Timer:TCPWM\ : LABEL IS "F(TCPWM,0)";
+    ATTRIBUTE Location OF isrTimer : LABEL IS "[IntrContainer=(0)][IntrId=(90)]";
     COMPONENT CLK_GEN
         PORT (
             gen_clk_in_0 : IN std_ulogic;
@@ -370,6 +415,13 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
             trace_data_3 : OUT std_ulogic;
             clock_trace_in : IN std_ulogic);
     END COMPONENT;
+    COMPONENT CTDAC
+        PORT (
+            clock : IN std_ulogic;
+            dsi_ctdac_strobe : IN std_ulogic;
+            tr_ctdac_empty : OUT std_ulogic;
+            interrupt_dac : OUT std_ulogic);
+    END COMPONENT;
     COMPONENT interrupt
         PORT (
             interrupt : IN std_ulogic;
@@ -403,6 +455,42 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
             out_clock_en : IN std_ulogic;
             out_reset : IN std_ulogic);
     END COMPONENT;
+    COMPONENT OA
+        PORT (
+            ctb_dsi_comp : OUT std_ulogic);
+    END COMPONENT;
+    COMPONENT SARADC
+        PORT (
+            dsi_sar_sample_done : OUT std_ulogic;
+            dsi_sar_chan_id_valid : OUT std_ulogic;
+            dsi_sar_data_valid : OUT std_ulogic;
+            tr_sar_out : OUT std_ulogic;
+            dsi_sar_data_0 : OUT std_ulogic;
+            dsi_sar_data_1 : OUT std_ulogic;
+            dsi_sar_data_2 : OUT std_ulogic;
+            dsi_sar_data_3 : OUT std_ulogic;
+            dsi_sar_data_4 : OUT std_ulogic;
+            dsi_sar_data_5 : OUT std_ulogic;
+            dsi_sar_data_6 : OUT std_ulogic;
+            dsi_sar_data_7 : OUT std_ulogic;
+            dsi_sar_data_8 : OUT std_ulogic;
+            dsi_sar_data_9 : OUT std_ulogic;
+            dsi_sar_data_10 : OUT std_ulogic;
+            dsi_sar_data_11 : OUT std_ulogic;
+            dsi_sar_chan_id_0 : OUT std_ulogic;
+            dsi_sar_chan_id_1 : OUT std_ulogic;
+            dsi_sar_chan_id_2 : OUT std_ulogic;
+            dsi_sar_chan_id_3 : OUT std_ulogic;
+            dsi_sar_cfg_st_sel_0 : IN std_ulogic;
+            dsi_sar_cfg_st_sel_1 : IN std_ulogic;
+            dsi_sar_cfg_average : IN std_ulogic;
+            dsi_sar_cfg_differential : IN std_ulogic;
+            dsi_sar_sw_negvref : IN std_ulogic;
+            dsi_sar_data_hilo_sel : IN std_ulogic;
+            tr_sar_in : IN std_ulogic;
+            clock : IN std_ulogic;
+            interrupt : OUT std_ulogic);
+    END COMPONENT;
     COMPONENT SCB
         PORT (
             clock : IN std_ulogic;
@@ -423,6 +511,21 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
             tr_tx_req : OUT std_ulogic;
             tr_rx_req : OUT std_ulogic;
             tr_i2c_scl_filtered : OUT std_ulogic);
+    END COMPONENT;
+    COMPONENT TCPWM
+        PORT (
+            clock : IN std_ulogic;
+            capture : IN std_ulogic;
+            count : IN std_ulogic;
+            reload : IN std_ulogic;
+            stop : IN std_ulogic;
+            start : IN std_ulogic;
+            tr_underflow : OUT std_ulogic;
+            tr_compare_match : OUT std_ulogic;
+            tr_overflow : OUT std_ulogic;
+            line_compl : OUT std_ulogic;
+            line : OUT std_ulogic;
+            interrupt : OUT std_ulogic);
     END COMPONENT;
 BEGIN
 
@@ -448,6 +551,8 @@ BEGIN
             wco => ClockBlock_WCO,
             lfclk => ClockBlock_LFClk,
             ff_div_0 => open,
+            ff_div_11 => Net_50_ff11,
+            ff_div_49 => \ADC:Net_428_ff49\,
             ff_div_5 => \UART_1:Net_847_ff0\,
             periclk_App => periclk_App);
 
@@ -673,6 +778,112 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
+    DAC_to_ADC:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "0113321b-4a37-46f6-8407-2f8646c68756",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    DAC_to_ADC(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "DAC_to_ADC",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => DAC_to_ADC(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    DAC_out:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "81ff76b5-268f-4460-b27a-cf2375f63c1a",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    DAC_out(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "DAC_out",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => DAC_out(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
     \UART_1:SCB_IRQ\:interrupt
         GENERIC MAP(
             cy_registers => "",
@@ -705,5 +916,94 @@ BEGIN
             tr_tx_req => Net_7,
             tr_rx_req => Net_6,
             tr_i2c_scl_filtered => \UART_1:Net_161\);
+
+    \ADC:IRQ\:interrupt
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_required => 0,
+            int_type => "10")
+        PORT MAP(
+            interrupt => \ADC:Net_423\,
+            clock => ClockBlock_PeriClk);
+
+    \ADC:SAR\:SARADC
+        GENERIC MAP(
+            cy_registers => "",
+            edge_trigger => 0)
+        PORT MAP(
+            dsi_sar_sample_done => Net_158,
+            dsi_sar_chan_id_valid => Net_160,
+            dsi_sar_data_valid => Net_162,
+            tr_sar_out => Net_157,
+            dsi_sar_data_11 => Net_161_11,
+            dsi_sar_data_10 => Net_161_10,
+            dsi_sar_data_9 => Net_161_9,
+            dsi_sar_data_8 => Net_161_8,
+            dsi_sar_data_7 => Net_161_7,
+            dsi_sar_data_6 => Net_161_6,
+            dsi_sar_data_5 => Net_161_5,
+            dsi_sar_data_4 => Net_161_4,
+            dsi_sar_data_3 => Net_161_3,
+            dsi_sar_data_2 => Net_161_2,
+            dsi_sar_data_1 => Net_161_1,
+            dsi_sar_data_0 => Net_161_0,
+            dsi_sar_chan_id_3 => Net_159_3,
+            dsi_sar_chan_id_2 => Net_159_2,
+            dsi_sar_chan_id_1 => Net_159_1,
+            dsi_sar_chan_id_0 => Net_159_0,
+            dsi_sar_cfg_st_sel_1 => open,
+            dsi_sar_cfg_st_sel_0 => open,
+            dsi_sar_cfg_average => open,
+            dsi_sar_cfg_differential => open,
+            dsi_sar_sw_negvref => open,
+            dsi_sar_data_hilo_sel => open,
+            tr_sar_in => open,
+            clock => \ADC:Net_428_ff49\,
+            interrupt => \ADC:Net_423\);
+
+    \VDAC_1:CTDAC\:CTDAC
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => open,
+            dsi_ctdac_strobe => open,
+            tr_ctdac_empty => Net_47);
+
+    \VDAC_1:REFBUF\:OA
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_available => 0,
+            has_resistor => 0,
+            needs_dsab => 0)
+        PORT MAP(
+            ctb_dsi_comp => \VDAC_1:Net_34\);
+
+    \Timer:TCPWM\:TCPWM
+        GENERIC MAP(
+            cy_registers => "",
+            exact_width => 0,
+            width => 32)
+        PORT MAP(
+            clock => Net_50_ff11,
+            capture => '0',
+            count => '1',
+            reload => '0',
+            stop => '0',
+            start => '0',
+            tr_underflow => Net_58,
+            tr_compare_match => Net_51,
+            tr_overflow => Net_54,
+            line_compl => \Timer:Net_1\,
+            line => \Timer:Net_2\,
+            interrupt => Net_53);
+
+    isrTimer:interrupt
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_required => 0,
+            int_type => "10")
+        PORT MAP(
+            interrupt => Net_53,
+            clock => ClockBlock_PeriClk);
 
 END __DEFAULT__;

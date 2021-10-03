@@ -20,18 +20,42 @@
 #include "cyfitter_gpio.h"
 #include "cyfitter_sysint.h"
 
-/* UART_1_SCB */
+/* ADC */
+#define ADC_intSarClock__DIV_IDX 2
+#define ADC_intSarClock__DIV_NUM 2
+#define ADC_intSarClock__DIV_TYPE CY_SYSCLK_DIV_8_BIT
+#define ADC_SAR__HW SAR
+#define ADC_SAR__IDX 0
+#define ADC_SAR__TR_SAR_IN TRIG6_OUT_PASS_TR_SAR_IN
+
+/* Clock */
+#define Clock__DIV_IDX 1
+#define Clock__DIV_NUM 1
+#define Clock__DIV_TYPE CY_SYSCLK_DIV_8_BIT
+
+/* Timer */
+#define Timer_TCPWM__CNT_HW TCPWM0_CNT0
+#define Timer_TCPWM__CNT_IDX 0u
+#define Timer_TCPWM__HW TCPWM0
+#define Timer_TCPWM__IDX 0u
+
+/* UART_1 */
 #define UART_1_SCB__HW SCB5
 #define UART_1_SCB__IDX 5
 #define UART_1_SCB__SS0_POSITION 0u
 #define UART_1_SCB__SS1_POSITION 1u
 #define UART_1_SCB__SS2_POSITION 2u
 #define UART_1_SCB__SS3_POSITION 3u
-
-/* UART_1_SCBCLK */
 #define UART_1_SCBCLK__DIV_IDX 0
 #define UART_1_SCBCLK__DIV_NUM 0
 #define UART_1_SCBCLK__DIV_TYPE CY_SYSCLK_DIV_8_BIT
+
+/* VDAC_1 */
+#define VDAC_1_CTDAC__HW CTDAC0
+#define VDAC_1_CTDAC__IDX 0
+#define VDAC_1_REFBUF__HW CTBM0
+#define VDAC_1_REFBUF__IDX 1
+#define VDAC_1_REFBUF__OA_IDX 1u
 
 /* Miscellaneous */
 #define CPUSS__CTI_TR_IN_0 TRIG5_OUT_CPUSS_CTI_TR_IN0

@@ -15,6 +15,8 @@
 ********************************************************************************/
 
 #include "cyble_416045_02.h"
+#include "cy_ctb.h"
+#include "cy_ctdac.h"
 #include "cy_efuse.h"
 #include "cy_flash.h"
 #include "cy_gpio.h"
@@ -24,6 +26,7 @@
 #include "cy_lvd.h"
 #include "cy_profile.h"
 #include "cy_prot.h"
+#include "cy_sar.h"
 #include "cy_scb_common.h"
 #include "cy_scb_i2c.h"
 #include "cy_scb_ezi2c.h"
@@ -35,6 +38,10 @@
 #include "cy_syslib.h"
 #include "cy_syspm.h"
 #include "cy_systick.h"
+#include "cy_tcpwm.h"
+#include "cy_tcpwm_counter.h"
+#include "cy_tcpwm_pwm.h"
+#include "cy_tcpwm_quaddec.h"
 #include "cy_trigmux.h"
 #include "cy_wdt.h"
 #include "cy_device.h"
@@ -103,7 +110,12 @@
 #include "cyfitter_sysint.h"
 #include "cydisabledsheets.h"
 #include "UART_1.h"
+#include "ADC.h"
+#include "VDAC_1.h"
+#include "Timer.h"
+#include "Clock.h"
 #include "UART_1_SCBCLK.h"
+#include "ADC_intSarClock.h"
 
 /*[]*/
 
