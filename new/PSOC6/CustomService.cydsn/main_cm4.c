@@ -38,6 +38,7 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
 
         case CY_BLE_EVT_GATTS_WRITE_CMD_REQ:
             writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
+            printf("entered switch\r\n");
             
             // Handle = 18, UUID = 0000fe41-8e22-4541-9d4c-21edae82ed19
             if (writeReqParameter->handleValPair.attrHandle == CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_CHAR_HANDLE) {
@@ -49,6 +50,11 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
             
             printf("end\r\n\n");
             
+            Cy_BLE_GATTS_WriteRsp(writeReqParameter->connHandle);
+            break;
+            
+        case CY_BLE_EVT_GATTS_WRITE_REQ:
+            writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
             Cy_BLE_GATTS_WriteRsp(writeReqParameter->connHandle);
             break;
         default:
