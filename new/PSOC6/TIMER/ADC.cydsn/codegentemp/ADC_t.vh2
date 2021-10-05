@@ -1,5 +1,5 @@
 -- Project:   C:\Users\User\Documents\Neural-Stimulator-Firmware\new\PSOC6\TIMER\ADC.cydsn\ADC.cyprj
--- Generated: 10/03/2021 21:46:11
+-- Generated: 10/05/2021 19:09:40
 -- PSoC Creator  4.4
 
 ENTITY ADC IS
@@ -86,7 +86,6 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
     SIGNAL \\\UART_1:rx(0)\\__PA\ : bit;
     SIGNAL \\\UART_1:tx(0)\\__PA\ : bit;
     SIGNAL \UART_1:tx_wire\ : bit;
-    SIGNAL \VDAC_1:Net_34\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
@@ -116,7 +115,6 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
     ATTRIBUTE Location OF \ADC:IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(138)]";
     ATTRIBUTE Location OF \ADC:SAR\ : LABEL IS "F(SARADC,0)";
     ATTRIBUTE Location OF \VDAC_1:CTDAC\ : LABEL IS "F(CTDAC,0)";
-    ATTRIBUTE Location OF \VDAC_1:REFBUF\ : LABEL IS "F(OA,1)";
     ATTRIBUTE Location OF \Timer:TCPWM\ : LABEL IS "F(TCPWM,0)";
     ATTRIBUTE Location OF isrTimer : LABEL IS "[IntrContainer=(0)][IntrId=(90)]";
     COMPONENT CLK_GEN
@@ -454,10 +452,6 @@ ARCHITECTURE __DEFAULT__ OF ADC IS
             out_clock : IN std_ulogic;
             out_clock_en : IN std_ulogic;
             out_reset : IN std_ulogic);
-    END COMPONENT;
-    COMPONENT OA
-        PORT (
-            ctb_dsi_comp : OUT std_ulogic);
     END COMPONENT;
     COMPONENT SARADC
         PORT (
@@ -929,7 +923,7 @@ BEGIN
     \ADC:SAR\:SARADC
         GENERIC MAP(
             cy_registers => "",
-            edge_trigger => 0)
+            edge_trigger => 1)
         PORT MAP(
             dsi_sar_sample_done => Net_158,
             dsi_sar_chan_id_valid => Net_160,
@@ -968,15 +962,6 @@ BEGIN
             clock => open,
             dsi_ctdac_strobe => open,
             tr_ctdac_empty => Net_47);
-
-    \VDAC_1:REFBUF\:OA
-        GENERIC MAP(
-            cy_registers => "",
-            deepsleep_available => 0,
-            has_resistor => 0,
-            needs_dsab => 0)
-        PORT MAP(
-            ctb_dsi_comp => \VDAC_1:Net_34\);
 
     \Timer:TCPWM\:TCPWM
         GENERIC MAP(

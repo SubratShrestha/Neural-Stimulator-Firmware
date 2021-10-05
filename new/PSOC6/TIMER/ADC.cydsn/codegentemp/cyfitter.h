@@ -53,9 +53,6 @@
 /* VDAC_1 */
 #define VDAC_1_CTDAC__HW CTDAC0
 #define VDAC_1_CTDAC__IDX 0
-#define VDAC_1_REFBUF__HW CTBM0
-#define VDAC_1_REFBUF__IDX 1
-#define VDAC_1_REFBUF__OA_IDX 1u
 
 /* Miscellaneous */
 #define CPUSS__CTI_TR_IN_0 TRIG5_OUT_CPUSS_CTI_TR_IN0

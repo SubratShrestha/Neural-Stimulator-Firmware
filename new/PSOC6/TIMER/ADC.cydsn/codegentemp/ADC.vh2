@@ -2,7 +2,7 @@
 --	Conversion of ADC.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sun Oct 03 21:45:56 2021
+--	Tue Oct 05 19:09:25 2021
 --
 
 USE cypress.cypress.all;
@@ -51,10 +51,10 @@ SIGNAL \ADC:Net_428\ : bit;
 TERMINAL \ADC:muxoutPlus\ : bit;
 TERMINAL \ADC:vinPlus_0\ : bit;
 TERMINAL \ADC:muxoutMinus\ : bit;
-TERMINAL \ADC:vinMinus_0\ : bit;
-TERMINAL \ADC:Net_339_0\ : bit;
-TERMINAL \ADC:Net_340_0\ : bit;
 TERMINAL \ADC:vinNeg_0\ : bit;
+TERMINAL \ADC:Net_339_0\ : bit;
+TERMINAL \ADC:vinMinus_0\ : bit;
+TERMINAL \ADC:Net_340_0\ : bit;
 TERMINAL \ADC:Net_21_0\ : bit;
 SIGNAL \ADC:Net_40\ : bit;
 SIGNAL \ADC:Net_41\ : bit;
@@ -219,7 +219,6 @@ TERMINAL \ADC:vinPlus_62\ : bit;
 TERMINAL \ADC:Net_210\ : bit;
 TERMINAL \ADC:vinPlus_63\ : bit;
 TERMINAL \ADC:Net_211\ : bit;
-TERMINAL Net_35 : bit;
 TERMINAL \ADC:Net_213\ : bit;
 TERMINAL \ADC:vinMinus_1\ : bit;
 TERMINAL \ADC:Net_218\ : bit;
@@ -380,13 +379,11 @@ TERMINAL \VDAC_1:ct_vout\ : bit;
 TERMINAL \VDAC_1:ct_vout_sw\ : bit;
 SIGNAL \VDAC_1:strobe\ : bit;
 SIGNAL Net_47 : bit;
-TERMINAL \VDAC_1:Net_9\ : bit;
-TERMINAL \VDAC_1:Net_10\ : bit;
-SIGNAL \VDAC_1:Net_34\ : bit;
 TERMINAL Net_76 : bit;
 TERMINAL \VDAC_1:ct_vout_buf\ : bit;
 TERMINAL \VDAC_1:Net_16\ : bit;
-TERMINAL Net_99 : bit;
+TERMINAL \VDAC_1:Net_9\ : bit;
+TERMINAL \VDAC_1:Net_10\ : bit;
 TERMINAL \VDAC_1:Net_42\ : bit;
 SIGNAL \VDAC_1:Net_44\ : bit;
 TERMINAL Net_48 : bit;
@@ -537,7 +534,7 @@ zero <=  ('0') ;
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
 	PORT MAP(signal1=>\ADC:muxoutMinus\,
-		signal2=>\ADC:vinMinus_0\);
+		signal2=>\ADC:vinNeg_0\);
 \ADC:vinPlusConnect:bus_connect\:cy_connect_v1_0
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
@@ -570,7 +567,7 @@ zero <=  ('0') ;
 		signal2=>Net_37);
 \ADC:SAR\:cy_mxs40_sar_v1_0
 	GENERIC MAP(cy_registers=>"",
-		edge_trigger=>'0')
+		edge_trigger=>'1')
 	PORT MAP(vplus=>\ADC:muxoutPlus\,
 		vminus=>\ADC:muxoutMinus\,
 		vref=>\ADC:vref\,
@@ -1038,7 +1035,7 @@ zero <=  ('0') ;
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
 	PORT MAP(signal1=>\ADC:vinMinus_0\,
-		signal2=>Net_35);
+		signal2=>\ADC:Net_213\);
 \ADC:cy_analog_noconnect_1\:cy_analog_noconnect_v1_0
 	PORT MAP(noconnect=>\ADC:Net_213\);
 \ADC:vinMinusMux_1_connect\:cy_connect_v1_0
@@ -1595,16 +1592,6 @@ zero <=  ('0') ;
 		ctdvoutsw=>\VDAC_1:ct_vout_sw\,
 		dsi_ctdac_strobe=>zero,
 		tr_ctdac_empty=>Net_47);
-\VDAC_1:REFBUF\:cy_mxs40_opamp_v1_0
-	GENERIC MAP(cy_registers=>"",
-		has_resistor=>'0',
-		deepsleep_available=>'0',
-		needs_dsab=>'0')
-	PORT MAP(out_1x=>\VDAC_1:ref_drive\,
-		out_10x=>\VDAC_1:Net_9\,
-		vplus=>\VDAC_1:Net_10\,
-		vminus=>\VDAC_1:ref_drive\,
-		ctb_dsi_comp=>\VDAC_1:Net_34\);
 \VDAC_1:cy_analog_virtualmux_1_connect\:cy_connect_v1_0
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
@@ -1621,7 +1608,7 @@ zero <=  ('0') ;
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
 	PORT MAP(signal1=>\VDAC_1:Net_10\,
-		signal2=>Net_99);
+		signal2=>\VDAC_1:Net_42\);
 \VDAC_1:cy_analog_noconnect_3\:cy_analog_noconnect_v1_0
 	PORT MAP(noconnect=>\VDAC_1:Net_42\);
 \VDAC_1:cy_analog_noconnect_4\:cy_analog_noconnect_v1_0
@@ -1663,12 +1650,6 @@ DAC_to_ADC:cy_mxs40_gpio_v1_0
 		io=>(tmpIO_0__DAC_to_ADC_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__DAC_to_ADC_net_0));
-vRef_1:cy_vref_v1_0
-	GENERIC MAP(guid=>"6E0C5DC9-D531-4D01-9B49-536487FE4A82",
-		name=>"Bandgap Reference",
-		autoenable=>'1',
-		ignoresleep=>'0')
-	PORT MAP(vout=>Net_99);
 \Timer:TCPWM\:cy_mxs40_tcpwm_v1_0
 	GENERIC MAP(cy_registers=>"",
 		width=>32,
@@ -1732,11 +1713,5 @@ DAC_out:cy_mxs40_gpio_v1_0
 		io=>(tmpIO_0__DAC_out_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__DAC_out_net_0));
-vRef_2:cy_vref_v1_0
-	GENERIC MAP(guid=>"6E0C5DC9-D531-4D01-9B49-536487FE4A82",
-		name=>"Bandgap Reference",
-		autoenable=>'1',
-		ignoresleep=>'0')
-	PORT MAP(vout=>Net_35);
 
 END R_T_L;

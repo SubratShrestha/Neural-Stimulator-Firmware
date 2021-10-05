@@ -49,8 +49,7 @@ static const cy_stc_sar_config_t ADC_hwConfigs[ADC_TOTAL_CONFIGS] = {
         .rangeThres         = ADC_CFG0_RANGE_THRES_INIT,
         .rangeCond          = ADC_CFG0_RANGE_COND_INIT,
         .chanEn             = ADC_CFG0_CHANNEL_EN,
-        .chanConfig         = {((uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos)
-        | SAR_CHAN_CONFIG_DIFFERENTIAL_EN_Msk),
+        .chanConfig         = {((uint32_t) (0 << SAR_CHAN_CONFIG_SAMPLE_TIME_SEL_Pos)),
         CY_SAR_DEINIT,
         CY_SAR_DEINIT,
         CY_SAR_DEINIT,

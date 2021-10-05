@@ -17,10 +17,10 @@
 
 uint32_t dacWrite = 0x000;
 uint32_t comparevalue = 0;
-uint32_t phase_1 = 500;
-uint32_t inter_stim_gap = 10;
-uint32_t phase_2 = 500;
-uint32_t inter_stim_delay = 8990;
+uint32_t phase_1 = 1;
+uint32_t inter_stim_gap = 1;
+uint32_t phase_2 = 1;
+uint32_t inter_stim_delay = 1;
 uint32_t phases[4];
 int num_pulses = 0; /* could need to change to uint32_t based on how data format is sent/recieved */
 int curr_num_pulses = 0;
@@ -31,18 +31,28 @@ void TimerInterruptHandler(void)
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
-    if (current_phase == 0) {
+    if (current_phase == 0) {//curren tphase 1
         dacWrite = 0xFFF;   
-    } else if (current_phase == 1) {
-        dacWrite = 0x800;   
+    } else if (current_phase == 1) { //current phase
+        dacWrite = 0x000;   
     } else if (current_phase == 2) {
-        dacWrite = 0x000;
+        dacWrite = 0xFFF;
     } else if (current_phase == 3) {
         dacWrite = 0x800;   
     }
     VDAC_1_SetValue(dacWrite);
+    ///ADC IS HERE << ADC start in main
     
     
+    Cy_SAR_StartConvert(SAR, CY_SAR_START_CONVERT_SINGLE_SHOT);
+    
+    volatile float value = Cy_SAR_GetResult16(SAR, 0);
+    volatile float volts = Cy_SAR_CountsTo_Volts(SAR, 0, value);
+    printf("Value in V = %f\r\n", volts);
+    
+    ///ADC STOPS
+    
+    //current phase goes 0,1,2,3 : phase_1, inter_stim_gap, phase_2, inter_stim_delay
     while (1) {
         if (phases[current_phase] == 0) {
             if (current_phase == 3) {
@@ -79,6 +89,8 @@ int main(void)
     __enable_irq(); /* Enable global interrupts. */
     
     VDAC_1_Start();
+    ///ADC start here
+    ADC_Start();
     UART_1_Start();
     setvbuf ( stdin, NULL, _IONBF, 0 );
     /* Start the TCPWM component in timer/counter mode. The return value of the
@@ -96,17 +108,18 @@ int main(void)
     Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[0]);
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
     
-    ADC_Start();
-    Cy_SAR_StartConvert(SAR, CY_SAR_START_CONVERT_CONTINUOUS);
     
+    
+    
+    /*
     int i = 0;
-    while (i<60)
+    while (i<600)
     {
         volatile float value = Cy_SAR_GetResult16(SAR, 0);
         volatile float volts = Cy_SAR_CountsTo_Volts(SAR, 0, value);
-        printf("value in V = %f\n", volts);
+        printf("Value in V = %f\r\n", volts);
         i++;
-    }
+    } */
     for(;;)
     {
         /* Place your application code here. */
