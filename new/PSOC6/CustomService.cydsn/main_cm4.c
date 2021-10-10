@@ -18,6 +18,10 @@
 
 SemaphoreHandle_t bleSemaphore;
 
+// Queue globals
+static QueueHandle_t msg_queue;
+static const uint8_t len = 5;
+
 void genericEventHandler(uint32_t event, void *eventParameter) {
     cy_stc_ble_gatts_write_cmd_req_param_t *writeReqParameter;
     
@@ -38,17 +42,20 @@ void genericEventHandler(uint32_t event, void *eventParameter) {
 
         case CY_BLE_EVT_GATTS_WRITE_CMD_REQ:
             writeReqParameter = (cy_stc_ble_gatts_write_cmd_req_param_t *) eventParameter;
-            printf("entered switch\r\n");
             
             // Handle = 18, UUID = 0000fe41-8e22-4541-9d4c-21edae82ed19
-            if (writeReqParameter->handleValPair.attrHandle == CY_BLE_STIMULATION_COMMAND_SERVICE_SERIAL_COMMAND_INPUT_CHAR_CHAR_HANDLE) {
-                int size = (int) sizeof(writeReqParameter->handleValPair.value.val) / sizeof(uint8_t);
-                for(int i=0; i<size; i++) {
-                    printf("handle = %d | value = %d\r\n", writeReqParameter->handleValPair.attrHandle, writeReqParameter->handleValPair.value.val[i]);  
-                }
+            // this is one bytearray.
+            uint8_t command[5];
+            for (int i = 0; i < writeReqParameter->handleValPair.value.len; i++) {
+                command[i] = writeReqParameter->handleValPair.value.val[i];
             }
             
-            printf("end\r\n\n");
+            if (command[0] != 25) {
+                if (xQueueSend(msg_queue, command, 0) != pdPASS) {
+                    printf("queue full\r\n");
+                    return;
+                }
+            }
             
             Cy_BLE_GATTS_WriteRsp(writeReqParameter->connHandle);
             break;
@@ -86,7 +93,91 @@ void bleTask(void *arg) {
     for(;;) {
         xSemaphoreTake(bleSemaphore, portMAX_DELAY);
         Cy_BLE_ProcessEvents();
+        vTaskDelay(100);
     }
+}
+
+void dacTask(void *arg) {
+    (void) arg;
+    printf("DAC task started\r\n");
+    
+    for (;;) {
+        uint8_t command[5];
+        while(xQueueReceive(msg_queue, (void *)&command, 0) == pdPASS) {
+            uint32_t value = (command[1]<<24) + (command[2]<<16) + (command[3]<<8) + command[4];
+            switch(command[0]) {
+                case 0x01:
+                    printf("start stimulation\r\n");
+                    break;
+                case 0x02:
+                    printf("stop stimulation\r\n");
+                    break;
+                case 0x03:
+                    printf("stim type = %s\r\n", value == 0 ? "uniform" : "burst");
+                    break;
+                case 0x04:
+                    printf("anodic/cathodic = %s\r\n", value == 0 ? "anodic" : "cathodic");
+                    break;
+                case 0x05:
+                    printf("phase 1 = %d\r\n", value);
+                    
+                    break;
+                case 0x06:
+                    printf("phase 2 = %d\r\n", value);
+                    break;
+                case 0x07:
+                    printf("dac gap = %d\r\n", value);
+                    break;
+                case 0x08:
+                    printf("phase 1 time = %d\r\n", value);
+                    break;
+                case 0x09:
+                    printf("inter phase gap = %d\r\n", value);
+                    break;
+                case 0x0a:
+                    printf("phase 2 time = %d\r\n", value);
+                    break;
+                case 0x0b:
+                    printf("inter stim delay = %d\r\n", value);
+                    break;
+                case 0x0c:
+                    printf("inter burst delay = %d\r\n", value);
+                    break;
+                case 0x0d:
+                    printf("pulse number = %d\r\n", value);
+                    break;
+                case 0x0e:
+                    printf("pulse number in one burst = %d\r\n", value);
+                    break;
+                case 0x0f:
+                    printf("burst number = %d\r\n", value);
+                    break;
+                case 0x10:
+                    printf("ramp up = %s\r\n", value == 0 ? "no" : "yes");
+                    break;
+                case 0x11:
+                    printf("short electrode = %s\r\n", value == 0 ? "no" : "yes");
+                    break;
+                case 0x12:
+                    printf("record frequency = %d\r\n", value);
+                    break;
+                case 0x13:
+                    printf("start recording\r\n");
+                    break;
+                case 0x14:
+                    printf("stop recording\r\n");
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        if (xQueueIsQueueEmptyFromISR(msg_queue)) {
+            printf("queue is empty, dac task going to sleep\r\n");
+            vTaskDelay(5000);
+        }
+    }
+    
 }
 
 
@@ -98,8 +189,10 @@ int main(void)
     setvbuf(stdin, NULL, _IONBF, 0);
     setvbuf(stdout, NULL, _IONBF, 0);
     printf("System started\r\n");
+    msg_queue = xQueueCreate(16, sizeof(uint8_t[5]));
     
-    xTaskCreate(bleTask, "bleTask", 8*1024, 0, 2, 0);
+    xTaskCreate(bleTask, "bleTask", 1024, NULL, 1, NULL);
+    xTaskCreate(dacTask, "dacTask", 1024, NULL, 1, NULL);
     
     vTaskStartScheduler();
 
