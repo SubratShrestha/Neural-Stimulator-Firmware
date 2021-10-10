@@ -11,7 +11,6 @@
 */
 
 #include "command_queue.h"
-#include "main.h"
 
 void InitQueue(PQueue queue){
 	queue->Front = queue->Rear = (PNODE)malloc(sizeof(NODE));

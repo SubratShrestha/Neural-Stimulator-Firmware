@@ -48,13 +48,18 @@ extern "C" {
 
 /* USER CODE END ET */
 
+Queue COMMAND_QUEUE;
+
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
 uint16_t stim_amp;
-uint32_t phase_1 = 10;
-uint32_t inter_stim_gap = 0;
-uint32_t phase_2 = 10;
-uint32_t inter_stim_delay = 0;
+
+extern uint32_t phases[4];
+extern uint32_t phase_1;
+extern uint32_t inter_stim_gap;
+extern uint32_t phase_2;
+extern uint32_t inter_stim_delay;
+
 uint32_t num_pulses;
 uint8_t anodic_cathodic;
 uint8_t stim_type;

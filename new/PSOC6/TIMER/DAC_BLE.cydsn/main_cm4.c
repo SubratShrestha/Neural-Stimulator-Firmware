@@ -14,8 +14,9 @@
 
 uint32_t dac_write = 0x000;
 uint32_t compare_value = 0;
-uint32_t phases[4];
 int current_phase = 0;
+uint32_t curr_num_pulses = 0;
+
 
 void TimerInterruptHandler(void)
 {
@@ -83,7 +84,7 @@ int main(void)
     phases[1] = inter_stim_gap;
     phases[2] = phase_2;
     phases[3] = inter_stim_delay;
-  
+
     // add dummy data here for command queue.
     
     Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[0]);
@@ -93,6 +94,7 @@ int main(void)
     {
         /* Place your application code here. */
         if (IsEmptyQueue(&COMMAND_QUEUE) == 0) {
+            
             uint8_t *command = calloc(5, sizeof(uint8_t));
             DeQueue(&COMMAND_QUEUE, command);
             execute_command(command);

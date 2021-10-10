@@ -21,6 +21,7 @@ uint32_t inter_stim_gap = 10;
 uint32_t phase_2 = 500;
 uint32_t inter_stim_delay = 8990;
 uint32_t phases[4];
+
 int num_pulses = 0; /* could need to change to uint32_t based on how data format is sent/recieved */
 int curr_num_pulses = 0;
 int current_phase = 0;
@@ -30,6 +31,8 @@ void TimerInterruptHandler(void)
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
+    
+    /* Update DAC values based on the current phase */
     if (current_phase == 0) {
         dacWrite = 0xFFF;   
     } else if (current_phase == 1) {
@@ -41,7 +44,7 @@ void TimerInterruptHandler(void)
     }
     VDAC_1_SetValue(dacWrite);
     
-    
+    /* Zero handle timer values */
     while (1) {
         if (phases[current_phase] == 0) {
             if (current_phase == 3) {
@@ -55,6 +58,7 @@ void TimerInterruptHandler(void)
         }
     }
     
+    /* Update the compare register */
     Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[current_phase] - 1);
     
     if (current_phase == 3) {
@@ -64,10 +68,12 @@ void TimerInterruptHandler(void)
         current_phase++;
     }
     
+    /* reset the counter back to 0 */
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
     if (curr_num_pulses == num_pulses && num_pulses != 0) {
         Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);   
     }
+    
 }
 
 
@@ -92,6 +98,7 @@ int main(void)
     phases[2] = phase_2;
     phases[3] = inter_stim_delay;
   
+    
     
     Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[0]);
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);

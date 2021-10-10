@@ -1,0 +1,3654 @@
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"cy_trigmux.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.Cy_TrigMux_Connect,"ax",%progbits
+  21              		.align	1
+  22              		.global	Cy_TrigMux_Connect
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	Cy_TrigMux_Connect, %function
+  26              	Cy_TrigMux_Connect:
+  27              	.LFB132:
+  28              		.file 1 "Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\trigmux\\cy_trigmux.c"
+   1:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \file cy_trigmux.c
+   3:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \version 1.20
+   4:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+   5:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \brief Trigger mux API.
+   6:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+   7:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** ********************************************************************************
+   8:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \copyright
+   9:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Copyright 2016-2018, Cypress Semiconductor Corporation.  All rights reserved.
+  10:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *******************************************************************************/
+  14:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  15:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #include "cy_trigmux.h"
+  16:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #include "cy_device.h"
+  17:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  18:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  19:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_IS_TRIGTYPE_VALID(trigType)  (((trigType) == TRIGGER_TYPE_EDGE) || \
+  20:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                  ((trigType) == TRIGGER_TYPE_LEVEL))
+  21:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  22:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_V1_IS_CYCLES_VALID(cycles)   (CY_TRIGGER_INFINITE >= (cycles))
+  23:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_V2_IS_CYCLES_VALID(cycles)   ((CY_TRIGGER_DEACTIVATE == (cycles)) || \
+  24:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                  (CY_TRIGGER_TWO_CYCLES == (cycles)) || \
+  25:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                  (CY_TRIGGER_INFINITE   == (cycles)))
+  26:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_IS_CYCLES_VALID(cycles)      ((CY_PERI_V1 && CY_TRIGMUX_V1_IS_CYCLES_VALID(cycle
+  27:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                                 CY_TRIGMUX_V2_IS_CYCLES_VALID(cycle
+  28:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  29:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_INTRIG_MASK                  (PERI_TR_CMD_GROUP_SEL_Msk | PERI_TR_GR_TR_OUT_CTL_
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 2
+
+
+  30:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_IS_INTRIG_VALID(inTrg)       (0UL == ((inTrg) & (uint32_t)~CY_TRIGMUX_INTRIG_MAS
+  31:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  32:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_OUTTRIG_MASK                 (PERI_TR_CMD_OUT_SEL_Msk | PERI_TR_CMD_GROUP_SEL_Ms
+  33:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_IS_OUTTRIG_VALID(outTrg)     ((0UL == ((outTrg) & (uint32_t)~CY_TRIGMUX_OUTTRIG_
+  34:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                  (0UL != ((outTrg) & PERI_TR_CMD_OUT_SEL_Msk)))
+  35:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  36:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_ONETRIG_MASK                 (PERI_V2_TR_CMD_OUT_SEL_Msk | PERI_V2_TR_CMD_GROUP_
+  37:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_IS_ONETRIG_VALID(oneTrg)     ((0UL == ((oneTrg) & (uint32_t)~CY_TRIGMUX_ONETRIG_
+  38:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                  (0UL != ((oneTrg) & PERI_V2_TR_CMD_OUT_SEL_Msk)) &
+  39:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                  (0UL != ((oneTrg) & (PERI_V2_TR_CMD_GROUP_SEL_Msk 
+  40:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  41:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_TRIGLINE_MASK                (PERI_TR_CMD_OUT_SEL_Msk | CY_PERI_TR_CMD_GROUP_SEL
+  42:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_IS_TRIGLINE_VALID(trgLn)     (0U == ((trgLn) & (uint32_t)~CY_TRIGMUX_TRIGLINE_MA
+  43:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  44:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** #define CY_TRIGMUX_TR_CTL(outTrig)              (PERI_TR_GR_TR_CTL(_FLD2VAL(CY_PERI_TR_CMD_GROUP_SE
+  45:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                                    _FLD2VAL(CY_PERI_TR_CTL_SEL,    
+  46:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  47:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  48:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** /*******************************************************************************
+  49:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Function Name: Cy_TrigMux_Connect
+  50:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** ****************************************************************************//**
+  51:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+  52:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Connects an input trigger source and output trigger.
+  53:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+  54:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param inTrig
+  55:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * An input selection for the trigger mux.
+  56:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 30 should be cleared.
+  57:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 12 should be cleared.
+  58:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 11:8 represent the trigger group selection.
+  59:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 7:0 select the input trigger signal for the specified trigger multiplexer.
+  60:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+  61:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param outTrig
+  62:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * The output of the trigger mux. This refers to the consumer of the trigger mux.
+  63:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 30 should be set.
+  64:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 12 should be cleared.
+  65:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 11:8 represent the trigger group selection.<br>
+  66:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  For PERI_ver1:
+  67:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 6:0 select the output trigger number in the trigger group.<br>
+  68:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  For PERI_ver2:
+  69:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 7:0 select the output trigger number in the trigger group.
+  70:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+  71:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param invert
+  72:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - true: The output trigger is inverted.
+  73:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - false: The output trigger is not inverted.
+  74:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+  75:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param trigType The trigger signal type.
+  76:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - TRIGGER_TYPE_EDGE: The trigger is synchronized to the consumer blocks clock
+  77:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   and a two-cycle pulse is generated on this clock.
+  78:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - TRIGGER_TYPE_LEVEL: The trigger is a simple level output.
+  79:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+  80:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \return status:
+  81:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_SUCCESS: The connection is made successfully.
+  82:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_BAD_PARAM: Some parameter is invalid.
+  83:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+  84:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \funcusage
+  85:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \snippet trigmux\1.20\snippet\main.c snippet_Cy_TrigMux_Connect
+  86:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 3
+
+
+  87:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *******************************************************************************/
+  88:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** cy_en_trigmux_status_t Cy_TrigMux_Connect(uint32_t inTrig, uint32_t outTrig, bool invert, en_trig_t
+  89:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** {
+  29              		.loc 1 89 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              	.LVL0:
+  34 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  35              		.cfi_def_cfa_offset 32
+  36              		.cfi_offset 4, -32
+  37              		.cfi_offset 5, -28
+  38              		.cfi_offset 6, -24
+  39              		.cfi_offset 7, -20
+  40              		.cfi_offset 8, -16
+  41              		.cfi_offset 9, -12
+  42              		.cfi_offset 10, -8
+  43              		.cfi_offset 14, -4
+  90:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+  91:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L3(CY_TRIGMUX_IS_TRIGTYPE_VALID(trigType));
+  92:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L2(CY_TRIGMUX_IS_INTRIG_VALID(inTrig));
+  93:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L2(CY_TRIGMUX_IS_OUTTRIG_VALID(outTrig));
+  94:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+  95:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     /* inTrig and outTrig should be in the same group */
+  96:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     if ((inTrig & PERI_TR_CMD_GROUP_SEL_Msk) == (outTrig & PERI_TR_CMD_GROUP_SEL_Msk))
+  44              		.loc 1 96 0
+  45 0004 80EA0104 		eor	r4, r0, r1
+  46 0008 14F47064 		ands	r4, r4, #3840
+  89:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+  47              		.loc 1 89 0
+  48 000c 8046     		mov	r8, r0
+  49 000e 0E46     		mov	r6, r1
+  50 0010 9146     		mov	r9, r2
+  51 0012 9A46     		mov	r10, r3
+  52              		.loc 1 96 0
+  53 0014 2FD1     		bne	.L4
+  54              	.LBB2:
+  97:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     {
+  98:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         uint32_t interruptState = Cy_SysLib_EnterCriticalSection();
+  55              		.loc 1 98 0
+  56 0016 FFF7FEFF 		bl	Cy_SysLib_EnterCriticalSection
+  57              	.LVL1:
+  99:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 100:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         CY_TRIGMUX_TR_CTL(outTrig) = (CY_TRIGMUX_TR_CTL(outTrig) &
+  58              		.loc 1 100 0
+  59 001a 184B     		ldr	r3, .L7
+  60 001c 1968     		ldr	r1, [r3]
+  61 001e B1F86E50 		ldrh	r5, [r1, #110]
+  62 0022 8A68     		ldr	r2, [r1, #8]
+  63 0024 AF08     		lsrs	r7, r5, #2
+  64 0026 013F     		subs	r7, r7, #1
+  65 0028 07EA0603 		and	r3, r7, r6
+  66 002c B1F86C70 		ldrh	r7, [r1, #108]
+  67 0030 B1F86A10 		ldrh	r1, [r1, #106]
+  68 0034 0E40     		ands	r6, r6, r1
+  69              	.LVL2:
+  70 0036 1744     		add	r7, r7, r2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 4
+
+
+  71 0038 360A     		lsrs	r6, r6, #8
+  72 003a 07EB8307 		add	r7, r7, r3, lsl #2
+  73 003e 6E43     		muls	r6, r5, r6
+ 101:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                       (uint32_t)~(PERI_TR_GR_TR_OUT_CTL_TR_SEL_Msk |
+ 102:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                   PERI_TR_GR_TR_OUT_CTL_TR_INV_Msk |
+ 103:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                   PERI_TR_GR_TR_OUT_CTL_TR_EDGE_Msk)) |
+  74              		.loc 1 103 0
+  75 0040 4FEA4A2A 		lsl	r10, r10, #9
+ 100:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                       (uint32_t)~(PERI_TR_GR_TR_OUT_CTL_TR_SEL_Msk |
+  76              		.loc 1 100 0
+  77 0044 BD59     		ldr	r5, [r7, r6]
+  78              		.loc 1 103 0
+  79 0046 0AF4007A 		and	r10, r10, #512
+ 100:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                       (uint32_t)~(PERI_TR_GR_TR_OUT_CTL_TR_SEL_Msk |
+  80              		.loc 1 100 0
+  81 004a 25F47F75 		bic	r5, r5, #1020
+ 104:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                         (_VAL2FLD(PERI_TR_GR_TR_OUT_CTL_TR_SEL, inTrig) |
+  82              		.loc 1 104 0
+  83 004e 5FFA88F8 		uxtb	r8, r8
+  84              	.LVL3:
+ 105:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                         _BOOL2FLD(PERI_TR_GR_TR_OUT_CTL_TR_INV, invert) |
+  85              		.loc 1 105 0
+  86 0052 B9F1000F 		cmp	r9, #0
+ 103:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                         (_VAL2FLD(PERI_TR_GR_TR_OUT_CTL_TR_SEL, inTrig) |
+  87              		.loc 1 103 0
+  88 0056 4AEA0808 		orr	r8, r10, r8
+ 100:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                       (uint32_t)~(PERI_TR_GR_TR_OUT_CTL_TR_SEL_Msk |
+  89              		.loc 1 100 0
+  90 005a 25F00305 		bic	r5, r5, #3
+  91              		.loc 1 105 0
+  92 005e 18BF     		it	ne
+  93 0060 4FF48074 		movne	r4, #256
+ 103:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                         (_VAL2FLD(PERI_TR_GR_TR_OUT_CTL_TR_SEL, inTrig) |
+  94              		.loc 1 103 0
+  95 0064 48EA0505 		orr	r5, r8, r5
+  96 0068 2543     		orrs	r5, r5, r4
+ 100:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                       (uint32_t)~(PERI_TR_GR_TR_OUT_CTL_TR_SEL_Msk |
+  97              		.loc 1 100 0
+  98 006a BD51     		str	r5, [r7, r6]
+ 106:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                          _VAL2FLD(PERI_TR_GR_TR_OUT_CTL_TR_EDGE, trigType));
+ 107:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 108:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         Cy_SysLib_ExitCriticalSection(interruptState);
+  99              		.loc 1 108 0
+ 100 006c FFF7FEFF 		bl	Cy_SysLib_ExitCriticalSection
+ 101              	.LVL4:
+ 109:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 110:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         retVal = CY_TRIGMUX_SUCCESS;
+ 102              		.loc 1 110 0
+ 103 0070 0020     		movs	r0, #0
+ 104 0072 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 105              	.LVL5:
+ 106              	.L4:
+ 107              	.LBE2:
+  90:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L3(CY_TRIGMUX_IS_TRIGTYPE_VALID(trigType));
+ 108              		.loc 1 90 0
+ 109 0076 0248     		ldr	r0, .L7+4
+ 110              	.LVL6:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 5
+
+
+ 111:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     }
+ 112:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 113:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     return retVal;
+ 114:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** }
+ 111              		.loc 1 114 0
+ 112 0078 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 113              	.LVL7:
+ 114              	.L8:
+ 115              		.align	2
+ 116              	.L7:
+ 117 007c 00000000 		.word	cy_device
+ 118 0080 0100CE00 		.word	13500417
+ 119              		.cfi_endproc
+ 120              	.LFE132:
+ 121              		.size	Cy_TrigMux_Connect, .-Cy_TrigMux_Connect
+ 122              		.section	.text.Cy_TrigMux_Select,"ax",%progbits
+ 123              		.align	1
+ 124              		.global	Cy_TrigMux_Select
+ 125              		.thumb
+ 126              		.thumb_func
+ 127              		.type	Cy_TrigMux_Select, %function
+ 128              	Cy_TrigMux_Select:
+ 129              	.LFB133:
+ 115:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 116:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 117:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** /*******************************************************************************
+ 118:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Function Name: Cy_TrigMux_Select
+ 119:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** ****************************************************************************//**
+ 120:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 121:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Enables and configures the specified 1-to-1 trigger line. For PERI_ver2 only.
+ 122:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 123:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param outTrig
+ 124:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * The 1to1 trigger line.
+ 125:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 30 should be set.
+ 126:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 12 should be set.
+ 127:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 11:8 represent the 1-to-1 trigger group selection.
+ 128:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 7:0 select the trigger line number in the trigger group.
+ 129:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 130:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param invert
+ 131:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - true: The trigger signal is inverted.
+ 132:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - false: The trigger signal is not inverted.
+ 133:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 134:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param trigType The trigger signal type.
+ 135:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - TRIGGER_TYPE_EDGE: The trigger is synchronized to the consumer blocks clock
+ 136:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   and a two-cycle pulse is generated on this clock.
+ 137:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - TRIGGER_TYPE_LEVEL: The trigger is a simple level output.
+ 138:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 139:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \return status:
+ 140:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_SUCCESS: The selection is made successfully.
+ 141:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_BAD_PARAM: Some parameter is invalid.
+ 142:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 143:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \funcusage
+ 144:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \snippet trigmux\1.20\snippet\main.c snippet_Cy_TrigMux_Select
+ 145:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  
+ 146:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *******************************************************************************/
+ 147:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** cy_en_trigmux_status_t Cy_TrigMux_Select(uint32_t outTrig, bool invert, en_trig_type_t trigType)
+ 148:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** {
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 6
+
+
+ 130              		.loc 1 148 0
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 0, uses_anonymous_args = 0
+ 134              	.LVL8:
+ 135 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 136              		.cfi_def_cfa_offset 24
+ 137              		.cfi_offset 3, -24
+ 138              		.cfi_offset 4, -20
+ 139              		.cfi_offset 5, -16
+ 140              		.cfi_offset 6, -12
+ 141              		.cfi_offset 7, -8
+ 142              		.cfi_offset 14, -4
+ 149:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+ 150:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     
+ 151:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L3(CY_TRIGMUX_IS_TRIGTYPE_VALID(trigType));
+ 152:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L2(CY_TRIGMUX_IS_ONETRIG_VALID(outTrig));
+ 153:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 154:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     if (!CY_PERI_V1)
+ 143              		.loc 1 154 0
+ 144 0002 194D     		ldr	r5, .L14
+ 145 0004 2B68     		ldr	r3, [r5]
+ 146 0006 93F82F30 		ldrb	r3, [r3, #47]	@ zero_extendqisi2
+ 147 000a 012B     		cmp	r3, #1
+ 148:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+ 148              		.loc 1 148 0
+ 149 000c 0446     		mov	r4, r0
+ 150 000e 0F46     		mov	r7, r1
+ 151 0010 1646     		mov	r6, r2
+ 152              		.loc 1 154 0
+ 153 0012 26D0     		beq	.L12
+ 154              	.LBB3:
+ 155:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     {
+ 156:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         uint32_t interruptState;
+ 157:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 158:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         interruptState = Cy_SysLib_EnterCriticalSection();
+ 155              		.loc 1 158 0
+ 156 0014 FFF7FEFF 		bl	Cy_SysLib_EnterCriticalSection
+ 157              	.LVL9:
+ 159:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 160:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         CY_TRIGMUX_TR_CTL(outTrig) = (CY_TRIGMUX_TR_CTL(outTrig) &
+ 158              		.loc 1 160 0
+ 159 0018 2968     		ldr	r1, [r5]
+ 160 001a B1F86E50 		ldrh	r5, [r1, #110]
+ 161 001e B1F86CE0 		ldrh	lr, [r1, #108]
+ 162 0022 AB08     		lsrs	r3, r5, #2
+ 163 0024 013B     		subs	r3, r3, #1
+ 164 0026 03EA0402 		and	r2, r3, r4
+ 165 002a 8B68     		ldr	r3, [r1, #8]
+ 166 002c 7344     		add	r3, r3, lr
+ 167 002e 03EB8203 		add	r3, r3, r2, lsl #2
+ 168 0032 B1F86A20 		ldrh	r2, [r1, #106]
+ 169 0036 1440     		ands	r4, r4, r2
+ 170              	.LVL10:
+ 171 0038 240A     		lsrs	r4, r4, #8
+ 172 003a 6C43     		muls	r4, r5, r4
+ 161:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                           (uint32_t)~(PERI_TR_1TO1_GR_V2_TR_CTL_TR_INV_Msk |
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 7
+
+
+ 162:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                       PERI_TR_1TO1_GR_V2_TR_CTL_TR_EDGE_Msk)) |
+ 173              		.loc 1 162 0
+ 174 003c 7202     		lsls	r2, r6, #9
+ 160:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                           (uint32_t)~(PERI_TR_1TO1_GR_V2_TR_CTL_TR_INV_Msk |
+ 175              		.loc 1 160 0
+ 176 003e 1D59     		ldr	r5, [r3, r4]
+ 163:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                      (PERI_TR_1TO1_GR_V2_TR_CTL_TR_SEL_Msk      |
+ 177              		.loc 1 163 0
+ 178 0040 002F     		cmp	r7, #0
+ 160:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                           (uint32_t)~(PERI_TR_1TO1_GR_V2_TR_CTL_TR_INV_Msk |
+ 179              		.loc 1 160 0
+ 180 0042 25F44075 		bic	r5, r5, #768
+ 162:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                      (PERI_TR_1TO1_GR_V2_TR_CTL_TR_SEL_Msk      |
+ 181              		.loc 1 162 0
+ 182 0046 02F40072 		and	r2, r2, #512
+ 183              		.loc 1 163 0
+ 184 004a 40F20111 		movw	r1, #257
+ 162:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                      (PERI_TR_1TO1_GR_V2_TR_CTL_TR_SEL_Msk      |
+ 185              		.loc 1 162 0
+ 186 004e 42EA0502 		orr	r2, r2, r5
+ 187              		.loc 1 163 0
+ 188 0052 08BF     		it	eq
+ 189 0054 0121     		moveq	r1, #1
+ 162:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                      (PERI_TR_1TO1_GR_V2_TR_CTL_TR_SEL_Msk      |
+ 190              		.loc 1 162 0
+ 191 0056 0A43     		orrs	r2, r2, r1
+ 160:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                           (uint32_t)~(PERI_TR_1TO1_GR_V2_TR_CTL_TR_INV_Msk |
+ 192              		.loc 1 160 0
+ 193 0058 1A51     		str	r2, [r3, r4]
+ 164:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                             _BOOL2FLD(PERI_TR_1TO1_GR_V2_TR_CTL_TR_INV, invert) |
+ 165:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                              _VAL2FLD(PERI_TR_1TO1_GR_V2_TR_CTL_TR_EDGE, trigType));
+ 166:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 167:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         Cy_SysLib_ExitCriticalSection(interruptState);
+ 194              		.loc 1 167 0
+ 195 005a FFF7FEFF 		bl	Cy_SysLib_ExitCriticalSection
+ 196              	.LVL11:
+ 168:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 169:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         retVal = CY_TRIGMUX_SUCCESS;
+ 197              		.loc 1 169 0
+ 198 005e 0020     		movs	r0, #0
+ 199 0060 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 200              	.LVL12:
+ 201              	.L12:
+ 202              	.LBE3:
+ 149:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     
+ 203              		.loc 1 149 0
+ 204 0062 0248     		ldr	r0, .L14+4
+ 205              	.LVL13:
+ 170:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     }
+ 171:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 172:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     return retVal;
+ 173:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** }
+ 206              		.loc 1 173 0
+ 207 0064 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 208              	.LVL14:
+ 209              	.L15:
+ 210 0066 00BF     		.align	2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 8
+
+
+ 211              	.L14:
+ 212 0068 00000000 		.word	cy_device
+ 213 006c 0100CE00 		.word	13500417
+ 214              		.cfi_endproc
+ 215              	.LFE133:
+ 216              		.size	Cy_TrigMux_Select, .-Cy_TrigMux_Select
+ 217              		.section	.text.Cy_TrigMux_Deselect,"ax",%progbits
+ 218              		.align	1
+ 219              		.global	Cy_TrigMux_Deselect
+ 220              		.thumb
+ 221              		.thumb_func
+ 222              		.type	Cy_TrigMux_Deselect, %function
+ 223              	Cy_TrigMux_Deselect:
+ 224              	.LFB134:
+ 174:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 175:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 176:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** /*******************************************************************************
+ 177:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Function Name: Cy_TrigMux_Deselect
+ 178:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** ****************************************************************************//**
+ 179:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 180:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Disables the specified 1-to-1 trigger line. For PERI_ver2 only.
+ 181:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 182:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param outTrig
+ 183:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * The 1to1 trigger line.
+ 184:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 30 should be set.
+ 185:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 12 should be set.
+ 186:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 11:8 represent the 1-to-1 trigger group selection.
+ 187:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 7:0 select the trigger line number in the trigger group.
+ 188:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 189:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \return status:
+ 190:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_SUCCESS: The deselection is made successfully.
+ 191:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_BAD_PARAM: Some parameter is invalid.
+ 192:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 193:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \funcusage
+ 194:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \snippet trigmux\1.20\snippet\main.c snippet_Cy_TrigMux_Deselect
+ 195:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  
+ 196:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *******************************************************************************/
+ 197:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** cy_en_trigmux_status_t Cy_TrigMux_Deselect(uint32_t outTrig)
+ 198:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** {
+ 225              		.loc 1 198 0
+ 226              		.cfi_startproc
+ 227              		@ args = 0, pretend = 0, frame = 0
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229              	.LVL15:
+ 230 0000 70B5     		push	{r4, r5, r6, lr}
+ 231              		.cfi_def_cfa_offset 16
+ 232              		.cfi_offset 4, -16
+ 233              		.cfi_offset 5, -12
+ 234              		.cfi_offset 6, -8
+ 235              		.cfi_offset 14, -4
+ 199:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+ 200:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 201:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L2(CY_TRIGMUX_IS_ONETRIG_VALID(outTrig));
+ 202:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 203:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     if (!CY_PERI_V1)
+ 236              		.loc 1 203 0
+ 237 0002 134D     		ldr	r5, .L19
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 9
+
+
+ 238 0004 2B68     		ldr	r3, [r5]
+ 239 0006 93F82F30 		ldrb	r3, [r3, #47]	@ zero_extendqisi2
+ 240 000a 012B     		cmp	r3, #1
+ 198:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+ 241              		.loc 1 198 0
+ 242 000c 0446     		mov	r4, r0
+ 243              		.loc 1 203 0
+ 244 000e 1DD0     		beq	.L18
+ 245              	.LBB4:
+ 204:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     {
+ 205:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         uint32_t interruptState;
+ 206:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 207:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         interruptState = Cy_SysLib_EnterCriticalSection();
+ 246              		.loc 1 207 0
+ 247 0010 FFF7FEFF 		bl	Cy_SysLib_EnterCriticalSection
+ 248              	.LVL16:
+ 208:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 209:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         CY_TRIGMUX_TR_CTL(outTrig) &= (uint32_t)~(PERI_TR_1TO1_GR_V2_TR_CTL_TR_SEL_Msk |
+ 249              		.loc 1 209 0
+ 250 0014 2E68     		ldr	r6, [r5]
+ 251 0016 B6F86E10 		ldrh	r1, [r6, #110]
+ 252 001a B268     		ldr	r2, [r6, #8]
+ 253 001c 8B08     		lsrs	r3, r1, #2
+ 254 001e 013B     		subs	r3, r3, #1
+ 255 0020 03EA0405 		and	r5, r3, r4
+ 256 0024 B6F86C30 		ldrh	r3, [r6, #108]
+ 257 0028 1A44     		add	r2, r2, r3
+ 258 002a 02EB8503 		add	r3, r2, r5, lsl #2
+ 259 002e B6F86A20 		ldrh	r2, [r6, #106]
+ 260 0032 1440     		ands	r4, r4, r2
+ 261              	.LVL17:
+ 262 0034 240A     		lsrs	r4, r4, #8
+ 263 0036 4C43     		muls	r4, r1, r4
+ 264 0038 1A59     		ldr	r2, [r3, r4]
+ 265 003a 22F44072 		bic	r2, r2, #768
+ 266 003e 22F00102 		bic	r2, r2, #1
+ 267 0042 1A51     		str	r2, [r3, r4]
+ 210:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                   PERI_TR_1TO1_GR_V2_TR_CTL_TR_INV_Msk |
+ 211:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                                   PERI_TR_1TO1_GR_V2_TR_CTL_TR_EDGE_Msk);
+ 212:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 213:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         Cy_SysLib_ExitCriticalSection(interruptState);
+ 268              		.loc 1 213 0
+ 269 0044 FFF7FEFF 		bl	Cy_SysLib_ExitCriticalSection
+ 270              	.LVL18:
+ 214:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 215:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         retVal = CY_TRIGMUX_SUCCESS;
+ 271              		.loc 1 215 0
+ 272 0048 0020     		movs	r0, #0
+ 273 004a 70BD     		pop	{r4, r5, r6, pc}
+ 274              	.LVL19:
+ 275              	.L18:
+ 276              	.LBE4:
+ 199:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 277              		.loc 1 199 0
+ 278 004c 0148     		ldr	r0, .L19+4
+ 279              	.LVL20:
+ 216:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     }
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 10
+
+
+ 217:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 218:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     return retVal;
+ 219:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** }
+ 280              		.loc 1 219 0
+ 281 004e 70BD     		pop	{r4, r5, r6, pc}
+ 282              	.LVL21:
+ 283              	.L20:
+ 284              		.align	2
+ 285              	.L19:
+ 286 0050 00000000 		.word	cy_device
+ 287 0054 0100CE00 		.word	13500417
+ 288              		.cfi_endproc
+ 289              	.LFE134:
+ 290              		.size	Cy_TrigMux_Deselect, .-Cy_TrigMux_Deselect
+ 291              		.section	.text.Cy_TrigMux_SetDebugFreeze,"ax",%progbits
+ 292              		.align	1
+ 293              		.global	Cy_TrigMux_SetDebugFreeze
+ 294              		.thumb
+ 295              		.thumb_func
+ 296              		.type	Cy_TrigMux_SetDebugFreeze, %function
+ 297              	Cy_TrigMux_SetDebugFreeze:
+ 298              	.LFB135:
+ 220:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 221:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 222:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** /*******************************************************************************
+ 223:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Function Name: Cy_TrigMux_SetDebugFreeze
+ 224:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** ****************************************************************************//**
+ 225:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 226:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Enables/disables the Debug Freeze feature for the specified trigger 
+ 227:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * multiplexer or 1-to-1 trigger line. For PERI_ver2 only.
+ 228:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 229:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param outTrig
+ 230:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * The output of the trigger mux or dedicated 1-to-1 trigger line.
+ 231:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 30 should be set.
+ 232:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 12:8 represent the trigger group selection.
+ 233:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 7:0 select the output trigger number in the trigger group.
+ 234:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 235:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param enable
+ 236:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - true: The Debug Freeze feature is enabled.
+ 237:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - false: The Debug Freeze feature is disabled.
+ 238:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 239:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \return status:
+ 240:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_SUCCESS: The operation is made successfully.
+ 241:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_BAD_PARAM: The outTrig parameter is invalid.
+ 242:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 243:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \funcusage
+ 244:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \snippet trigmux\1.20\snippet\main.c snippet_Cy_TrigMux_SetDebugFreeze
+ 245:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  
+ 246:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *******************************************************************************/
+ 247:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** cy_en_trigmux_status_t Cy_TrigMux_SetDebugFreeze(uint32_t outTrig, bool enable)
+ 248:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** {    
+ 299              		.loc 1 248 0
+ 300              		.cfi_startproc
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303              	.LVL22:
+ 304 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 11
+
+
+ 305              		.cfi_def_cfa_offset 16
+ 306              		.cfi_offset 4, -16
+ 307              		.cfi_offset 5, -12
+ 308              		.cfi_offset 6, -8
+ 309              		.cfi_offset 14, -4
+ 249:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+ 250:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 251:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     if (!CY_PERI_V1)
+ 310              		.loc 1 251 0
+ 311 0002 1E4D     		ldr	r5, .L27
+ 312 0004 2B68     		ldr	r3, [r5]
+ 313 0006 93F82F30 		ldrb	r3, [r3, #47]	@ zero_extendqisi2
+ 314 000a 012B     		cmp	r3, #1
+ 248:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_BAD_PARAM;
+ 315              		.loc 1 248 0
+ 316 000c 0446     		mov	r4, r0
+ 317 000e 0E46     		mov	r6, r1
+ 318              		.loc 1 251 0
+ 319 0010 32D0     		beq	.L25
+ 320              	.LBB5:
+ 252:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     {
+ 253:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         uint32_t interruptState;
+ 254:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 255:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         interruptState = Cy_SysLib_EnterCriticalSection();
+ 321              		.loc 1 255 0
+ 322 0012 FFF7FEFF 		bl	Cy_SysLib_EnterCriticalSection
+ 323              	.LVL23:
+ 256:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 257:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         if (enable)
+ 324              		.loc 1 257 0
+ 325 0016 AEB1     		cbz	r6, .L23
+ 258:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         {
+ 259:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             CY_TRIGMUX_TR_CTL(outTrig) |= PERI_TR_GR_V2_TR_CTL_DBG_FREEZE_EN_Msk;
+ 326              		.loc 1 259 0
+ 327 0018 2E68     		ldr	r6, [r5]
+ 328 001a B6F86E10 		ldrh	r1, [r6, #110]
+ 329 001e B268     		ldr	r2, [r6, #8]
+ 330 0020 8B08     		lsrs	r3, r1, #2
+ 331 0022 013B     		subs	r3, r3, #1
+ 332 0024 03EA0405 		and	r5, r3, r4
+ 333 0028 B6F86C30 		ldrh	r3, [r6, #108]
+ 334 002c 1A44     		add	r2, r2, r3
+ 335 002e 02EB8503 		add	r3, r2, r5, lsl #2
+ 336 0032 B6F86A20 		ldrh	r2, [r6, #106]
+ 337 0036 1440     		ands	r4, r4, r2
+ 338              	.LVL24:
+ 339 0038 240A     		lsrs	r4, r4, #8
+ 340 003a 4C43     		muls	r4, r1, r4
+ 341 003c 1A59     		ldr	r2, [r3, r4]
+ 342 003e 42F48052 		orr	r2, r2, #4096
+ 343 0042 14E0     		b	.L26
+ 344              	.LVL25:
+ 345              	.L23:
+ 260:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         }
+ 261:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         else
+ 262:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         {
+ 263:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             CY_TRIGMUX_TR_CTL(outTrig) &= (uint32_t)~PERI_TR_GR_V2_TR_CTL_DBG_FREEZE_EN_Msk;
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 12
+
+
+ 346              		.loc 1 263 0
+ 347 0044 2E68     		ldr	r6, [r5]
+ 348 0046 B6F86E10 		ldrh	r1, [r6, #110]
+ 349 004a B268     		ldr	r2, [r6, #8]
+ 350 004c 8B08     		lsrs	r3, r1, #2
+ 351 004e 013B     		subs	r3, r3, #1
+ 352 0050 03EA0405 		and	r5, r3, r4
+ 353 0054 B6F86C30 		ldrh	r3, [r6, #108]
+ 354 0058 1A44     		add	r2, r2, r3
+ 355 005a 02EB8503 		add	r3, r2, r5, lsl #2
+ 356 005e B6F86A20 		ldrh	r2, [r6, #106]
+ 357 0062 1440     		ands	r4, r4, r2
+ 358              	.LVL26:
+ 359 0064 240A     		lsrs	r4, r4, #8
+ 360 0066 4C43     		muls	r4, r1, r4
+ 361 0068 1A59     		ldr	r2, [r3, r4]
+ 362 006a 22F48052 		bic	r2, r2, #4096
+ 363              	.L26:
+ 364 006e 1A51     		str	r2, [r3, r4]
+ 264:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         }
+ 265:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 266:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         Cy_SysLib_ExitCriticalSection(interruptState);
+ 365              		.loc 1 266 0
+ 366 0070 FFF7FEFF 		bl	Cy_SysLib_ExitCriticalSection
+ 367              	.LVL27:
+ 267:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 268:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         retVal = CY_TRIGMUX_SUCCESS;
+ 368              		.loc 1 268 0
+ 369 0074 0020     		movs	r0, #0
+ 370 0076 70BD     		pop	{r4, r5, r6, pc}
+ 371              	.LVL28:
+ 372              	.L25:
+ 373              	.LBE5:
+ 249:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 374              		.loc 1 249 0
+ 375 0078 0148     		ldr	r0, .L27+4
+ 376              	.LVL29:
+ 269:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     }
+ 270:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 271:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     return retVal;
+ 272:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** }
+ 377              		.loc 1 272 0
+ 378 007a 70BD     		pop	{r4, r5, r6, pc}
+ 379              	.LVL30:
+ 380              	.L28:
+ 381              		.align	2
+ 382              	.L27:
+ 383 007c 00000000 		.word	cy_device
+ 384 0080 0100CE00 		.word	13500417
+ 385              		.cfi_endproc
+ 386              	.LFE135:
+ 387              		.size	Cy_TrigMux_SetDebugFreeze, .-Cy_TrigMux_SetDebugFreeze
+ 388              		.section	.text.Cy_TrigMux_SwTrigger,"ax",%progbits
+ 389              		.align	1
+ 390              		.global	Cy_TrigMux_SwTrigger
+ 391              		.thumb
+ 392              		.thumb_func
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 13
+
+
+ 393              		.type	Cy_TrigMux_SwTrigger, %function
+ 394              	Cy_TrigMux_SwTrigger:
+ 395              	.LFB136:
+ 273:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 274:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 275:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** /*******************************************************************************
+ 276:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * Function Name: Cy_TrigMux_SwTrigger
+ 277:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** ****************************************************************************//**
+ 278:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 279:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * This function generates a software trigger on an input trigger line. 
+ 280:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * All output triggers connected to this input trigger will be triggered. 
+ 281:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * The function also verifies that there is no activated trigger before 
+ 282:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * generating another activation. 
+ 283:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 284:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param trigLine
+ 285:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * The input of the trigger mux.
+ 286:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bit 30 represents if the signal is an input/output. When this bit is set, 
+ 287:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   the trigger activation is for an output trigger from the trigger multiplexer.
+ 288:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   When this bit is reset, the trigger activation is for an input trigger to 
+ 289:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   the trigger multiplexer.
+ 290:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 12:8 represent the trigger group selection.<br>
+ 291:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * In case of output trigger line (bit 30 is set):
+ 292:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  For PERI_ver1:
+ 293:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 6:0 select the output trigger number in the trigger group.<br>
+ 294:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  For PERI_ver2:
+ 295:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 7:0 select the output trigger number in the trigger group.
+ 296:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * In case of input trigger line (bit 30 is unset):
+ 297:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - Bits 7:0 select the input trigger signal for the trigger multiplexer.
+ 298:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 299:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \param cycles
+ 300:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  The number of "Clk_Peri" cycles during which the trigger remains activated.<br>
+ 301:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  For PERI_ver1: The valid range of cycles is 1 ... 254.<br>
+ 302:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  For PERI_ver2: The only valid value of cycles is 2 (\ref CY_TRIGGER_TWO_CYCLES).<br>
+ 303:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *  Also there are special values (supported with both PERI_ver1 and PERI_ver2):
+ 304:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   - CY_TRIGGER_INFINITE - trigger remains activated until the user deactivates it by
+ 305:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   calling this function with CY_TRIGGER_DEACTIVATE parameter.
+ 306:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   - CY_TRIGGER_DEACTIVATE - this is used to deactivate the trigger activated by
+ 307:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *   calling this function with CY_TRIGGER_INFINITE parameter.
+ 308:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * 
+ 309:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \return status:
+ 310:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_SUCCESS: The trigger is successfully activated/deactivated.
+ 311:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_INVALID_STATE: The trigger is already activated/not active.
+ 312:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * - CY_TRIGMUX_BAD_PARAM: Some parameter is invalid.
+ 313:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 314:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \funcusage
+ 315:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** * \snippet trigmux\1.20\snippet\main.c snippet_Cy_TrigMux_SwTrigger
+ 316:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *
+ 317:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** *******************************************************************************/
+ 318:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** cy_en_trigmux_status_t Cy_TrigMux_SwTrigger(uint32_t trigLine, uint32_t cycles)
+ 319:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** {
+ 396              		.loc 1 319 0
+ 397              		.cfi_startproc
+ 398              		@ args = 0, pretend = 0, frame = 0
+ 399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 400              	.LVL31:
+ 401 0000 30B5     		push	{r4, r5, lr}
+ 402              		.cfi_def_cfa_offset 12
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 14
+
+
+ 403              		.cfi_offset 4, -12
+ 404              		.cfi_offset 5, -8
+ 405              		.cfi_offset 14, -4
+ 406 0002 194B     		ldr	r3, .L39
+ 320:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     cy_en_trigmux_status_t retVal = CY_TRIGMUX_INVALID_STATE;
+ 321:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 322:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L2(CY_TRIGMUX_IS_TRIGLINE_VALID(trigLine));
+ 323:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     CY_ASSERT_L2(CY_TRIGMUX_IS_CYCLES_VALID(cycles));
+ 324:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 325:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     if (CY_TRIGGER_DEACTIVATE != cycles)
+ 407              		.loc 1 325 0
+ 408 0004 19B3     		cbz	r1, .L30
+ 326:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     {
+ 327:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         /* Activate the trigger if it is not in the active state. */
+ 328:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         if (PERI_TR_CMD_ACTIVATE_Msk != (PERI_TR_CMD & PERI_TR_CMD_ACTIVATE_Msk))
+ 409              		.loc 1 328 0
+ 410 0006 1D68     		ldr	r5, [r3]
+ 411 0008 B5F86840 		ldrh	r4, [r5, #104]
+ 412 000c AA68     		ldr	r2, [r5, #8]
+ 413 000e A358     		ldr	r3, [r4, r2]
+ 414 0010 002B     		cmp	r3, #0
+ 415 0012 27DB     		blt	.L36
+ 416              	.LBB6:
+ 329:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         {
+ 330:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 331:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             uint32_t trCmd = (trigLine & (PERI_TR_CMD_TR_SEL_Msk |
+ 417              		.loc 1 331 0
+ 418 0014 B5F86A30 		ldrh	r3, [r5, #106]
+ 332:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                           PERI_TR_CMD_OUT_SEL_Msk |
+ 333:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                        CY_PERI_TR_CMD_GROUP_SEL_Msk)) |
+ 334:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                           PERI_TR_CMD_ACTIVATE_Msk;
+ 335:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             
+ 336:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             retVal = CY_TRIGMUX_SUCCESS;
+ 337:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             
+ 338:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             if (CY_PERI_V1) /* mxperi_v1 */
+ 419              		.loc 1 338 0
+ 420 0018 95F82F50 		ldrb	r5, [r5, #47]	@ zero_extendqisi2
+ 331:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                           PERI_TR_CMD_OUT_SEL_Msk |
+ 421              		.loc 1 331 0
+ 422 001c 43F08043 		orr	r3, r3, #1073741824
+ 423 0020 43F0FF03 		orr	r3, r3, #255
+ 424 0024 1840     		ands	r0, r0, r3
+ 425              	.LVL32:
+ 426              		.loc 1 338 0
+ 427 0026 012D     		cmp	r5, #1
+ 331:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                                           PERI_TR_CMD_OUT_SEL_Msk |
+ 428              		.loc 1 331 0
+ 429 0028 40F00043 		orr	r3, r0, #-2147483648
+ 430              	.LVL33:
+ 431              		.loc 1 338 0
+ 432 002c 04D1     		bne	.L32
+ 339:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             {
+ 340:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                 PERI_TR_CMD = trCmd | _VAL2FLD(PERI_TR_CMD_COUNT, cycles);
+ 433              		.loc 1 340 0
+ 434 002e 0904     		lsls	r1, r1, #16
+ 435              	.LVL34:
+ 436 0030 01F47F01 		and	r1, r1, #16711680
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 15
+
+
+ 437 0034 0B43     		orrs	r3, r3, r1
+ 438              	.LVL35:
+ 439 0036 07E0     		b	.L37
+ 440              	.LVL36:
+ 441              	.L32:
+ 341:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             }
+ 342:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             else if (CY_TRIGGER_TWO_CYCLES == cycles) /* mxperi_v2 or later, 2 cycles pulse */
+ 442              		.loc 1 342 0
+ 443 0038 0229     		cmp	r1, #2
+ 444 003a 03D1     		bne	.L33
+ 343:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             {
+ 344:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                 PERI_TR_CMD = trCmd | PERI_V2_TR_CMD_TR_EDGE_Msk;
+ 445              		.loc 1 344 0
+ 446 003c 40F02040 		orr	r0, r0, #-1610612736
+ 447 0040 A050     		str	r0, [r4, r2]
+ 448 0042 02E0     		b	.L38
+ 449              	.L33:
+ 345:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             }
+ 346:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             else if (CY_TRIGGER_INFINITE == cycles) /* mxperi_v2 or later, infinite activating */
+ 450              		.loc 1 346 0
+ 451 0044 FF29     		cmp	r1, #255
+ 452 0046 0BD1     		bne	.L35
+ 453              	.LVL37:
+ 454              	.L37:
+ 347:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             {
+ 348:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                 PERI_TR_CMD = trCmd;
+ 455              		.loc 1 348 0
+ 456 0048 A350     		str	r3, [r4, r2]
+ 457              	.LVL38:
+ 458              	.L38:
+ 336:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             
+ 459              		.loc 1 336 0
+ 460 004a 0020     		movs	r0, #0
+ 461 004c 30BD     		pop	{r4, r5, pc}
+ 462              	.LVL39:
+ 463              	.L30:
+ 464              	.LBE6:
+ 349:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             }
+ 350:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             else /* mxperi_v2 or later, invalid cycles value */
+ 351:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             {
+ 352:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****                 retVal = CY_TRIGMUX_BAD_PARAM;
+ 353:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             }
+ 354:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         }
+ 355:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     }
+ 356:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     else
+ 357:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     {
+ 358:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         /* Forcibly deactivate the trigger if it is in the active state. */
+ 359:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         if (PERI_TR_CMD_ACTIVATE_Msk == (PERI_TR_CMD & PERI_TR_CMD_ACTIVATE_Msk))
+ 465              		.loc 1 359 0
+ 466 004e 1B68     		ldr	r3, [r3]
+ 467 0050 B3F86820 		ldrh	r2, [r3, #104]
+ 468 0054 9B68     		ldr	r3, [r3, #8]
+ 469 0056 D058     		ldr	r0, [r2, r3]
+ 470              	.LVL40:
+ 471 0058 0028     		cmp	r0, #0
+ 472 005a 03DA     		bge	.L36
+ 360:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         {
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 16
+
+
+ 361:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             PERI_TR_CMD = 0UL;
+ 473              		.loc 1 361 0
+ 474 005c D150     		str	r1, [r2, r3]
+ 475              	.LVL41:
+ 476 005e F4E7     		b	.L38
+ 477              	.LVL42:
+ 478              	.L35:
+ 479              	.LBB7:
+ 352:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             }
+ 480              		.loc 1 352 0
+ 481 0060 0248     		ldr	r0, .L39+4
+ 482 0062 30BD     		pop	{r4, r5, pc}
+ 483              	.LVL43:
+ 484              	.L36:
+ 485              	.LBE7:
+ 320:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 486              		.loc 1 320 0
+ 487 0064 0248     		ldr	r0, .L39+8
+ 488              	.LVL44:
+ 362:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 363:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****             retVal = CY_TRIGMUX_SUCCESS;
+ 364:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****         }
+ 365:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     }
+ 366:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** 
+ 367:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c ****     return retVal;
+ 368:Generated_Source\PSoC6\pdl\drivers\peripheral\trigmux/cy_trigmux.c **** }
+ 489              		.loc 1 368 0
+ 490 0066 30BD     		pop	{r4, r5, pc}
+ 491              	.L40:
+ 492              		.align	2
+ 493              	.L39:
+ 494 0068 00000000 		.word	cy_device
+ 495 006c 0100CE00 		.word	13500417
+ 496 0070 0200CE00 		.word	13500418
+ 497              		.cfi_endproc
+ 498              	.LFE136:
+ 499              		.size	Cy_TrigMux_SwTrigger, .-Cy_TrigMux_SwTrigger
+ 500              		.text
+ 501              	.Letext0:
+ 502              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 503              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 504              		.file 4 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
+ 505              		.file 5 "Generated_Source\\PSoC6\\pdl\\devices/psoc6/include/psoc6_01_config.h"
+ 506              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\trigmux\\cy_trigmux.h"
+ 507              		.file 7 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
+ 508              		.file 8 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/syslib/cy_syslib.h"
+ 509              		.section	.debug_info,"",%progbits
+ 510              	.Ldebug_info0:
+ 511 0000 FA070000 		.4byte	0x7fa
+ 512 0004 0400     		.2byte	0x4
+ 513 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 514 000a 04       		.byte	0x4
+ 515 000b 01       		.uleb128 0x1
+ 516 000c 5C000000 		.4byte	.LASF138
+ 517 0010 0C       		.byte	0xc
+ 518 0011 EC070000 		.4byte	.LASF139
+ 519 0015 8A080000 		.4byte	.LASF140
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 17
+
+
+ 520 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 521 001d 00000000 		.4byte	0
+ 522 0021 00000000 		.4byte	.Ldebug_line0
+ 523 0025 02       		.uleb128 0x2
+ 524 0026 01       		.byte	0x1
+ 525 0027 06       		.byte	0x6
+ 526 0028 2A020000 		.4byte	.LASF0
+ 527 002c 03       		.uleb128 0x3
+ 528 002d 40010000 		.4byte	.LASF2
+ 529 0031 02       		.byte	0x2
+ 530 0032 1D       		.byte	0x1d
+ 531 0033 37000000 		.4byte	0x37
+ 532 0037 02       		.uleb128 0x2
+ 533 0038 01       		.byte	0x1
+ 534 0039 08       		.byte	0x8
+ 535 003a 3E060000 		.4byte	.LASF1
+ 536 003e 03       		.uleb128 0x3
+ 537 003f 75030000 		.4byte	.LASF3
+ 538 0043 02       		.byte	0x2
+ 539 0044 29       		.byte	0x29
+ 540 0045 49000000 		.4byte	0x49
+ 541 0049 02       		.uleb128 0x2
+ 542 004a 02       		.byte	0x2
+ 543 004b 05       		.byte	0x5
+ 544 004c 74060000 		.4byte	.LASF4
+ 545 0050 03       		.uleb128 0x3
+ 546 0051 39070000 		.4byte	.LASF5
+ 547 0055 02       		.byte	0x2
+ 548 0056 2B       		.byte	0x2b
+ 549 0057 5B000000 		.4byte	0x5b
+ 550 005b 02       		.uleb128 0x2
+ 551 005c 02       		.byte	0x2
+ 552 005d 07       		.byte	0x7
+ 553 005e A4070000 		.4byte	.LASF6
+ 554 0062 03       		.uleb128 0x3
+ 555 0063 57070000 		.4byte	.LASF7
+ 556 0067 02       		.byte	0x2
+ 557 0068 3F       		.byte	0x3f
+ 558 0069 6D000000 		.4byte	0x6d
+ 559 006d 02       		.uleb128 0x2
+ 560 006e 04       		.byte	0x4
+ 561 006f 05       		.byte	0x5
+ 562 0070 85020000 		.4byte	.LASF8
+ 563 0074 03       		.uleb128 0x3
+ 564 0075 5A030000 		.4byte	.LASF9
+ 565 0079 02       		.byte	0x2
+ 566 007a 41       		.byte	0x41
+ 567 007b 7F000000 		.4byte	0x7f
+ 568 007f 02       		.uleb128 0x2
+ 569 0080 04       		.byte	0x4
+ 570 0081 07       		.byte	0x7
+ 571 0082 DC030000 		.4byte	.LASF10
+ 572 0086 02       		.uleb128 0x2
+ 573 0087 08       		.byte	0x8
+ 574 0088 05       		.byte	0x5
+ 575 0089 1C020000 		.4byte	.LASF11
+ 576 008d 02       		.uleb128 0x2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 18
+
+
+ 577 008e 08       		.byte	0x8
+ 578 008f 07       		.byte	0x7
+ 579 0090 8F010000 		.4byte	.LASF12
+ 580 0094 04       		.uleb128 0x4
+ 581 0095 04       		.byte	0x4
+ 582 0096 05       		.byte	0x5
+ 583 0097 696E7400 		.ascii	"int\000"
+ 584 009b 02       		.uleb128 0x2
+ 585 009c 04       		.byte	0x4
+ 586 009d 07       		.byte	0x7
+ 587 009e B4030000 		.4byte	.LASF13
+ 588 00a2 03       		.uleb128 0x3
+ 589 00a3 54080000 		.4byte	.LASF14
+ 590 00a7 03       		.byte	0x3
+ 591 00a8 18       		.byte	0x18
+ 592 00a9 2C000000 		.4byte	0x2c
+ 593 00ad 03       		.uleb128 0x3
+ 594 00ae 14020000 		.4byte	.LASF15
+ 595 00b2 03       		.byte	0x3
+ 596 00b3 20       		.byte	0x20
+ 597 00b4 3E000000 		.4byte	0x3e
+ 598 00b8 03       		.uleb128 0x3
+ 599 00b9 C1030000 		.4byte	.LASF16
+ 600 00bd 03       		.byte	0x3
+ 601 00be 24       		.byte	0x24
+ 602 00bf 50000000 		.4byte	0x50
+ 603 00c3 03       		.uleb128 0x3
+ 604 00c4 36060000 		.4byte	.LASF17
+ 605 00c8 03       		.byte	0x3
+ 606 00c9 2C       		.byte	0x2c
+ 607 00ca 62000000 		.4byte	0x62
+ 608 00ce 03       		.uleb128 0x3
+ 609 00cf EB060000 		.4byte	.LASF18
+ 610 00d3 03       		.byte	0x3
+ 611 00d4 30       		.byte	0x30
+ 612 00d5 74000000 		.4byte	0x74
+ 613 00d9 02       		.uleb128 0x2
+ 614 00da 08       		.byte	0x8
+ 615 00db 04       		.byte	0x4
+ 616 00dc F4060000 		.4byte	.LASF19
+ 617 00e0 02       		.uleb128 0x2
+ 618 00e1 04       		.byte	0x4
+ 619 00e2 07       		.byte	0x7
+ 620 00e3 42050000 		.4byte	.LASF20
+ 621 00e7 05       		.uleb128 0x5
+ 622 00e8 B8       		.byte	0xb8
+ 623 00e9 04       		.byte	0x4
+ 624 00ea 34       		.byte	0x34
+ 625 00eb F8040000 		.4byte	0x4f8
+ 626 00ef 06       		.uleb128 0x6
+ 627 00f0 76010000 		.4byte	.LASF21
+ 628 00f4 04       		.byte	0x4
+ 629 00f5 37       		.byte	0x37
+ 630 00f6 CE000000 		.4byte	0xce
+ 631 00fa 00       		.byte	0
+ 632 00fb 06       		.uleb128 0x6
+ 633 00fc 4F030000 		.4byte	.LASF22
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 19
+
+
+ 634 0100 04       		.byte	0x4
+ 635 0101 38       		.byte	0x38
+ 636 0102 CE000000 		.4byte	0xce
+ 637 0106 04       		.byte	0x4
+ 638 0107 06       		.uleb128 0x6
+ 639 0108 B1020000 		.4byte	.LASF23
+ 640 010c 04       		.byte	0x4
+ 641 010d 39       		.byte	0x39
+ 642 010e CE000000 		.4byte	0xce
+ 643 0112 08       		.byte	0x8
+ 644 0113 06       		.uleb128 0x6
+ 645 0114 28060000 		.4byte	.LASF24
+ 646 0118 04       		.byte	0x4
+ 647 0119 3A       		.byte	0x3a
+ 648 011a CE000000 		.4byte	0xce
+ 649 011e 0C       		.byte	0xc
+ 650 011f 06       		.uleb128 0x6
+ 651 0120 4B020000 		.4byte	.LASF25
+ 652 0124 04       		.byte	0x4
+ 653 0125 3B       		.byte	0x3b
+ 654 0126 CE000000 		.4byte	0xce
+ 655 012a 10       		.byte	0x10
+ 656 012b 06       		.uleb128 0x6
+ 657 012c 7B020000 		.4byte	.LASF26
+ 658 0130 04       		.byte	0x4
+ 659 0131 3C       		.byte	0x3c
+ 660 0132 CE000000 		.4byte	0xce
+ 661 0136 14       		.byte	0x14
+ 662 0137 06       		.uleb128 0x6
+ 663 0138 08040000 		.4byte	.LASF27
+ 664 013c 04       		.byte	0x4
+ 665 013d 3D       		.byte	0x3d
+ 666 013e CE000000 		.4byte	0xce
+ 667 0142 18       		.byte	0x18
+ 668 0143 06       		.uleb128 0x6
+ 669 0144 29010000 		.4byte	.LASF28
+ 670 0148 04       		.byte	0x4
+ 671 0149 3E       		.byte	0x3e
+ 672 014a CE000000 		.4byte	0xce
+ 673 014e 1C       		.byte	0x1c
+ 674 014f 06       		.uleb128 0x6
+ 675 0150 0E090000 		.4byte	.LASF29
+ 676 0154 04       		.byte	0x4
+ 677 0155 3F       		.byte	0x3f
+ 678 0156 CE000000 		.4byte	0xce
+ 679 015a 20       		.byte	0x20
+ 680 015b 06       		.uleb128 0x6
+ 681 015c C5050000 		.4byte	.LASF30
+ 682 0160 04       		.byte	0x4
+ 683 0161 40       		.byte	0x40
+ 684 0162 CE000000 		.4byte	0xce
+ 685 0166 24       		.byte	0x24
+ 686 0167 06       		.uleb128 0x6
+ 687 0168 14050000 		.4byte	.LASF31
+ 688 016c 04       		.byte	0x4
+ 689 016d 43       		.byte	0x43
+ 690 016e A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 20
+
+
+ 691 0172 28       		.byte	0x28
+ 692 0173 06       		.uleb128 0x6
+ 693 0174 0F010000 		.4byte	.LASF32
+ 694 0178 04       		.byte	0x4
+ 695 0179 44       		.byte	0x44
+ 696 017a A2000000 		.4byte	0xa2
+ 697 017e 29       		.byte	0x29
+ 698 017f 06       		.uleb128 0x6
+ 699 0180 04090000 		.4byte	.LASF33
+ 700 0184 04       		.byte	0x4
+ 701 0185 45       		.byte	0x45
+ 702 0186 A2000000 		.4byte	0xa2
+ 703 018a 2A       		.byte	0x2a
+ 704 018b 06       		.uleb128 0x6
+ 705 018c B7050000 		.4byte	.LASF34
+ 706 0190 04       		.byte	0x4
+ 707 0191 46       		.byte	0x46
+ 708 0192 A2000000 		.4byte	0xa2
+ 709 0196 2B       		.byte	0x2b
+ 710 0197 06       		.uleb128 0x6
+ 711 0198 63040000 		.4byte	.LASF35
+ 712 019c 04       		.byte	0x4
+ 713 019d 47       		.byte	0x47
+ 714 019e A2000000 		.4byte	0xa2
+ 715 01a2 2C       		.byte	0x2c
+ 716 01a3 06       		.uleb128 0x6
+ 717 01a4 61070000 		.4byte	.LASF36
+ 718 01a8 04       		.byte	0x4
+ 719 01a9 48       		.byte	0x48
+ 720 01aa A2000000 		.4byte	0xa2
+ 721 01ae 2D       		.byte	0x2d
+ 722 01af 06       		.uleb128 0x6
+ 723 01b0 54020000 		.4byte	.LASF37
+ 724 01b4 04       		.byte	0x4
+ 725 01b5 49       		.byte	0x49
+ 726 01b6 A2000000 		.4byte	0xa2
+ 727 01ba 2E       		.byte	0x2e
+ 728 01bb 06       		.uleb128 0x6
+ 729 01bc 21050000 		.4byte	.LASF38
+ 730 01c0 04       		.byte	0x4
+ 731 01c1 4A       		.byte	0x4a
+ 732 01c2 A2000000 		.4byte	0xa2
+ 733 01c6 2F       		.byte	0x2f
+ 734 01c7 06       		.uleb128 0x6
+ 735 01c8 1F070000 		.4byte	.LASF39
+ 736 01cc 04       		.byte	0x4
+ 737 01cd 4B       		.byte	0x4b
+ 738 01ce A2000000 		.4byte	0xa2
+ 739 01d2 30       		.byte	0x30
+ 740 01d3 06       		.uleb128 0x6
+ 741 01d4 FD030000 		.4byte	.LASF40
+ 742 01d8 04       		.byte	0x4
+ 743 01d9 4E       		.byte	0x4e
+ 744 01da A2000000 		.4byte	0xa2
+ 745 01de 31       		.byte	0x31
+ 746 01df 06       		.uleb128 0x6
+ 747 01e0 32010000 		.4byte	.LASF41
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 21
+
+
+ 748 01e4 04       		.byte	0x4
+ 749 01e5 4F       		.byte	0x4f
+ 750 01e6 A2000000 		.4byte	0xa2
+ 751 01ea 32       		.byte	0x32
+ 752 01eb 06       		.uleb128 0x6
+ 753 01ec A8030000 		.4byte	.LASF42
+ 754 01f0 04       		.byte	0x4
+ 755 01f1 50       		.byte	0x50
+ 756 01f2 A2000000 		.4byte	0xa2
+ 757 01f6 33       		.byte	0x33
+ 758 01f7 06       		.uleb128 0x6
+ 759 01f8 56050000 		.4byte	.LASF43
+ 760 01fc 04       		.byte	0x4
+ 761 01fd 51       		.byte	0x51
+ 762 01fe A2000000 		.4byte	0xa2
+ 763 0202 34       		.byte	0x34
+ 764 0203 06       		.uleb128 0x6
+ 765 0204 CE070000 		.4byte	.LASF44
+ 766 0208 04       		.byte	0x4
+ 767 0209 52       		.byte	0x52
+ 768 020a AD000000 		.4byte	0xad
+ 769 020e 36       		.byte	0x36
+ 770 020f 06       		.uleb128 0x6
+ 771 0210 E0060000 		.4byte	.LASF45
+ 772 0214 04       		.byte	0x4
+ 773 0215 53       		.byte	0x53
+ 774 0216 AD000000 		.4byte	0xad
+ 775 021a 38       		.byte	0x38
+ 776 021b 06       		.uleb128 0x6
+ 777 021c 2F080000 		.4byte	.LASF46
+ 778 0220 04       		.byte	0x4
+ 779 0221 54       		.byte	0x54
+ 780 0222 AD000000 		.4byte	0xad
+ 781 0226 3A       		.byte	0x3a
+ 782 0227 06       		.uleb128 0x6
+ 783 0228 F5080000 		.4byte	.LASF47
+ 784 022c 04       		.byte	0x4
+ 785 022d 55       		.byte	0x55
+ 786 022e A2000000 		.4byte	0xa2
+ 787 0232 3C       		.byte	0x3c
+ 788 0233 06       		.uleb128 0x6
+ 789 0234 00030000 		.4byte	.LASF48
+ 790 0238 04       		.byte	0x4
+ 791 0239 56       		.byte	0x56
+ 792 023a A2000000 		.4byte	0xa2
+ 793 023e 3D       		.byte	0x3d
+ 794 023f 06       		.uleb128 0x6
+ 795 0240 C2060000 		.4byte	.LASF49
+ 796 0244 04       		.byte	0x4
+ 797 0245 57       		.byte	0x57
+ 798 0246 A2000000 		.4byte	0xa2
+ 799 024a 3E       		.byte	0x3e
+ 800 024b 06       		.uleb128 0x6
+ 801 024c 1D010000 		.4byte	.LASF50
+ 802 0250 04       		.byte	0x4
+ 803 0251 58       		.byte	0x58
+ 804 0252 A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 22
+
+
+ 805 0256 3F       		.byte	0x3f
+ 806 0257 06       		.uleb128 0x6
+ 807 0258 D0050000 		.4byte	.LASF51
+ 808 025c 04       		.byte	0x4
+ 809 025d 59       		.byte	0x59
+ 810 025e A2000000 		.4byte	0xa2
+ 811 0262 40       		.byte	0x40
+ 812 0263 06       		.uleb128 0x6
+ 813 0264 65030000 		.4byte	.LASF52
+ 814 0268 04       		.byte	0x4
+ 815 0269 5A       		.byte	0x5a
+ 816 026a A2000000 		.4byte	0xa2
+ 817 026e 41       		.byte	0x41
+ 818 026f 06       		.uleb128 0x6
+ 819 0270 B1040000 		.4byte	.LASF53
+ 820 0274 04       		.byte	0x4
+ 821 0275 5B       		.byte	0x5b
+ 822 0276 A2000000 		.4byte	0xa2
+ 823 027a 42       		.byte	0x42
+ 824 027b 06       		.uleb128 0x6
+ 825 027c AC050000 		.4byte	.LASF54
+ 826 0280 04       		.byte	0x4
+ 827 0281 5C       		.byte	0x5c
+ 828 0282 A2000000 		.4byte	0xa2
+ 829 0286 43       		.byte	0x43
+ 830 0287 06       		.uleb128 0x6
+ 831 0288 BA020000 		.4byte	.LASF55
+ 832 028c 04       		.byte	0x4
+ 833 028d 5D       		.byte	0x5d
+ 834 028e A2000000 		.4byte	0xa2
+ 835 0292 44       		.byte	0x44
+ 836 0293 06       		.uleb128 0x6
+ 837 0294 00000000 		.4byte	.LASF56
+ 838 0298 04       		.byte	0x4
+ 839 0299 5E       		.byte	0x5e
+ 840 029a CE000000 		.4byte	0xce
+ 841 029e 48       		.byte	0x48
+ 842 029f 06       		.uleb128 0x6
+ 843 02a0 8E020000 		.4byte	.LASF57
+ 844 02a4 04       		.byte	0x4
+ 845 02a5 5F       		.byte	0x5f
+ 846 02a6 CE000000 		.4byte	0xce
+ 847 02aa 4C       		.byte	0x4c
+ 848 02ab 06       		.uleb128 0x6
+ 849 02ac 45090000 		.4byte	.LASF58
+ 850 02b0 04       		.byte	0x4
+ 851 02b1 60       		.byte	0x60
+ 852 02b2 A2000000 		.4byte	0xa2
+ 853 02b6 50       		.byte	0x50
+ 854 02b7 06       		.uleb128 0x6
+ 855 02b8 EE010000 		.4byte	.LASF59
+ 856 02bc 04       		.byte	0x4
+ 857 02bd 61       		.byte	0x61
+ 858 02be A2000000 		.4byte	0xa2
+ 859 02c2 51       		.byte	0x51
+ 860 02c3 06       		.uleb128 0x6
+ 861 02c4 44080000 		.4byte	.LASF60
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 23
+
+
+ 862 02c8 04       		.byte	0x4
+ 863 02c9 62       		.byte	0x62
+ 864 02ca A2000000 		.4byte	0xa2
+ 865 02ce 52       		.byte	0x52
+ 866 02cf 06       		.uleb128 0x6
+ 867 02d0 2C090000 		.4byte	.LASF61
+ 868 02d4 04       		.byte	0x4
+ 869 02d5 63       		.byte	0x63
+ 870 02d6 A2000000 		.4byte	0xa2
+ 871 02da 53       		.byte	0x53
+ 872 02db 06       		.uleb128 0x6
+ 873 02dc D0060000 		.4byte	.LASF62
+ 874 02e0 04       		.byte	0x4
+ 875 02e1 64       		.byte	0x64
+ 876 02e2 A2000000 		.4byte	0xa2
+ 877 02e6 54       		.byte	0x54
+ 878 02e7 06       		.uleb128 0x6
+ 879 02e8 00020000 		.4byte	.LASF63
+ 880 02ec 04       		.byte	0x4
+ 881 02ed 65       		.byte	0x65
+ 882 02ee A2000000 		.4byte	0xa2
+ 883 02f2 55       		.byte	0x55
+ 884 02f3 06       		.uleb128 0x6
+ 885 02f4 90070000 		.4byte	.LASF64
+ 886 02f8 04       		.byte	0x4
+ 887 02f9 66       		.byte	0x66
+ 888 02fa A2000000 		.4byte	0xa2
+ 889 02fe 56       		.byte	0x56
+ 890 02ff 06       		.uleb128 0x6
+ 891 0300 11040000 		.4byte	.LASF65
+ 892 0304 04       		.byte	0x4
+ 893 0305 67       		.byte	0x67
+ 894 0306 A2000000 		.4byte	0xa2
+ 895 030a 57       		.byte	0x57
+ 896 030b 06       		.uleb128 0x6
+ 897 030c 2C000000 		.4byte	.LASF66
+ 898 0310 04       		.byte	0x4
+ 899 0311 68       		.byte	0x68
+ 900 0312 A2000000 		.4byte	0xa2
+ 901 0316 58       		.byte	0x58
+ 902 0317 06       		.uleb128 0x6
+ 903 0318 4C060000 		.4byte	.LASF67
+ 904 031c 04       		.byte	0x4
+ 905 031d 69       		.byte	0x69
+ 906 031e A2000000 		.4byte	0xa2
+ 907 0322 59       		.byte	0x59
+ 908 0323 06       		.uleb128 0x6
+ 909 0324 4B050000 		.4byte	.LASF68
+ 910 0328 04       		.byte	0x4
+ 911 0329 6E       		.byte	0x6e
+ 912 032a B8000000 		.4byte	0xb8
+ 913 032e 5A       		.byte	0x5a
+ 914 032f 06       		.uleb128 0x6
+ 915 0330 B7070000 		.4byte	.LASF69
+ 916 0334 04       		.byte	0x4
+ 917 0335 6F       		.byte	0x6f
+ 918 0336 B8000000 		.4byte	0xb8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 24
+
+
+ 919 033a 5C       		.byte	0x5c
+ 920 033b 06       		.uleb128 0x6
+ 921 033c 80010000 		.4byte	.LASF70
+ 922 0340 04       		.byte	0x4
+ 923 0341 70       		.byte	0x70
+ 924 0342 A2000000 		.4byte	0xa2
+ 925 0346 5E       		.byte	0x5e
+ 926 0347 06       		.uleb128 0x6
+ 927 0348 12060000 		.4byte	.LASF71
+ 928 034c 04       		.byte	0x4
+ 929 034d 71       		.byte	0x71
+ 930 034e A2000000 		.4byte	0xa2
+ 931 0352 5F       		.byte	0x5f
+ 932 0353 06       		.uleb128 0x6
+ 933 0354 9B050000 		.4byte	.LASF72
+ 934 0358 04       		.byte	0x4
+ 935 0359 72       		.byte	0x72
+ 936 035a A2000000 		.4byte	0xa2
+ 937 035e 60       		.byte	0x60
+ 938 035f 06       		.uleb128 0x6
+ 939 0360 EB050000 		.4byte	.LASF73
+ 940 0364 04       		.byte	0x4
+ 941 0365 73       		.byte	0x73
+ 942 0366 CE000000 		.4byte	0xce
+ 943 036a 64       		.byte	0x64
+ 944 036b 06       		.uleb128 0x6
+ 945 036c BB010000 		.4byte	.LASF74
+ 946 0370 04       		.byte	0x4
+ 947 0371 76       		.byte	0x76
+ 948 0372 B8000000 		.4byte	0xb8
+ 949 0376 68       		.byte	0x68
+ 950 0377 06       		.uleb128 0x6
+ 951 0378 CA030000 		.4byte	.LASF75
+ 952 037c 04       		.byte	0x4
+ 953 037d 77       		.byte	0x77
+ 954 037e B8000000 		.4byte	0xb8
+ 955 0382 6A       		.byte	0x6a
+ 956 0383 06       		.uleb128 0x6
+ 957 0384 25040000 		.4byte	.LASF76
+ 958 0388 04       		.byte	0x4
+ 959 0389 78       		.byte	0x78
+ 960 038a B8000000 		.4byte	0xb8
+ 961 038e 6C       		.byte	0x6c
+ 962 038f 06       		.uleb128 0x6
+ 963 0390 56040000 		.4byte	.LASF77
+ 964 0394 04       		.byte	0x4
+ 965 0395 79       		.byte	0x79
+ 966 0396 B8000000 		.4byte	0xb8
+ 967 039a 6E       		.byte	0x6e
+ 968 039b 06       		.uleb128 0x6
+ 969 039c 97060000 		.4byte	.LASF78
+ 970 03a0 04       		.byte	0x4
+ 971 03a1 7B       		.byte	0x7b
+ 972 03a2 A2000000 		.4byte	0xa2
+ 973 03a6 70       		.byte	0x70
+ 974 03a7 06       		.uleb128 0x6
+ 975 03a8 36020000 		.4byte	.LASF79
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 25
+
+
+ 976 03ac 04       		.byte	0x4
+ 977 03ad 7C       		.byte	0x7c
+ 978 03ae A2000000 		.4byte	0xa2
+ 979 03b2 71       		.byte	0x71
+ 980 03b3 06       		.uleb128 0x6
+ 981 03b4 16090000 		.4byte	.LASF80
+ 982 03b8 04       		.byte	0x4
+ 983 03b9 7D       		.byte	0x7d
+ 984 03ba A2000000 		.4byte	0xa2
+ 985 03be 72       		.byte	0x72
+ 986 03bf 06       		.uleb128 0x6
+ 987 03c0 67050000 		.4byte	.LASF81
+ 988 03c4 04       		.byte	0x4
+ 989 03c5 7E       		.byte	0x7e
+ 990 03c6 A2000000 		.4byte	0xa2
+ 991 03ca 73       		.byte	0x73
+ 992 03cb 06       		.uleb128 0x6
+ 993 03cc 0B030000 		.4byte	.LASF82
+ 994 03d0 04       		.byte	0x4
+ 995 03d1 80       		.byte	0x80
+ 996 03d2 B8000000 		.4byte	0xb8
+ 997 03d6 74       		.byte	0x74
+ 998 03d7 06       		.uleb128 0x6
+ 999 03d8 44070000 		.4byte	.LASF83
+ 1000 03dc 04       		.byte	0x4
+ 1001 03dd 81       		.byte	0x81
+ 1002 03de B8000000 		.4byte	0xb8
+ 1003 03e2 76       		.byte	0x76
+ 1004 03e3 06       		.uleb128 0x6
+ 1005 03e4 EB020000 		.4byte	.LASF84
+ 1006 03e8 04       		.byte	0x4
+ 1007 03e9 82       		.byte	0x82
+ 1008 03ea B8000000 		.4byte	0xb8
+ 1009 03ee 78       		.byte	0x78
+ 1010 03ef 06       		.uleb128 0x6
+ 1011 03f0 4A010000 		.4byte	.LASF85
+ 1012 03f4 04       		.byte	0x4
+ 1013 03f5 83       		.byte	0x83
+ 1014 03f6 B8000000 		.4byte	0xb8
+ 1015 03fa 7A       		.byte	0x7a
+ 1016 03fb 06       		.uleb128 0x6
+ 1017 03fc 9C020000 		.4byte	.LASF86
+ 1018 0400 04       		.byte	0x4
+ 1019 0401 86       		.byte	0x86
+ 1020 0402 A2000000 		.4byte	0xa2
+ 1021 0406 7C       		.byte	0x7c
+ 1022 0407 06       		.uleb128 0x6
+ 1023 0408 DB070000 		.4byte	.LASF87
+ 1024 040c 04       		.byte	0x4
+ 1025 040d 87       		.byte	0x87
+ 1026 040e A2000000 		.4byte	0xa2
+ 1027 0412 7D       		.byte	0x7d
+ 1028 0413 06       		.uleb128 0x6
+ 1029 0414 40000000 		.4byte	.LASF88
+ 1030 0418 04       		.byte	0x4
+ 1031 0419 88       		.byte	0x88
+ 1032 041a A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 26
+
+
+ 1033 041e 7E       		.byte	0x7e
+ 1034 041f 06       		.uleb128 0x6
+ 1035 0420 3B030000 		.4byte	.LASF89
+ 1036 0424 04       		.byte	0x4
+ 1037 0425 89       		.byte	0x89
+ 1038 0426 A2000000 		.4byte	0xa2
+ 1039 042a 7F       		.byte	0x7f
+ 1040 042b 06       		.uleb128 0x6
+ 1041 042c 94030000 		.4byte	.LASF90
+ 1042 0430 04       		.byte	0x4
+ 1043 0431 8A       		.byte	0x8a
+ 1044 0432 A2000000 		.4byte	0xa2
+ 1045 0436 80       		.byte	0x80
+ 1046 0437 06       		.uleb128 0x6
+ 1047 0438 FD040000 		.4byte	.LASF91
+ 1048 043c 04       		.byte	0x4
+ 1049 043d 8D       		.byte	0x8d
+ 1050 043e CE000000 		.4byte	0xce
+ 1051 0442 84       		.byte	0x84
+ 1052 0443 06       		.uleb128 0x6
+ 1053 0444 5F010000 		.4byte	.LASF92
+ 1054 0448 04       		.byte	0x4
+ 1055 0449 8E       		.byte	0x8e
+ 1056 044a CE000000 		.4byte	0xce
+ 1057 044e 88       		.byte	0x88
+ 1058 044f 06       		.uleb128 0x6
+ 1059 0450 5C080000 		.4byte	.LASF93
+ 1060 0454 04       		.byte	0x4
+ 1061 0455 8F       		.byte	0x8f
+ 1062 0456 CE000000 		.4byte	0xce
+ 1063 045a 8C       		.byte	0x8c
+ 1064 045b 06       		.uleb128 0x6
+ 1065 045c 2D050000 		.4byte	.LASF94
+ 1066 0460 04       		.byte	0x4
+ 1067 0461 90       		.byte	0x90
+ 1068 0462 CE000000 		.4byte	0xce
+ 1069 0466 90       		.byte	0x90
+ 1070 0467 06       		.uleb128 0x6
+ 1071 0468 7F030000 		.4byte	.LASF95
+ 1072 046c 04       		.byte	0x4
+ 1073 046d 91       		.byte	0x91
+ 1074 046e CE000000 		.4byte	0xce
+ 1075 0472 94       		.byte	0x94
+ 1076 0473 06       		.uleb128 0x6
+ 1077 0474 E7040000 		.4byte	.LASF96
+ 1078 0478 04       		.byte	0x4
+ 1079 0479 92       		.byte	0x92
+ 1080 047a CE000000 		.4byte	0xce
+ 1081 047e 98       		.byte	0x98
+ 1082 047f 06       		.uleb128 0x6
+ 1083 0480 DF080000 		.4byte	.LASF97
+ 1084 0484 04       		.byte	0x4
+ 1085 0485 93       		.byte	0x93
+ 1086 0486 CE000000 		.4byte	0xce
+ 1087 048a 9C       		.byte	0x9c
+ 1088 048b 06       		.uleb128 0x6
+ 1089 048c CB010000 		.4byte	.LASF98
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 27
+
+
+ 1090 0490 04       		.byte	0x4
+ 1091 0491 94       		.byte	0x94
+ 1092 0492 CE000000 		.4byte	0xce
+ 1093 0496 A0       		.byte	0xa0
+ 1094 0497 06       		.uleb128 0x6
+ 1095 0498 5F020000 		.4byte	.LASF99
+ 1096 049c 04       		.byte	0x4
+ 1097 049d 95       		.byte	0x95
+ 1098 049e B8000000 		.4byte	0xb8
+ 1099 04a2 A4       		.byte	0xa4
+ 1100 04a3 06       		.uleb128 0x6
+ 1101 04a4 D2040000 		.4byte	.LASF100
+ 1102 04a8 04       		.byte	0x4
+ 1103 04a9 96       		.byte	0x96
+ 1104 04aa B8000000 		.4byte	0xb8
+ 1105 04ae A6       		.byte	0xa6
+ 1106 04af 06       		.uleb128 0x6
+ 1107 04b0 06060000 		.4byte	.LASF101
+ 1108 04b4 04       		.byte	0x4
+ 1109 04b5 97       		.byte	0x97
+ 1110 04b6 B8000000 		.4byte	0xb8
+ 1111 04ba A8       		.byte	0xa8
+ 1112 04bb 06       		.uleb128 0x6
+ 1113 04bc 2B070000 		.4byte	.LASF102
+ 1114 04c0 04       		.byte	0x4
+ 1115 04c1 98       		.byte	0x98
+ 1116 04c2 B8000000 		.4byte	0xb8
+ 1117 04c6 AA       		.byte	0xaa
+ 1118 04c7 06       		.uleb128 0x6
+ 1119 04c8 34040000 		.4byte	.LASF103
+ 1120 04cc 04       		.byte	0x4
+ 1121 04cd 99       		.byte	0x99
+ 1122 04ce B8000000 		.4byte	0xb8
+ 1123 04d2 AC       		.byte	0xac
+ 1124 04d3 06       		.uleb128 0x6
+ 1125 04d4 7E050000 		.4byte	.LASF104
+ 1126 04d8 04       		.byte	0x4
+ 1127 04d9 9A       		.byte	0x9a
+ 1128 04da B8000000 		.4byte	0xb8
+ 1129 04de AE       		.byte	0xae
+ 1130 04df 06       		.uleb128 0x6
+ 1131 04e0 C0070000 		.4byte	.LASF105
+ 1132 04e4 04       		.byte	0x4
+ 1133 04e5 9D       		.byte	0x9d
+ 1134 04e6 B8000000 		.4byte	0xb8
+ 1135 04ea B0       		.byte	0xb0
+ 1136 04eb 06       		.uleb128 0x6
+ 1137 04ec 60060000 		.4byte	.LASF106
+ 1138 04f0 04       		.byte	0x4
+ 1139 04f1 9E       		.byte	0x9e
+ 1140 04f2 CE000000 		.4byte	0xce
+ 1141 04f6 B4       		.byte	0xb4
+ 1142 04f7 00       		.byte	0
+ 1143 04f8 03       		.uleb128 0x3
+ 1144 04f9 6F040000 		.4byte	.LASF107
+ 1145 04fd 04       		.byte	0x4
+ 1146 04fe 9F       		.byte	0x9f
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 28
+
+
+ 1147 04ff E7000000 		.4byte	0xe7
+ 1148 0503 07       		.uleb128 0x7
+ 1149 0504 01       		.byte	0x1
+ 1150 0505 37000000 		.4byte	0x37
+ 1151 0509 05       		.byte	0x5
+ 1152 050a 6E05     		.2byte	0x56e
+ 1153 050c 1D050000 		.4byte	0x51d
+ 1154 0510 08       		.uleb128 0x8
+ 1155 0511 7D070000 		.4byte	.LASF108
+ 1156 0515 00       		.byte	0
+ 1157 0516 08       		.uleb128 0x8
+ 1158 0517 7E060000 		.4byte	.LASF109
+ 1159 051b 01       		.byte	0x1
+ 1160 051c 00       		.byte	0
+ 1161 051d 09       		.uleb128 0x9
+ 1162 051e 6E070000 		.4byte	.LASF110
+ 1163 0522 05       		.byte	0x5
+ 1164 0523 7405     		.2byte	0x574
+ 1165 0525 03050000 		.4byte	0x503
+ 1166 0529 02       		.uleb128 0x2
+ 1167 052a 01       		.byte	0x1
+ 1168 052b 08       		.byte	0x8
+ 1169 052c 00070000 		.4byte	.LASF111
+ 1170 0530 02       		.uleb128 0x2
+ 1171 0531 04       		.byte	0x4
+ 1172 0532 04       		.byte	0x4
+ 1173 0533 E5050000 		.4byte	.LASF112
+ 1174 0537 02       		.uleb128 0x2
+ 1175 0538 08       		.byte	0x8
+ 1176 0539 04       		.byte	0x4
+ 1177 053a E4020000 		.4byte	.LASF113
+ 1178 053e 07       		.uleb128 0x7
+ 1179 053f 04       		.byte	0x4
+ 1180 0540 9B000000 		.4byte	0x9b
+ 1181 0544 06       		.byte	0x6
+ 1182 0545 1301     		.2byte	0x113
+ 1183 0547 64050000 		.4byte	0x564
+ 1184 054b 08       		.uleb128 0x8
+ 1185 054c 9E040000 		.4byte	.LASF114
+ 1186 0550 00       		.byte	0
+ 1187 0551 0A       		.uleb128 0xa
+ 1188 0552 A6010000 		.4byte	.LASF115
+ 1189 0556 0100CE00 		.4byte	0xce0001
+ 1190 055a 0A       		.uleb128 0xa
+ 1191 055b 71080000 		.4byte	.LASF116
+ 1192 055f 0200CE00 		.4byte	0xce0002
+ 1193 0563 00       		.byte	0
+ 1194 0564 09       		.uleb128 0x9
+ 1195 0565 AB060000 		.4byte	.LASF117
+ 1196 0569 06       		.byte	0x6
+ 1197 056a 1701     		.2byte	0x117
+ 1198 056c 3E050000 		.4byte	0x53e
+ 1199 0570 0B       		.uleb128 0xb
+ 1200 0571 19000000 		.4byte	.LASF125
+ 1201 0575 01       		.byte	0x1
+ 1202 0576 58       		.byte	0x58
+ 1203 0577 64050000 		.4byte	0x564
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 29
+
+
+ 1204 057b 00000000 		.4byte	.LFB132
+ 1205 057f 84000000 		.4byte	.LFE132-.LFB132
+ 1206 0583 01       		.uleb128 0x1
+ 1207 0584 9C       		.byte	0x9c
+ 1208 0585 00060000 		.4byte	0x600
+ 1209 0589 0C       		.uleb128 0xc
+ 1210 058a 74020000 		.4byte	.LASF118
+ 1211 058e 01       		.byte	0x1
+ 1212 058f 58       		.byte	0x58
+ 1213 0590 CE000000 		.4byte	0xce
+ 1214 0594 00000000 		.4byte	.LLST0
+ 1215 0598 0C       		.uleb128 0xc
+ 1216 0599 DD050000 		.4byte	.LASF119
+ 1217 059d 01       		.byte	0x1
+ 1218 059e 58       		.byte	0x58
+ 1219 059f CE000000 		.4byte	0xce
+ 1220 05a3 50000000 		.4byte	.LLST1
+ 1221 05a7 0C       		.uleb128 0xc
+ 1222 05a8 3E090000 		.4byte	.LASF120
+ 1223 05ac 01       		.byte	0x1
+ 1224 05ad 58       		.byte	0x58
+ 1225 05ae 00060000 		.4byte	0x600
+ 1226 05b2 87000000 		.4byte	.LLST2
+ 1227 05b6 0C       		.uleb128 0xc
+ 1228 05b7 53000000 		.4byte	.LASF121
+ 1229 05bb 01       		.byte	0x1
+ 1230 05bc 58       		.byte	0x58
+ 1231 05bd 1D050000 		.4byte	0x51d
+ 1232 05c1 B3000000 		.4byte	.LLST3
+ 1233 05c5 0D       		.uleb128 0xd
+ 1234 05c6 12000000 		.4byte	.LASF122
+ 1235 05ca 01       		.byte	0x1
+ 1236 05cb 5A       		.byte	0x5a
+ 1237 05cc 64050000 		.4byte	0x564
+ 1238 05d0 DF000000 		.4byte	.LLST4
+ 1239 05d4 0E       		.uleb128 0xe
+ 1240 05d5 16000000 		.4byte	.LBB2
+ 1241 05d9 60000000 		.4byte	.LBE2-.LBB2
+ 1242 05dd 0D       		.uleb128 0xd
+ 1243 05de EE030000 		.4byte	.LASF123
+ 1244 05e2 01       		.byte	0x1
+ 1245 05e3 62       		.byte	0x62
+ 1246 05e4 CE000000 		.4byte	0xce
+ 1247 05e8 1E010000 		.4byte	.LLST5
+ 1248 05ec 0F       		.uleb128 0xf
+ 1249 05ed 1A000000 		.4byte	.LVL1
+ 1250 05f1 E5070000 		.4byte	0x7e5
+ 1251 05f5 0F       		.uleb128 0xf
+ 1252 05f6 70000000 		.4byte	.LVL4
+ 1253 05fa F1070000 		.4byte	0x7f1
+ 1254 05fe 00       		.byte	0
+ 1255 05ff 00       		.byte	0
+ 1256 0600 02       		.uleb128 0x2
+ 1257 0601 01       		.byte	0x1
+ 1258 0602 02       		.byte	0x2
+ 1259 0603 30060000 		.4byte	.LASF124
+ 1260 0607 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 30
+
+
+ 1261 0608 CB020000 		.4byte	.LASF126
+ 1262 060c 01       		.byte	0x1
+ 1263 060d 93       		.byte	0x93
+ 1264 060e 64050000 		.4byte	0x564
+ 1265 0612 00000000 		.4byte	.LFB133
+ 1266 0616 70000000 		.4byte	.LFE133-.LFB133
+ 1267 061a 01       		.uleb128 0x1
+ 1268 061b 9C       		.byte	0x9c
+ 1269 061c 88060000 		.4byte	0x688
+ 1270 0620 0C       		.uleb128 0xc
+ 1271 0621 DD050000 		.4byte	.LASF119
+ 1272 0625 01       		.byte	0x1
+ 1273 0626 93       		.byte	0x93
+ 1274 0627 CE000000 		.4byte	0xce
+ 1275 062b 31010000 		.4byte	.LLST6
+ 1276 062f 0C       		.uleb128 0xc
+ 1277 0630 3E090000 		.4byte	.LASF120
+ 1278 0634 01       		.byte	0x1
+ 1279 0635 93       		.byte	0x93
+ 1280 0636 00060000 		.4byte	0x600
+ 1281 063a 81010000 		.4byte	.LLST7
+ 1282 063e 0C       		.uleb128 0xc
+ 1283 063f 53000000 		.4byte	.LASF121
+ 1284 0643 01       		.byte	0x1
+ 1285 0644 93       		.byte	0x93
+ 1286 0645 1D050000 		.4byte	0x51d
+ 1287 0649 AD010000 		.4byte	.LLST8
+ 1288 064d 0D       		.uleb128 0xd
+ 1289 064e 12000000 		.4byte	.LASF122
+ 1290 0652 01       		.byte	0x1
+ 1291 0653 95       		.byte	0x95
+ 1292 0654 64050000 		.4byte	0x564
+ 1293 0658 D9010000 		.4byte	.LLST9
+ 1294 065c 0E       		.uleb128 0xe
+ 1295 065d 14000000 		.4byte	.LBB3
+ 1296 0661 4E000000 		.4byte	.LBE3-.LBB3
+ 1297 0665 0D       		.uleb128 0xd
+ 1298 0666 EE030000 		.4byte	.LASF123
+ 1299 066a 01       		.byte	0x1
+ 1300 066b 9C       		.byte	0x9c
+ 1301 066c CE000000 		.4byte	0xce
+ 1302 0670 18020000 		.4byte	.LLST10
+ 1303 0674 0F       		.uleb128 0xf
+ 1304 0675 18000000 		.4byte	.LVL9
+ 1305 0679 E5070000 		.4byte	0x7e5
+ 1306 067d 0F       		.uleb128 0xf
+ 1307 067e 5E000000 		.4byte	.LVL11
+ 1308 0682 F1070000 		.4byte	0x7f1
+ 1309 0686 00       		.byte	0
+ 1310 0687 00       		.byte	0
+ 1311 0688 0B       		.uleb128 0xb
+ 1312 0689 42040000 		.4byte	.LASF127
+ 1313 068d 01       		.byte	0x1
+ 1314 068e C5       		.byte	0xc5
+ 1315 068f 64050000 		.4byte	0x564
+ 1316 0693 00000000 		.4byte	.LFB134
+ 1317 0697 58000000 		.4byte	.LFE134-.LFB134
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 31
+
+
+ 1318 069b 01       		.uleb128 0x1
+ 1319 069c 9C       		.byte	0x9c
+ 1320 069d EB060000 		.4byte	0x6eb
+ 1321 06a1 0C       		.uleb128 0xc
+ 1322 06a2 DD050000 		.4byte	.LASF119
+ 1323 06a6 01       		.byte	0x1
+ 1324 06a7 C5       		.byte	0xc5
+ 1325 06a8 CE000000 		.4byte	0xce
+ 1326 06ac 2B020000 		.4byte	.LLST11
+ 1327 06b0 0D       		.uleb128 0xd
+ 1328 06b1 12000000 		.4byte	.LASF122
+ 1329 06b5 01       		.byte	0x1
+ 1330 06b6 C7       		.byte	0xc7
+ 1331 06b7 64050000 		.4byte	0x564
+ 1332 06bb 7B020000 		.4byte	.LLST12
+ 1333 06bf 0E       		.uleb128 0xe
+ 1334 06c0 10000000 		.4byte	.LBB4
+ 1335 06c4 3C000000 		.4byte	.LBE4-.LBB4
+ 1336 06c8 0D       		.uleb128 0xd
+ 1337 06c9 EE030000 		.4byte	.LASF123
+ 1338 06cd 01       		.byte	0x1
+ 1339 06ce CD       		.byte	0xcd
+ 1340 06cf CE000000 		.4byte	0xce
+ 1341 06d3 BA020000 		.4byte	.LLST13
+ 1342 06d7 0F       		.uleb128 0xf
+ 1343 06d8 14000000 		.4byte	.LVL16
+ 1344 06dc E5070000 		.4byte	0x7e5
+ 1345 06e0 0F       		.uleb128 0xf
+ 1346 06e1 48000000 		.4byte	.LVL18
+ 1347 06e5 F1070000 		.4byte	0x7f1
+ 1348 06e9 00       		.byte	0
+ 1349 06ea 00       		.byte	0
+ 1350 06eb 0B       		.uleb128 0xb
+ 1351 06ec 05070000 		.4byte	.LASF128
+ 1352 06f0 01       		.byte	0x1
+ 1353 06f1 F7       		.byte	0xf7
+ 1354 06f2 64050000 		.4byte	0x564
+ 1355 06f6 00000000 		.4byte	.LFB135
+ 1356 06fa 84000000 		.4byte	.LFE135-.LFB135
+ 1357 06fe 01       		.uleb128 0x1
+ 1358 06ff 9C       		.byte	0x9c
+ 1359 0700 5D070000 		.4byte	0x75d
+ 1360 0704 0C       		.uleb128 0xc
+ 1361 0705 DD050000 		.4byte	.LASF119
+ 1362 0709 01       		.byte	0x1
+ 1363 070a F7       		.byte	0xf7
+ 1364 070b CE000000 		.4byte	0xce
+ 1365 070f CD020000 		.4byte	.LLST14
+ 1366 0713 0C       		.uleb128 0xc
+ 1367 0714 DD020000 		.4byte	.LASF129
+ 1368 0718 01       		.byte	0x1
+ 1369 0719 F7       		.byte	0xf7
+ 1370 071a 00060000 		.4byte	0x600
+ 1371 071e 36030000 		.4byte	.LLST15
+ 1372 0722 0D       		.uleb128 0xd
+ 1373 0723 12000000 		.4byte	.LASF122
+ 1374 0727 01       		.byte	0x1
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 32
+
+
+ 1375 0728 F9       		.byte	0xf9
+ 1376 0729 64050000 		.4byte	0x564
+ 1377 072d 62030000 		.4byte	.LLST16
+ 1378 0731 0E       		.uleb128 0xe
+ 1379 0732 12000000 		.4byte	.LBB5
+ 1380 0736 66000000 		.4byte	.LBE5-.LBB5
+ 1381 073a 0D       		.uleb128 0xd
+ 1382 073b EE030000 		.4byte	.LASF123
+ 1383 073f 01       		.byte	0x1
+ 1384 0740 FD       		.byte	0xfd
+ 1385 0741 CE000000 		.4byte	0xce
+ 1386 0745 A1030000 		.4byte	.LLST17
+ 1387 0749 0F       		.uleb128 0xf
+ 1388 074a 16000000 		.4byte	.LVL23
+ 1389 074e E5070000 		.4byte	0x7e5
+ 1390 0752 0F       		.uleb128 0xf
+ 1391 0753 74000000 		.4byte	.LVL27
+ 1392 0757 F1070000 		.4byte	0x7f1
+ 1393 075b 00       		.byte	0
+ 1394 075c 00       		.byte	0
+ 1395 075d 10       		.uleb128 0x10
+ 1396 075e BD040000 		.4byte	.LASF130
+ 1397 0762 01       		.byte	0x1
+ 1398 0763 3E01     		.2byte	0x13e
+ 1399 0765 64050000 		.4byte	0x564
+ 1400 0769 00000000 		.4byte	.LFB136
+ 1401 076d 74000000 		.4byte	.LFE136-.LFB136
+ 1402 0771 01       		.uleb128 0x1
+ 1403 0772 9C       		.byte	0x9c
+ 1404 0773 BE070000 		.4byte	0x7be
+ 1405 0777 11       		.uleb128 0x11
+ 1406 0778 8C050000 		.4byte	.LASF131
+ 1407 077c 01       		.byte	0x1
+ 1408 077d 3E01     		.2byte	0x13e
+ 1409 077f CE000000 		.4byte	0xce
+ 1410 0783 B4030000 		.4byte	.LLST18
+ 1411 0787 11       		.uleb128 0x11
+ 1412 0788 90060000 		.4byte	.LASF132
+ 1413 078c 01       		.byte	0x1
+ 1414 078d 3E01     		.2byte	0x13e
+ 1415 078f CE000000 		.4byte	0xce
+ 1416 0793 EE030000 		.4byte	.LLST19
+ 1417 0797 12       		.uleb128 0x12
+ 1418 0798 12000000 		.4byte	.LASF122
+ 1419 079c 01       		.byte	0x1
+ 1420 079d 4001     		.2byte	0x140
+ 1421 079f 64050000 		.4byte	0x564
+ 1422 07a3 33040000 		.4byte	.LLST20
+ 1423 07a7 13       		.uleb128 0x13
+ 1424 07a8 00000000 		.4byte	.Ldebug_ranges0+0
+ 1425 07ac 12       		.uleb128 0x12
+ 1426 07ad 95050000 		.4byte	.LASF133
+ 1427 07b1 01       		.byte	0x1
+ 1428 07b2 4B01     		.2byte	0x14b
+ 1429 07b4 CE000000 		.4byte	0xce
+ 1430 07b8 8E040000 		.4byte	.LLST21
+ 1431 07bc 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 33
+
+
+ 1432 07bd 00       		.byte	0
+ 1433 07be 14       		.uleb128 0x14
+ 1434 07bf FC050000 		.4byte	.LASF134
+ 1435 07c3 04       		.byte	0x4
+ 1436 07c4 A7       		.byte	0xa7
+ 1437 07c5 C9070000 		.4byte	0x7c9
+ 1438 07c9 15       		.uleb128 0x15
+ 1439 07ca 04       		.byte	0x4
+ 1440 07cb CF070000 		.4byte	0x7cf
+ 1441 07cf 16       		.uleb128 0x16
+ 1442 07d0 F8040000 		.4byte	0x4f8
+ 1443 07d4 17       		.uleb128 0x17
+ 1444 07d5 E1010000 		.4byte	.LASF135
+ 1445 07d9 07       		.byte	0x7
+ 1446 07da F907     		.2byte	0x7f9
+ 1447 07dc E0070000 		.4byte	0x7e0
+ 1448 07e0 18       		.uleb128 0x18
+ 1449 07e1 C3000000 		.4byte	0xc3
+ 1450 07e5 19       		.uleb128 0x19
+ 1451 07e6 7F040000 		.4byte	.LASF136
+ 1452 07ea 7F040000 		.4byte	.LASF136
+ 1453 07ee 08       		.byte	0x8
+ 1454 07ef B203     		.2byte	0x3b2
+ 1455 07f1 19       		.uleb128 0x19
+ 1456 07f2 1D030000 		.4byte	.LASF137
+ 1457 07f6 1D030000 		.4byte	.LASF137
+ 1458 07fa 08       		.byte	0x8
+ 1459 07fb C103     		.2byte	0x3c1
+ 1460 07fd 00       		.byte	0
+ 1461              		.section	.debug_abbrev,"",%progbits
+ 1462              	.Ldebug_abbrev0:
+ 1463 0000 01       		.uleb128 0x1
+ 1464 0001 11       		.uleb128 0x11
+ 1465 0002 01       		.byte	0x1
+ 1466 0003 25       		.uleb128 0x25
+ 1467 0004 0E       		.uleb128 0xe
+ 1468 0005 13       		.uleb128 0x13
+ 1469 0006 0B       		.uleb128 0xb
+ 1470 0007 03       		.uleb128 0x3
+ 1471 0008 0E       		.uleb128 0xe
+ 1472 0009 1B       		.uleb128 0x1b
+ 1473 000a 0E       		.uleb128 0xe
+ 1474 000b 55       		.uleb128 0x55
+ 1475 000c 17       		.uleb128 0x17
+ 1476 000d 11       		.uleb128 0x11
+ 1477 000e 01       		.uleb128 0x1
+ 1478 000f 10       		.uleb128 0x10
+ 1479 0010 17       		.uleb128 0x17
+ 1480 0011 00       		.byte	0
+ 1481 0012 00       		.byte	0
+ 1482 0013 02       		.uleb128 0x2
+ 1483 0014 24       		.uleb128 0x24
+ 1484 0015 00       		.byte	0
+ 1485 0016 0B       		.uleb128 0xb
+ 1486 0017 0B       		.uleb128 0xb
+ 1487 0018 3E       		.uleb128 0x3e
+ 1488 0019 0B       		.uleb128 0xb
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 34
+
+
+ 1489 001a 03       		.uleb128 0x3
+ 1490 001b 0E       		.uleb128 0xe
+ 1491 001c 00       		.byte	0
+ 1492 001d 00       		.byte	0
+ 1493 001e 03       		.uleb128 0x3
+ 1494 001f 16       		.uleb128 0x16
+ 1495 0020 00       		.byte	0
+ 1496 0021 03       		.uleb128 0x3
+ 1497 0022 0E       		.uleb128 0xe
+ 1498 0023 3A       		.uleb128 0x3a
+ 1499 0024 0B       		.uleb128 0xb
+ 1500 0025 3B       		.uleb128 0x3b
+ 1501 0026 0B       		.uleb128 0xb
+ 1502 0027 49       		.uleb128 0x49
+ 1503 0028 13       		.uleb128 0x13
+ 1504 0029 00       		.byte	0
+ 1505 002a 00       		.byte	0
+ 1506 002b 04       		.uleb128 0x4
+ 1507 002c 24       		.uleb128 0x24
+ 1508 002d 00       		.byte	0
+ 1509 002e 0B       		.uleb128 0xb
+ 1510 002f 0B       		.uleb128 0xb
+ 1511 0030 3E       		.uleb128 0x3e
+ 1512 0031 0B       		.uleb128 0xb
+ 1513 0032 03       		.uleb128 0x3
+ 1514 0033 08       		.uleb128 0x8
+ 1515 0034 00       		.byte	0
+ 1516 0035 00       		.byte	0
+ 1517 0036 05       		.uleb128 0x5
+ 1518 0037 13       		.uleb128 0x13
+ 1519 0038 01       		.byte	0x1
+ 1520 0039 0B       		.uleb128 0xb
+ 1521 003a 0B       		.uleb128 0xb
+ 1522 003b 3A       		.uleb128 0x3a
+ 1523 003c 0B       		.uleb128 0xb
+ 1524 003d 3B       		.uleb128 0x3b
+ 1525 003e 0B       		.uleb128 0xb
+ 1526 003f 01       		.uleb128 0x1
+ 1527 0040 13       		.uleb128 0x13
+ 1528 0041 00       		.byte	0
+ 1529 0042 00       		.byte	0
+ 1530 0043 06       		.uleb128 0x6
+ 1531 0044 0D       		.uleb128 0xd
+ 1532 0045 00       		.byte	0
+ 1533 0046 03       		.uleb128 0x3
+ 1534 0047 0E       		.uleb128 0xe
+ 1535 0048 3A       		.uleb128 0x3a
+ 1536 0049 0B       		.uleb128 0xb
+ 1537 004a 3B       		.uleb128 0x3b
+ 1538 004b 0B       		.uleb128 0xb
+ 1539 004c 49       		.uleb128 0x49
+ 1540 004d 13       		.uleb128 0x13
+ 1541 004e 38       		.uleb128 0x38
+ 1542 004f 0B       		.uleb128 0xb
+ 1543 0050 00       		.byte	0
+ 1544 0051 00       		.byte	0
+ 1545 0052 07       		.uleb128 0x7
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 35
+
+
+ 1546 0053 04       		.uleb128 0x4
+ 1547 0054 01       		.byte	0x1
+ 1548 0055 0B       		.uleb128 0xb
+ 1549 0056 0B       		.uleb128 0xb
+ 1550 0057 49       		.uleb128 0x49
+ 1551 0058 13       		.uleb128 0x13
+ 1552 0059 3A       		.uleb128 0x3a
+ 1553 005a 0B       		.uleb128 0xb
+ 1554 005b 3B       		.uleb128 0x3b
+ 1555 005c 05       		.uleb128 0x5
+ 1556 005d 01       		.uleb128 0x1
+ 1557 005e 13       		.uleb128 0x13
+ 1558 005f 00       		.byte	0
+ 1559 0060 00       		.byte	0
+ 1560 0061 08       		.uleb128 0x8
+ 1561 0062 28       		.uleb128 0x28
+ 1562 0063 00       		.byte	0
+ 1563 0064 03       		.uleb128 0x3
+ 1564 0065 0E       		.uleb128 0xe
+ 1565 0066 1C       		.uleb128 0x1c
+ 1566 0067 0B       		.uleb128 0xb
+ 1567 0068 00       		.byte	0
+ 1568 0069 00       		.byte	0
+ 1569 006a 09       		.uleb128 0x9
+ 1570 006b 16       		.uleb128 0x16
+ 1571 006c 00       		.byte	0
+ 1572 006d 03       		.uleb128 0x3
+ 1573 006e 0E       		.uleb128 0xe
+ 1574 006f 3A       		.uleb128 0x3a
+ 1575 0070 0B       		.uleb128 0xb
+ 1576 0071 3B       		.uleb128 0x3b
+ 1577 0072 05       		.uleb128 0x5
+ 1578 0073 49       		.uleb128 0x49
+ 1579 0074 13       		.uleb128 0x13
+ 1580 0075 00       		.byte	0
+ 1581 0076 00       		.byte	0
+ 1582 0077 0A       		.uleb128 0xa
+ 1583 0078 28       		.uleb128 0x28
+ 1584 0079 00       		.byte	0
+ 1585 007a 03       		.uleb128 0x3
+ 1586 007b 0E       		.uleb128 0xe
+ 1587 007c 1C       		.uleb128 0x1c
+ 1588 007d 06       		.uleb128 0x6
+ 1589 007e 00       		.byte	0
+ 1590 007f 00       		.byte	0
+ 1591 0080 0B       		.uleb128 0xb
+ 1592 0081 2E       		.uleb128 0x2e
+ 1593 0082 01       		.byte	0x1
+ 1594 0083 3F       		.uleb128 0x3f
+ 1595 0084 19       		.uleb128 0x19
+ 1596 0085 03       		.uleb128 0x3
+ 1597 0086 0E       		.uleb128 0xe
+ 1598 0087 3A       		.uleb128 0x3a
+ 1599 0088 0B       		.uleb128 0xb
+ 1600 0089 3B       		.uleb128 0x3b
+ 1601 008a 0B       		.uleb128 0xb
+ 1602 008b 27       		.uleb128 0x27
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 36
+
+
+ 1603 008c 19       		.uleb128 0x19
+ 1604 008d 49       		.uleb128 0x49
+ 1605 008e 13       		.uleb128 0x13
+ 1606 008f 11       		.uleb128 0x11
+ 1607 0090 01       		.uleb128 0x1
+ 1608 0091 12       		.uleb128 0x12
+ 1609 0092 06       		.uleb128 0x6
+ 1610 0093 40       		.uleb128 0x40
+ 1611 0094 18       		.uleb128 0x18
+ 1612 0095 9742     		.uleb128 0x2117
+ 1613 0097 19       		.uleb128 0x19
+ 1614 0098 01       		.uleb128 0x1
+ 1615 0099 13       		.uleb128 0x13
+ 1616 009a 00       		.byte	0
+ 1617 009b 00       		.byte	0
+ 1618 009c 0C       		.uleb128 0xc
+ 1619 009d 05       		.uleb128 0x5
+ 1620 009e 00       		.byte	0
+ 1621 009f 03       		.uleb128 0x3
+ 1622 00a0 0E       		.uleb128 0xe
+ 1623 00a1 3A       		.uleb128 0x3a
+ 1624 00a2 0B       		.uleb128 0xb
+ 1625 00a3 3B       		.uleb128 0x3b
+ 1626 00a4 0B       		.uleb128 0xb
+ 1627 00a5 49       		.uleb128 0x49
+ 1628 00a6 13       		.uleb128 0x13
+ 1629 00a7 02       		.uleb128 0x2
+ 1630 00a8 17       		.uleb128 0x17
+ 1631 00a9 00       		.byte	0
+ 1632 00aa 00       		.byte	0
+ 1633 00ab 0D       		.uleb128 0xd
+ 1634 00ac 34       		.uleb128 0x34
+ 1635 00ad 00       		.byte	0
+ 1636 00ae 03       		.uleb128 0x3
+ 1637 00af 0E       		.uleb128 0xe
+ 1638 00b0 3A       		.uleb128 0x3a
+ 1639 00b1 0B       		.uleb128 0xb
+ 1640 00b2 3B       		.uleb128 0x3b
+ 1641 00b3 0B       		.uleb128 0xb
+ 1642 00b4 49       		.uleb128 0x49
+ 1643 00b5 13       		.uleb128 0x13
+ 1644 00b6 02       		.uleb128 0x2
+ 1645 00b7 17       		.uleb128 0x17
+ 1646 00b8 00       		.byte	0
+ 1647 00b9 00       		.byte	0
+ 1648 00ba 0E       		.uleb128 0xe
+ 1649 00bb 0B       		.uleb128 0xb
+ 1650 00bc 01       		.byte	0x1
+ 1651 00bd 11       		.uleb128 0x11
+ 1652 00be 01       		.uleb128 0x1
+ 1653 00bf 12       		.uleb128 0x12
+ 1654 00c0 06       		.uleb128 0x6
+ 1655 00c1 00       		.byte	0
+ 1656 00c2 00       		.byte	0
+ 1657 00c3 0F       		.uleb128 0xf
+ 1658 00c4 898201   		.uleb128 0x4109
+ 1659 00c7 00       		.byte	0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 37
+
+
+ 1660 00c8 11       		.uleb128 0x11
+ 1661 00c9 01       		.uleb128 0x1
+ 1662 00ca 31       		.uleb128 0x31
+ 1663 00cb 13       		.uleb128 0x13
+ 1664 00cc 00       		.byte	0
+ 1665 00cd 00       		.byte	0
+ 1666 00ce 10       		.uleb128 0x10
+ 1667 00cf 2E       		.uleb128 0x2e
+ 1668 00d0 01       		.byte	0x1
+ 1669 00d1 3F       		.uleb128 0x3f
+ 1670 00d2 19       		.uleb128 0x19
+ 1671 00d3 03       		.uleb128 0x3
+ 1672 00d4 0E       		.uleb128 0xe
+ 1673 00d5 3A       		.uleb128 0x3a
+ 1674 00d6 0B       		.uleb128 0xb
+ 1675 00d7 3B       		.uleb128 0x3b
+ 1676 00d8 05       		.uleb128 0x5
+ 1677 00d9 27       		.uleb128 0x27
+ 1678 00da 19       		.uleb128 0x19
+ 1679 00db 49       		.uleb128 0x49
+ 1680 00dc 13       		.uleb128 0x13
+ 1681 00dd 11       		.uleb128 0x11
+ 1682 00de 01       		.uleb128 0x1
+ 1683 00df 12       		.uleb128 0x12
+ 1684 00e0 06       		.uleb128 0x6
+ 1685 00e1 40       		.uleb128 0x40
+ 1686 00e2 18       		.uleb128 0x18
+ 1687 00e3 9742     		.uleb128 0x2117
+ 1688 00e5 19       		.uleb128 0x19
+ 1689 00e6 01       		.uleb128 0x1
+ 1690 00e7 13       		.uleb128 0x13
+ 1691 00e8 00       		.byte	0
+ 1692 00e9 00       		.byte	0
+ 1693 00ea 11       		.uleb128 0x11
+ 1694 00eb 05       		.uleb128 0x5
+ 1695 00ec 00       		.byte	0
+ 1696 00ed 03       		.uleb128 0x3
+ 1697 00ee 0E       		.uleb128 0xe
+ 1698 00ef 3A       		.uleb128 0x3a
+ 1699 00f0 0B       		.uleb128 0xb
+ 1700 00f1 3B       		.uleb128 0x3b
+ 1701 00f2 05       		.uleb128 0x5
+ 1702 00f3 49       		.uleb128 0x49
+ 1703 00f4 13       		.uleb128 0x13
+ 1704 00f5 02       		.uleb128 0x2
+ 1705 00f6 17       		.uleb128 0x17
+ 1706 00f7 00       		.byte	0
+ 1707 00f8 00       		.byte	0
+ 1708 00f9 12       		.uleb128 0x12
+ 1709 00fa 34       		.uleb128 0x34
+ 1710 00fb 00       		.byte	0
+ 1711 00fc 03       		.uleb128 0x3
+ 1712 00fd 0E       		.uleb128 0xe
+ 1713 00fe 3A       		.uleb128 0x3a
+ 1714 00ff 0B       		.uleb128 0xb
+ 1715 0100 3B       		.uleb128 0x3b
+ 1716 0101 05       		.uleb128 0x5
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 38
+
+
+ 1717 0102 49       		.uleb128 0x49
+ 1718 0103 13       		.uleb128 0x13
+ 1719 0104 02       		.uleb128 0x2
+ 1720 0105 17       		.uleb128 0x17
+ 1721 0106 00       		.byte	0
+ 1722 0107 00       		.byte	0
+ 1723 0108 13       		.uleb128 0x13
+ 1724 0109 0B       		.uleb128 0xb
+ 1725 010a 01       		.byte	0x1
+ 1726 010b 55       		.uleb128 0x55
+ 1727 010c 17       		.uleb128 0x17
+ 1728 010d 00       		.byte	0
+ 1729 010e 00       		.byte	0
+ 1730 010f 14       		.uleb128 0x14
+ 1731 0110 34       		.uleb128 0x34
+ 1732 0111 00       		.byte	0
+ 1733 0112 03       		.uleb128 0x3
+ 1734 0113 0E       		.uleb128 0xe
+ 1735 0114 3A       		.uleb128 0x3a
+ 1736 0115 0B       		.uleb128 0xb
+ 1737 0116 3B       		.uleb128 0x3b
+ 1738 0117 0B       		.uleb128 0xb
+ 1739 0118 49       		.uleb128 0x49
+ 1740 0119 13       		.uleb128 0x13
+ 1741 011a 3F       		.uleb128 0x3f
+ 1742 011b 19       		.uleb128 0x19
+ 1743 011c 3C       		.uleb128 0x3c
+ 1744 011d 19       		.uleb128 0x19
+ 1745 011e 00       		.byte	0
+ 1746 011f 00       		.byte	0
+ 1747 0120 15       		.uleb128 0x15
+ 1748 0121 0F       		.uleb128 0xf
+ 1749 0122 00       		.byte	0
+ 1750 0123 0B       		.uleb128 0xb
+ 1751 0124 0B       		.uleb128 0xb
+ 1752 0125 49       		.uleb128 0x49
+ 1753 0126 13       		.uleb128 0x13
+ 1754 0127 00       		.byte	0
+ 1755 0128 00       		.byte	0
+ 1756 0129 16       		.uleb128 0x16
+ 1757 012a 26       		.uleb128 0x26
+ 1758 012b 00       		.byte	0
+ 1759 012c 49       		.uleb128 0x49
+ 1760 012d 13       		.uleb128 0x13
+ 1761 012e 00       		.byte	0
+ 1762 012f 00       		.byte	0
+ 1763 0130 17       		.uleb128 0x17
+ 1764 0131 34       		.uleb128 0x34
+ 1765 0132 00       		.byte	0
+ 1766 0133 03       		.uleb128 0x3
+ 1767 0134 0E       		.uleb128 0xe
+ 1768 0135 3A       		.uleb128 0x3a
+ 1769 0136 0B       		.uleb128 0xb
+ 1770 0137 3B       		.uleb128 0x3b
+ 1771 0138 05       		.uleb128 0x5
+ 1772 0139 49       		.uleb128 0x49
+ 1773 013a 13       		.uleb128 0x13
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 39
+
+
+ 1774 013b 3F       		.uleb128 0x3f
+ 1775 013c 19       		.uleb128 0x19
+ 1776 013d 3C       		.uleb128 0x3c
+ 1777 013e 19       		.uleb128 0x19
+ 1778 013f 00       		.byte	0
+ 1779 0140 00       		.byte	0
+ 1780 0141 18       		.uleb128 0x18
+ 1781 0142 35       		.uleb128 0x35
+ 1782 0143 00       		.byte	0
+ 1783 0144 49       		.uleb128 0x49
+ 1784 0145 13       		.uleb128 0x13
+ 1785 0146 00       		.byte	0
+ 1786 0147 00       		.byte	0
+ 1787 0148 19       		.uleb128 0x19
+ 1788 0149 2E       		.uleb128 0x2e
+ 1789 014a 00       		.byte	0
+ 1790 014b 3F       		.uleb128 0x3f
+ 1791 014c 19       		.uleb128 0x19
+ 1792 014d 3C       		.uleb128 0x3c
+ 1793 014e 19       		.uleb128 0x19
+ 1794 014f 6E       		.uleb128 0x6e
+ 1795 0150 0E       		.uleb128 0xe
+ 1796 0151 03       		.uleb128 0x3
+ 1797 0152 0E       		.uleb128 0xe
+ 1798 0153 3A       		.uleb128 0x3a
+ 1799 0154 0B       		.uleb128 0xb
+ 1800 0155 3B       		.uleb128 0x3b
+ 1801 0156 05       		.uleb128 0x5
+ 1802 0157 00       		.byte	0
+ 1803 0158 00       		.byte	0
+ 1804 0159 00       		.byte	0
+ 1805              		.section	.debug_loc,"",%progbits
+ 1806              	.Ldebug_loc0:
+ 1807              	.LLST0:
+ 1808 0000 00000000 		.4byte	.LVL0
+ 1809 0004 19000000 		.4byte	.LVL1-1
+ 1810 0008 0100     		.2byte	0x1
+ 1811 000a 50       		.byte	0x50
+ 1812 000b 19000000 		.4byte	.LVL1-1
+ 1813 000f 52000000 		.4byte	.LVL3
+ 1814 0013 0100     		.2byte	0x1
+ 1815 0015 58       		.byte	0x58
+ 1816 0016 52000000 		.4byte	.LVL3
+ 1817 001a 76000000 		.4byte	.LVL5
+ 1818 001e 0400     		.2byte	0x4
+ 1819 0020 F3       		.byte	0xf3
+ 1820 0021 01       		.uleb128 0x1
+ 1821 0022 50       		.byte	0x50
+ 1822 0023 9F       		.byte	0x9f
+ 1823 0024 76000000 		.4byte	.LVL5
+ 1824 0028 78000000 		.4byte	.LVL6
+ 1825 002c 0100     		.2byte	0x1
+ 1826 002e 50       		.byte	0x50
+ 1827 002f 78000000 		.4byte	.LVL6
+ 1828 0033 7C000000 		.4byte	.LVL7
+ 1829 0037 0100     		.2byte	0x1
+ 1830 0039 58       		.byte	0x58
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 40
+
+
+ 1831 003a 7C000000 		.4byte	.LVL7
+ 1832 003e 84000000 		.4byte	.LFE132
+ 1833 0042 0400     		.2byte	0x4
+ 1834 0044 F3       		.byte	0xf3
+ 1835 0045 01       		.uleb128 0x1
+ 1836 0046 50       		.byte	0x50
+ 1837 0047 9F       		.byte	0x9f
+ 1838 0048 00000000 		.4byte	0
+ 1839 004c 00000000 		.4byte	0
+ 1840              	.LLST1:
+ 1841 0050 00000000 		.4byte	.LVL0
+ 1842 0054 19000000 		.4byte	.LVL1-1
+ 1843 0058 0100     		.2byte	0x1
+ 1844 005a 51       		.byte	0x51
+ 1845 005b 19000000 		.4byte	.LVL1-1
+ 1846 005f 36000000 		.4byte	.LVL2
+ 1847 0063 0100     		.2byte	0x1
+ 1848 0065 56       		.byte	0x56
+ 1849 0066 36000000 		.4byte	.LVL2
+ 1850 006a 76000000 		.4byte	.LVL5
+ 1851 006e 0400     		.2byte	0x4
+ 1852 0070 F3       		.byte	0xf3
+ 1853 0071 01       		.uleb128 0x1
+ 1854 0072 51       		.byte	0x51
+ 1855 0073 9F       		.byte	0x9f
+ 1856 0074 76000000 		.4byte	.LVL5
+ 1857 0078 84000000 		.4byte	.LFE132
+ 1858 007c 0100     		.2byte	0x1
+ 1859 007e 51       		.byte	0x51
+ 1860 007f 00000000 		.4byte	0
+ 1861 0083 00000000 		.4byte	0
+ 1862              	.LLST2:
+ 1863 0087 00000000 		.4byte	.LVL0
+ 1864 008b 19000000 		.4byte	.LVL1-1
+ 1865 008f 0100     		.2byte	0x1
+ 1866 0091 52       		.byte	0x52
+ 1867 0092 19000000 		.4byte	.LVL1-1
+ 1868 0096 76000000 		.4byte	.LVL5
+ 1869 009a 0400     		.2byte	0x4
+ 1870 009c F3       		.byte	0xf3
+ 1871 009d 01       		.uleb128 0x1
+ 1872 009e 52       		.byte	0x52
+ 1873 009f 9F       		.byte	0x9f
+ 1874 00a0 76000000 		.4byte	.LVL5
+ 1875 00a4 84000000 		.4byte	.LFE132
+ 1876 00a8 0100     		.2byte	0x1
+ 1877 00aa 52       		.byte	0x52
+ 1878 00ab 00000000 		.4byte	0
+ 1879 00af 00000000 		.4byte	0
+ 1880              	.LLST3:
+ 1881 00b3 00000000 		.4byte	.LVL0
+ 1882 00b7 19000000 		.4byte	.LVL1-1
+ 1883 00bb 0100     		.2byte	0x1
+ 1884 00bd 53       		.byte	0x53
+ 1885 00be 19000000 		.4byte	.LVL1-1
+ 1886 00c2 76000000 		.4byte	.LVL5
+ 1887 00c6 0400     		.2byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 41
+
+
+ 1888 00c8 F3       		.byte	0xf3
+ 1889 00c9 01       		.uleb128 0x1
+ 1890 00ca 53       		.byte	0x53
+ 1891 00cb 9F       		.byte	0x9f
+ 1892 00cc 76000000 		.4byte	.LVL5
+ 1893 00d0 84000000 		.4byte	.LFE132
+ 1894 00d4 0100     		.2byte	0x1
+ 1895 00d6 53       		.byte	0x53
+ 1896 00d7 00000000 		.4byte	0
+ 1897 00db 00000000 		.4byte	0
+ 1898              	.LLST4:
+ 1899 00df 00000000 		.4byte	.LVL0
+ 1900 00e3 70000000 		.4byte	.LVL4
+ 1901 00e7 0600     		.2byte	0x6
+ 1902 00e9 0C       		.byte	0xc
+ 1903 00ea 0100CE00 		.4byte	0xce0001
+ 1904 00ee 9F       		.byte	0x9f
+ 1905 00ef 70000000 		.4byte	.LVL4
+ 1906 00f3 76000000 		.4byte	.LVL5
+ 1907 00f7 0200     		.2byte	0x2
+ 1908 00f9 30       		.byte	0x30
+ 1909 00fa 9F       		.byte	0x9f
+ 1910 00fb 76000000 		.4byte	.LVL5
+ 1911 00ff 78000000 		.4byte	.LVL6
+ 1912 0103 0600     		.2byte	0x6
+ 1913 0105 0C       		.byte	0xc
+ 1914 0106 0100CE00 		.4byte	0xce0001
+ 1915 010a 9F       		.byte	0x9f
+ 1916 010b 78000000 		.4byte	.LVL6
+ 1917 010f 84000000 		.4byte	.LFE132
+ 1918 0113 0100     		.2byte	0x1
+ 1919 0115 50       		.byte	0x50
+ 1920 0116 00000000 		.4byte	0
+ 1921 011a 00000000 		.4byte	0
+ 1922              	.LLST5:
+ 1923 011e 1A000000 		.4byte	.LVL1
+ 1924 0122 6F000000 		.4byte	.LVL4-1
+ 1925 0126 0100     		.2byte	0x1
+ 1926 0128 50       		.byte	0x50
+ 1927 0129 00000000 		.4byte	0
+ 1928 012d 00000000 		.4byte	0
+ 1929              	.LLST6:
+ 1930 0131 00000000 		.4byte	.LVL8
+ 1931 0135 17000000 		.4byte	.LVL9-1
+ 1932 0139 0100     		.2byte	0x1
+ 1933 013b 50       		.byte	0x50
+ 1934 013c 17000000 		.4byte	.LVL9-1
+ 1935 0140 38000000 		.4byte	.LVL10
+ 1936 0144 0100     		.2byte	0x1
+ 1937 0146 54       		.byte	0x54
+ 1938 0147 38000000 		.4byte	.LVL10
+ 1939 014b 62000000 		.4byte	.LVL12
+ 1940 014f 0400     		.2byte	0x4
+ 1941 0151 F3       		.byte	0xf3
+ 1942 0152 01       		.uleb128 0x1
+ 1943 0153 50       		.byte	0x50
+ 1944 0154 9F       		.byte	0x9f
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 42
+
+
+ 1945 0155 62000000 		.4byte	.LVL12
+ 1946 0159 64000000 		.4byte	.LVL13
+ 1947 015d 0100     		.2byte	0x1
+ 1948 015f 50       		.byte	0x50
+ 1949 0160 64000000 		.4byte	.LVL13
+ 1950 0164 66000000 		.4byte	.LVL14
+ 1951 0168 0100     		.2byte	0x1
+ 1952 016a 54       		.byte	0x54
+ 1953 016b 66000000 		.4byte	.LVL14
+ 1954 016f 70000000 		.4byte	.LFE133
+ 1955 0173 0400     		.2byte	0x4
+ 1956 0175 F3       		.byte	0xf3
+ 1957 0176 01       		.uleb128 0x1
+ 1958 0177 50       		.byte	0x50
+ 1959 0178 9F       		.byte	0x9f
+ 1960 0179 00000000 		.4byte	0
+ 1961 017d 00000000 		.4byte	0
+ 1962              	.LLST7:
+ 1963 0181 00000000 		.4byte	.LVL8
+ 1964 0185 17000000 		.4byte	.LVL9-1
+ 1965 0189 0100     		.2byte	0x1
+ 1966 018b 51       		.byte	0x51
+ 1967 018c 17000000 		.4byte	.LVL9-1
+ 1968 0190 62000000 		.4byte	.LVL12
+ 1969 0194 0400     		.2byte	0x4
+ 1970 0196 F3       		.byte	0xf3
+ 1971 0197 01       		.uleb128 0x1
+ 1972 0198 51       		.byte	0x51
+ 1973 0199 9F       		.byte	0x9f
+ 1974 019a 62000000 		.4byte	.LVL12
+ 1975 019e 70000000 		.4byte	.LFE133
+ 1976 01a2 0100     		.2byte	0x1
+ 1977 01a4 51       		.byte	0x51
+ 1978 01a5 00000000 		.4byte	0
+ 1979 01a9 00000000 		.4byte	0
+ 1980              	.LLST8:
+ 1981 01ad 00000000 		.4byte	.LVL8
+ 1982 01b1 17000000 		.4byte	.LVL9-1
+ 1983 01b5 0100     		.2byte	0x1
+ 1984 01b7 52       		.byte	0x52
+ 1985 01b8 17000000 		.4byte	.LVL9-1
+ 1986 01bc 62000000 		.4byte	.LVL12
+ 1987 01c0 0400     		.2byte	0x4
+ 1988 01c2 F3       		.byte	0xf3
+ 1989 01c3 01       		.uleb128 0x1
+ 1990 01c4 52       		.byte	0x52
+ 1991 01c5 9F       		.byte	0x9f
+ 1992 01c6 62000000 		.4byte	.LVL12
+ 1993 01ca 70000000 		.4byte	.LFE133
+ 1994 01ce 0100     		.2byte	0x1
+ 1995 01d0 52       		.byte	0x52
+ 1996 01d1 00000000 		.4byte	0
+ 1997 01d5 00000000 		.4byte	0
+ 1998              	.LLST9:
+ 1999 01d9 00000000 		.4byte	.LVL8
+ 2000 01dd 5E000000 		.4byte	.LVL11
+ 2001 01e1 0600     		.2byte	0x6
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 43
+
+
+ 2002 01e3 0C       		.byte	0xc
+ 2003 01e4 0100CE00 		.4byte	0xce0001
+ 2004 01e8 9F       		.byte	0x9f
+ 2005 01e9 5E000000 		.4byte	.LVL11
+ 2006 01ed 62000000 		.4byte	.LVL12
+ 2007 01f1 0200     		.2byte	0x2
+ 2008 01f3 30       		.byte	0x30
+ 2009 01f4 9F       		.byte	0x9f
+ 2010 01f5 62000000 		.4byte	.LVL12
+ 2011 01f9 64000000 		.4byte	.LVL13
+ 2012 01fd 0600     		.2byte	0x6
+ 2013 01ff 0C       		.byte	0xc
+ 2014 0200 0100CE00 		.4byte	0xce0001
+ 2015 0204 9F       		.byte	0x9f
+ 2016 0205 64000000 		.4byte	.LVL13
+ 2017 0209 70000000 		.4byte	.LFE133
+ 2018 020d 0100     		.2byte	0x1
+ 2019 020f 50       		.byte	0x50
+ 2020 0210 00000000 		.4byte	0
+ 2021 0214 00000000 		.4byte	0
+ 2022              	.LLST10:
+ 2023 0218 18000000 		.4byte	.LVL9
+ 2024 021c 5D000000 		.4byte	.LVL11-1
+ 2025 0220 0100     		.2byte	0x1
+ 2026 0222 50       		.byte	0x50
+ 2027 0223 00000000 		.4byte	0
+ 2028 0227 00000000 		.4byte	0
+ 2029              	.LLST11:
+ 2030 022b 00000000 		.4byte	.LVL15
+ 2031 022f 13000000 		.4byte	.LVL16-1
+ 2032 0233 0100     		.2byte	0x1
+ 2033 0235 50       		.byte	0x50
+ 2034 0236 13000000 		.4byte	.LVL16-1
+ 2035 023a 34000000 		.4byte	.LVL17
+ 2036 023e 0100     		.2byte	0x1
+ 2037 0240 54       		.byte	0x54
+ 2038 0241 34000000 		.4byte	.LVL17
+ 2039 0245 4C000000 		.4byte	.LVL19
+ 2040 0249 0400     		.2byte	0x4
+ 2041 024b F3       		.byte	0xf3
+ 2042 024c 01       		.uleb128 0x1
+ 2043 024d 50       		.byte	0x50
+ 2044 024e 9F       		.byte	0x9f
+ 2045 024f 4C000000 		.4byte	.LVL19
+ 2046 0253 4E000000 		.4byte	.LVL20
+ 2047 0257 0100     		.2byte	0x1
+ 2048 0259 50       		.byte	0x50
+ 2049 025a 4E000000 		.4byte	.LVL20
+ 2050 025e 50000000 		.4byte	.LVL21
+ 2051 0262 0100     		.2byte	0x1
+ 2052 0264 54       		.byte	0x54
+ 2053 0265 50000000 		.4byte	.LVL21
+ 2054 0269 58000000 		.4byte	.LFE134
+ 2055 026d 0400     		.2byte	0x4
+ 2056 026f F3       		.byte	0xf3
+ 2057 0270 01       		.uleb128 0x1
+ 2058 0271 50       		.byte	0x50
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 44
+
+
+ 2059 0272 9F       		.byte	0x9f
+ 2060 0273 00000000 		.4byte	0
+ 2061 0277 00000000 		.4byte	0
+ 2062              	.LLST12:
+ 2063 027b 00000000 		.4byte	.LVL15
+ 2064 027f 48000000 		.4byte	.LVL18
+ 2065 0283 0600     		.2byte	0x6
+ 2066 0285 0C       		.byte	0xc
+ 2067 0286 0100CE00 		.4byte	0xce0001
+ 2068 028a 9F       		.byte	0x9f
+ 2069 028b 48000000 		.4byte	.LVL18
+ 2070 028f 4C000000 		.4byte	.LVL19
+ 2071 0293 0200     		.2byte	0x2
+ 2072 0295 30       		.byte	0x30
+ 2073 0296 9F       		.byte	0x9f
+ 2074 0297 4C000000 		.4byte	.LVL19
+ 2075 029b 4E000000 		.4byte	.LVL20
+ 2076 029f 0600     		.2byte	0x6
+ 2077 02a1 0C       		.byte	0xc
+ 2078 02a2 0100CE00 		.4byte	0xce0001
+ 2079 02a6 9F       		.byte	0x9f
+ 2080 02a7 4E000000 		.4byte	.LVL20
+ 2081 02ab 58000000 		.4byte	.LFE134
+ 2082 02af 0100     		.2byte	0x1
+ 2083 02b1 50       		.byte	0x50
+ 2084 02b2 00000000 		.4byte	0
+ 2085 02b6 00000000 		.4byte	0
+ 2086              	.LLST13:
+ 2087 02ba 14000000 		.4byte	.LVL16
+ 2088 02be 47000000 		.4byte	.LVL18-1
+ 2089 02c2 0100     		.2byte	0x1
+ 2090 02c4 50       		.byte	0x50
+ 2091 02c5 00000000 		.4byte	0
+ 2092 02c9 00000000 		.4byte	0
+ 2093              	.LLST14:
+ 2094 02cd 00000000 		.4byte	.LVL22
+ 2095 02d1 15000000 		.4byte	.LVL23-1
+ 2096 02d5 0100     		.2byte	0x1
+ 2097 02d7 50       		.byte	0x50
+ 2098 02d8 15000000 		.4byte	.LVL23-1
+ 2099 02dc 38000000 		.4byte	.LVL24
+ 2100 02e0 0100     		.2byte	0x1
+ 2101 02e2 54       		.byte	0x54
+ 2102 02e3 38000000 		.4byte	.LVL24
+ 2103 02e7 44000000 		.4byte	.LVL25
+ 2104 02eb 0400     		.2byte	0x4
+ 2105 02ed F3       		.byte	0xf3
+ 2106 02ee 01       		.uleb128 0x1
+ 2107 02ef 50       		.byte	0x50
+ 2108 02f0 9F       		.byte	0x9f
+ 2109 02f1 44000000 		.4byte	.LVL25
+ 2110 02f5 64000000 		.4byte	.LVL26
+ 2111 02f9 0100     		.2byte	0x1
+ 2112 02fb 54       		.byte	0x54
+ 2113 02fc 64000000 		.4byte	.LVL26
+ 2114 0300 78000000 		.4byte	.LVL28
+ 2115 0304 0400     		.2byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 45
+
+
+ 2116 0306 F3       		.byte	0xf3
+ 2117 0307 01       		.uleb128 0x1
+ 2118 0308 50       		.byte	0x50
+ 2119 0309 9F       		.byte	0x9f
+ 2120 030a 78000000 		.4byte	.LVL28
+ 2121 030e 7A000000 		.4byte	.LVL29
+ 2122 0312 0100     		.2byte	0x1
+ 2123 0314 50       		.byte	0x50
+ 2124 0315 7A000000 		.4byte	.LVL29
+ 2125 0319 7C000000 		.4byte	.LVL30
+ 2126 031d 0100     		.2byte	0x1
+ 2127 031f 54       		.byte	0x54
+ 2128 0320 7C000000 		.4byte	.LVL30
+ 2129 0324 84000000 		.4byte	.LFE135
+ 2130 0328 0400     		.2byte	0x4
+ 2131 032a F3       		.byte	0xf3
+ 2132 032b 01       		.uleb128 0x1
+ 2133 032c 50       		.byte	0x50
+ 2134 032d 9F       		.byte	0x9f
+ 2135 032e 00000000 		.4byte	0
+ 2136 0332 00000000 		.4byte	0
+ 2137              	.LLST15:
+ 2138 0336 00000000 		.4byte	.LVL22
+ 2139 033a 15000000 		.4byte	.LVL23-1
+ 2140 033e 0100     		.2byte	0x1
+ 2141 0340 51       		.byte	0x51
+ 2142 0341 15000000 		.4byte	.LVL23-1
+ 2143 0345 78000000 		.4byte	.LVL28
+ 2144 0349 0400     		.2byte	0x4
+ 2145 034b F3       		.byte	0xf3
+ 2146 034c 01       		.uleb128 0x1
+ 2147 034d 51       		.byte	0x51
+ 2148 034e 9F       		.byte	0x9f
+ 2149 034f 78000000 		.4byte	.LVL28
+ 2150 0353 84000000 		.4byte	.LFE135
+ 2151 0357 0100     		.2byte	0x1
+ 2152 0359 51       		.byte	0x51
+ 2153 035a 00000000 		.4byte	0
+ 2154 035e 00000000 		.4byte	0
+ 2155              	.LLST16:
+ 2156 0362 00000000 		.4byte	.LVL22
+ 2157 0366 74000000 		.4byte	.LVL27
+ 2158 036a 0600     		.2byte	0x6
+ 2159 036c 0C       		.byte	0xc
+ 2160 036d 0100CE00 		.4byte	0xce0001
+ 2161 0371 9F       		.byte	0x9f
+ 2162 0372 74000000 		.4byte	.LVL27
+ 2163 0376 78000000 		.4byte	.LVL28
+ 2164 037a 0200     		.2byte	0x2
+ 2165 037c 30       		.byte	0x30
+ 2166 037d 9F       		.byte	0x9f
+ 2167 037e 78000000 		.4byte	.LVL28
+ 2168 0382 7A000000 		.4byte	.LVL29
+ 2169 0386 0600     		.2byte	0x6
+ 2170 0388 0C       		.byte	0xc
+ 2171 0389 0100CE00 		.4byte	0xce0001
+ 2172 038d 9F       		.byte	0x9f
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 46
+
+
+ 2173 038e 7A000000 		.4byte	.LVL29
+ 2174 0392 84000000 		.4byte	.LFE135
+ 2175 0396 0100     		.2byte	0x1
+ 2176 0398 50       		.byte	0x50
+ 2177 0399 00000000 		.4byte	0
+ 2178 039d 00000000 		.4byte	0
+ 2179              	.LLST17:
+ 2180 03a1 16000000 		.4byte	.LVL23
+ 2181 03a5 73000000 		.4byte	.LVL27-1
+ 2182 03a9 0100     		.2byte	0x1
+ 2183 03ab 50       		.byte	0x50
+ 2184 03ac 00000000 		.4byte	0
+ 2185 03b0 00000000 		.4byte	0
+ 2186              	.LLST18:
+ 2187 03b4 00000000 		.4byte	.LVL31
+ 2188 03b8 26000000 		.4byte	.LVL32
+ 2189 03bc 0100     		.2byte	0x1
+ 2190 03be 50       		.byte	0x50
+ 2191 03bf 26000000 		.4byte	.LVL32
+ 2192 03c3 4E000000 		.4byte	.LVL39
+ 2193 03c7 0400     		.2byte	0x4
+ 2194 03c9 F3       		.byte	0xf3
+ 2195 03ca 01       		.uleb128 0x1
+ 2196 03cb 50       		.byte	0x50
+ 2197 03cc 9F       		.byte	0x9f
+ 2198 03cd 4E000000 		.4byte	.LVL39
+ 2199 03d1 58000000 		.4byte	.LVL40
+ 2200 03d5 0100     		.2byte	0x1
+ 2201 03d7 50       		.byte	0x50
+ 2202 03d8 58000000 		.4byte	.LVL40
+ 2203 03dc 74000000 		.4byte	.LFE136
+ 2204 03e0 0400     		.2byte	0x4
+ 2205 03e2 F3       		.byte	0xf3
+ 2206 03e3 01       		.uleb128 0x1
+ 2207 03e4 50       		.byte	0x50
+ 2208 03e5 9F       		.byte	0x9f
+ 2209 03e6 00000000 		.4byte	0
+ 2210 03ea 00000000 		.4byte	0
+ 2211              	.LLST19:
+ 2212 03ee 00000000 		.4byte	.LVL31
+ 2213 03f2 30000000 		.4byte	.LVL34
+ 2214 03f6 0100     		.2byte	0x1
+ 2215 03f8 51       		.byte	0x51
+ 2216 03f9 30000000 		.4byte	.LVL34
+ 2217 03fd 38000000 		.4byte	.LVL36
+ 2218 0401 0400     		.2byte	0x4
+ 2219 0403 F3       		.byte	0xf3
+ 2220 0404 01       		.uleb128 0x1
+ 2221 0405 51       		.byte	0x51
+ 2222 0406 9F       		.byte	0x9f
+ 2223 0407 38000000 		.4byte	.LVL36
+ 2224 040b 48000000 		.4byte	.LVL37
+ 2225 040f 0100     		.2byte	0x1
+ 2226 0411 51       		.byte	0x51
+ 2227 0412 48000000 		.4byte	.LVL37
+ 2228 0416 4E000000 		.4byte	.LVL39
+ 2229 041a 0400     		.2byte	0x4
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 47
+
+
+ 2230 041c F3       		.byte	0xf3
+ 2231 041d 01       		.uleb128 0x1
+ 2232 041e 51       		.byte	0x51
+ 2233 041f 9F       		.byte	0x9f
+ 2234 0420 4E000000 		.4byte	.LVL39
+ 2235 0424 74000000 		.4byte	.LFE136
+ 2236 0428 0100     		.2byte	0x1
+ 2237 042a 51       		.byte	0x51
+ 2238 042b 00000000 		.4byte	0
+ 2239 042f 00000000 		.4byte	0
+ 2240              	.LLST20:
+ 2241 0433 00000000 		.4byte	.LVL31
+ 2242 0437 2C000000 		.4byte	.LVL33
+ 2243 043b 0600     		.2byte	0x6
+ 2244 043d 0C       		.byte	0xc
+ 2245 043e 0200CE00 		.4byte	0xce0002
+ 2246 0442 9F       		.byte	0x9f
+ 2247 0443 2C000000 		.4byte	.LVL33
+ 2248 0447 4E000000 		.4byte	.LVL39
+ 2249 044b 0200     		.2byte	0x2
+ 2250 044d 30       		.byte	0x30
+ 2251 044e 9F       		.byte	0x9f
+ 2252 044f 4E000000 		.4byte	.LVL39
+ 2253 0453 5E000000 		.4byte	.LVL41
+ 2254 0457 0600     		.2byte	0x6
+ 2255 0459 0C       		.byte	0xc
+ 2256 045a 0200CE00 		.4byte	0xce0002
+ 2257 045e 9F       		.byte	0x9f
+ 2258 045f 5E000000 		.4byte	.LVL41
+ 2259 0463 64000000 		.4byte	.LVL43
+ 2260 0467 0200     		.2byte	0x2
+ 2261 0469 30       		.byte	0x30
+ 2262 046a 9F       		.byte	0x9f
+ 2263 046b 64000000 		.4byte	.LVL43
+ 2264 046f 66000000 		.4byte	.LVL44
+ 2265 0473 0600     		.2byte	0x6
+ 2266 0475 0C       		.byte	0xc
+ 2267 0476 0200CE00 		.4byte	0xce0002
+ 2268 047a 9F       		.byte	0x9f
+ 2269 047b 66000000 		.4byte	.LVL44
+ 2270 047f 74000000 		.4byte	.LFE136
+ 2271 0483 0100     		.2byte	0x1
+ 2272 0485 50       		.byte	0x50
+ 2273 0486 00000000 		.4byte	0
+ 2274 048a 00000000 		.4byte	0
+ 2275              	.LLST21:
+ 2276 048e 2C000000 		.4byte	.LVL33
+ 2277 0492 36000000 		.4byte	.LVL35
+ 2278 0496 0100     		.2byte	0x1
+ 2279 0498 53       		.byte	0x53
+ 2280 0499 36000000 		.4byte	.LVL35
+ 2281 049d 38000000 		.4byte	.LVL36
+ 2282 04a1 0800     		.2byte	0x8
+ 2283 04a3 70       		.byte	0x70
+ 2284 04a4 00       		.sleb128 0
+ 2285 04a5 40       		.byte	0x40
+ 2286 04a6 4B       		.byte	0x4b
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 48
+
+
+ 2287 04a7 24       		.byte	0x24
+ 2288 04a8 1F       		.byte	0x1f
+ 2289 04a9 21       		.byte	0x21
+ 2290 04aa 9F       		.byte	0x9f
+ 2291 04ab 38000000 		.4byte	.LVL36
+ 2292 04af 48000000 		.4byte	.LVL37
+ 2293 04b3 0100     		.2byte	0x1
+ 2294 04b5 53       		.byte	0x53
+ 2295 04b6 48000000 		.4byte	.LVL37
+ 2296 04ba 4A000000 		.4byte	.LVL38
+ 2297 04be 0800     		.2byte	0x8
+ 2298 04c0 70       		.byte	0x70
+ 2299 04c1 00       		.sleb128 0
+ 2300 04c2 40       		.byte	0x40
+ 2301 04c3 4B       		.byte	0x4b
+ 2302 04c4 24       		.byte	0x24
+ 2303 04c5 1F       		.byte	0x1f
+ 2304 04c6 21       		.byte	0x21
+ 2305 04c7 9F       		.byte	0x9f
+ 2306 04c8 60000000 		.4byte	.LVL42
+ 2307 04cc 64000000 		.4byte	.LVL43
+ 2308 04d0 0100     		.2byte	0x1
+ 2309 04d2 53       		.byte	0x53
+ 2310 04d3 00000000 		.4byte	0
+ 2311 04d7 00000000 		.4byte	0
+ 2312              		.section	.debug_aranges,"",%progbits
+ 2313 0000 3C000000 		.4byte	0x3c
+ 2314 0004 0200     		.2byte	0x2
+ 2315 0006 00000000 		.4byte	.Ldebug_info0
+ 2316 000a 04       		.byte	0x4
+ 2317 000b 00       		.byte	0
+ 2318 000c 0000     		.2byte	0
+ 2319 000e 0000     		.2byte	0
+ 2320 0010 00000000 		.4byte	.LFB132
+ 2321 0014 84000000 		.4byte	.LFE132-.LFB132
+ 2322 0018 00000000 		.4byte	.LFB133
+ 2323 001c 70000000 		.4byte	.LFE133-.LFB133
+ 2324 0020 00000000 		.4byte	.LFB134
+ 2325 0024 58000000 		.4byte	.LFE134-.LFB134
+ 2326 0028 00000000 		.4byte	.LFB135
+ 2327 002c 84000000 		.4byte	.LFE135-.LFB135
+ 2328 0030 00000000 		.4byte	.LFB136
+ 2329 0034 74000000 		.4byte	.LFE136-.LFB136
+ 2330 0038 00000000 		.4byte	0
+ 2331 003c 00000000 		.4byte	0
+ 2332              		.section	.debug_ranges,"",%progbits
+ 2333              	.Ldebug_ranges0:
+ 2334 0000 14000000 		.4byte	.LBB6
+ 2335 0004 4E000000 		.4byte	.LBE6
+ 2336 0008 60000000 		.4byte	.LBB7
+ 2337 000c 64000000 		.4byte	.LBE7
+ 2338 0010 00000000 		.4byte	0
+ 2339 0014 00000000 		.4byte	0
+ 2340 0018 00000000 		.4byte	.LFB132
+ 2341 001c 84000000 		.4byte	.LFE132
+ 2342 0020 00000000 		.4byte	.LFB133
+ 2343 0024 70000000 		.4byte	.LFE133
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 49
+
+
+ 2344 0028 00000000 		.4byte	.LFB134
+ 2345 002c 58000000 		.4byte	.LFE134
+ 2346 0030 00000000 		.4byte	.LFB135
+ 2347 0034 84000000 		.4byte	.LFE135
+ 2348 0038 00000000 		.4byte	.LFB136
+ 2349 003c 74000000 		.4byte	.LFE136
+ 2350 0040 00000000 		.4byte	0
+ 2351 0044 00000000 		.4byte	0
+ 2352              		.section	.debug_line,"",%progbits
+ 2353              	.Ldebug_line0:
+ 2354 0000 36030000 		.section	.debug_str,"MS",%progbits,1
+ 2354      02006B02 
+ 2354      00000201 
+ 2354      FB0E0D00 
+ 2354      01010101 
+ 2355              	.LASF56:
+ 2356 0000 70726F74 		.ascii	"protBusMasterMask\000"
+ 2356      4275734D 
+ 2356      61737465 
+ 2356      724D6173 
+ 2356      6B00
+ 2357              	.LASF122:
+ 2358 0012 72657456 		.ascii	"retVal\000"
+ 2358      616C00
+ 2359              	.LASF125:
+ 2360 0019 43795F54 		.ascii	"Cy_TrigMux_Connect\000"
+ 2360      7269674D 
+ 2360      75785F43 
+ 2360      6F6E6E65 
+ 2360      637400
+ 2361              	.LASF66:
+ 2362 002c 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
+ 2362      6843746C 
+ 2362      4D61696E 
+ 2362      57733346 
+ 2362      72657100 
+ 2363              	.LASF88:
+ 2364 0040 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
+ 2364      50727443 
+ 2364      6667496E 
+ 2364      4F666673 
+ 2364      657400
+ 2365              	.LASF121:
+ 2366 0053 74726967 		.ascii	"trigType\000"
+ 2366      54797065 
+ 2366      00
+ 2367              	.LASF138:
+ 2368 005c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2368      43313120 
+ 2368      352E342E 
+ 2368      31203230 
+ 2368      31363036 
+ 2369 008f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 2369      20726576 
+ 2369      6973696F 
+ 2369      6E203233 
+ 2369      37373135 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 50
+
+
+ 2370 00c2 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Os -ffunction-s"
+ 2370      70202D6D 
+ 2370      6670753D 
+ 2370      66707634 
+ 2370      2D73702D 
+ 2371 00f5 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 2371      6F6E7320 
+ 2371      2D666661 
+ 2371      742D6C74 
+ 2371      6F2D6F62 
+ 2372              	.LASF32:
+ 2373 010f 63727970 		.ascii	"cryptoVersion\000"
+ 2373      746F5665 
+ 2373      7273696F 
+ 2373      6E00
+ 2374              	.LASF50:
+ 2375 011d 70657269 		.ascii	"periClockNr\000"
+ 2375      436C6F63 
+ 2375      6B4E7200 
+ 2376              	.LASF28:
+ 2377 0129 70617373 		.ascii	"passBase\000"
+ 2377      42617365 
+ 2377      00
+ 2378              	.LASF41:
+ 2379 0132 63707573 		.ascii	"cpussIpcIrqNr\000"
+ 2379      73497063 
+ 2379      4972714E 
+ 2379      7200
+ 2380              	.LASF2:
+ 2381 0140 5F5F7569 		.ascii	"__uint8_t\000"
+ 2381      6E74385F 
+ 2381      7400
+ 2382              	.LASF85:
+ 2383 014a 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ 2383      44697632 
+ 2383      345F3543 
+ 2383      746C4F66 
+ 2383      66736574 
+ 2384              	.LASF92:
+ 2385 015f 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
+ 2385      73436D34 
+ 2385      436C6F63 
+ 2385      6B43746C 
+ 2385      4F666673 
+ 2386              	.LASF21:
+ 2387 0176 63707573 		.ascii	"cpussBase\000"
+ 2387      73426173 
+ 2387      6500
+ 2388              	.LASF70:
+ 2389 0180 64774368 		.ascii	"dwChCtlPrioPos\000"
+ 2389      43746C50 
+ 2389      72696F50 
+ 2389      6F7300
+ 2390              	.LASF12:
+ 2391 018f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2391      206C6F6E 
+ 2391      6720756E 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 51
+
+
+ 2391      7369676E 
+ 2391      65642069 
+ 2392              	.LASF115:
+ 2393 01a6 43595F54 		.ascii	"CY_TRIGMUX_BAD_PARAM\000"
+ 2393      5249474D 
+ 2393      55585F42 
+ 2393      41445F50 
+ 2393      4152414D 
+ 2394              	.LASF74:
+ 2395 01bb 70657269 		.ascii	"periTrCmdOffset\000"
+ 2395      5472436D 
+ 2395      644F6666 
+ 2395      73657400 
+ 2396              	.LASF98:
+ 2397 01cb 63707573 		.ascii	"cpussSysTickCtlOffset\000"
+ 2397      73537973 
+ 2397      5469636B 
+ 2397      43746C4F 
+ 2397      66667365 
+ 2398              	.LASF135:
+ 2399 01e1 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2399      52784275 
+ 2399      66666572 
+ 2399      00
+ 2400              	.LASF59:
+ 2401 01ee 666C6173 		.ascii	"flashPipeRequired\000"
+ 2401      68506970 
+ 2401      65526571 
+ 2401      75697265 
+ 2401      6400
+ 2402              	.LASF63:
+ 2403 0200 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
+ 2403      6843746C 
+ 2403      4D61696E 
+ 2403      57733046 
+ 2403      72657100 
+ 2404              	.LASF15:
+ 2405 0214 696E7431 		.ascii	"int16_t\000"
+ 2405      365F7400 
+ 2406              	.LASF11:
+ 2407 021c 6C6F6E67 		.ascii	"long long int\000"
+ 2407      206C6F6E 
+ 2407      6720696E 
+ 2407      7400
+ 2408              	.LASF0:
+ 2409 022a 7369676E 		.ascii	"signed char\000"
+ 2409      65642063 
+ 2409      68617200 
+ 2410              	.LASF79:
+ 2411 0236 70657269 		.ascii	"periDivCmdTypeSelPos\000"
+ 2411      44697643 
+ 2411      6D645479 
+ 2411      70655365 
+ 2411      6C506F73 
+ 2412              	.LASF25:
+ 2413 024b 70726F74 		.ascii	"protBase\000"
+ 2413      42617365 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 52
+
+
+ 2413      00
+ 2414              	.LASF37:
+ 2415 0254 69706356 		.ascii	"ipcVersion\000"
+ 2415      65727369 
+ 2415      6F6E00
+ 2416              	.LASF99:
+ 2417 025f 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
+ 2417      73436D30 
+ 2417      4E6D6943 
+ 2417      746C4F66 
+ 2417      66736574 
+ 2418              	.LASF118:
+ 2419 0274 696E5472 		.ascii	"inTrig\000"
+ 2419      696700
+ 2420              	.LASF26:
+ 2421 027b 6873696F 		.ascii	"hsiomBase\000"
+ 2421      6D426173 
+ 2421      6500
+ 2422              	.LASF8:
+ 2423 0285 6C6F6E67 		.ascii	"long int\000"
+ 2423      20696E74 
+ 2423      00
+ 2424              	.LASF57:
+ 2425 028e 63727970 		.ascii	"cryptoMemSize\000"
+ 2425      746F4D65 
+ 2425      6D53697A 
+ 2425      6500
+ 2426              	.LASF86:
+ 2427 029c 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ 2427      50727449 
+ 2427      6E747243 
+ 2427      66674F66 
+ 2427      66736574 
+ 2428              	.LASF23:
+ 2429 02b1 70657269 		.ascii	"periBase\000"
+ 2429      42617365 
+ 2429      00
+ 2430              	.LASF55:
+ 2431 02ba 73797350 		.ascii	"sysPmSimoPresent\000"
+ 2431      6D53696D 
+ 2431      6F507265 
+ 2431      73656E74 
+ 2431      00
+ 2432              	.LASF126:
+ 2433 02cb 43795F54 		.ascii	"Cy_TrigMux_Select\000"
+ 2433      7269674D 
+ 2433      75785F53 
+ 2433      656C6563 
+ 2433      7400
+ 2434              	.LASF129:
+ 2435 02dd 656E6162 		.ascii	"enable\000"
+ 2435      6C6500
+ 2436              	.LASF113:
+ 2437 02e4 646F7562 		.ascii	"double\000"
+ 2437      6C6500
+ 2438              	.LASF84:
+ 2439 02eb 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 53
+
+
+ 2439      44697631 
+ 2439      365F3543 
+ 2439      746C4F66 
+ 2439      66736574 
+ 2440              	.LASF48:
+ 2441 0300 73727373 		.ascii	"srssNumPll\000"
+ 2441      4E756D50 
+ 2441      6C6C00
+ 2442              	.LASF82:
+ 2443 030b 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 2443      44697638 
+ 2443      43746C4F 
+ 2443      66667365 
+ 2443      7400
+ 2444              	.LASF137:
+ 2445 031d 43795F53 		.ascii	"Cy_SysLib_ExitCriticalSection\000"
+ 2445      79734C69 
+ 2445      625F4578 
+ 2445      69744372 
+ 2445      69746963 
+ 2446              	.LASF89:
+ 2447 033b 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 2447      50727443 
+ 2447      66674F75 
+ 2447      744F6666 
+ 2447      73657400 
+ 2448              	.LASF22:
+ 2449 034f 666C6173 		.ascii	"flashcBase\000"
+ 2449      68634261 
+ 2449      736500
+ 2450              	.LASF9:
+ 2451 035a 5F5F7569 		.ascii	"__uint32_t\000"
+ 2451      6E743332 
+ 2451      5F7400
+ 2452              	.LASF52:
+ 2453 0365 70617373 		.ascii	"passSarChannels\000"
+ 2453      53617243 
+ 2453      68616E6E 
+ 2453      656C7300 
+ 2454              	.LASF3:
+ 2455 0375 5F5F696E 		.ascii	"__int16_t\000"
+ 2455      7431365F 
+ 2455      7400
+ 2456              	.LASF95:
+ 2457 037f 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 2457      73436D34 
+ 2457      50777243 
+ 2457      746C4F66 
+ 2457      66736574 
+ 2458              	.LASF90:
+ 2459 0394 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
+ 2459      50727443 
+ 2459      66675369 
+ 2459      6F4F6666 
+ 2459      73657400 
+ 2460              	.LASF42:
+ 2461 03a8 63707573 		.ascii	"cpussDwChNr\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 54
+
+
+ 2461      73447743 
+ 2461      684E7200 
+ 2462              	.LASF13:
+ 2463 03b4 756E7369 		.ascii	"unsigned int\000"
+ 2463      676E6564 
+ 2463      20696E74 
+ 2463      00
+ 2464              	.LASF16:
+ 2465 03c1 75696E74 		.ascii	"uint16_t\000"
+ 2465      31365F74 
+ 2465      00
+ 2466              	.LASF75:
+ 2467 03ca 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ 2467      5472436D 
+ 2467      64477253 
+ 2467      656C4D73 
+ 2467      6B00
+ 2468              	.LASF10:
+ 2469 03dc 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2469      20756E73 
+ 2469      69676E65 
+ 2469      6420696E 
+ 2469      7400
+ 2470              	.LASF123:
+ 2471 03ee 696E7465 		.ascii	"interruptState\000"
+ 2471      72727570 
+ 2471      74537461 
+ 2471      746500
+ 2472              	.LASF40:
+ 2473 03fd 63707573 		.ascii	"cpussIpcNr\000"
+ 2473      73497063 
+ 2473      4E7200
+ 2474              	.LASF27:
+ 2475 0408 6770696F 		.ascii	"gpioBase\000"
+ 2475      42617365 
+ 2475      00
+ 2476              	.LASF65:
+ 2477 0411 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ 2477      6843746C 
+ 2477      4D61696E 
+ 2477      57733246 
+ 2477      72657100 
+ 2478              	.LASF76:
+ 2479 0425 70657269 		.ascii	"periTrGrOffset\000"
+ 2479      54724772 
+ 2479      4F666673 
+ 2479      657400
+ 2480              	.LASF103:
+ 2481 0434 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 2481      7352616D 
+ 2481      3143746C 
+ 2481      3000
+ 2482              	.LASF127:
+ 2483 0442 43795F54 		.ascii	"Cy_TrigMux_Deselect\000"
+ 2483      7269674D 
+ 2483      75785F44 
+ 2483      6573656C 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 55
+
+
+ 2483      65637400 
+ 2484              	.LASF77:
+ 2485 0456 70657269 		.ascii	"periTrGrSize\000"
+ 2485      54724772 
+ 2485      53697A65 
+ 2485      00
+ 2486              	.LASF35:
+ 2487 0463 6770696F 		.ascii	"gpioVersion\000"
+ 2487      56657273 
+ 2487      696F6E00 
+ 2488              	.LASF107:
+ 2489 046f 63795F73 		.ascii	"cy_stc_device_t\000"
+ 2489      74635F64 
+ 2489      65766963 
+ 2489      655F7400 
+ 2490              	.LASF136:
+ 2491 047f 43795F53 		.ascii	"Cy_SysLib_EnterCriticalSection\000"
+ 2491      79734C69 
+ 2491      625F456E 
+ 2491      74657243 
+ 2491      72697469 
+ 2492              	.LASF114:
+ 2493 049e 43595F54 		.ascii	"CY_TRIGMUX_SUCCESS\000"
+ 2493      5249474D 
+ 2493      55585F53 
+ 2493      55434345 
+ 2493      535300
+ 2494              	.LASF53:
+ 2495 04b1 65704D6F 		.ascii	"epMonitorNr\000"
+ 2495      6E69746F 
+ 2495      724E7200 
+ 2496              	.LASF130:
+ 2497 04bd 43795F54 		.ascii	"Cy_TrigMux_SwTrigger\000"
+ 2497      7269674D 
+ 2497      75785F53 
+ 2497      77547269 
+ 2497      67676572 
+ 2498              	.LASF100:
+ 2499 04d2 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 2499      73436D34 
+ 2499      4E6D6943 
+ 2499      746C4F66 
+ 2499      66736574 
+ 2500              	.LASF96:
+ 2501 04e7 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 2501      73547269 
+ 2501      6D52616D 
+ 2501      43746C4F 
+ 2501      66667365 
+ 2502              	.LASF91:
+ 2503 04fd 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 2503      73436D30 
+ 2503      436C6F63 
+ 2503      6B43746C 
+ 2503      4F666673 
+ 2504              	.LASF31:
+ 2505 0514 63707573 		.ascii	"cpussVersion\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 56
+
+
+ 2505      73566572 
+ 2505      73696F6E 
+ 2505      00
+ 2506              	.LASF38:
+ 2507 0521 70657269 		.ascii	"periVersion\000"
+ 2507      56657273 
+ 2507      696F6E00 
+ 2508              	.LASF94:
+ 2509 052d 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 2509      73436D30 
+ 2509      53746174 
+ 2509      75734F66 
+ 2509      66736574 
+ 2510              	.LASF20:
+ 2511 0542 73697A65 		.ascii	"sizetype\000"
+ 2511      74797065 
+ 2511      00
+ 2512              	.LASF68:
+ 2513 054b 64774368 		.ascii	"dwChOffset\000"
+ 2513      4F666673 
+ 2513      657400
+ 2514              	.LASF43:
+ 2515 0556 63707573 		.ascii	"cpussFlashPaSize\000"
+ 2515      73466C61 
+ 2515      73685061 
+ 2515      53697A65 
+ 2515      00
+ 2516              	.LASF81:
+ 2517 0567 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 2517      44697643 
+ 2517      6D645061 
+ 2517      54797065 
+ 2517      53656C50 
+ 2518              	.LASF104:
+ 2519 057e 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 2519      7352616D 
+ 2519      3243746C 
+ 2519      3000
+ 2520              	.LASF131:
+ 2521 058c 74726967 		.ascii	"trigLine\000"
+ 2521      4C696E65 
+ 2521      00
+ 2522              	.LASF133:
+ 2523 0595 7472436D 		.ascii	"trCmd\000"
+ 2523      6400
+ 2524              	.LASF72:
+ 2525 059b 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 2525      61747573 
+ 2525      43684964 
+ 2525      78506F73 
+ 2525      00
+ 2526              	.LASF54:
+ 2527 05ac 75646250 		.ascii	"udbPresent\000"
+ 2527      72657365 
+ 2527      6E7400
+ 2528              	.LASF34:
+ 2529 05b7 666C6173 		.ascii	"flashcVersion\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 57
+
+
+ 2529      68635665 
+ 2529      7273696F 
+ 2529      6E00
+ 2530              	.LASF30:
+ 2531 05c5 63727970 		.ascii	"cryptoBase\000"
+ 2531      746F4261 
+ 2531      736500
+ 2532              	.LASF51:
+ 2533 05d0 736D6966 		.ascii	"smifDeviceNr\000"
+ 2533      44657669 
+ 2533      63654E72 
+ 2533      00
+ 2534              	.LASF119:
+ 2535 05dd 6F757454 		.ascii	"outTrig\000"
+ 2535      72696700 
+ 2536              	.LASF112:
+ 2537 05e5 666C6F61 		.ascii	"float\000"
+ 2537      7400
+ 2538              	.LASF73:
+ 2539 05eb 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 2539      61747573 
+ 2539      43684964 
+ 2539      784D736B 
+ 2539      00
+ 2540              	.LASF134:
+ 2541 05fc 63795F64 		.ascii	"cy_device\000"
+ 2541      65766963 
+ 2541      6500
+ 2542              	.LASF101:
+ 2543 0606 63707573 		.ascii	"cpussRomCtl\000"
+ 2543      73526F6D 
+ 2543      43746C00 
+ 2544              	.LASF71:
+ 2545 0612 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 2545      43746C50 
+ 2545      7265656D 
+ 2545      70746162 
+ 2545      6C65506F 
+ 2546              	.LASF24:
+ 2547 0628 75646242 		.ascii	"udbBase\000"
+ 2547      61736500 
+ 2548              	.LASF124:
+ 2549 0630 5F426F6F 		.ascii	"_Bool\000"
+ 2549      6C00
+ 2550              	.LASF17:
+ 2551 0636 696E7433 		.ascii	"int32_t\000"
+ 2551      325F7400 
+ 2552              	.LASF1:
+ 2553 063e 756E7369 		.ascii	"unsigned char\000"
+ 2553      676E6564 
+ 2553      20636861 
+ 2553      7200
+ 2554              	.LASF67:
+ 2555 064c 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 2555      6843746C 
+ 2555      4D61696E 
+ 2555      57733446 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 58
+
+
+ 2555      72657100 
+ 2556              	.LASF106:
+ 2557 0660 6970634C 		.ascii	"ipcLockStatusOffset\000"
+ 2557      6F636B53 
+ 2557      74617475 
+ 2557      734F6666 
+ 2557      73657400 
+ 2558              	.LASF4:
+ 2559 0674 73686F72 		.ascii	"short int\000"
+ 2559      7420696E 
+ 2559      7400
+ 2560              	.LASF109:
+ 2561 067e 54524947 		.ascii	"TRIGGER_TYPE_EDGE\000"
+ 2561      4745525F 
+ 2561      54595045 
+ 2561      5F454447 
+ 2561      4500
+ 2562              	.LASF132:
+ 2563 0690 6379636C 		.ascii	"cycles\000"
+ 2563      657300
+ 2564              	.LASF78:
+ 2565 0697 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 2565      44697643 
+ 2565      6D644469 
+ 2565      7653656C 
+ 2565      4D736B00 
+ 2566              	.LASF117:
+ 2567 06ab 63795F65 		.ascii	"cy_en_trigmux_status_t\000"
+ 2567      6E5F7472 
+ 2567      69676D75 
+ 2567      785F7374 
+ 2567      61747573 
+ 2568              	.LASF49:
+ 2569 06c2 73727373 		.ascii	"srssNumHfroot\000"
+ 2569      4E756D48 
+ 2569      66726F6F 
+ 2569      7400
+ 2570              	.LASF62:
+ 2571 06d0 666C6173 		.ascii	"flashEraseDelay\000"
+ 2571      68457261 
+ 2571      73654465 
+ 2571      6C617900 
+ 2572              	.LASF45:
+ 2573 06e0 63707573 		.ascii	"cpussFmIrq\000"
+ 2573      73466D49 
+ 2573      727100
+ 2574              	.LASF18:
+ 2575 06eb 75696E74 		.ascii	"uint32_t\000"
+ 2575      33325F74 
+ 2575      00
+ 2576              	.LASF19:
+ 2577 06f4 6C6F6E67 		.ascii	"long double\000"
+ 2577      20646F75 
+ 2577      626C6500 
+ 2578              	.LASF111:
+ 2579 0700 63686172 		.ascii	"char\000"
+ 2579      00
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 59
+
+
+ 2580              	.LASF128:
+ 2581 0705 43795F54 		.ascii	"Cy_TrigMux_SetDebugFreeze\000"
+ 2581      7269674D 
+ 2581      75785F53 
+ 2581      65744465 
+ 2581      62756746 
+ 2582              	.LASF39:
+ 2583 071f 70726F74 		.ascii	"protVersion\000"
+ 2583      56657273 
+ 2583      696F6E00 
+ 2584              	.LASF102:
+ 2585 072b 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 2585      7352616D 
+ 2585      3043746C 
+ 2585      3000
+ 2586              	.LASF5:
+ 2587 0739 5F5F7569 		.ascii	"__uint16_t\000"
+ 2587      6E743136 
+ 2587      5F7400
+ 2588              	.LASF83:
+ 2589 0744 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 2589      44697631 
+ 2589      3643746C 
+ 2589      4F666673 
+ 2589      657400
+ 2590              	.LASF7:
+ 2591 0757 5F5F696E 		.ascii	"__int32_t\000"
+ 2591      7433325F 
+ 2591      7400
+ 2592              	.LASF36:
+ 2593 0761 6873696F 		.ascii	"hsiomVersion\000"
+ 2593      6D566572 
+ 2593      73696F6E 
+ 2593      00
+ 2594              	.LASF110:
+ 2595 076e 656E5F74 		.ascii	"en_trig_type_t\000"
+ 2595      7269675F 
+ 2595      74797065 
+ 2595      5F7400
+ 2596              	.LASF108:
+ 2597 077d 54524947 		.ascii	"TRIGGER_TYPE_LEVEL\000"
+ 2597      4745525F 
+ 2597      54595045 
+ 2597      5F4C4556 
+ 2597      454C00
+ 2598              	.LASF64:
+ 2599 0790 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 2599      6843746C 
+ 2599      4D61696E 
+ 2599      57733146 
+ 2599      72657100 
+ 2600              	.LASF6:
+ 2601 07a4 73686F72 		.ascii	"short unsigned int\000"
+ 2601      7420756E 
+ 2601      7369676E 
+ 2601      65642069 
+ 2601      6E7400
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 60
+
+
+ 2602              	.LASF69:
+ 2603 07b7 64774368 		.ascii	"dwChSize\000"
+ 2603      53697A65 
+ 2603      00
+ 2604              	.LASF105:
+ 2605 07c0 69706353 		.ascii	"ipcStructSize\000"
+ 2605      74727563 
+ 2605      7453697A 
+ 2605      6500
+ 2606              	.LASF44:
+ 2607 07ce 63707573 		.ascii	"cpussIpc0Irq\000"
+ 2607      73497063 
+ 2607      30497271 
+ 2607      00
+ 2608              	.LASF87:
+ 2609 07db 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 2609      50727443 
+ 2609      66674F66 
+ 2609      66736574 
+ 2609      00
+ 2610              	.LASF139:
+ 2611 07ec 47656E65 		.ascii	"Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\"
+ 2611      72617465 
+ 2611      645F536F 
+ 2611      75726365 
+ 2611      5C50536F 
+ 2612 081a 74726967 		.ascii	"trigmux\\cy_trigmux.c\000"
+ 2612      6D75785C 
+ 2612      63795F74 
+ 2612      7269676D 
+ 2612      75782E63 
+ 2613              	.LASF46:
+ 2614 082f 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 2614      734E6F74 
+ 2614      436F6E6E 
+ 2614      65637465 
+ 2614      64497271 
+ 2615              	.LASF60:
+ 2616 0844 666C6173 		.ascii	"flashWriteDelay\000"
+ 2616      68577269 
+ 2616      74654465 
+ 2616      6C617900 
+ 2617              	.LASF14:
+ 2618 0854 75696E74 		.ascii	"uint8_t\000"
+ 2618      385F7400 
+ 2619              	.LASF93:
+ 2620 085c 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 2620      73436D34 
+ 2620      53746174 
+ 2620      75734F66 
+ 2620      66736574 
+ 2621              	.LASF116:
+ 2622 0871 43595F54 		.ascii	"CY_TRIGMUX_INVALID_STATE\000"
+ 2622      5249474D 
+ 2622      55585F49 
+ 2622      4E56414C 
+ 2622      49445F53 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccBcTpQh.s 			page 61
+
+
+ 2623              	.LASF140:
+ 2624 088a 433A5C55 		.ascii	"C:\\Users\\cmila\\uni\\projects\\Neural-Stimulator-"
+ 2624      73657273 
+ 2624      5C636D69 
+ 2624      6C615C75 
+ 2624      6E695C70 
+ 2625 08b8 4669726D 		.ascii	"Firmware\\new\\PSOC6\\TIMER\\DAC_BLE.cydsn\000"
+ 2625      77617265 
+ 2625      5C6E6577 
+ 2625      5C50534F 
+ 2625      43365C54 
+ 2626              	.LASF97:
+ 2627 08df 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ 2627      73547269 
+ 2627      6D526F6D 
+ 2627      43746C4F 
+ 2627      66667365 
+ 2628              	.LASF47:
+ 2629 08f5 73727373 		.ascii	"srssNumClkpath\000"
+ 2629      4E756D43 
+ 2629      6C6B7061 
+ 2629      746800
+ 2630              	.LASF33:
+ 2631 0904 64775665 		.ascii	"dwVersion\000"
+ 2631      7273696F 
+ 2631      6E00
+ 2632              	.LASF29:
+ 2633 090e 69706342 		.ascii	"ipcBase\000"
+ 2633      61736500 
+ 2634              	.LASF80:
+ 2635 0916 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 2635      44697643 
+ 2635      6D645061 
+ 2635      44697653 
+ 2635      656C506F 
+ 2636              	.LASF61:
+ 2637 092c 666C6173 		.ascii	"flashProgramDelay\000"
+ 2637      6850726F 
+ 2637      6772616D 
+ 2637      44656C61 
+ 2637      7900
+ 2638              	.LASF120:
+ 2639 093e 696E7665 		.ascii	"invert\000"
+ 2639      727400
+ 2640              	.LASF58:
+ 2641 0945 666C6173 		.ascii	"flashRwwRequired\000"
+ 2641      68527777 
+ 2641      52657175 
+ 2641      69726564 
+ 2641      00
+ 2642              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
