@@ -49,10 +49,15 @@ void TimerInterruptHandler(void)
     } else if (current_phase == 2) {
         dacWrite = 0x000;
     } else if (current_phase == 3) {
-        dacWrite = 0x800;   
+        dacWrite = 0xFFF;  
     }
     VDAC_1_SetValue(dacWrite);
     
+    Cy_SAR_StartConvert(SAR, CY_SAR_START_CONVERT_SINGLE_SHOT);
+
+    volatile float value = Cy_SAR_GetResult16(SAR, 0);
+    volatile float volts = Cy_SAR_CountsTo_Volts(SAR, 0, value);
+    printf("Value in V = %f\r\n", volts);
     
     while (1) {
         if (phases[current_phase] == 0) {
@@ -88,6 +93,7 @@ void dacTask(void *arg) {
     printf("DAC Task Started\r\n");
     
     VDAC_1_Start();
+    ADC_Start();
     
     Cy_SysInt_Init(&isrTimer_cfg, TimerInterruptHandler);
     NVIC_ClearPendingIRQ(isrTimer_cfg.intrSrc);/* Clears the interrupt */

@@ -42,6 +42,8 @@
 
 #include "syslib/cy_syslib.h"
 
+// #warning This is a template. Modify it according to your project and remove this line. 
+
 #define configUSE_PREEMPTION                    1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 0
 #define configUSE_TICKLESS_IDLE                 0
@@ -55,7 +57,7 @@
 #define configUSE_TASK_NOTIFICATIONS            1
 #define configUSE_MUTEXES                       0
 #define configUSE_RECURSIVE_MUTEXES             0
-#define configUSE_COUNTING_SEMAPHORES           0
+#define configUSE_COUNTING_SEMAPHORES           1
 #define configQUEUE_REGISTRY_SIZE               10
 #define configUSE_QUEUE_SETS                    0
 #define configUSE_TIME_SLICING                  0
@@ -66,7 +68,7 @@
 /* Memory allocation related definitions. */
 #define configSUPPORT_STATIC_ALLOCATION         0
 #define configSUPPORT_DYNAMIC_ALLOCATION        1
-#define configTOTAL_HEAP_SIZE                   10240
+#define configTOTAL_HEAP_SIZE                   (48 * 1024)
 #define configAPPLICATION_ALLOCATED_HEAP        0
 
 /* Hook function related definitions. */
@@ -146,7 +148,14 @@ Put MAX_SYSCALL_INTERRUPT_PRIORITY in top __NVIC_PRIO_BITS bits of CM4 register
 NOTE For IAR compiler make sure that changes of this macro is reflected in  
 file portable\IAR\CM4F\portasm.s in PendSV_Handler: routine
 */
-#define configMAX_SYSCALL_INTERRUPT_PRIORITY    0x3F
+// #define configMAX_SYSCALL_INTERRUPT_PRIORITY    0x3F
+#ifdef __NVIC_PRIO_BITS
+    #define configPRIO_BITS                         __NVIC_PRIO_BITS
+#else
+    #define configPRIO_BITS                         4
+#endif
+
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY        (1 << (8 - configPRIO_BITS))
 /* configMAX_API_CALL_INTERRUPT_PRIORITY is a new name for configMAX_SYSCALL_INTERRUPT_PRIORITY
  that is used by newer ports only. The two are equivalent. */
 #define configMAX_API_CALL_INTERRUPT_PRIORITY 	configMAX_SYSCALL_INTERRUPT_PRIORITY

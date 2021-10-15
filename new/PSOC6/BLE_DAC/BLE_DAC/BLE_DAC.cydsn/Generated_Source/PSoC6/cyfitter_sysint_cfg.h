@@ -19,6 +19,13 @@
 
 #include "sysint/cy_sysint.h"
 
+/* ARM CM0+ */
+#if (((__CORTEX_M == 0) && (CY_CORE_ID == 0)))
+    #define BLE_1_bless_isr__INTC_ASSIGNED 1u
+    extern const cy_stc_sysint_t BLE_1_bless_isr_cfg;
+
+#endif /* ((__CORTEX_M == 0) && (CY_CORE_ID == 0)) */
+
 /* ARM CM4 */
 #if (((__CORTEX_M == 4) && (CY_CORE_ID == 0)))
     #define BLE_1_bless_isr__INTC_ASSIGNED 1u
@@ -29,6 +36,9 @@
 
     #define isrTimer__INTC_ASSIGNED 1u
     extern const cy_stc_sysint_t isrTimer_cfg;
+
+    #define ADC_IRQ__INTC_ASSIGNED 1u
+    extern const cy_stc_sysint_t ADC_IRQ_cfg;
 
 #endif /* ((__CORTEX_M == 4) && (CY_CORE_ID == 0)) */
 

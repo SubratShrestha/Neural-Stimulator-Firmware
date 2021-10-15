@@ -1,5 +1,5 @@
 -- Project:   D:\Projects\NS\Neural-Stimulator-Firmware\new\PSOC6\BLE_DAC\BLE_DAC\BLE_DAC.cydsn\BLE_DAC.cyprj
--- Generated: 10/05/2021 20:06:23
+-- Generated: 10/11/2021 17:23:51
 -- PSoC Creator  4.4
 
 ENTITY BLE_DAC IS
@@ -7,7 +7,9 @@ ENTITY BLE_DAC IS
         \UART_1:tx(0)_PAD\ : OUT std_ulogic;
         \UART_1:rx(0)_PAD\ : IN std_ulogic;
         RED(0)_PAD : OUT std_ulogic;
-        GREEN(0)_PAD : OUT std_ulogic);
+        GREEN(0)_PAD : OUT std_ulogic;
+        dac_out(0)_PAD : INOUT std_ulogic;
+        VDAC_Out_1(0)_PAD : INOUT std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -25,6 +27,8 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     SIGNAL CPUSS_swj_swdio_tms : bit;
     SIGNAL CY_CPUSS_SWJ_SWCLK_TCLK(0)__PA : bit;
     SIGNAL CY_CPUSS_SWJ_SWDIO_TMS(0)__PA : bit;
+    SIGNAL CY_SRSS_WCO_IN(0)__PA : bit;
+    SIGNAL CY_SRSS_WCO_OUT(0)__PA : bit;
     SIGNAL ClockBlock_AltHF : bit;
     SIGNAL ClockBlock_ECO : bit;
     SIGNAL ClockBlock_ExtClk : bit;
@@ -49,6 +53,26 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     SIGNAL Net_14 : bit;
     SIGNAL Net_15 : bit;
     SIGNAL Net_16 : bit;
+    SIGNAL Net_178 : bit;
+    SIGNAL Net_179 : bit;
+    SIGNAL Net_180_0 : bit;
+    SIGNAL Net_180_1 : bit;
+    SIGNAL Net_180_2 : bit;
+    SIGNAL Net_180_3 : bit;
+    SIGNAL Net_181 : bit;
+    SIGNAL Net_182_0 : bit;
+    SIGNAL Net_182_1 : bit;
+    SIGNAL Net_182_10 : bit;
+    SIGNAL Net_182_11 : bit;
+    SIGNAL Net_182_2 : bit;
+    SIGNAL Net_182_3 : bit;
+    SIGNAL Net_182_4 : bit;
+    SIGNAL Net_182_5 : bit;
+    SIGNAL Net_182_6 : bit;
+    SIGNAL Net_182_7 : bit;
+    SIGNAL Net_182_8 : bit;
+    SIGNAL Net_182_9 : bit;
+    SIGNAL Net_183 : bit;
     SIGNAL Net_21 : bit;
     SIGNAL Net_24 : bit;
     SIGNAL Net_27 : bit;
@@ -73,7 +97,10 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     SIGNAL Net_63 : bit;
     SIGNAL Net_77 : bit;
     SIGNAL RED(0)__PA : bit;
-    SIGNAL VDAC_Out(0)__PA : bit;
+    SIGNAL VDAC_Out_1(0)__PA : bit;
+    SIGNAL \ADC:Net_423\ : bit;
+    SIGNAL \ADC:Net_428_ff49\ : bit;
+    ATTRIBUTE global_signal OF \ADC:Net_428_ff49\ : SIGNAL IS true;
     SIGNAL \BLE_1:Net_1\ : bit;
     SIGNAL \Timer:Net_1\ : bit;
     SIGNAL \Timer:Net_2\ : bit;
@@ -90,6 +117,7 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
     ATTRIBUTE GROUND OF __ZERO__ : SIGNAL IS true;
+    SIGNAL dac_out(0)__PA : bit;
     SIGNAL one : bit;
     ATTRIBUTE POWER OF one : SIGNAL IS true;
     SIGNAL zero : bit;
@@ -102,16 +130,23 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     ATTRIBUTE Location OF CY_CPUSS_SWJ_SWCLK_TCLK(0) : LABEL IS "P6[7]";
     ATTRIBUTE lib_model OF CY_CPUSS_SWJ_SWDIO_TMS(0) : LABEL IS "iocell2";
     ATTRIBUTE Location OF CY_CPUSS_SWJ_SWDIO_TMS(0) : LABEL IS "P6[6]";
-    ATTRIBUTE lib_model OF \UART_1:tx(0)\ : LABEL IS "iocell3";
+    ATTRIBUTE Location OF SRSS : LABEL IS "F(SRSS,0)";
+    ATTRIBUTE lib_model OF CY_SRSS_WCO_IN(0) : LABEL IS "iocell3";
+    ATTRIBUTE Location OF CY_SRSS_WCO_IN(0) : LABEL IS "P0[0]";
+    ATTRIBUTE lib_model OF CY_SRSS_WCO_OUT(0) : LABEL IS "iocell4";
+    ATTRIBUTE Location OF CY_SRSS_WCO_OUT(0) : LABEL IS "P0[1]";
+    ATTRIBUTE lib_model OF \UART_1:tx(0)\ : LABEL IS "iocell5";
     ATTRIBUTE Location OF \UART_1:tx(0)\ : LABEL IS "P5[1]";
-    ATTRIBUTE lib_model OF \UART_1:rx(0)\ : LABEL IS "iocell4";
+    ATTRIBUTE lib_model OF \UART_1:rx(0)\ : LABEL IS "iocell6";
     ATTRIBUTE Location OF \UART_1:rx(0)\ : LABEL IS "P5[0]";
-    ATTRIBUTE lib_model OF RED(0) : LABEL IS "iocell5";
-    ATTRIBUTE Location OF RED(0) : LABEL IS "P0[4]";
-    ATTRIBUTE lib_model OF GREEN(0) : LABEL IS "iocell6";
+    ATTRIBUTE lib_model OF RED(0) : LABEL IS "iocell7";
+    ATTRIBUTE Location OF RED(0) : LABEL IS "P6[4]";
+    ATTRIBUTE lib_model OF GREEN(0) : LABEL IS "iocell8";
     ATTRIBUTE Location OF GREEN(0) : LABEL IS "P6[2]";
-    ATTRIBUTE lib_model OF VDAC_Out(0) : LABEL IS "iocell7";
-    ATTRIBUTE Location OF VDAC_Out(0) : LABEL IS "P9[6]";
+    ATTRIBUTE lib_model OF dac_out(0) : LABEL IS "iocell9";
+    ATTRIBUTE Location OF dac_out(0) : LABEL IS "P10[0]";
+    ATTRIBUTE lib_model OF VDAC_Out_1(0) : LABEL IS "iocell10";
+    ATTRIBUTE Location OF VDAC_Out_1(0) : LABEL IS "P0[4]";
     ATTRIBUTE Location OF \UART_1:SCB_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(46)]";
     ATTRIBUTE Location OF \UART_1:SCB\ : LABEL IS "F(SCB,5)";
     ATTRIBUTE Location OF \BLE_1:cy_mxs40_ble\ : LABEL IS "F(BLE,0)";
@@ -121,6 +156,8 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     ATTRIBUTE Location OF \Timer:TCPWM\ : LABEL IS "F(TCPWM,0)";
     ATTRIBUTE Location OF isrTimer : LABEL IS "[IntrContainer=(0)][IntrId=(90)]";
     ATTRIBUTE Location OF \VDAC_1:CTDAC\ : LABEL IS "F(CTDAC,0)";
+    ATTRIBUTE Location OF \ADC:IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(138)]";
+    ATTRIBUTE Location OF \ADC:SAR\ : LABEL IS "F(SARADC,0)";
     COMPONENT BLE
         PORT (
             ext_pa_lna_chip_en_out : OUT std_ulogic;
@@ -464,6 +501,38 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
             out_clock_en : IN std_ulogic;
             out_reset : IN std_ulogic);
     END COMPONENT;
+    COMPONENT SARADC
+        PORT (
+            dsi_sar_sample_done : OUT std_ulogic;
+            dsi_sar_chan_id_valid : OUT std_ulogic;
+            dsi_sar_data_valid : OUT std_ulogic;
+            tr_sar_out : OUT std_ulogic;
+            dsi_sar_data_0 : OUT std_ulogic;
+            dsi_sar_data_1 : OUT std_ulogic;
+            dsi_sar_data_2 : OUT std_ulogic;
+            dsi_sar_data_3 : OUT std_ulogic;
+            dsi_sar_data_4 : OUT std_ulogic;
+            dsi_sar_data_5 : OUT std_ulogic;
+            dsi_sar_data_6 : OUT std_ulogic;
+            dsi_sar_data_7 : OUT std_ulogic;
+            dsi_sar_data_8 : OUT std_ulogic;
+            dsi_sar_data_9 : OUT std_ulogic;
+            dsi_sar_data_10 : OUT std_ulogic;
+            dsi_sar_data_11 : OUT std_ulogic;
+            dsi_sar_chan_id_0 : OUT std_ulogic;
+            dsi_sar_chan_id_1 : OUT std_ulogic;
+            dsi_sar_chan_id_2 : OUT std_ulogic;
+            dsi_sar_chan_id_3 : OUT std_ulogic;
+            dsi_sar_cfg_st_sel_0 : IN std_ulogic;
+            dsi_sar_cfg_st_sel_1 : IN std_ulogic;
+            dsi_sar_cfg_average : IN std_ulogic;
+            dsi_sar_cfg_differential : IN std_ulogic;
+            dsi_sar_sw_negvref : IN std_ulogic;
+            dsi_sar_data_hilo_sel : IN std_ulogic;
+            tr_sar_in : IN std_ulogic;
+            clock : IN std_ulogic;
+            interrupt : OUT std_ulogic);
+    END COMPONENT;
     COMPONENT SCB
         PORT (
             clock : IN std_ulogic;
@@ -484,6 +553,22 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
             tr_tx_req : OUT std_ulogic;
             tr_rx_req : OUT std_ulogic;
             tr_i2c_scl_filtered : OUT std_ulogic);
+    END COMPONENT;
+    COMPONENT SRSS
+        PORT (
+            clock_timer : IN std_ulogic;
+            interrupt_mcwdt_0 : OUT std_ulogic;
+            interrupt_mcwdt_1 : OUT std_ulogic;
+            interrupt_backup : OUT std_ulogic;
+            interrupt : OUT std_ulogic;
+            ext_clk : IN std_ulogic;
+            clk_ext : OUT std_ulogic;
+            swd_data : IN std_ulogic;
+            swd_clk : IN std_ulogic;
+            xres_n : IN std_ulogic;
+            pmic_wakeup_in : IN std_ulogic;
+            pmic_wakeup_out : OUT std_ulogic;
+            hibernate_wakeup : IN std_ulogic);
     END COMPONENT;
     COMPONENT TCPWM
         PORT (
@@ -527,6 +612,7 @@ BEGIN
             ff_div_11 => Net_10_ff11,
             ff_div_12 => Net_40_ff12,
             ff_div_13 => Net_29_ff13,
+            ff_div_49 => \ADC:Net_428_ff49\,
             ff_div_5 => \UART_1:Net_847_ff0\,
             periclk_App => periclk_App);
 
@@ -634,6 +720,112 @@ BEGIN
         PORT MAP(
             pa_out => CY_CPUSS_SWJ_SWDIO_TMS(0)__PA,
             fb => CPUSS_swj_swdio_tms,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    SRSS:SRSS;
+
+    CY_SRSS_WCO_IN:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "5262da02-7cc5-5860-85a9-3b13ac7954ca",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    CY_SRSS_WCO_IN(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "CY_SRSS_WCO_IN",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000000")
+        PORT MAP(
+            pa_out => CY_SRSS_WCO_IN(0)__PA,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    CY_SRSS_WCO_OUT:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "3efa897a-9b08-528e-9239-32fdb7df48cc",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    CY_SRSS_WCO_OUT(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "CY_SRSS_WCO_OUT",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000000")
+        PORT MAP(
+            pa_out => CY_SRSS_WCO_OUT(0)__PA,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,
@@ -864,7 +1056,7 @@ BEGIN
             out_clock_en => open,
             out_reset => open);
 
-    VDAC_Out:logicalport
+    dac_out:logicalport
         GENERIC MAP(
             cy_registers => "",
             drive_mode => "000",
@@ -872,7 +1064,7 @@ BEGIN
             hotswap_needed => "0",
             i2c_mode => "0",
             ibuf_enabled => "0",
-            id => "0113321b-4a37-46f6-8407-2f8646c68756",
+            id => "e4abeb67-bab3-4373-9bf1-04689820bf98",
             init_dr_st => "1",
             input_sync => "0",
             intr_mode => "00",
@@ -899,17 +1091,72 @@ BEGIN
             out_clken_mode => 1,
             out_rst_inv => 0);
 
-    VDAC_Out(0):iocell
+    dac_out(0):iocell
         GENERIC MAP(
             in_sync_mode => 0,
             out_sync_mode => 0,
             oe_sync_mode => 0,
-            logicalport => "VDAC_Out",
+            logicalport => "dac_out",
             logicalport_pin_id => 0,
             io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
         PORT MAP(
-            pa_out => VDAC_Out(0)__PA,
+            pa_out => dac_out(0)__PA,
             oe => open,
+            pad_in => dac_out(0)_PAD,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    VDAC_Out_1:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "f7221a87-65e6-41c7-ba9c-e59d9fdf7b87",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "A",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    VDAC_Out_1(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "VDAC_Out_1",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => VDAC_Out_1(0)__PA,
+            oe => open,
+            pad_in => VDAC_Out_1(0)_PAD,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,
@@ -1042,5 +1289,49 @@ BEGIN
             clock => open,
             dsi_ctdac_strobe => open,
             tr_ctdac_empty => Net_77);
+
+    \ADC:IRQ\:interrupt
+        GENERIC MAP(
+            cy_registers => "",
+            deepsleep_required => 0,
+            int_type => "10")
+        PORT MAP(
+            interrupt => \ADC:Net_423\,
+            clock => ClockBlock_PeriClk);
+
+    \ADC:SAR\:SARADC
+        GENERIC MAP(
+            cy_registers => "",
+            edge_trigger => 1)
+        PORT MAP(
+            dsi_sar_sample_done => Net_179,
+            dsi_sar_chan_id_valid => Net_181,
+            dsi_sar_data_valid => Net_183,
+            tr_sar_out => Net_178,
+            dsi_sar_data_11 => Net_182_11,
+            dsi_sar_data_10 => Net_182_10,
+            dsi_sar_data_9 => Net_182_9,
+            dsi_sar_data_8 => Net_182_8,
+            dsi_sar_data_7 => Net_182_7,
+            dsi_sar_data_6 => Net_182_6,
+            dsi_sar_data_5 => Net_182_5,
+            dsi_sar_data_4 => Net_182_4,
+            dsi_sar_data_3 => Net_182_3,
+            dsi_sar_data_2 => Net_182_2,
+            dsi_sar_data_1 => Net_182_1,
+            dsi_sar_data_0 => Net_182_0,
+            dsi_sar_chan_id_3 => Net_180_3,
+            dsi_sar_chan_id_2 => Net_180_2,
+            dsi_sar_chan_id_1 => Net_180_1,
+            dsi_sar_chan_id_0 => Net_180_0,
+            dsi_sar_cfg_st_sel_1 => open,
+            dsi_sar_cfg_st_sel_0 => open,
+            dsi_sar_cfg_average => open,
+            dsi_sar_cfg_differential => open,
+            dsi_sar_sw_negvref => open,
+            dsi_sar_data_hilo_sel => open,
+            tr_sar_in => open,
+            clock => \ADC:Net_428_ff49\,
+            interrupt => \ADC:Net_423\);
 
 END __DEFAULT__;
