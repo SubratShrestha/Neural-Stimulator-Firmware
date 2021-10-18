@@ -1,0 +1,1868 @@
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0plus
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cy_tcpwm_counter.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Cy_TCPWM_Counter_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	Cy_TCPWM_Counter_Init
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	Cy_TCPWM_Counter_Init, %function
+  25              	Cy_TCPWM_Counter_Init:
+  26              	.LFB71:
+  27              		.file 1 "Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\tcpwm\\cy_tcpwm_counter.c"
+   1:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \file cy_tcpwm_counter.c
+   3:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \version 1.10
+   4:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+   5:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \brief
+   6:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *  The source file of the tcpwm driver.
+   7:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+   8:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** ********************************************************************************
+   9:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \copyright
+  10:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * Copyright 2016-2018, Cypress Semiconductor Corporation.  All rights reserved.
+  11:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *******************************************************************************/
+  15:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  16:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** #include "cy_tcpwm_counter.h"
+  17:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  18:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** #ifdef CY_IP_MXTCPWM
+  19:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  20:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** #if defined(__cplusplus)
+  21:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** extern "C" {
+  22:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** #endif
+  23:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  24:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  25:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** /*******************************************************************************
+  26:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * Function Name: Cy_TCPWM_Counter_Init
+  27:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** ****************************************************************************//**
+  28:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+  29:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * Initializes the counter in the TCPWM block for the Counter operation.
+  30:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 2
+
+
+  31:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \param base
+  32:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * The pointer to a TCPWM instance.
+  33:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+  34:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \param cntNum
+  35:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * The Counter instance number in the selected TCPWM.
+  36:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+  37:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \param config
+  38:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * The pointer to configuration structure. See \ref cy_stc_tcpwm_counter_config_t.
+  39:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+  40:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \return error / status code. See \ref cy_en_tcpwm_status_t.
+  41:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+  42:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \funcusage
+  43:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \snippet tcpwm\1.10\counter\snippet\main.c snippet_Cy_TCPWM_Counter_Config
+  44:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \snippet tcpwm\1.10\counter\snippet\main.c snippet_Cy_TCPWM_Counter_Init
+  45:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+  46:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *******************************************************************************/
+  47:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** cy_en_tcpwm_status_t Cy_TCPWM_Counter_Init(TCPWM_Type *base, uint32_t cntNum, 
+  48:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                            cy_stc_tcpwm_counter_config_t const *config)
+  49:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** {
+  28              		.loc 1 49 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              		.cfi_def_cfa_offset 20
+  35              		.cfi_offset 4, -20
+  36              		.cfi_offset 5, -16
+  37              		.cfi_offset 6, -12
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  50:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     cy_en_tcpwm_status_t status = CY_TCPWM_BAD_PARAM;
+  51:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  52:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     if ((NULL != base) && (NULL != config))
+  40              		.loc 1 52 0
+  41 0002 0028     		cmp	r0, #0
+  42 0004 70D0     		beq	.L9
+  43              		.loc 1 52 0 is_stmt 0 discriminator 1
+  44 0006 002A     		cmp	r2, #0
+  45 0008 6ED0     		beq	.L9
+  53:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     {
+  54:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         TCPWM_CNT_CTRL(base, cntNum) = (_VAL2FLD(TCPWM_CNT_CTRL_GENERIC, config->clockPrescaler) |
+  55:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                       _VAL2FLD(TCPWM_CNT_CTRL_ONE_SHOT, config->runMode) |
+  56:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                       _VAL2FLD(TCPWM_CNT_CTRL_UP_DOWN_MODE, config->countDirection)
+  57:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                       _VAL2FLD(TCPWM_CNT_CTRL_MODE, config->compareOrCapture) |
+  46              		.loc 1 57 0 is_stmt 1
+  47 000a 8024     		movs	r4, #128
+  48 000c 5368     		ldr	r3, [r2, #4]
+  49 000e E402     		lsls	r4, r4, #11
+  50 0010 1B06     		lsls	r3, r3, #24
+  51 0012 1F0C     		lsrs	r7, r3, #16
+  52 0014 9368     		ldr	r3, [r2, #8]
+  56:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                       _VAL2FLD(TCPWM_CNT_CTRL_MODE, config->compareOrCapture) |
+  53              		.loc 1 56 0
+  54 0016 D568     		ldr	r5, [r2, #12]
+  55              		.loc 1 57 0
+  56 0018 9B04     		lsls	r3, r3, #18
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 3
+
+
+  57 001a 2340     		ands	r3, r4
+  58 001c C024     		movs	r4, #192
+  59 001e 3B43     		orrs	r3, r7
+  60 0020 177F     		ldrb	r7, [r2, #28]
+  61 0022 A402     		lsls	r4, r4, #10
+  62 0024 3B43     		orrs	r3, r7
+  63 0026 2F04     		lsls	r7, r5, #16
+  64 0028 3C40     		ands	r4, r7
+  65 002a 2343     		orrs	r3, r4
+  66 002c E024     		movs	r4, #224
+  67 002e 1F00     		movs	r7, r3
+  68 0030 1669     		ldr	r6, [r2, #16]
+  69 0032 E404     		lsls	r4, r4, #19
+  70 0034 3306     		lsls	r3, r6, #24
+  71 0036 1C40     		ands	r4, r3
+  72 0038 3B00     		movs	r3, r7
+  73 003a 2343     		orrs	r3, r4
+  54:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                       _VAL2FLD(TCPWM_CNT_CTRL_ONE_SHOT, config->runMode) |
+  74              		.loc 1 54 0
+  75 003c 0C1D     		adds	r4, r1, #4
+  76 003e A401     		lsls	r4, r4, #6
+  77 0040 8901     		lsls	r1, r1, #6
+  78              	.LVL1:
+  79 0042 2350     		str	r3, [r4, r0]
+  58:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                       (config->enableCompareSwap ? TCPWM_CNT_CTRL_AUTO_RELOAD_CC_Ms
+  59:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  60:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         if (CY_TCPWM_COUNTER_COUNT_UP == config->countDirection)
+  61:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         {
+  62:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****             TCPWM_CNT_COUNTER(base, cntNum) = CY_TCPWM_CNT_UP_INIT_VAL;
+  80              		.loc 1 62 0
+  81 0044 4318     		adds	r3, r0, r1
+  82 0046 1468     		ldr	r4, [r2]
+  83 0048 FC33     		adds	r3, r3, #252
+  60:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         {
+  84              		.loc 1 60 0
+  85 004a 002D     		cmp	r5, #0
+  86 004c 04D0     		beq	.L13
+  63:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         }
+  64:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         else if (CY_TCPWM_COUNTER_COUNT_DOWN == config->countDirection)
+  87              		.loc 1 64 0
+  88 004e 012D     		cmp	r5, #1
+  89 0050 01D1     		bne	.L5
+  65:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         {
+  66:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****             TCPWM_CNT_COUNTER(base, cntNum) = config->period;
+  90              		.loc 1 66 0
+  91 0052 DC60     		str	r4, [r3, #12]
+  92 0054 01E0     		b	.L4
+  93              	.L5:
+  67:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         }
+  68:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         else
+  69:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         {
+  70:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****             TCPWM_CNT_COUNTER(base, cntNum) = CY_TCPWM_CNT_UP_DOWN_INIT_VAL;
+  94              		.loc 1 70 0
+  95 0056 0125     		movs	r5, #1
+  96              	.L13:
+  97 0058 DD60     		str	r5, [r3, #12]
+  98              	.L4:
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 4
+
+
+  71:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         }
+  72:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  73:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         if (CY_TCPWM_COUNTER_MODE_COMPARE == config->compareOrCapture)
+  99              		.loc 1 73 0
+ 100 005a 002E     		cmp	r6, #0
+ 101 005c 05D1     		bne	.L6
+  74:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         {
+  75:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****             TCPWM_CNT_CC(base, cntNum) = config->compare0;
+ 102              		.loc 1 75 0
+ 103 005e 5569     		ldr	r5, [r2, #20]
+ 104 0060 4318     		adds	r3, r0, r1
+ 105 0062 FC33     		adds	r3, r3, #252
+ 106 0064 1D61     		str	r5, [r3, #16]
+  76:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****             TCPWM_CNT_CC_BUFF(base, cntNum) = config->compare1;
+ 107              		.loc 1 76 0
+ 108 0066 9569     		ldr	r5, [r2, #24]
+ 109 0068 5D61     		str	r5, [r3, #20]
+ 110              	.L6:
+  77:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         }
+  78:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  79:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         TCPWM_CNT_PERIOD(base, cntNum) = config->period;
+ 111              		.loc 1 79 0
+ 112 006a 4518     		adds	r5, r0, r1
+  80:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  81:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         if (CY_TCPWM_INPUT_CREATOR != config->countInput)
+ 113              		.loc 1 81 0
+ 114 006c 966C     		ldr	r6, [r2, #72]
+  79:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+ 115              		.loc 1 79 0
+ 116 006e FC35     		adds	r5, r5, #252
+ 117 0070 AC61     		str	r4, [r5, #24]
+ 118              		.loc 1 81 0
+ 119 0072 731C     		adds	r3, r6, #1
+ 120 0074 17D0     		beq	.L7
+  82:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         {
+  83:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****             TCPWM_CNT_TR_CTRL0(base, cntNum) = (_VAL2FLD(TCPWM_CNT_TR_CTRL0_CAPTURE_SEL, config->ca
+  84:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                               _VAL2FLD(TCPWM_CNT_TR_CTRL0_RELOAD_SEL, config->reloa
+  85:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                               _VAL2FLD(TCPWM_CNT_TR_CTRL0_START_SEL, config->startI
+  86:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                               _VAL2FLD(TCPWM_CNT_TR_CTRL0_STOP_SEL, config->stopInp
+ 121              		.loc 1 86 0
+ 122 0076 136B     		ldr	r3, [r2, #48]
+ 123 0078 F024     		movs	r4, #240
+ 124 007a 1F02     		lsls	r7, r3, #8
+ 125 007c F023     		movs	r3, #240
+ 126 007e 1B01     		lsls	r3, r3, #4
+ 127 0080 1F40     		ands	r7, r3
+ 128 0082 936B     		ldr	r3, [r2, #56]
+ 129 0084 2403     		lsls	r4, r4, #12
+ 130 0086 1B04     		lsls	r3, r3, #16
+ 131 0088 2340     		ands	r3, r4
+ 132 008a 0F24     		movs	r4, #15
+ 133 008c 3B43     		orrs	r3, r7
+ 134 008e 976A     		ldr	r7, [r2, #40]
+ 135 0090 3C40     		ands	r4, r7
+ 136 0092 2343     		orrs	r3, r4
+ 137 0094 146C     		ldr	r4, [r2, #64]
+ 138 0096 2407     		lsls	r4, r4, #28
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 5
+
+
+ 139 0098 240C     		lsrs	r4, r4, #16
+ 140 009a 2343     		orrs	r3, r4
+ 141 009c 3401     		lsls	r4, r6, #4
+ 142 009e FF26     		movs	r6, #255
+ 143 00a0 3440     		ands	r4, r6
+ 144 00a2 2343     		orrs	r3, r4
+  83:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                               _VAL2FLD(TCPWM_CNT_TR_CTRL0_RELOAD_SEL, config->reloa
+ 145              		.loc 1 83 0
+ 146 00a4 6B62     		str	r3, [r5, #36]
+ 147              	.L7:
+  87:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                               _VAL2FLD(TCPWM_CNT_TR_CTRL0_COUNT_SEL, config->countI
+  88:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         }
+  89:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  90:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         TCPWM_CNT_TR_CTRL1(base, cntNum) = (_VAL2FLD(TCPWM_CNT_TR_CTRL1_CAPTURE_EDGE, config->captu
+  91:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_RELOAD_EDGE, config->reloadIn
+  92:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_START_EDGE, config->startInpu
+  93:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_STOP_EDGE, config->stopInputM
+ 148              		.loc 1 93 0
+ 149 00a6 D36A     		ldr	r3, [r2, #44]
+ 150 00a8 C024     		movs	r4, #192
+ 151 00aa 1D01     		lsls	r5, r3, #4
+ 152 00ac 3023     		movs	r3, #48
+ 153 00ae 1D40     		ands	r5, r3
+ 154 00b0 536B     		ldr	r3, [r2, #52]
+ 155 00b2 A400     		lsls	r4, r4, #2
+ 156 00b4 1B02     		lsls	r3, r3, #8
+ 157 00b6 2340     		ands	r3, r4
+ 158 00b8 0324     		movs	r4, #3
+ 159 00ba 2B43     		orrs	r3, r5
+ 160 00bc 556A     		ldr	r5, [r2, #36]
+  90:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_RELOAD_EDGE, config->reloadIn
+ 161              		.loc 1 90 0
+ 162 00be 4118     		adds	r1, r0, r1
+ 163              		.loc 1 93 0
+ 164 00c0 2C40     		ands	r4, r5
+ 165 00c2 2343     		orrs	r3, r4
+ 166 00c4 D46B     		ldr	r4, [r2, #60]
+  90:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_RELOAD_EDGE, config->reloadIn
+ 167              		.loc 1 90 0
+ 168 00c6 FC31     		adds	r1, r1, #252
+ 169              		.loc 1 93 0
+ 170 00c8 A501     		lsls	r5, r4, #6
+ 171 00ca FF24     		movs	r4, #255
+ 172 00cc 2C40     		ands	r4, r5
+ 173 00ce 2343     		orrs	r3, r4
+ 174 00d0 1D00     		movs	r5, r3
+ 175 00d2 0C24     		movs	r4, #12
+ 176 00d4 536C     		ldr	r3, [r2, #68]
+  94:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_COUNT_EDGE, config->countInpu
+  95:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  96:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         TCPWM_CNT_INTR_MASK(base, cntNum) = config->interruptSources;
+  97:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+  98:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         status = CY_TCPWM_SUCCESS;
+ 177              		.loc 1 98 0
+ 178 00d6 0020     		movs	r0, #0
+ 179              	.LVL2:
+  93:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_COUNT_EDGE, config->countInpu
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 6
+
+
+ 180              		.loc 1 93 0
+ 181 00d8 9B00     		lsls	r3, r3, #2
+ 182 00da 1C40     		ands	r4, r3
+ 183 00dc 2B00     		movs	r3, r5
+ 184 00de 2343     		orrs	r3, r4
+  90:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****                                           _VAL2FLD(TCPWM_CNT_TR_CTRL1_RELOAD_EDGE, config->reloadIn
+ 185              		.loc 1 90 0
+ 186 00e0 8B62     		str	r3, [r1, #40]
+  96:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+ 187              		.loc 1 96 0
+ 188 00e2 136A     		ldr	r3, [r2, #32]
+ 189 00e4 CB63     		str	r3, [r1, #60]
+ 190              	.LVL3:
+ 191 00e6 00E0     		b	.L2
+ 192              	.LVL4:
+ 193              	.L9:
+  50:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+ 194              		.loc 1 50 0
+ 195 00e8 0048     		ldr	r0, .L15
+ 196              	.LVL5:
+ 197              	.L2:
+  99:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     }
+ 100:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+ 101:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     return(status);
+ 102:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** }
+ 198              		.loc 1 102 0
+ 199              		@ sp needed
+ 200 00ea F0BD     		pop	{r4, r5, r6, r7, pc}
+ 201              	.L16:
+ 202              		.align	2
+ 203              	.L15:
+ 204 00ec 0100B600 		.word	11927553
+ 205              		.cfi_endproc
+ 206              	.LFE71:
+ 207              		.size	Cy_TCPWM_Counter_Init, .-Cy_TCPWM_Counter_Init
+ 208              		.section	.text.Cy_TCPWM_Counter_DeInit,"ax",%progbits
+ 209              		.align	1
+ 210              		.global	Cy_TCPWM_Counter_DeInit
+ 211              		.code	16
+ 212              		.thumb_func
+ 213              		.type	Cy_TCPWM_Counter_DeInit, %function
+ 214              	Cy_TCPWM_Counter_DeInit:
+ 215              	.LFB72:
+ 103:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+ 104:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** 
+ 105:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** /*******************************************************************************
+ 106:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * Function Name: Cy_TCPWM_Counter_DeInit
+ 107:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** ****************************************************************************//**
+ 108:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+ 109:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * De-initializes the counter in the TCPWM block, returns register values to 
+ 110:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * default.
+ 111:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+ 112:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \param base
+ 113:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * The pointer to a TCPWM instance.
+ 114:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+ 115:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \param cntNum
+ 116:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * The Counter instance number in the selected TCPWM.
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 7
+
+
+ 117:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+ 118:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \param config
+ 119:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * The pointer to configuration structure. See \ref cy_stc_tcpwm_counter_config_t.
+ 120:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+ 121:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \funcusage
+ 122:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** * \snippet tcpwm\1.10\counter\snippet\main.c snippet_Cy_TCPWM_Counter_DeInit
+ 123:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *
+ 124:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** *******************************************************************************/
+ 125:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** void Cy_TCPWM_Counter_DeInit(TCPWM_Type *base, uint32_t cntNum, cy_stc_tcpwm_counter_config_t const
+ 126:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** {
+ 216              		.loc 1 126 0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 0
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 220              	.LVL6:
+ 127:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_CTRL(base, cntNum) = CY_TCPWM_CNT_CTRL_DEFAULT;
+ 221              		.loc 1 127 0
+ 222 0000 0023     		movs	r3, #0
+ 126:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_CTRL(base, cntNum) = CY_TCPWM_CNT_CTRL_DEFAULT;
+ 223              		.loc 1 126 0
+ 224 0002 10B5     		push	{r4, lr}
+ 225              		.cfi_def_cfa_offset 8
+ 226              		.cfi_offset 4, -8
+ 227              		.cfi_offset 14, -4
+ 228              		.loc 1 127 0
+ 229 0004 0C1D     		adds	r4, r1, #4
+ 230 0006 A401     		lsls	r4, r4, #6
+ 128:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_COUNTER(base, cntNum) = CY_TCPWM_CNT_COUNTER_DEFAULT;
+ 231              		.loc 1 128 0
+ 232 0008 8901     		lsls	r1, r1, #6
+ 233              	.LVL7:
+ 127:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_CTRL(base, cntNum) = CY_TCPWM_CNT_CTRL_DEFAULT;
+ 234              		.loc 1 127 0
+ 235 000a 2350     		str	r3, [r4, r0]
+ 236              		.loc 1 128 0
+ 237 000c 4018     		adds	r0, r0, r1
+ 238              	.LVL8:
+ 129:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_CC(base, cntNum) = CY_TCPWM_CNT_CC_DEFAULT;
+ 239              		.loc 1 129 0
+ 240 000e 0121     		movs	r1, #1
+ 128:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_COUNTER(base, cntNum) = CY_TCPWM_CNT_COUNTER_DEFAULT;
+ 241              		.loc 1 128 0
+ 242 0010 FC30     		adds	r0, r0, #252
+ 243              		.loc 1 129 0
+ 244 0012 4942     		rsbs	r1, r1, #0
+ 128:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_COUNTER(base, cntNum) = CY_TCPWM_CNT_COUNTER_DEFAULT;
+ 245              		.loc 1 128 0
+ 246 0014 C360     		str	r3, [r0, #12]
+ 247              		.loc 1 129 0
+ 248 0016 0161     		str	r1, [r0, #16]
+ 130:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_CC_BUFF(base, cntNum) = CY_TCPWM_CNT_CC_BUFF_DEFAULT;
+ 249              		.loc 1 130 0
+ 250 0018 4161     		str	r1, [r0, #20]
+ 131:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_PERIOD(base, cntNum) = CY_TCPWM_CNT_PERIOD_DEFAULT;
+ 251              		.loc 1 131 0
+ 252 001a 8161     		str	r1, [r0, #24]
+ 132:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_PERIOD_BUFF(base, cntNum) = CY_TCPWM_CNT_PERIOD_BUFF_DEFAULT;
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 8
+
+
+ 253              		.loc 1 132 0
+ 254 001c C161     		str	r1, [r0, #28]
+ 133:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_TR_CTRL1(base, cntNum) = CY_TCPWM_CNT_TR_CTRL1_DEFAULT;
+ 255              		.loc 1 133 0
+ 256 001e 0749     		ldr	r1, .L22
+ 257 0020 8162     		str	r1, [r0, #40]
+ 134:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_TR_CTRL2(base, cntNum) = CY_TCPWM_CNT_TR_CTRL2_DEFAULT;
+ 258              		.loc 1 134 0
+ 259 0022 3F21     		movs	r1, #63
+ 260 0024 C162     		str	r1, [r0, #44]
+ 135:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_INTR(base, cntNum) = CY_TCPWM_CNT_INTR_DEFAULT;
+ 261              		.loc 1 135 0
+ 262 0026 3C39     		subs	r1, r1, #60
+ 263 0028 4163     		str	r1, [r0, #52]
+ 136:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_INTR_SET(base, cntNum) = CY_TCPWM_CNT_INTR_SET_DEFAULT;
+ 264              		.loc 1 136 0
+ 265 002a 8363     		str	r3, [r0, #56]
+ 137:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     TCPWM_CNT_INTR_MASK(base, cntNum) = CY_TCPWM_CNT_INTR_MASK_DEFAULT;
+ 266              		.loc 1 137 0
+ 267 002c C363     		str	r3, [r0, #60]
+ 138:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     
+ 139:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     if (CY_TCPWM_INPUT_CREATOR != config->countInput)
+ 268              		.loc 1 139 0
+ 269 002e 936C     		ldr	r3, [r2, #72]
+ 270 0030 0133     		adds	r3, r3, #1
+ 271 0032 01D0     		beq	.L17
+ 140:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     {
+ 141:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****         TCPWM_CNT_TR_CTRL0(base, cntNum) = CY_TCPWM_CNT_TR_CTRL0_DEFAULT;
+ 272              		.loc 1 141 0
+ 273 0034 1023     		movs	r3, #16
+ 274 0036 4362     		str	r3, [r0, #36]
+ 275              	.L17:
+ 142:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c ****     }
+ 143:Generated_Source\PSoC6\pdl\drivers\peripheral\tcpwm/cy_tcpwm_counter.c **** }
+ 276              		.loc 1 143 0
+ 277              		@ sp needed
+ 278 0038 10BD     		pop	{r4, pc}
+ 279              	.L23:
+ 280 003a C046     		.align	2
+ 281              	.L22:
+ 282 003c FF030000 		.word	1023
+ 283              		.cfi_endproc
+ 284              	.LFE72:
+ 285              		.size	Cy_TCPWM_Counter_DeInit, .-Cy_TCPWM_Counter_DeInit
+ 286              		.text
+ 287              	.Letext0:
+ 288              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 289              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 290              		.file 4 "Generated_Source\\PSoC6\\pdl\\devices/psoc6/include/ip/cyip_tcpwm.h"
+ 291              		.file 5 "Generated_Source\\PSoC6\\pdl\\devices/psoc6/include/psoc6_01_config.h"
+ 292              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\tcpwm\\cy_tcpwm.h"
+ 293              		.file 7 "Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\tcpwm\\cy_tcpwm_counter.h"
+ 294              		.section	.debug_info,"",%progbits
+ 295              	.Ldebug_info0:
+ 296 0000 10040000 		.4byte	0x410
+ 297 0004 0400     		.2byte	0x4
+ 298 0006 00000000 		.4byte	.Ldebug_abbrev0
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 9
+
+
+ 299 000a 04       		.byte	0x4
+ 300 000b 01       		.uleb128 0x1
+ 301 000c 72030000 		.4byte	.LASF68
+ 302 0010 0C       		.byte	0xc
+ 303 0011 B6000000 		.4byte	.LASF69
+ 304 0015 B9020000 		.4byte	.LASF70
+ 305 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 306 001d 00000000 		.4byte	0
+ 307 0021 00000000 		.4byte	.Ldebug_line0
+ 308 0025 02       		.uleb128 0x2
+ 309 0026 01       		.byte	0x1
+ 310 0027 06       		.byte	0x6
+ 311 0028 1B020000 		.4byte	.LASF0
+ 312 002c 02       		.uleb128 0x2
+ 313 002d 01       		.byte	0x1
+ 314 002e 08       		.byte	0x8
+ 315 002f EE010000 		.4byte	.LASF1
+ 316 0033 02       		.uleb128 0x2
+ 317 0034 02       		.byte	0x2
+ 318 0035 05       		.byte	0x5
+ 319 0036 3C000000 		.4byte	.LASF2
+ 320 003a 02       		.uleb128 0x2
+ 321 003b 02       		.byte	0x2
+ 322 003c 07       		.byte	0x7
+ 323 003d 9A020000 		.4byte	.LASF3
+ 324 0041 02       		.uleb128 0x2
+ 325 0042 04       		.byte	0x4
+ 326 0043 05       		.byte	0x5
+ 327 0044 A8010000 		.4byte	.LASF4
+ 328 0048 03       		.uleb128 0x3
+ 329 0049 AB000000 		.4byte	.LASF9
+ 330 004d 02       		.byte	0x2
+ 331 004e 41       		.byte	0x41
+ 332 004f 53000000 		.4byte	0x53
+ 333 0053 02       		.uleb128 0x2
+ 334 0054 04       		.byte	0x4
+ 335 0055 07       		.byte	0x7
+ 336 0056 59030000 		.4byte	.LASF5
+ 337 005a 02       		.uleb128 0x2
+ 338 005b 08       		.byte	0x8
+ 339 005c 05       		.byte	0x5
+ 340 005d 7C010000 		.4byte	.LASF6
+ 341 0061 02       		.uleb128 0x2
+ 342 0062 08       		.byte	0x8
+ 343 0063 07       		.byte	0x7
+ 344 0064 30020000 		.4byte	.LASF7
+ 345 0068 04       		.uleb128 0x4
+ 346 0069 04       		.byte	0x4
+ 347 006a 05       		.byte	0x5
+ 348 006b 696E7400 		.ascii	"int\000"
+ 349 006f 02       		.uleb128 0x2
+ 350 0070 04       		.byte	0x4
+ 351 0071 07       		.byte	0x7
+ 352 0072 5F010000 		.4byte	.LASF8
+ 353 0076 03       		.uleb128 0x3
+ 354 0077 47020000 		.4byte	.LASF10
+ 355 007b 03       		.byte	0x3
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 10
+
+
+ 356 007c 30       		.byte	0x30
+ 357 007d 48000000 		.4byte	0x48
+ 358 0081 02       		.uleb128 0x2
+ 359 0082 08       		.byte	0x8
+ 360 0083 04       		.byte	0x4
+ 361 0084 D3010000 		.4byte	.LASF11
+ 362 0088 05       		.uleb128 0x5
+ 363 0089 76000000 		.4byte	0x76
+ 364 008d 06       		.uleb128 0x6
+ 365 008e 88000000 		.4byte	0x88
+ 366 0092 02       		.uleb128 0x2
+ 367 0093 04       		.byte	0x4
+ 368 0094 07       		.byte	0x7
+ 369 0095 46000000 		.4byte	.LASF12
+ 370 0099 07       		.uleb128 0x7
+ 371 009a 8D000000 		.4byte	0x8d
+ 372 009e A9000000 		.4byte	0xa9
+ 373 00a2 08       		.uleb128 0x8
+ 374 00a3 92000000 		.4byte	0x92
+ 375 00a7 37       		.byte	0x37
+ 376 00a8 00       		.byte	0
+ 377 00a9 09       		.uleb128 0x9
+ 378 00aa 40       		.byte	0x40
+ 379 00ab 04       		.byte	0x4
+ 380 00ac 22       		.byte	0x22
+ 381 00ad 71010000 		.4byte	0x171
+ 382 00b1 0A       		.uleb128 0xa
+ 383 00b2 0B020000 		.4byte	.LASF13
+ 384 00b6 04       		.byte	0x4
+ 385 00b7 23       		.byte	0x23
+ 386 00b8 88000000 		.4byte	0x88
+ 387 00bc 00       		.byte	0
+ 388 00bd 0A       		.uleb128 0xa
+ 389 00be 19030000 		.4byte	.LASF14
+ 390 00c2 04       		.byte	0x4
+ 391 00c3 24       		.byte	0x24
+ 392 00c4 8D000000 		.4byte	0x8d
+ 393 00c8 04       		.byte	0x4
+ 394 00c9 0A       		.uleb128 0xa
+ 395 00ca 5A040000 		.4byte	.LASF15
+ 396 00ce 04       		.byte	0x4
+ 397 00cf 25       		.byte	0x25
+ 398 00d0 88000000 		.4byte	0x88
+ 399 00d4 08       		.byte	0x8
+ 400 00d5 0B       		.uleb128 0xb
+ 401 00d6 434300   		.ascii	"CC\000"
+ 402 00d9 04       		.byte	0x4
+ 403 00da 26       		.byte	0x26
+ 404 00db 88000000 		.4byte	0x88
+ 405 00df 0C       		.byte	0xc
+ 406 00e0 0A       		.uleb128 0xa
+ 407 00e1 CB010000 		.4byte	.LASF16
+ 408 00e5 04       		.byte	0x4
+ 409 00e6 27       		.byte	0x27
+ 410 00e7 88000000 		.4byte	0x88
+ 411 00eb 10       		.byte	0x10
+ 412 00ec 0A       		.uleb128 0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 11
+
+
+ 413 00ed 76000000 		.4byte	.LASF17
+ 414 00f1 04       		.byte	0x4
+ 415 00f2 28       		.byte	0x28
+ 416 00f3 88000000 		.4byte	0x88
+ 417 00f7 14       		.byte	0x14
+ 418 00f8 0A       		.uleb128 0xa
+ 419 00f9 4F000000 		.4byte	.LASF18
+ 420 00fd 04       		.byte	0x4
+ 421 00fe 29       		.byte	0x29
+ 422 00ff 88000000 		.4byte	0x88
+ 423 0103 18       		.byte	0x18
+ 424 0104 0A       		.uleb128 0xa
+ 425 0105 62040000 		.4byte	.LASF19
+ 426 0109 04       		.byte	0x4
+ 427 010a 2A       		.byte	0x2a
+ 428 010b 8D000000 		.4byte	0x8d
+ 429 010f 1C       		.byte	0x1c
+ 430 0110 0A       		.uleb128 0xa
+ 431 0111 07010000 		.4byte	.LASF20
+ 432 0115 04       		.byte	0x4
+ 433 0116 2B       		.byte	0x2b
+ 434 0117 88000000 		.4byte	0x88
+ 435 011b 20       		.byte	0x20
+ 436 011c 0A       		.uleb128 0xa
+ 437 011d 88000000 		.4byte	.LASF21
+ 438 0121 04       		.byte	0x4
+ 439 0122 2C       		.byte	0x2c
+ 440 0123 88000000 		.4byte	0x88
+ 441 0127 24       		.byte	0x24
+ 442 0128 0A       		.uleb128 0xa
+ 443 0129 91000000 		.4byte	.LASF22
+ 444 012d 04       		.byte	0x4
+ 445 012e 2D       		.byte	0x2d
+ 446 012f 88000000 		.4byte	0x88
+ 447 0133 28       		.byte	0x28
+ 448 0134 0A       		.uleb128 0xa
+ 449 0135 4F030000 		.4byte	.LASF23
+ 450 0139 04       		.byte	0x4
+ 451 013a 2E       		.byte	0x2e
+ 452 013b 8D000000 		.4byte	0x8d
+ 453 013f 2C       		.byte	0x2c
+ 454 0140 0A       		.uleb128 0xa
+ 455 0141 39030000 		.4byte	.LASF24
+ 456 0145 04       		.byte	0x4
+ 457 0146 2F       		.byte	0x2f
+ 458 0147 88000000 		.4byte	0x88
+ 459 014b 30       		.byte	0x30
+ 460 014c 0A       		.uleb128 0xa
+ 461 014d 27020000 		.4byte	.LASF25
+ 462 0151 04       		.byte	0x4
+ 463 0152 30       		.byte	0x30
+ 464 0153 88000000 		.4byte	0x88
+ 465 0157 34       		.byte	0x34
+ 466 0158 0A       		.uleb128 0xa
+ 467 0159 8B040000 		.4byte	.LASF26
+ 468 015d 04       		.byte	0x4
+ 469 015e 31       		.byte	0x31
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 12
+
+
+ 470 015f 88000000 		.4byte	0x88
+ 471 0163 38       		.byte	0x38
+ 472 0164 0A       		.uleb128 0xa
+ 473 0165 BF010000 		.4byte	.LASF27
+ 474 0169 04       		.byte	0x4
+ 475 016a 32       		.byte	0x32
+ 476 016b 8D000000 		.4byte	0x8d
+ 477 016f 3C       		.byte	0x3c
+ 478 0170 00       		.byte	0
+ 479 0171 03       		.uleb128 0x3
+ 480 0172 5B000000 		.4byte	.LASF28
+ 481 0176 04       		.byte	0x4
+ 482 0177 33       		.byte	0x33
+ 483 0178 A9000000 		.4byte	0xa9
+ 484 017c 0C       		.uleb128 0xc
+ 485 017d 0009     		.2byte	0x900
+ 486 017f 04       		.byte	0x4
+ 487 0180 38       		.byte	0x38
+ 488 0181 FF010000 		.4byte	0x1ff
+ 489 0185 0A       		.uleb128 0xa
+ 490 0186 0B020000 		.4byte	.LASF13
+ 491 018a 04       		.byte	0x4
+ 492 018b 39       		.byte	0x39
+ 493 018c 88000000 		.4byte	0x88
+ 494 0190 00       		.byte	0
+ 495 0191 0A       		.uleb128 0xa
+ 496 0192 39040000 		.4byte	.LASF29
+ 497 0196 04       		.byte	0x4
+ 498 0197 3A       		.byte	0x3a
+ 499 0198 88000000 		.4byte	0x88
+ 500 019c 04       		.byte	0x4
+ 501 019d 0A       		.uleb128 0xa
+ 502 019e 6D000000 		.4byte	.LASF30
+ 503 01a2 04       		.byte	0x4
+ 504 01a3 3B       		.byte	0x3b
+ 505 01a4 88000000 		.4byte	0x88
+ 506 01a8 08       		.byte	0x8
+ 507 01a9 0A       		.uleb128 0xa
+ 508 01aa 32010000 		.4byte	.LASF31
+ 509 01ae 04       		.byte	0x4
+ 510 01af 3C       		.byte	0x3c
+ 511 01b0 88000000 		.4byte	0x88
+ 512 01b4 0C       		.byte	0xc
+ 513 01b5 0A       		.uleb128 0xa
+ 514 01b6 7D000000 		.4byte	.LASF32
+ 515 01ba 04       		.byte	0x4
+ 516 01bb 3D       		.byte	0x3d
+ 517 01bc 88000000 		.4byte	0x88
+ 518 01c0 10       		.byte	0x10
+ 519 01c1 0A       		.uleb128 0xa
+ 520 01c2 73020000 		.4byte	.LASF33
+ 521 01c6 04       		.byte	0x4
+ 522 01c7 3E       		.byte	0x3e
+ 523 01c8 88000000 		.4byte	0x88
+ 524 01cc 14       		.byte	0x14
+ 525 01cd 0A       		.uleb128 0xa
+ 526 01ce 4F010000 		.4byte	.LASF34
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 13
+
+
+ 527 01d2 04       		.byte	0x4
+ 528 01d3 3F       		.byte	0x3f
+ 529 01d4 88000000 		.4byte	0x88
+ 530 01d8 18       		.byte	0x18
+ 531 01d9 0A       		.uleb128 0xa
+ 532 01da 10020000 		.4byte	.LASF35
+ 533 01de 04       		.byte	0x4
+ 534 01df 40       		.byte	0x40
+ 535 01e0 8D000000 		.4byte	0x8d
+ 536 01e4 1C       		.byte	0x1c
+ 537 01e5 0A       		.uleb128 0xa
+ 538 01e6 62040000 		.4byte	.LASF19
+ 539 01ea 04       		.byte	0x4
+ 540 01eb 41       		.byte	0x41
+ 541 01ec 04020000 		.4byte	0x204
+ 542 01f0 20       		.byte	0x20
+ 543 01f1 0D       		.uleb128 0xd
+ 544 01f2 434E5400 		.ascii	"CNT\000"
+ 545 01f6 04       		.byte	0x4
+ 546 01f7 42       		.byte	0x42
+ 547 01f8 09020000 		.4byte	0x209
+ 548 01fc 0001     		.2byte	0x100
+ 549 01fe 00       		.byte	0
+ 550 01ff 05       		.uleb128 0x5
+ 551 0200 99000000 		.4byte	0x99
+ 552 0204 06       		.uleb128 0x6
+ 553 0205 FF010000 		.4byte	0x1ff
+ 554 0209 07       		.uleb128 0x7
+ 555 020a 71010000 		.4byte	0x171
+ 556 020e 19020000 		.4byte	0x219
+ 557 0212 08       		.uleb128 0x8
+ 558 0213 92000000 		.4byte	0x92
+ 559 0217 1F       		.byte	0x1f
+ 560 0218 00       		.byte	0
+ 561 0219 03       		.uleb128 0x3
+ 562 021a 17010000 		.4byte	.LASF36
+ 563 021e 04       		.byte	0x4
+ 564 021f 43       		.byte	0x43
+ 565 0220 7C010000 		.4byte	0x17c
+ 566 0224 0E       		.uleb128 0xe
+ 567 0225 95040000 		.4byte	.LASF37
+ 568 0229 05       		.byte	0x5
+ 569 022a 4206     		.2byte	0x642
+ 570 022c 19020000 		.4byte	0x219
+ 571 0230 02       		.uleb128 0x2
+ 572 0231 01       		.byte	0x1
+ 573 0232 08       		.byte	0x8
+ 574 0233 B4020000 		.4byte	.LASF38
+ 575 0237 02       		.uleb128 0x2
+ 576 0238 04       		.byte	0x4
+ 577 0239 04       		.byte	0x4
+ 578 023a 59010000 		.4byte	.LASF39
+ 579 023e 02       		.uleb128 0x2
+ 580 023f 08       		.byte	0x8
+ 581 0240 04       		.byte	0x4
+ 582 0241 6B030000 		.4byte	.LASF40
+ 583 0245 0F       		.uleb128 0xf
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 14
+
+
+ 584 0246 04       		.byte	0x4
+ 585 0247 6F000000 		.4byte	0x6f
+ 586 024b 06       		.byte	0x6
+ 587 024c 7301     		.2byte	0x173
+ 588 024e 62020000 		.4byte	0x262
+ 589 0252 10       		.uleb128 0x10
+ 590 0253 9A000000 		.4byte	.LASF41
+ 591 0257 00       		.byte	0
+ 592 0258 11       		.uleb128 0x11
+ 593 0259 20030000 		.4byte	.LASF42
+ 594 025d 0100B600 		.4byte	0xb60001
+ 595 0261 00       		.byte	0
+ 596 0262 0E       		.uleb128 0xe
+ 597 0263 6B040000 		.4byte	.LASF43
+ 598 0267 06       		.byte	0x6
+ 599 0268 7601     		.2byte	0x176
+ 600 026a 45020000 		.4byte	0x245
+ 601 026e 12       		.uleb128 0x12
+ 602 026f 04040000 		.4byte	.LASF71
+ 603 0273 4C       		.byte	0x4c
+ 604 0274 07       		.byte	0x7
+ 605 0275 2F       		.byte	0x2f
+ 606 0276 5F030000 		.4byte	0x35f
+ 607 027a 0A       		.uleb128 0xa
+ 608 027b B1010000 		.4byte	.LASF44
+ 609 027f 07       		.byte	0x7
+ 610 0280 31       		.byte	0x31
+ 611 0281 76000000 		.4byte	0x76
+ 612 0285 00       		.byte	0
+ 613 0286 0A       		.uleb128 0xa
+ 614 0287 0C000000 		.4byte	.LASF45
+ 615 028b 07       		.byte	0x7
+ 616 028c 33       		.byte	0x33
+ 617 028d 76000000 		.4byte	0x76
+ 618 0291 04       		.byte	0x4
+ 619 0292 0A       		.uleb128 0xa
+ 620 0293 8A010000 		.4byte	.LASF46
+ 621 0297 07       		.byte	0x7
+ 622 0298 34       		.byte	0x34
+ 623 0299 76000000 		.4byte	0x76
+ 624 029d 08       		.byte	0x8
+ 625 029e 0A       		.uleb128 0xa
+ 626 029f FC010000 		.4byte	.LASF47
+ 627 02a3 07       		.byte	0x7
+ 628 02a4 35       		.byte	0x35
+ 629 02a5 76000000 		.4byte	0x76
+ 630 02a9 0C       		.byte	0xc
+ 631 02aa 0A       		.uleb128 0xa
+ 632 02ab 50020000 		.4byte	.LASF48
+ 633 02af 07       		.byte	0x7
+ 634 02b0 37       		.byte	0x37
+ 635 02b1 76000000 		.4byte	0x76
+ 636 02b5 10       		.byte	0x10
+ 637 02b6 0A       		.uleb128 0xa
+ 638 02b7 2A000000 		.4byte	.LASF49
+ 639 02bb 07       		.byte	0x7
+ 640 02bc 38       		.byte	0x38
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 15
+
+
+ 641 02bd 76000000 		.4byte	0x76
+ 642 02c1 14       		.byte	0x14
+ 643 02c2 0A       		.uleb128 0xa
+ 644 02c3 33000000 		.4byte	.LASF50
+ 645 02c7 07       		.byte	0x7
+ 646 02c8 39       		.byte	0x39
+ 647 02c9 76000000 		.4byte	0x76
+ 648 02cd 18       		.byte	0x18
+ 649 02ce 0A       		.uleb128 0xa
+ 650 02cf 61020000 		.4byte	.LASF51
+ 651 02d3 07       		.byte	0x7
+ 652 02d4 3A       		.byte	0x3a
+ 653 02d5 5F030000 		.4byte	0x35f
+ 654 02d9 1C       		.byte	0x1c
+ 655 02da 0A       		.uleb128 0xa
+ 656 02db 3E010000 		.4byte	.LASF52
+ 657 02df 07       		.byte	0x7
+ 658 02e0 3C       		.byte	0x3c
+ 659 02e1 76000000 		.4byte	0x76
+ 660 02e5 20       		.byte	0x20
+ 661 02e6 0A       		.uleb128 0xa
+ 662 02e7 3E030000 		.4byte	.LASF53
+ 663 02eb 07       		.byte	0x7
+ 664 02ec 3D       		.byte	0x3d
+ 665 02ed 76000000 		.4byte	0x76
+ 666 02f1 24       		.byte	0x24
+ 667 02f2 0A       		.uleb128 0xa
+ 668 02f3 25010000 		.4byte	.LASF54
+ 669 02f7 07       		.byte	0x7
+ 670 02f8 3F       		.byte	0x3f
+ 671 02f9 76000000 		.4byte	0x76
+ 672 02fd 28       		.byte	0x28
+ 673 02fe 0A       		.uleb128 0xa
+ 674 02ff 6C010000 		.4byte	.LASF55
+ 675 0303 07       		.byte	0x7
+ 676 0304 40       		.byte	0x40
+ 677 0305 76000000 		.4byte	0x76
+ 678 0309 2C       		.byte	0x2c
+ 679 030a 0A       		.uleb128 0xa
+ 680 030b 00000000 		.4byte	.LASF56
+ 681 030f 07       		.byte	0x7
+ 682 0310 42       		.byte	0x42
+ 683 0311 76000000 		.4byte	0x76
+ 684 0315 30       		.byte	0x30
+ 685 0316 0A       		.uleb128 0xa
+ 686 0317 DF010000 		.4byte	.LASF57
+ 687 031b 07       		.byte	0x7
+ 688 031c 43       		.byte	0x43
+ 689 031d 76000000 		.4byte	0x76
+ 690 0321 34       		.byte	0x34
+ 691 0322 0A       		.uleb128 0xa
+ 692 0323 20040000 		.4byte	.LASF58
+ 693 0327 07       		.byte	0x7
+ 694 0328 45       		.byte	0x45
+ 695 0329 76000000 		.4byte	0x76
+ 696 032d 38       		.byte	0x38
+ 697 032e 0A       		.uleb128 0xa
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 16
+
+
+ 698 032f 2B040000 		.4byte	.LASF59
+ 699 0333 07       		.byte	0x7
+ 700 0334 46       		.byte	0x46
+ 701 0335 76000000 		.4byte	0x76
+ 702 0339 3C       		.byte	0x3c
+ 703 033a 0A       		.uleb128 0xa
+ 704 033b FD000000 		.4byte	.LASF60
+ 705 033f 07       		.byte	0x7
+ 706 0340 48       		.byte	0x48
+ 707 0341 76000000 		.4byte	0x76
+ 708 0345 40       		.byte	0x40
+ 709 0346 0A       		.uleb128 0xa
+ 710 0347 1B000000 		.4byte	.LASF61
+ 711 034b 07       		.byte	0x7
+ 712 034c 49       		.byte	0x49
+ 713 034d 76000000 		.4byte	0x76
+ 714 0351 44       		.byte	0x44
+ 715 0352 0A       		.uleb128 0xa
+ 716 0353 80040000 		.4byte	.LASF62
+ 717 0357 07       		.byte	0x7
+ 718 0358 4B       		.byte	0x4b
+ 719 0359 76000000 		.4byte	0x76
+ 720 035d 48       		.byte	0x48
+ 721 035e 00       		.byte	0
+ 722 035f 02       		.uleb128 0x2
+ 723 0360 01       		.byte	0x1
+ 724 0361 02       		.byte	0x2
+ 725 0362 33030000 		.4byte	.LASF63
+ 726 0366 03       		.uleb128 0x3
+ 727 0367 7C020000 		.4byte	.LASF64
+ 728 036b 07       		.byte	0x7
+ 729 036c 4C       		.byte	0x4c
+ 730 036d 6E020000 		.4byte	0x26e
+ 731 0371 13       		.uleb128 0x13
+ 732 0372 92010000 		.4byte	.LASF72
+ 733 0376 01       		.byte	0x1
+ 734 0377 2F       		.byte	0x2f
+ 735 0378 62020000 		.4byte	0x262
+ 736 037c 00000000 		.4byte	.LFB71
+ 737 0380 F0000000 		.4byte	.LFE71-.LFB71
+ 738 0384 01       		.uleb128 0x1
+ 739 0385 9C       		.byte	0x9c
+ 740 0386 C5030000 		.4byte	0x3c5
+ 741 038a 14       		.uleb128 0x14
+ 742 038b A0040000 		.4byte	.LASF65
+ 743 038f 01       		.byte	0x1
+ 744 0390 2F       		.byte	0x2f
+ 745 0391 C5030000 		.4byte	0x3c5
+ 746 0395 00000000 		.4byte	.LLST0
+ 747 0399 14       		.uleb128 0x14
+ 748 039a B8010000 		.4byte	.LASF66
+ 749 039e 01       		.byte	0x1
+ 750 039f 2F       		.byte	0x2f
+ 751 03a0 76000000 		.4byte	0x76
+ 752 03a4 3A000000 		.4byte	.LLST1
+ 753 03a8 15       		.uleb128 0x15
+ 754 03a9 10010000 		.4byte	.LASF67
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 17
+
+
+ 755 03ad 01       		.byte	0x1
+ 756 03ae 30       		.byte	0x30
+ 757 03af CB030000 		.4byte	0x3cb
+ 758 03b3 01       		.uleb128 0x1
+ 759 03b4 52       		.byte	0x52
+ 760 03b5 16       		.uleb128 0x16
+ 761 03b6 AD020000 		.4byte	.LASF73
+ 762 03ba 01       		.byte	0x1
+ 763 03bb 32       		.byte	0x32
+ 764 03bc 62020000 		.4byte	0x262
+ 765 03c0 74000000 		.4byte	.LLST2
+ 766 03c4 00       		.byte	0
+ 767 03c5 17       		.uleb128 0x17
+ 768 03c6 04       		.byte	0x4
+ 769 03c7 24020000 		.4byte	0x224
+ 770 03cb 17       		.uleb128 0x17
+ 771 03cc 04       		.byte	0x4
+ 772 03cd D1030000 		.4byte	0x3d1
+ 773 03d1 06       		.uleb128 0x6
+ 774 03d2 66030000 		.4byte	0x366
+ 775 03d6 18       		.uleb128 0x18
+ 776 03d7 42040000 		.4byte	.LASF74
+ 777 03db 01       		.byte	0x1
+ 778 03dc 7D       		.byte	0x7d
+ 779 03dd 00000000 		.4byte	.LFB72
+ 780 03e1 40000000 		.4byte	.LFE72-.LFB72
+ 781 03e5 01       		.uleb128 0x1
+ 782 03e6 9C       		.byte	0x9c
+ 783 03e7 14       		.uleb128 0x14
+ 784 03e8 A0040000 		.4byte	.LASF65
+ 785 03ec 01       		.byte	0x1
+ 786 03ed 7D       		.byte	0x7d
+ 787 03ee C5030000 		.4byte	0x3c5
+ 788 03f2 B3000000 		.4byte	.LLST3
+ 789 03f6 14       		.uleb128 0x14
+ 790 03f7 B8010000 		.4byte	.LASF66
+ 791 03fb 01       		.byte	0x1
+ 792 03fc 7D       		.byte	0x7d
+ 793 03fd 76000000 		.4byte	0x76
+ 794 0401 D4000000 		.4byte	.LLST4
+ 795 0405 15       		.uleb128 0x15
+ 796 0406 10010000 		.4byte	.LASF67
+ 797 040a 01       		.byte	0x1
+ 798 040b 7D       		.byte	0x7d
+ 799 040c CB030000 		.4byte	0x3cb
+ 800 0410 01       		.uleb128 0x1
+ 801 0411 52       		.byte	0x52
+ 802 0412 00       		.byte	0
+ 803 0413 00       		.byte	0
+ 804              		.section	.debug_abbrev,"",%progbits
+ 805              	.Ldebug_abbrev0:
+ 806 0000 01       		.uleb128 0x1
+ 807 0001 11       		.uleb128 0x11
+ 808 0002 01       		.byte	0x1
+ 809 0003 25       		.uleb128 0x25
+ 810 0004 0E       		.uleb128 0xe
+ 811 0005 13       		.uleb128 0x13
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 18
+
+
+ 812 0006 0B       		.uleb128 0xb
+ 813 0007 03       		.uleb128 0x3
+ 814 0008 0E       		.uleb128 0xe
+ 815 0009 1B       		.uleb128 0x1b
+ 816 000a 0E       		.uleb128 0xe
+ 817 000b 55       		.uleb128 0x55
+ 818 000c 17       		.uleb128 0x17
+ 819 000d 11       		.uleb128 0x11
+ 820 000e 01       		.uleb128 0x1
+ 821 000f 10       		.uleb128 0x10
+ 822 0010 17       		.uleb128 0x17
+ 823 0011 00       		.byte	0
+ 824 0012 00       		.byte	0
+ 825 0013 02       		.uleb128 0x2
+ 826 0014 24       		.uleb128 0x24
+ 827 0015 00       		.byte	0
+ 828 0016 0B       		.uleb128 0xb
+ 829 0017 0B       		.uleb128 0xb
+ 830 0018 3E       		.uleb128 0x3e
+ 831 0019 0B       		.uleb128 0xb
+ 832 001a 03       		.uleb128 0x3
+ 833 001b 0E       		.uleb128 0xe
+ 834 001c 00       		.byte	0
+ 835 001d 00       		.byte	0
+ 836 001e 03       		.uleb128 0x3
+ 837 001f 16       		.uleb128 0x16
+ 838 0020 00       		.byte	0
+ 839 0021 03       		.uleb128 0x3
+ 840 0022 0E       		.uleb128 0xe
+ 841 0023 3A       		.uleb128 0x3a
+ 842 0024 0B       		.uleb128 0xb
+ 843 0025 3B       		.uleb128 0x3b
+ 844 0026 0B       		.uleb128 0xb
+ 845 0027 49       		.uleb128 0x49
+ 846 0028 13       		.uleb128 0x13
+ 847 0029 00       		.byte	0
+ 848 002a 00       		.byte	0
+ 849 002b 04       		.uleb128 0x4
+ 850 002c 24       		.uleb128 0x24
+ 851 002d 00       		.byte	0
+ 852 002e 0B       		.uleb128 0xb
+ 853 002f 0B       		.uleb128 0xb
+ 854 0030 3E       		.uleb128 0x3e
+ 855 0031 0B       		.uleb128 0xb
+ 856 0032 03       		.uleb128 0x3
+ 857 0033 08       		.uleb128 0x8
+ 858 0034 00       		.byte	0
+ 859 0035 00       		.byte	0
+ 860 0036 05       		.uleb128 0x5
+ 861 0037 35       		.uleb128 0x35
+ 862 0038 00       		.byte	0
+ 863 0039 49       		.uleb128 0x49
+ 864 003a 13       		.uleb128 0x13
+ 865 003b 00       		.byte	0
+ 866 003c 00       		.byte	0
+ 867 003d 06       		.uleb128 0x6
+ 868 003e 26       		.uleb128 0x26
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 19
+
+
+ 869 003f 00       		.byte	0
+ 870 0040 49       		.uleb128 0x49
+ 871 0041 13       		.uleb128 0x13
+ 872 0042 00       		.byte	0
+ 873 0043 00       		.byte	0
+ 874 0044 07       		.uleb128 0x7
+ 875 0045 01       		.uleb128 0x1
+ 876 0046 01       		.byte	0x1
+ 877 0047 49       		.uleb128 0x49
+ 878 0048 13       		.uleb128 0x13
+ 879 0049 01       		.uleb128 0x1
+ 880 004a 13       		.uleb128 0x13
+ 881 004b 00       		.byte	0
+ 882 004c 00       		.byte	0
+ 883 004d 08       		.uleb128 0x8
+ 884 004e 21       		.uleb128 0x21
+ 885 004f 00       		.byte	0
+ 886 0050 49       		.uleb128 0x49
+ 887 0051 13       		.uleb128 0x13
+ 888 0052 2F       		.uleb128 0x2f
+ 889 0053 0B       		.uleb128 0xb
+ 890 0054 00       		.byte	0
+ 891 0055 00       		.byte	0
+ 892 0056 09       		.uleb128 0x9
+ 893 0057 13       		.uleb128 0x13
+ 894 0058 01       		.byte	0x1
+ 895 0059 0B       		.uleb128 0xb
+ 896 005a 0B       		.uleb128 0xb
+ 897 005b 3A       		.uleb128 0x3a
+ 898 005c 0B       		.uleb128 0xb
+ 899 005d 3B       		.uleb128 0x3b
+ 900 005e 0B       		.uleb128 0xb
+ 901 005f 01       		.uleb128 0x1
+ 902 0060 13       		.uleb128 0x13
+ 903 0061 00       		.byte	0
+ 904 0062 00       		.byte	0
+ 905 0063 0A       		.uleb128 0xa
+ 906 0064 0D       		.uleb128 0xd
+ 907 0065 00       		.byte	0
+ 908 0066 03       		.uleb128 0x3
+ 909 0067 0E       		.uleb128 0xe
+ 910 0068 3A       		.uleb128 0x3a
+ 911 0069 0B       		.uleb128 0xb
+ 912 006a 3B       		.uleb128 0x3b
+ 913 006b 0B       		.uleb128 0xb
+ 914 006c 49       		.uleb128 0x49
+ 915 006d 13       		.uleb128 0x13
+ 916 006e 38       		.uleb128 0x38
+ 917 006f 0B       		.uleb128 0xb
+ 918 0070 00       		.byte	0
+ 919 0071 00       		.byte	0
+ 920 0072 0B       		.uleb128 0xb
+ 921 0073 0D       		.uleb128 0xd
+ 922 0074 00       		.byte	0
+ 923 0075 03       		.uleb128 0x3
+ 924 0076 08       		.uleb128 0x8
+ 925 0077 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 20
+
+
+ 926 0078 0B       		.uleb128 0xb
+ 927 0079 3B       		.uleb128 0x3b
+ 928 007a 0B       		.uleb128 0xb
+ 929 007b 49       		.uleb128 0x49
+ 930 007c 13       		.uleb128 0x13
+ 931 007d 38       		.uleb128 0x38
+ 932 007e 0B       		.uleb128 0xb
+ 933 007f 00       		.byte	0
+ 934 0080 00       		.byte	0
+ 935 0081 0C       		.uleb128 0xc
+ 936 0082 13       		.uleb128 0x13
+ 937 0083 01       		.byte	0x1
+ 938 0084 0B       		.uleb128 0xb
+ 939 0085 05       		.uleb128 0x5
+ 940 0086 3A       		.uleb128 0x3a
+ 941 0087 0B       		.uleb128 0xb
+ 942 0088 3B       		.uleb128 0x3b
+ 943 0089 0B       		.uleb128 0xb
+ 944 008a 01       		.uleb128 0x1
+ 945 008b 13       		.uleb128 0x13
+ 946 008c 00       		.byte	0
+ 947 008d 00       		.byte	0
+ 948 008e 0D       		.uleb128 0xd
+ 949 008f 0D       		.uleb128 0xd
+ 950 0090 00       		.byte	0
+ 951 0091 03       		.uleb128 0x3
+ 952 0092 08       		.uleb128 0x8
+ 953 0093 3A       		.uleb128 0x3a
+ 954 0094 0B       		.uleb128 0xb
+ 955 0095 3B       		.uleb128 0x3b
+ 956 0096 0B       		.uleb128 0xb
+ 957 0097 49       		.uleb128 0x49
+ 958 0098 13       		.uleb128 0x13
+ 959 0099 38       		.uleb128 0x38
+ 960 009a 05       		.uleb128 0x5
+ 961 009b 00       		.byte	0
+ 962 009c 00       		.byte	0
+ 963 009d 0E       		.uleb128 0xe
+ 964 009e 16       		.uleb128 0x16
+ 965 009f 00       		.byte	0
+ 966 00a0 03       		.uleb128 0x3
+ 967 00a1 0E       		.uleb128 0xe
+ 968 00a2 3A       		.uleb128 0x3a
+ 969 00a3 0B       		.uleb128 0xb
+ 970 00a4 3B       		.uleb128 0x3b
+ 971 00a5 05       		.uleb128 0x5
+ 972 00a6 49       		.uleb128 0x49
+ 973 00a7 13       		.uleb128 0x13
+ 974 00a8 00       		.byte	0
+ 975 00a9 00       		.byte	0
+ 976 00aa 0F       		.uleb128 0xf
+ 977 00ab 04       		.uleb128 0x4
+ 978 00ac 01       		.byte	0x1
+ 979 00ad 0B       		.uleb128 0xb
+ 980 00ae 0B       		.uleb128 0xb
+ 981 00af 49       		.uleb128 0x49
+ 982 00b0 13       		.uleb128 0x13
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 21
+
+
+ 983 00b1 3A       		.uleb128 0x3a
+ 984 00b2 0B       		.uleb128 0xb
+ 985 00b3 3B       		.uleb128 0x3b
+ 986 00b4 05       		.uleb128 0x5
+ 987 00b5 01       		.uleb128 0x1
+ 988 00b6 13       		.uleb128 0x13
+ 989 00b7 00       		.byte	0
+ 990 00b8 00       		.byte	0
+ 991 00b9 10       		.uleb128 0x10
+ 992 00ba 28       		.uleb128 0x28
+ 993 00bb 00       		.byte	0
+ 994 00bc 03       		.uleb128 0x3
+ 995 00bd 0E       		.uleb128 0xe
+ 996 00be 1C       		.uleb128 0x1c
+ 997 00bf 0B       		.uleb128 0xb
+ 998 00c0 00       		.byte	0
+ 999 00c1 00       		.byte	0
+ 1000 00c2 11       		.uleb128 0x11
+ 1001 00c3 28       		.uleb128 0x28
+ 1002 00c4 00       		.byte	0
+ 1003 00c5 03       		.uleb128 0x3
+ 1004 00c6 0E       		.uleb128 0xe
+ 1005 00c7 1C       		.uleb128 0x1c
+ 1006 00c8 06       		.uleb128 0x6
+ 1007 00c9 00       		.byte	0
+ 1008 00ca 00       		.byte	0
+ 1009 00cb 12       		.uleb128 0x12
+ 1010 00cc 13       		.uleb128 0x13
+ 1011 00cd 01       		.byte	0x1
+ 1012 00ce 03       		.uleb128 0x3
+ 1013 00cf 0E       		.uleb128 0xe
+ 1014 00d0 0B       		.uleb128 0xb
+ 1015 00d1 0B       		.uleb128 0xb
+ 1016 00d2 3A       		.uleb128 0x3a
+ 1017 00d3 0B       		.uleb128 0xb
+ 1018 00d4 3B       		.uleb128 0x3b
+ 1019 00d5 0B       		.uleb128 0xb
+ 1020 00d6 01       		.uleb128 0x1
+ 1021 00d7 13       		.uleb128 0x13
+ 1022 00d8 00       		.byte	0
+ 1023 00d9 00       		.byte	0
+ 1024 00da 13       		.uleb128 0x13
+ 1025 00db 2E       		.uleb128 0x2e
+ 1026 00dc 01       		.byte	0x1
+ 1027 00dd 3F       		.uleb128 0x3f
+ 1028 00de 19       		.uleb128 0x19
+ 1029 00df 03       		.uleb128 0x3
+ 1030 00e0 0E       		.uleb128 0xe
+ 1031 00e1 3A       		.uleb128 0x3a
+ 1032 00e2 0B       		.uleb128 0xb
+ 1033 00e3 3B       		.uleb128 0x3b
+ 1034 00e4 0B       		.uleb128 0xb
+ 1035 00e5 27       		.uleb128 0x27
+ 1036 00e6 19       		.uleb128 0x19
+ 1037 00e7 49       		.uleb128 0x49
+ 1038 00e8 13       		.uleb128 0x13
+ 1039 00e9 11       		.uleb128 0x11
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 22
+
+
+ 1040 00ea 01       		.uleb128 0x1
+ 1041 00eb 12       		.uleb128 0x12
+ 1042 00ec 06       		.uleb128 0x6
+ 1043 00ed 40       		.uleb128 0x40
+ 1044 00ee 18       		.uleb128 0x18
+ 1045 00ef 9742     		.uleb128 0x2117
+ 1046 00f1 19       		.uleb128 0x19
+ 1047 00f2 01       		.uleb128 0x1
+ 1048 00f3 13       		.uleb128 0x13
+ 1049 00f4 00       		.byte	0
+ 1050 00f5 00       		.byte	0
+ 1051 00f6 14       		.uleb128 0x14
+ 1052 00f7 05       		.uleb128 0x5
+ 1053 00f8 00       		.byte	0
+ 1054 00f9 03       		.uleb128 0x3
+ 1055 00fa 0E       		.uleb128 0xe
+ 1056 00fb 3A       		.uleb128 0x3a
+ 1057 00fc 0B       		.uleb128 0xb
+ 1058 00fd 3B       		.uleb128 0x3b
+ 1059 00fe 0B       		.uleb128 0xb
+ 1060 00ff 49       		.uleb128 0x49
+ 1061 0100 13       		.uleb128 0x13
+ 1062 0101 02       		.uleb128 0x2
+ 1063 0102 17       		.uleb128 0x17
+ 1064 0103 00       		.byte	0
+ 1065 0104 00       		.byte	0
+ 1066 0105 15       		.uleb128 0x15
+ 1067 0106 05       		.uleb128 0x5
+ 1068 0107 00       		.byte	0
+ 1069 0108 03       		.uleb128 0x3
+ 1070 0109 0E       		.uleb128 0xe
+ 1071 010a 3A       		.uleb128 0x3a
+ 1072 010b 0B       		.uleb128 0xb
+ 1073 010c 3B       		.uleb128 0x3b
+ 1074 010d 0B       		.uleb128 0xb
+ 1075 010e 49       		.uleb128 0x49
+ 1076 010f 13       		.uleb128 0x13
+ 1077 0110 02       		.uleb128 0x2
+ 1078 0111 18       		.uleb128 0x18
+ 1079 0112 00       		.byte	0
+ 1080 0113 00       		.byte	0
+ 1081 0114 16       		.uleb128 0x16
+ 1082 0115 34       		.uleb128 0x34
+ 1083 0116 00       		.byte	0
+ 1084 0117 03       		.uleb128 0x3
+ 1085 0118 0E       		.uleb128 0xe
+ 1086 0119 3A       		.uleb128 0x3a
+ 1087 011a 0B       		.uleb128 0xb
+ 1088 011b 3B       		.uleb128 0x3b
+ 1089 011c 0B       		.uleb128 0xb
+ 1090 011d 49       		.uleb128 0x49
+ 1091 011e 13       		.uleb128 0x13
+ 1092 011f 02       		.uleb128 0x2
+ 1093 0120 17       		.uleb128 0x17
+ 1094 0121 00       		.byte	0
+ 1095 0122 00       		.byte	0
+ 1096 0123 17       		.uleb128 0x17
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 23
+
+
+ 1097 0124 0F       		.uleb128 0xf
+ 1098 0125 00       		.byte	0
+ 1099 0126 0B       		.uleb128 0xb
+ 1100 0127 0B       		.uleb128 0xb
+ 1101 0128 49       		.uleb128 0x49
+ 1102 0129 13       		.uleb128 0x13
+ 1103 012a 00       		.byte	0
+ 1104 012b 00       		.byte	0
+ 1105 012c 18       		.uleb128 0x18
+ 1106 012d 2E       		.uleb128 0x2e
+ 1107 012e 01       		.byte	0x1
+ 1108 012f 3F       		.uleb128 0x3f
+ 1109 0130 19       		.uleb128 0x19
+ 1110 0131 03       		.uleb128 0x3
+ 1111 0132 0E       		.uleb128 0xe
+ 1112 0133 3A       		.uleb128 0x3a
+ 1113 0134 0B       		.uleb128 0xb
+ 1114 0135 3B       		.uleb128 0x3b
+ 1115 0136 0B       		.uleb128 0xb
+ 1116 0137 27       		.uleb128 0x27
+ 1117 0138 19       		.uleb128 0x19
+ 1118 0139 11       		.uleb128 0x11
+ 1119 013a 01       		.uleb128 0x1
+ 1120 013b 12       		.uleb128 0x12
+ 1121 013c 06       		.uleb128 0x6
+ 1122 013d 40       		.uleb128 0x40
+ 1123 013e 18       		.uleb128 0x18
+ 1124 013f 9742     		.uleb128 0x2117
+ 1125 0141 19       		.uleb128 0x19
+ 1126 0142 00       		.byte	0
+ 1127 0143 00       		.byte	0
+ 1128 0144 00       		.byte	0
+ 1129              		.section	.debug_loc,"",%progbits
+ 1130              	.Ldebug_loc0:
+ 1131              	.LLST0:
+ 1132 0000 00000000 		.4byte	.LVL0
+ 1133 0004 D8000000 		.4byte	.LVL2
+ 1134 0008 0100     		.2byte	0x1
+ 1135 000a 50       		.byte	0x50
+ 1136 000b D8000000 		.4byte	.LVL2
+ 1137 000f E8000000 		.4byte	.LVL4
+ 1138 0013 0400     		.2byte	0x4
+ 1139 0015 F3       		.byte	0xf3
+ 1140 0016 01       		.uleb128 0x1
+ 1141 0017 50       		.byte	0x50
+ 1142 0018 9F       		.byte	0x9f
+ 1143 0019 E8000000 		.4byte	.LVL4
+ 1144 001d EA000000 		.4byte	.LVL5
+ 1145 0021 0100     		.2byte	0x1
+ 1146 0023 50       		.byte	0x50
+ 1147 0024 EA000000 		.4byte	.LVL5
+ 1148 0028 F0000000 		.4byte	.LFE71
+ 1149 002c 0400     		.2byte	0x4
+ 1150 002e F3       		.byte	0xf3
+ 1151 002f 01       		.uleb128 0x1
+ 1152 0030 50       		.byte	0x50
+ 1153 0031 9F       		.byte	0x9f
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 24
+
+
+ 1154 0032 00000000 		.4byte	0
+ 1155 0036 00000000 		.4byte	0
+ 1156              	.LLST1:
+ 1157 003a 00000000 		.4byte	.LVL0
+ 1158 003e 42000000 		.4byte	.LVL1
+ 1159 0042 0100     		.2byte	0x1
+ 1160 0044 51       		.byte	0x51
+ 1161 0045 42000000 		.4byte	.LVL1
+ 1162 0049 E8000000 		.4byte	.LVL4
+ 1163 004d 0400     		.2byte	0x4
+ 1164 004f F3       		.byte	0xf3
+ 1165 0050 01       		.uleb128 0x1
+ 1166 0051 51       		.byte	0x51
+ 1167 0052 9F       		.byte	0x9f
+ 1168 0053 E8000000 		.4byte	.LVL4
+ 1169 0057 EA000000 		.4byte	.LVL5
+ 1170 005b 0100     		.2byte	0x1
+ 1171 005d 51       		.byte	0x51
+ 1172 005e EA000000 		.4byte	.LVL5
+ 1173 0062 F0000000 		.4byte	.LFE71
+ 1174 0066 0400     		.2byte	0x4
+ 1175 0068 F3       		.byte	0xf3
+ 1176 0069 01       		.uleb128 0x1
+ 1177 006a 51       		.byte	0x51
+ 1178 006b 9F       		.byte	0x9f
+ 1179 006c 00000000 		.4byte	0
+ 1180 0070 00000000 		.4byte	0
+ 1181              	.LLST2:
+ 1182 0074 00000000 		.4byte	.LVL0
+ 1183 0078 E6000000 		.4byte	.LVL3
+ 1184 007c 0600     		.2byte	0x6
+ 1185 007e 0C       		.byte	0xc
+ 1186 007f 0100B600 		.4byte	0xb60001
+ 1187 0083 9F       		.byte	0x9f
+ 1188 0084 E6000000 		.4byte	.LVL3
+ 1189 0088 E8000000 		.4byte	.LVL4
+ 1190 008c 0200     		.2byte	0x2
+ 1191 008e 30       		.byte	0x30
+ 1192 008f 9F       		.byte	0x9f
+ 1193 0090 E8000000 		.4byte	.LVL4
+ 1194 0094 EA000000 		.4byte	.LVL5
+ 1195 0098 0600     		.2byte	0x6
+ 1196 009a 0C       		.byte	0xc
+ 1197 009b 0100B600 		.4byte	0xb60001
+ 1198 009f 9F       		.byte	0x9f
+ 1199 00a0 EA000000 		.4byte	.LVL5
+ 1200 00a4 F0000000 		.4byte	.LFE71
+ 1201 00a8 0100     		.2byte	0x1
+ 1202 00aa 50       		.byte	0x50
+ 1203 00ab 00000000 		.4byte	0
+ 1204 00af 00000000 		.4byte	0
+ 1205              	.LLST3:
+ 1206 00b3 00000000 		.4byte	.LVL6
+ 1207 00b7 0E000000 		.4byte	.LVL8
+ 1208 00bb 0100     		.2byte	0x1
+ 1209 00bd 50       		.byte	0x50
+ 1210 00be 0E000000 		.4byte	.LVL8
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 25
+
+
+ 1211 00c2 40000000 		.4byte	.LFE72
+ 1212 00c6 0400     		.2byte	0x4
+ 1213 00c8 F3       		.byte	0xf3
+ 1214 00c9 01       		.uleb128 0x1
+ 1215 00ca 50       		.byte	0x50
+ 1216 00cb 9F       		.byte	0x9f
+ 1217 00cc 00000000 		.4byte	0
+ 1218 00d0 00000000 		.4byte	0
+ 1219              	.LLST4:
+ 1220 00d4 00000000 		.4byte	.LVL6
+ 1221 00d8 0A000000 		.4byte	.LVL7
+ 1222 00dc 0100     		.2byte	0x1
+ 1223 00de 51       		.byte	0x51
+ 1224 00df 0A000000 		.4byte	.LVL7
+ 1225 00e3 40000000 		.4byte	.LFE72
+ 1226 00e7 0400     		.2byte	0x4
+ 1227 00e9 F3       		.byte	0xf3
+ 1228 00ea 01       		.uleb128 0x1
+ 1229 00eb 51       		.byte	0x51
+ 1230 00ec 9F       		.byte	0x9f
+ 1231 00ed 00000000 		.4byte	0
+ 1232 00f1 00000000 		.4byte	0
+ 1233              		.section	.debug_aranges,"",%progbits
+ 1234 0000 24000000 		.4byte	0x24
+ 1235 0004 0200     		.2byte	0x2
+ 1236 0006 00000000 		.4byte	.Ldebug_info0
+ 1237 000a 04       		.byte	0x4
+ 1238 000b 00       		.byte	0
+ 1239 000c 0000     		.2byte	0
+ 1240 000e 0000     		.2byte	0
+ 1241 0010 00000000 		.4byte	.LFB71
+ 1242 0014 F0000000 		.4byte	.LFE71-.LFB71
+ 1243 0018 00000000 		.4byte	.LFB72
+ 1244 001c 40000000 		.4byte	.LFE72-.LFB72
+ 1245 0020 00000000 		.4byte	0
+ 1246 0024 00000000 		.4byte	0
+ 1247              		.section	.debug_ranges,"",%progbits
+ 1248              	.Ldebug_ranges0:
+ 1249 0000 00000000 		.4byte	.LFB71
+ 1250 0004 F0000000 		.4byte	.LFE71
+ 1251 0008 00000000 		.4byte	.LFB72
+ 1252 000c 40000000 		.4byte	.LFE72
+ 1253 0010 00000000 		.4byte	0
+ 1254 0014 00000000 		.4byte	0
+ 1255              		.section	.debug_line,"",%progbits
+ 1256              	.Ldebug_line0:
+ 1257 0000 70020000 		.section	.debug_str,"MS",%progbits,1
+ 1257      02000802 
+ 1257      00000201 
+ 1257      FB0E0D00 
+ 1257      01010101 
+ 1258              	.LASF56:
+ 1259 0000 72656C6F 		.ascii	"reloadInput\000"
+ 1259      6164496E 
+ 1259      70757400 
+ 1260              	.LASF45:
+ 1261 000c 636C6F63 		.ascii	"clockPrescaler\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 26
+
+
+ 1261      6B507265 
+ 1261      7363616C 
+ 1261      657200
+ 1262              	.LASF61:
+ 1263 001b 636F756E 		.ascii	"countInputMode\000"
+ 1263      74496E70 
+ 1263      75744D6F 
+ 1263      646500
+ 1264              	.LASF49:
+ 1265 002a 636F6D70 		.ascii	"compare0\000"
+ 1265      61726530 
+ 1265      00
+ 1266              	.LASF50:
+ 1267 0033 636F6D70 		.ascii	"compare1\000"
+ 1267      61726531 
+ 1267      00
+ 1268              	.LASF2:
+ 1269 003c 73686F72 		.ascii	"short int\000"
+ 1269      7420696E 
+ 1269      7400
+ 1270              	.LASF12:
+ 1271 0046 73697A65 		.ascii	"sizetype\000"
+ 1271      74797065 
+ 1271      00
+ 1272              	.LASF18:
+ 1273 004f 50455249 		.ascii	"PERIOD_BUFF\000"
+ 1273      4F445F42 
+ 1273      55464600 
+ 1274              	.LASF28:
+ 1275 005b 54435057 		.ascii	"TCPWM_CNT_V1_Type\000"
+ 1275      4D5F434E 
+ 1275      545F5631 
+ 1275      5F547970 
+ 1275      6500
+ 1276              	.LASF30:
+ 1277 006d 4354524C 		.ascii	"CTRL_SET\000"
+ 1277      5F534554 
+ 1277      00
+ 1278              	.LASF17:
+ 1279 0076 50455249 		.ascii	"PERIOD\000"
+ 1279      4F4400
+ 1280              	.LASF32:
+ 1281 007d 434D445F 		.ascii	"CMD_RELOAD\000"
+ 1281      52454C4F 
+ 1281      414400
+ 1282              	.LASF21:
+ 1283 0088 54525F43 		.ascii	"TR_CTRL1\000"
+ 1283      54524C31 
+ 1283      00
+ 1284              	.LASF22:
+ 1285 0091 54525F43 		.ascii	"TR_CTRL2\000"
+ 1285      54524C32 
+ 1285      00
+ 1286              	.LASF41:
+ 1287 009a 43595F54 		.ascii	"CY_TCPWM_SUCCESS\000"
+ 1287      4350574D 
+ 1287      5F535543 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 27
+
+
+ 1287      43455353 
+ 1287      00
+ 1288              	.LASF9:
+ 1289 00ab 5F5F7569 		.ascii	"__uint32_t\000"
+ 1289      6E743332 
+ 1289      5F7400
+ 1290              	.LASF69:
+ 1291 00b6 47656E65 		.ascii	"Generated_Source\\PSoC6\\pdl\\drivers\\peripheral\\"
+ 1291      72617465 
+ 1291      645F536F 
+ 1291      75726365 
+ 1291      5C50536F 
+ 1292 00e4 74637077 		.ascii	"tcpwm\\cy_tcpwm_counter.c\000"
+ 1292      6D5C6379 
+ 1292      5F746370 
+ 1292      776D5F63 
+ 1292      6F756E74 
+ 1293              	.LASF60:
+ 1294 00fd 73746F70 		.ascii	"stopInput\000"
+ 1294      496E7075 
+ 1294      7400
+ 1295              	.LASF20:
+ 1296 0107 54525F43 		.ascii	"TR_CTRL0\000"
+ 1296      54524C30 
+ 1296      00
+ 1297              	.LASF67:
+ 1298 0110 636F6E66 		.ascii	"config\000"
+ 1298      696700
+ 1299              	.LASF36:
+ 1300 0117 54435057 		.ascii	"TCPWM_V1_Type\000"
+ 1300      4D5F5631 
+ 1300      5F547970 
+ 1300      6500
+ 1301              	.LASF54:
+ 1302 0125 63617074 		.ascii	"captureInput\000"
+ 1302      75726549 
+ 1302      6E707574 
+ 1302      00
+ 1303              	.LASF31:
+ 1304 0132 434D445F 		.ascii	"CMD_CAPTURE\000"
+ 1304      43415054 
+ 1304      55524500 
+ 1305              	.LASF52:
+ 1306 013e 696E7465 		.ascii	"interruptSources\000"
+ 1306      72727570 
+ 1306      74536F75 
+ 1306      72636573 
+ 1306      00
+ 1307              	.LASF34:
+ 1308 014f 434D445F 		.ascii	"CMD_START\000"
+ 1308      53544152 
+ 1308      5400
+ 1309              	.LASF39:
+ 1310 0159 666C6F61 		.ascii	"float\000"
+ 1310      7400
+ 1311              	.LASF8:
+ 1312 015f 756E7369 		.ascii	"unsigned int\000"
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 28
+
+
+ 1312      676E6564 
+ 1312      20696E74 
+ 1312      00
+ 1313              	.LASF55:
+ 1314 016c 72656C6F 		.ascii	"reloadInputMode\000"
+ 1314      6164496E 
+ 1314      7075744D 
+ 1314      6F646500 
+ 1315              	.LASF6:
+ 1316 017c 6C6F6E67 		.ascii	"long long int\000"
+ 1316      206C6F6E 
+ 1316      6720696E 
+ 1316      7400
+ 1317              	.LASF46:
+ 1318 018a 72756E4D 		.ascii	"runMode\000"
+ 1318      6F646500 
+ 1319              	.LASF72:
+ 1320 0192 43795F54 		.ascii	"Cy_TCPWM_Counter_Init\000"
+ 1320      4350574D 
+ 1320      5F436F75 
+ 1320      6E746572 
+ 1320      5F496E69 
+ 1321              	.LASF4:
+ 1322 01a8 6C6F6E67 		.ascii	"long int\000"
+ 1322      20696E74 
+ 1322      00
+ 1323              	.LASF44:
+ 1324 01b1 70657269 		.ascii	"period\000"
+ 1324      6F6400
+ 1325              	.LASF66:
+ 1326 01b8 636E744E 		.ascii	"cntNum\000"
+ 1326      756D00
+ 1327              	.LASF27:
+ 1328 01bf 494E5452 		.ascii	"INTR_MASKED\000"
+ 1328      5F4D4153 
+ 1328      4B454400 
+ 1329              	.LASF16:
+ 1330 01cb 43435F42 		.ascii	"CC_BUFF\000"
+ 1330      55464600 
+ 1331              	.LASF11:
+ 1332 01d3 6C6F6E67 		.ascii	"long double\000"
+ 1332      20646F75 
+ 1332      626C6500 
+ 1333              	.LASF57:
+ 1334 01df 73746172 		.ascii	"startInputMode\000"
+ 1334      74496E70 
+ 1334      75744D6F 
+ 1334      646500
+ 1335              	.LASF1:
+ 1336 01ee 756E7369 		.ascii	"unsigned char\000"
+ 1336      676E6564 
+ 1336      20636861 
+ 1336      7200
+ 1337              	.LASF47:
+ 1338 01fc 636F756E 		.ascii	"countDirection\000"
+ 1338      74446972 
+ 1338      65637469 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 29
+
+
+ 1338      6F6E00
+ 1339              	.LASF13:
+ 1340 020b 4354524C 		.ascii	"CTRL\000"
+ 1340      00
+ 1341              	.LASF35:
+ 1342 0210 494E5452 		.ascii	"INTR_CAUSE\000"
+ 1342      5F434155 
+ 1342      534500
+ 1343              	.LASF0:
+ 1344 021b 7369676E 		.ascii	"signed char\000"
+ 1344      65642063 
+ 1344      68617200 
+ 1345              	.LASF25:
+ 1346 0227 494E5452 		.ascii	"INTR_SET\000"
+ 1346      5F534554 
+ 1346      00
+ 1347              	.LASF7:
+ 1348 0230 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1348      206C6F6E 
+ 1348      6720756E 
+ 1348      7369676E 
+ 1348      65642069 
+ 1349              	.LASF10:
+ 1350 0247 75696E74 		.ascii	"uint32_t\000"
+ 1350      33325F74 
+ 1350      00
+ 1351              	.LASF48:
+ 1352 0250 636F6D70 		.ascii	"compareOrCapture\000"
+ 1352      6172654F 
+ 1352      72436170 
+ 1352      74757265 
+ 1352      00
+ 1353              	.LASF51:
+ 1354 0261 656E6162 		.ascii	"enableCompareSwap\000"
+ 1354      6C65436F 
+ 1354      6D706172 
+ 1354      65537761 
+ 1354      7000
+ 1355              	.LASF33:
+ 1356 0273 434D445F 		.ascii	"CMD_STOP\000"
+ 1356      53544F50 
+ 1356      00
+ 1357              	.LASF64:
+ 1358 027c 63795F73 		.ascii	"cy_stc_tcpwm_counter_config_t\000"
+ 1358      74635F74 
+ 1358      6370776D 
+ 1358      5F636F75 
+ 1358      6E746572 
+ 1359              	.LASF3:
+ 1360 029a 73686F72 		.ascii	"short unsigned int\000"
+ 1360      7420756E 
+ 1360      7369676E 
+ 1360      65642069 
+ 1360      6E7400
+ 1361              	.LASF73:
+ 1362 02ad 73746174 		.ascii	"status\000"
+ 1362      757300
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 30
+
+
+ 1363              	.LASF38:
+ 1364 02b4 63686172 		.ascii	"char\000"
+ 1364      00
+ 1365              	.LASF70:
+ 1366 02b9 433A5C55 		.ascii	"C:\\Users\\cmila\\uni\\projects\\Neural-Stimulator-"
+ 1366      73657273 
+ 1366      5C636D69 
+ 1366      6C615C75 
+ 1366      6E695C70 
+ 1367 02e7 4669726D 		.ascii	"Firmware\\new\\PSOC6\\TIMER\\SampleMicroSeconds.cyd"
+ 1367      77617265 
+ 1367      5C6E6577 
+ 1367      5C50534F 
+ 1367      43365C54 
+ 1368 0316 736E00   		.ascii	"sn\000"
+ 1369              	.LASF14:
+ 1370 0319 53544154 		.ascii	"STATUS\000"
+ 1370      555300
+ 1371              	.LASF42:
+ 1372 0320 43595F54 		.ascii	"CY_TCPWM_BAD_PARAM\000"
+ 1372      4350574D 
+ 1372      5F424144 
+ 1372      5F504152 
+ 1372      414D00
+ 1373              	.LASF63:
+ 1374 0333 5F426F6F 		.ascii	"_Bool\000"
+ 1374      6C00
+ 1375              	.LASF24:
+ 1376 0339 494E5452 		.ascii	"INTR\000"
+ 1376      00
+ 1377              	.LASF53:
+ 1378 033e 63617074 		.ascii	"captureInputMode\000"
+ 1378      75726549 
+ 1378      6E707574 
+ 1378      4D6F6465 
+ 1378      00
+ 1379              	.LASF23:
+ 1380 034f 52455345 		.ascii	"RESERVED1\000"
+ 1380      52564544 
+ 1380      3100
+ 1381              	.LASF5:
+ 1382 0359 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1382      20756E73 
+ 1382      69676E65 
+ 1382      6420696E 
+ 1382      7400
+ 1383              	.LASF40:
+ 1384 036b 646F7562 		.ascii	"double\000"
+ 1384      6C6500
+ 1385              	.LASF68:
+ 1386 0372 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1386      43313120 
+ 1386      352E342E 
+ 1386      31203230 
+ 1386      31363036 
+ 1387 03a5 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0plus -mthumb -"
+ 1387      20726576 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 31
+
+
+ 1387      6973696F 
+ 1387      6E203233 
+ 1387      37373135 
+ 1388 03d8 67202D4F 		.ascii	"g -Os -ffunction-sections -ffat-lto-objects\000"
+ 1388      73202D66 
+ 1388      66756E63 
+ 1388      74696F6E 
+ 1388      2D736563 
+ 1389              	.LASF71:
+ 1390 0404 63795F73 		.ascii	"cy_stc_tcpwm_counter_config\000"
+ 1390      74635F74 
+ 1390      6370776D 
+ 1390      5F636F75 
+ 1390      6E746572 
+ 1391              	.LASF58:
+ 1392 0420 73746172 		.ascii	"startInput\000"
+ 1392      74496E70 
+ 1392      757400
+ 1393              	.LASF59:
+ 1394 042b 73746F70 		.ascii	"stopInputMode\000"
+ 1394      496E7075 
+ 1394      744D6F64 
+ 1394      6500
+ 1395              	.LASF29:
+ 1396 0439 4354524C 		.ascii	"CTRL_CLR\000"
+ 1396      5F434C52 
+ 1396      00
+ 1397              	.LASF74:
+ 1398 0442 43795F54 		.ascii	"Cy_TCPWM_Counter_DeInit\000"
+ 1398      4350574D 
+ 1398      5F436F75 
+ 1398      6E746572 
+ 1398      5F446549 
+ 1399              	.LASF15:
+ 1400 045a 434F554E 		.ascii	"COUNTER\000"
+ 1400      54455200 
+ 1401              	.LASF19:
+ 1402 0462 52455345 		.ascii	"RESERVED\000"
+ 1402      52564544 
+ 1402      00
+ 1403              	.LASF43:
+ 1404 046b 63795F65 		.ascii	"cy_en_tcpwm_status_t\000"
+ 1404      6E5F7463 
+ 1404      70776D5F 
+ 1404      73746174 
+ 1404      75735F74 
+ 1405              	.LASF62:
+ 1406 0480 636F756E 		.ascii	"countInput\000"
+ 1406      74496E70 
+ 1406      757400
+ 1407              	.LASF26:
+ 1408 048b 494E5452 		.ascii	"INTR_MASK\000"
+ 1408      5F4D4153 
+ 1408      4B00
+ 1409              	.LASF37:
+ 1410 0495 54435057 		.ascii	"TCPWM_Type\000"
+ 1410      4D5F5479 
+ARM GAS  C:\Users\cmila\AppData\Local\Temp\ccUNz96n.s 			page 32
+
+
+ 1410      706500
+ 1411              	.LASF65:
+ 1412 04a0 62617365 		.ascii	"base\000"
+ 1412      00
+ 1413              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
