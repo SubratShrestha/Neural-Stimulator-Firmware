@@ -43,13 +43,13 @@ void TimerInterruptHandler(void)
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
     if (current_phase == 0) {
-        dacWrite = 0xFFF;   
+        dacWrite = phase_1_dac;   
     } else if (current_phase == 1) {
-        dacWrite = 0x800;   
+        dacWrite = 0x000;   
     } else if (current_phase == 2) {
-        dacWrite = 0x000;
+        dacWrite = phase_2_dac;
     } else if (current_phase == 3) {
-        dacWrite = 0xFFF;  
+        dacWrite = 0x000;  
     }
     VDAC_1_SetValue(dacWrite);
     
@@ -57,7 +57,7 @@ void TimerInterruptHandler(void)
 
     volatile float value = Cy_SAR_GetResult16(SAR, 0);
     volatile float volts = Cy_SAR_CountsTo_Volts(SAR, 0, value);
-    printf("Value in V = %f\r\n", volts);
+    // printf("Value in V = %f\r\n", volts);
     
     while (1) {
         if (phases[current_phase] == 0) {
@@ -125,12 +125,16 @@ void dacTask(void *arg) {
                     stim_type = value;
                     break;
                 case 0x05:
-                    printf("phase 1 = %d\r\n", value);
-                    phase_1_dac = value;
+                    printf("phase 1 = %d\r\n", (uint32_t) value) ;
+                    printf("phase 1 = 0x%x\r\n", (uint32_t)((value - 32767) * 4095) / 32767);
+                    
+                    phase_1_dac = (uint32_t)((value - 32767) * 4095) / 32767;
                     break;
                 case 0x06:
-                    printf("phase 2 = %d\r\n", value);
-                    phase_2_dac = value;
+                    printf("phase 2 = %d\r\n", (uint32_t) value) ;
+                    
+                    printf("phase 2 = 0x%x\r\n", (uint32_t)((value - 32767) * 4095) / 32767);
+                    phase_2_dac = (uint32_t)((value - 32767) * 4095) / 32767;
                     break;
                 case 0x07:
                     printf("dac gap = %d\r\n", value);
