@@ -125,16 +125,16 @@ void dacTask(void *arg) {
                     stim_type = value;
                     break;
                 case 0x05:
-                    printf("phase 1 = %d\r\n", (uint32_t) value) ;
-                    printf("phase 1 = 0x%x\r\n", (uint32_t)((value - 32767) * 4095) / 32767);
+                    printf("phase 1 = %d\r\n", ((2047 - value) / 2047) * -4095) ;
+                    printf("phase 1 = 0x%x\r\n", ((2047 - value) / 2047) * -4095);
                     
-                    phase_1_dac = (uint32_t)((value - 32767) * 4095) / 32767;
+                    phase_1_dac = ((2047 - value) / 2047) * 4095;
                     break;
                 case 0x06:
-                    printf("phase 2 = %d\r\n", (uint32_t) value) ;
+                    printf("phase 2 = %d\r\n", ((value - 2047) / 2047) * 4095);
+                    printf("phase 2 = 0x%x\r\n", ((value - 2047) / 2047) * 4095);
                     
-                    printf("phase 2 = 0x%x\r\n", (uint32_t)((value - 32767) * 4095) / 32767);
-                    phase_2_dac = (uint32_t)((value - 32767) * 4095) / 32767;
+                    phase_2_dac = ((value - 2047) / 2047) * 4095;
                     break;
                 case 0x07:
                     printf("dac gap = %d\r\n", value);

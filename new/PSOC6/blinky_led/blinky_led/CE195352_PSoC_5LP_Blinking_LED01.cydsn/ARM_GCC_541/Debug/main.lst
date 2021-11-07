@@ -1,0 +1,485 @@
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB63:
+  27              		.file 1 "main.c"
+   1:main.c        **** /******************************************************************************
+   2:main.c        **** * File Name: main.c
+   3:main.c        **** *
+   4:main.c        **** * Version: 1.10
+   5:main.c        **** *
+   6:main.c        **** * Description: This is the source code for the Blinking LED code example.
+   7:main.c        **** *
+   8:main.c        **** * Related Document: CE195352_PSoC_5LP_Blinking_LED.pdf
+   9:main.c        **** *
+  10:main.c        **** * Hardware Dependency: See CE195352_PSoC_5LP_Blinking_LED.pdf
+  11:main.c        **** *
+  12:main.c        **** *******************************************************************************
+  13:main.c        **** * Copyright (2018), Cypress Semiconductor Corporation. All rights reserved.
+  14:main.c        **** *******************************************************************************
+  15:main.c        **** * This software, including source code, documentation and related materials
+  16:main.c        **** * (“Software”), is owned by Cypress Semiconductor Corporation or one of its
+  17:main.c        **** * subsidiaries (“Cypress”) and is protected by and subject to worldwide patent
+  18:main.c        **** * protection (United States and foreign), United States copyright laws and
+  19:main.c        **** * international treaty provisions. Therefore, you may use this Software only
+  20:main.c        **** * as provided in the license agreement accompanying the software package from
+  21:main.c        **** * which you obtained this Software (“EULA”).
+  22:main.c        **** *
+  23:main.c        **** * If no EULA applies, Cypress hereby grants you a personal, nonexclusive,
+  24:main.c        **** * non-transferable license to copy, modify, and compile the Software source
+  25:main.c        **** * code solely for use in connection with Cypress’s integrated circuit products.
+  26:main.c        **** * Any reproduction, modification, translation, compilation, or representation
+  27:main.c        **** * of this Software except as specified above is prohibited without the express
+  28:main.c        **** * written permission of Cypress.
+  29:main.c        **** *
+  30:main.c        **** * Disclaimer: THIS SOFTWARE IS PROVIDED AS-IS, WITH NO WARRANTY OF ANY KIND, 
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 2
+
+
+  31:main.c        **** * EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT, IMPLIED 
+  32:main.c        **** * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. Cypress 
+  33:main.c        **** * reserves the right to make changes to the Software without notice. Cypress 
+  34:main.c        **** * does not assume any liability arising out of the application or use of the 
+  35:main.c        **** * Software or any product or circuit described in the Software. Cypress does 
+  36:main.c        **** * not authorize its products for use in any products where a malfunction or 
+  37:main.c        **** * failure of the Cypress product may reasonably be expected to result in 
+  38:main.c        **** * significant property damage, injury or death (“High Risk Product”). By 
+  39:main.c        **** * including Cypress’s product in a High Risk Product, the manufacturer of such 
+  40:main.c        **** * system or application assumes all risk of such use and in doing so agrees to 
+  41:main.c        **** * indemnify Cypress against all liability.
+  42:main.c        **** *******************************************************************************/
+  43:main.c        **** 
+  44:main.c        **** #include <project.h>
+  45:main.c        **** 
+  46:main.c        **** /*******************************************************************************
+  47:main.c        **** * Function Name: main
+  48:main.c        **** ********************************************************************************
+  49:main.c        **** *
+  50:main.c        **** * Summary:
+  51:main.c        **** *  The PWM is configured and started in the PWM_1_Start() function.
+  52:main.c        **** *  The firmware then enters an idle loop, leaving control of the project
+  53:main.c        **** *  to the fixed function PWM peripheral.
+  54:main.c        **** *
+  55:main.c        **** * Parameters:
+  56:main.c        **** *  None.
+  57:main.c        **** *
+  58:main.c        **** * Return:
+  59:main.c        **** *  None.
+  60:main.c        **** *
+  61:main.c        **** *******************************************************************************/
+  62:main.c        **** int main()
+  63:main.c        **** {
+  28              		.loc 1 63 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  64:main.c        ****     /* Prepare components */
+  65:main.c        ****     PWM_1_Start();    
+  38              		.loc 1 65 0
+  39 0004 FFF7FEFF 		bl	PWM_1_Start
+  40              	.L2:
+  66:main.c        ****     
+  67:main.c        ****     for (;;)
+  68:main.c        ****     {}
+  41              		.loc 1 68 0 discriminator 1
+  42 0008 FEE7     		b	.L2
+  43              		.cfi_endproc
+  44              	.LFE63:
+  45              		.size	main, .-main
+  46 000a 00BF     		.text
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 3
+
+
+  47              	.Letext0:
+  48              		.file 2 "d:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+  49              		.file 3 "d:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+  50              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+  51              		.section	.debug_info,"",%progbits
+  52              	.Ldebug_info0:
+  53 0000 C7000000 		.4byte	0xc7
+  54 0004 0400     		.2byte	0x4
+  55 0006 00000000 		.4byte	.Ldebug_abbrev0
+  56 000a 04       		.byte	0x4
+  57 000b 01       		.uleb128 0x1
+  58 000c 63000000 		.4byte	.LASF16
+  59 0010 0C       		.byte	0xc
+  60 0011 2E000000 		.4byte	.LASF17
+  61 0015 39010000 		.4byte	.LASF18
+  62 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  63 001d 00000000 		.4byte	0
+  64 0021 00000000 		.4byte	.Ldebug_line0
+  65 0025 02       		.uleb128 0x2
+  66 0026 01       		.byte	0x1
+  67 0027 06       		.byte	0x6
+  68 0028 21010000 		.4byte	.LASF0
+  69 002c 02       		.uleb128 0x2
+  70 002d 01       		.byte	0x1
+  71 002e 08       		.byte	0x8
+  72 002f F1000000 		.4byte	.LASF1
+  73 0033 02       		.uleb128 0x2
+  74 0034 02       		.byte	0x2
+  75 0035 05       		.byte	0x5
+  76 0036 AE010000 		.4byte	.LASF2
+  77 003a 02       		.uleb128 0x2
+  78 003b 02       		.byte	0x2
+  79 003c 07       		.byte	0x7
+  80 003d 0E000000 		.4byte	.LASF3
+  81 0041 03       		.uleb128 0x3
+  82 0042 9E010000 		.4byte	.LASF9
+  83 0046 02       		.byte	0x2
+  84 0047 3F       		.byte	0x3f
+  85 0048 4C000000 		.4byte	0x4c
+  86 004c 02       		.uleb128 0x2
+  87 004d 04       		.byte	0x4
+  88 004e 05       		.byte	0x5
+  89 004f 04010000 		.4byte	.LASF4
+  90 0053 02       		.uleb128 0x2
+  91 0054 04       		.byte	0x4
+  92 0055 07       		.byte	0x7
+  93 0056 3A000000 		.4byte	.LASF5
+  94 005a 02       		.uleb128 0x2
+  95 005b 08       		.byte	0x8
+  96 005c 05       		.byte	0x5
+  97 005d 00000000 		.4byte	.LASF6
+  98 0061 02       		.uleb128 0x2
+  99 0062 08       		.byte	0x8
+ 100 0063 07       		.byte	0x7
+ 101 0064 4C000000 		.4byte	.LASF7
+ 102 0068 04       		.uleb128 0x4
+ 103 0069 04       		.byte	0x4
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 4
+
+
+ 104 006a 05       		.byte	0x5
+ 105 006b 696E7400 		.ascii	"int\000"
+ 106 006f 02       		.uleb128 0x2
+ 107 0070 04       		.byte	0x4
+ 108 0071 07       		.byte	0x7
+ 109 0072 21000000 		.4byte	.LASF8
+ 110 0076 03       		.uleb128 0x3
+ 111 0077 B8010000 		.4byte	.LASF10
+ 112 007b 03       		.byte	0x3
+ 113 007c 2C       		.byte	0x2c
+ 114 007d 41000000 		.4byte	0x41
+ 115 0081 02       		.uleb128 0x2
+ 116 0082 04       		.byte	0x4
+ 117 0083 04       		.byte	0x4
+ 118 0084 A8010000 		.4byte	.LASF11
+ 119 0088 02       		.uleb128 0x2
+ 120 0089 08       		.byte	0x8
+ 121 008a 04       		.byte	0x4
+ 122 008b 0D010000 		.4byte	.LASF12
+ 123 008f 02       		.uleb128 0x2
+ 124 0090 01       		.byte	0x1
+ 125 0091 08       		.byte	0x8
+ 126 0092 FF000000 		.4byte	.LASF13
+ 127 0096 02       		.uleb128 0x2
+ 128 0097 08       		.byte	0x8
+ 129 0098 04       		.byte	0x4
+ 130 0099 2D010000 		.4byte	.LASF14
+ 131 009d 02       		.uleb128 0x2
+ 132 009e 04       		.byte	0x4
+ 133 009f 07       		.byte	0x7
+ 134 00a0 C0010000 		.4byte	.LASF15
+ 135 00a4 05       		.uleb128 0x5
+ 136 00a5 35000000 		.4byte	.LASF19
+ 137 00a9 01       		.byte	0x1
+ 138 00aa 3E       		.byte	0x3e
+ 139 00ab 68000000 		.4byte	0x68
+ 140 00af 00000000 		.4byte	.LFB63
+ 141 00b3 0A000000 		.4byte	.LFE63-.LFB63
+ 142 00b7 01       		.uleb128 0x1
+ 143 00b8 9C       		.byte	0x9c
+ 144 00b9 06       		.uleb128 0x6
+ 145 00ba 14010000 		.4byte	.LASF20
+ 146 00be 04       		.byte	0x4
+ 147 00bf 1207     		.2byte	0x712
+ 148 00c1 C5000000 		.4byte	0xc5
+ 149 00c5 07       		.uleb128 0x7
+ 150 00c6 76000000 		.4byte	0x76
+ 151 00ca 00       		.byte	0
+ 152              		.section	.debug_abbrev,"",%progbits
+ 153              	.Ldebug_abbrev0:
+ 154 0000 01       		.uleb128 0x1
+ 155 0001 11       		.uleb128 0x11
+ 156 0002 01       		.byte	0x1
+ 157 0003 25       		.uleb128 0x25
+ 158 0004 0E       		.uleb128 0xe
+ 159 0005 13       		.uleb128 0x13
+ 160 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 5
+
+
+ 161 0007 03       		.uleb128 0x3
+ 162 0008 0E       		.uleb128 0xe
+ 163 0009 1B       		.uleb128 0x1b
+ 164 000a 0E       		.uleb128 0xe
+ 165 000b 55       		.uleb128 0x55
+ 166 000c 17       		.uleb128 0x17
+ 167 000d 11       		.uleb128 0x11
+ 168 000e 01       		.uleb128 0x1
+ 169 000f 10       		.uleb128 0x10
+ 170 0010 17       		.uleb128 0x17
+ 171 0011 00       		.byte	0
+ 172 0012 00       		.byte	0
+ 173 0013 02       		.uleb128 0x2
+ 174 0014 24       		.uleb128 0x24
+ 175 0015 00       		.byte	0
+ 176 0016 0B       		.uleb128 0xb
+ 177 0017 0B       		.uleb128 0xb
+ 178 0018 3E       		.uleb128 0x3e
+ 179 0019 0B       		.uleb128 0xb
+ 180 001a 03       		.uleb128 0x3
+ 181 001b 0E       		.uleb128 0xe
+ 182 001c 00       		.byte	0
+ 183 001d 00       		.byte	0
+ 184 001e 03       		.uleb128 0x3
+ 185 001f 16       		.uleb128 0x16
+ 186 0020 00       		.byte	0
+ 187 0021 03       		.uleb128 0x3
+ 188 0022 0E       		.uleb128 0xe
+ 189 0023 3A       		.uleb128 0x3a
+ 190 0024 0B       		.uleb128 0xb
+ 191 0025 3B       		.uleb128 0x3b
+ 192 0026 0B       		.uleb128 0xb
+ 193 0027 49       		.uleb128 0x49
+ 194 0028 13       		.uleb128 0x13
+ 195 0029 00       		.byte	0
+ 196 002a 00       		.byte	0
+ 197 002b 04       		.uleb128 0x4
+ 198 002c 24       		.uleb128 0x24
+ 199 002d 00       		.byte	0
+ 200 002e 0B       		.uleb128 0xb
+ 201 002f 0B       		.uleb128 0xb
+ 202 0030 3E       		.uleb128 0x3e
+ 203 0031 0B       		.uleb128 0xb
+ 204 0032 03       		.uleb128 0x3
+ 205 0033 08       		.uleb128 0x8
+ 206 0034 00       		.byte	0
+ 207 0035 00       		.byte	0
+ 208 0036 05       		.uleb128 0x5
+ 209 0037 2E       		.uleb128 0x2e
+ 210 0038 00       		.byte	0
+ 211 0039 3F       		.uleb128 0x3f
+ 212 003a 19       		.uleb128 0x19
+ 213 003b 03       		.uleb128 0x3
+ 214 003c 0E       		.uleb128 0xe
+ 215 003d 3A       		.uleb128 0x3a
+ 216 003e 0B       		.uleb128 0xb
+ 217 003f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 6
+
+
+ 218 0040 0B       		.uleb128 0xb
+ 219 0041 49       		.uleb128 0x49
+ 220 0042 13       		.uleb128 0x13
+ 221 0043 11       		.uleb128 0x11
+ 222 0044 01       		.uleb128 0x1
+ 223 0045 12       		.uleb128 0x12
+ 224 0046 06       		.uleb128 0x6
+ 225 0047 40       		.uleb128 0x40
+ 226 0048 18       		.uleb128 0x18
+ 227 0049 9642     		.uleb128 0x2116
+ 228 004b 19       		.uleb128 0x19
+ 229 004c 00       		.byte	0
+ 230 004d 00       		.byte	0
+ 231 004e 06       		.uleb128 0x6
+ 232 004f 34       		.uleb128 0x34
+ 233 0050 00       		.byte	0
+ 234 0051 03       		.uleb128 0x3
+ 235 0052 0E       		.uleb128 0xe
+ 236 0053 3A       		.uleb128 0x3a
+ 237 0054 0B       		.uleb128 0xb
+ 238 0055 3B       		.uleb128 0x3b
+ 239 0056 05       		.uleb128 0x5
+ 240 0057 49       		.uleb128 0x49
+ 241 0058 13       		.uleb128 0x13
+ 242 0059 3F       		.uleb128 0x3f
+ 243 005a 19       		.uleb128 0x19
+ 244 005b 3C       		.uleb128 0x3c
+ 245 005c 19       		.uleb128 0x19
+ 246 005d 00       		.byte	0
+ 247 005e 00       		.byte	0
+ 248 005f 07       		.uleb128 0x7
+ 249 0060 35       		.uleb128 0x35
+ 250 0061 00       		.byte	0
+ 251 0062 49       		.uleb128 0x49
+ 252 0063 13       		.uleb128 0x13
+ 253 0064 00       		.byte	0
+ 254 0065 00       		.byte	0
+ 255 0066 00       		.byte	0
+ 256              		.section	.debug_aranges,"",%progbits
+ 257 0000 1C000000 		.4byte	0x1c
+ 258 0004 0200     		.2byte	0x2
+ 259 0006 00000000 		.4byte	.Ldebug_info0
+ 260 000a 04       		.byte	0x4
+ 261 000b 00       		.byte	0
+ 262 000c 0000     		.2byte	0
+ 263 000e 0000     		.2byte	0
+ 264 0010 00000000 		.4byte	.LFB63
+ 265 0014 0A000000 		.4byte	.LFE63-.LFB63
+ 266 0018 00000000 		.4byte	0
+ 267 001c 00000000 		.4byte	0
+ 268              		.section	.debug_ranges,"",%progbits
+ 269              	.Ldebug_ranges0:
+ 270 0000 00000000 		.4byte	.LFB63
+ 271 0004 0A000000 		.4byte	.LFE63
+ 272 0008 00000000 		.4byte	0
+ 273 000c 00000000 		.4byte	0
+ 274              		.section	.debug_line,"",%progbits
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 7
+
+
+ 275              	.Ldebug_line0:
+ 276 0000 5A010000 		.section	.debug_str,"MS",%progbits,1
+ 276      02003F01 
+ 276      00000201 
+ 276      FB0E0D00 
+ 276      01010101 
+ 277              	.LASF6:
+ 278 0000 6C6F6E67 		.ascii	"long long int\000"
+ 278      206C6F6E 
+ 278      6720696E 
+ 278      7400
+ 279              	.LASF3:
+ 280 000e 73686F72 		.ascii	"short unsigned int\000"
+ 280      7420756E 
+ 280      7369676E 
+ 280      65642069 
+ 280      6E7400
+ 281              	.LASF8:
+ 282 0021 756E7369 		.ascii	"unsigned int\000"
+ 282      676E6564 
+ 282      20696E74 
+ 282      00
+ 283              	.LASF17:
+ 284 002e 6D61696E 		.ascii	"main.c\000"
+ 284      2E6300
+ 285              	.LASF19:
+ 286 0035 6D61696E 		.ascii	"main\000"
+ 286      00
+ 287              	.LASF5:
+ 288 003a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 288      20756E73 
+ 288      69676E65 
+ 288      6420696E 
+ 288      7400
+ 289              	.LASF7:
+ 290 004c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 290      206C6F6E 
+ 290      6720756E 
+ 290      7369676E 
+ 290      65642069 
+ 291              	.LASF16:
+ 292 0063 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 292      43313120 
+ 292      352E342E 
+ 292      31203230 
+ 292      31363036 
+ 293 0096 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 293      20726576 
+ 293      6973696F 
+ 293      6E203233 
+ 293      37373135 
+ 294 00c9 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 294      66756E63 
+ 294      74696F6E 
+ 294      2D736563 
+ 294      74696F6E 
+ 295              	.LASF1:
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 8
+
+
+ 296 00f1 756E7369 		.ascii	"unsigned char\000"
+ 296      676E6564 
+ 296      20636861 
+ 296      7200
+ 297              	.LASF13:
+ 298 00ff 63686172 		.ascii	"char\000"
+ 298      00
+ 299              	.LASF4:
+ 300 0104 6C6F6E67 		.ascii	"long int\000"
+ 300      20696E74 
+ 300      00
+ 301              	.LASF12:
+ 302 010d 646F7562 		.ascii	"double\000"
+ 302      6C6500
+ 303              	.LASF20:
+ 304 0114 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 304      52784275 
+ 304      66666572 
+ 304      00
+ 305              	.LASF0:
+ 306 0121 7369676E 		.ascii	"signed char\000"
+ 306      65642063 
+ 306      68617200 
+ 307              	.LASF14:
+ 308 012d 6C6F6E67 		.ascii	"long double\000"
+ 308      20646F75 
+ 308      626C6500 
+ 309              	.LASF18:
+ 310 0139 443A5C50 		.ascii	"D:\\Projects\\NS\\Firmware\\NeruoStim\\PSOC6\\blink"
+ 310      726F6A65 
+ 310      6374735C 
+ 310      4E535C46 
+ 310      69726D77 
+ 311 0166 795F6C65 		.ascii	"y_led\\blinky_led\\CE195352_PSoC_5LP_Blinking_LED01"
+ 311      645C626C 
+ 311      696E6B79 
+ 311      5F6C6564 
+ 311      5C434531 
+ 312 0197 2E637964 		.ascii	".cydsn\000"
+ 312      736E00
+ 313              	.LASF9:
+ 314 019e 5F5F696E 		.ascii	"__int32_t\000"
+ 314      7433325F 
+ 314      7400
+ 315              	.LASF11:
+ 316 01a8 666C6F61 		.ascii	"float\000"
+ 316      7400
+ 317              	.LASF2:
+ 318 01ae 73686F72 		.ascii	"short int\000"
+ 318      7420696E 
+ 318      7400
+ 319              	.LASF10:
+ 320 01b8 696E7433 		.ascii	"int32_t\000"
+ 320      325F7400 
+ 321              	.LASF15:
+ 322 01c0 73697A65 		.ascii	"sizetype\000"
+ 322      74797065 
+ARM GAS  C:\Users\subra\AppData\Local\Temp\ccJXAo54.s 			page 9
+
+
+ 322      00
+ 323              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
