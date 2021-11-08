@@ -15,6 +15,7 @@
 #include "semphr.h"
 #include <stdio.h>
 #include <limits.h>
+#include <math.h>
 
 // BLE globals
 SemaphoreHandle_t bleSemaphore;
@@ -125,16 +126,19 @@ void dacTask(void *arg) {
                     stim_type = value;
                     break;
                 case 0x05:
-                    printf("phase 1 = %d\r\n", ((2047 - value) / 2047) * -4095) ;
-                    printf("phase 1 = 0x%x\r\n", ((2047 - value) / 2047) * -4095);
+                    printf("phase 1 = %d\r\n", value) ;
+                    //printf("phase 1 after scaling = %f\r\n", floor(((2047 - value) / 2047) * 4095)) ;
+                    //printf("phase 1 after scaling with bitwise = %f\r\n", floor(value & value)) ;
+                    //printf("phase 1 = 0x%x\r\n", ((2047 - value) / 2047) * 4095);
                     
-                    phase_1_dac = ((2047 - value) / 2047) * 4095;
+                    phase_1_dac = value;
                     break;
                 case 0x06:
-                    printf("phase 2 = %d\r\n", ((value - 2047) / 2047) * 4095);
-                    printf("phase 2 = 0x%x\r\n", ((value - 2047) / 2047) * 4095);
+                    printf("phase 2 = %d\r\n", value) ;
+                    //printf("phase 2 after scaling = %f\r\n", floor(((value - 2047) / 2047) * 4095));
+                    //printf("phase 2 = 0x%x\r\n", ((value - 2047) / 2047) * 4095);
                     
-                    phase_2_dac = ((value - 2047) / 2047) * 4095;
+                    phase_2_dac = value;
                     break;
                 case 0x07:
                     printf("dac gap = %d\r\n", value);
