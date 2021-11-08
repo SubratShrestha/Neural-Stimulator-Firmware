@@ -2,7 +2,7 @@
 --	Conversion of BLE_DAC.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Nov 08 15:12:35 2021
+--	Mon Nov 08 16:57:37 2021
 --
 
 USE cypress.cypress.all;
@@ -433,13 +433,18 @@ TERMINAL \ADC:Net_105\ : bit;
 TERMINAL Net_187 : bit;
 TERMINAL Net_186 : bit;
 SIGNAL tmpFB_0__dac_out_net_0 : bit;
-TERMINAL Net_149 : bit;
 SIGNAL tmpIO_0__dac_out_net_0 : bit;
 TERMINAL tmpSIOVREF__dac_out_net_0 : bit;
 SIGNAL tmpFB_0__VDAC_Out_1_net_0 : bit;
 TERMINAL Net_194 : bit;
 SIGNAL tmpIO_0__VDAC_Out_1_net_0 : bit;
 TERMINAL tmpSIOVREF__VDAC_Out_1_net_0 : bit;
+SIGNAL tmpFB_0__Stim_Enable_net_0 : bit;
+SIGNAL tmpIO_0__Stim_Enable_net_0 : bit;
+TERMINAL tmpSIOVREF__Stim_Enable_net_0 : bit;
+SIGNAL tmpFB_0__Short_Electrode_net_0 : bit;
+SIGNAL tmpIO_0__Short_Electrode_net_0 : bit;
+TERMINAL tmpSIOVREF__Short_Electrode_net_0 : bit;
 BEGIN
 
 one <=  ('1') ;
@@ -1840,7 +1845,7 @@ dac_out:cy_mxs40_gpio_v1_0
 	PORT MAP(oe=>(one),
 		y=>(zero),
 		fb=>(tmpFB_0__dac_out_net_0),
-		analog=>Net_149,
+		analog=>Net_196,
 		io=>(tmpIO_0__dac_out_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__dac_out_net_0));
@@ -1876,5 +1881,69 @@ VDAC_Out_1:cy_mxs40_gpio_v1_0
 		io=>(tmpIO_0__VDAC_Out_1_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__VDAC_Out_1_net_0));
+Stim_Enable:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"75b92792-b66b-44cd-a4bc-47ca7bf74654",
+		drive_mode=>"6",
+		ibuf_enabled=>"0",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__Stim_Enable_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__Stim_Enable_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__Stim_Enable_net_0));
+Short_Electrode:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"a2002e29-57a4-4832-b9dd-a6be2265a7f0",
+		drive_mode=>"6",
+		ibuf_enabled=>"0",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__Short_Electrode_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__Short_Electrode_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__Short_Electrode_net_0));
 
 END R_T_L;

@@ -26,7 +26,7 @@
 #define RED_0_INPUT_SYNC 2u
 #define RED_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
 #define RED_0_NUM 4u
-#define RED_0_PORT GPIO_PRT6
+#define RED_0_PORT GPIO_PRT0
 #define RED_0_SLEWRATE CY_GPIO_SLEW_FAST
 #define RED_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
 #define RED_DRIVEMODE CY_GPIO_DM_STRONG_IN_OFF
@@ -36,7 +36,7 @@
 #define RED_INPUT_SYNC 2u
 #define RED_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
 #define RED_NUM 4u
-#define RED_PORT GPIO_PRT6
+#define RED_PORT GPIO_PRT0
 #define RED_SLEWRATE CY_GPIO_SLEW_FAST
 #define RED_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
 
@@ -66,7 +66,7 @@
 #define dac_out_0_DRIVEMODE CY_GPIO_DM_ANALOG
 #define dac_out_0_INBUF_ENABLED 0u
 #define dac_out_0_INIT_DRIVESTATE 1u
-#define dac_out_0_INIT_MUXSEL 0u
+#define dac_out_0_INIT_MUXSEL 4u
 #define dac_out_0_INPUT_SYNC 2u
 #define dac_out_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
 #define dac_out_0_NUM 0u
@@ -76,7 +76,7 @@
 #define dac_out_DRIVEMODE CY_GPIO_DM_ANALOG
 #define dac_out_INBUF_ENABLED 0u
 #define dac_out_INIT_DRIVESTATE 1u
-#define dac_out_INIT_MUXSEL 0u
+#define dac_out_INIT_MUXSEL 4u
 #define dac_out_INPUT_SYNC 2u
 #define dac_out_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
 #define dac_out_NUM 0u
@@ -135,8 +135,8 @@
 #define VDAC_Out_1_0_INIT_MUXSEL 0u
 #define VDAC_Out_1_0_INPUT_SYNC 2u
 #define VDAC_Out_1_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define VDAC_Out_1_0_NUM 4u
-#define VDAC_Out_1_0_PORT GPIO_PRT0
+#define VDAC_Out_1_0_NUM 1u
+#define VDAC_Out_1_0_PORT GPIO_PRT7
 #define VDAC_Out_1_0_SLEWRATE CY_GPIO_SLEW_FAST
 #define VDAC_Out_1_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
 #define VDAC_Out_1_DRIVEMODE CY_GPIO_DM_ANALOG
@@ -145,9 +145,53 @@
 #define VDAC_Out_1_INIT_MUXSEL 0u
 #define VDAC_Out_1_INPUT_SYNC 2u
 #define VDAC_Out_1_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define VDAC_Out_1_NUM 4u
-#define VDAC_Out_1_PORT GPIO_PRT0
+#define VDAC_Out_1_NUM 1u
+#define VDAC_Out_1_PORT GPIO_PRT7
 #define VDAC_Out_1_SLEWRATE CY_GPIO_SLEW_FAST
 #define VDAC_Out_1_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
+
+/* Stim_Enable */
+#define Stim_Enable_0_DRIVEMODE CY_GPIO_DM_STRONG_IN_OFF
+#define Stim_Enable_0_INBUF_ENABLED 0u
+#define Stim_Enable_0_INIT_DRIVESTATE 0u
+#define Stim_Enable_0_INIT_MUXSEL 0u
+#define Stim_Enable_0_INPUT_SYNC 2u
+#define Stim_Enable_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
+#define Stim_Enable_0_NUM 3u
+#define Stim_Enable_0_PORT GPIO_PRT9
+#define Stim_Enable_0_SLEWRATE CY_GPIO_SLEW_FAST
+#define Stim_Enable_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
+#define Stim_Enable_DRIVEMODE CY_GPIO_DM_STRONG_IN_OFF
+#define Stim_Enable_INBUF_ENABLED 0u
+#define Stim_Enable_INIT_DRIVESTATE 0u
+#define Stim_Enable_INIT_MUXSEL 0u
+#define Stim_Enable_INPUT_SYNC 2u
+#define Stim_Enable_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
+#define Stim_Enable_NUM 3u
+#define Stim_Enable_PORT GPIO_PRT9
+#define Stim_Enable_SLEWRATE CY_GPIO_SLEW_FAST
+#define Stim_Enable_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
+
+/* Short_Electrode */
+#define Short_Electrode_0_DRIVEMODE CY_GPIO_DM_STRONG_IN_OFF
+#define Short_Electrode_0_INBUF_ENABLED 0u
+#define Short_Electrode_0_INIT_DRIVESTATE 0u
+#define Short_Electrode_0_INIT_MUXSEL 0u
+#define Short_Electrode_0_INPUT_SYNC 2u
+#define Short_Electrode_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
+#define Short_Electrode_0_NUM 1u
+#define Short_Electrode_0_PORT GPIO_PRT9
+#define Short_Electrode_0_SLEWRATE CY_GPIO_SLEW_FAST
+#define Short_Electrode_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
+#define Short_Electrode_DRIVEMODE CY_GPIO_DM_STRONG_IN_OFF
+#define Short_Electrode_INBUF_ENABLED 0u
+#define Short_Electrode_INIT_DRIVESTATE 0u
+#define Short_Electrode_INIT_MUXSEL 0u
+#define Short_Electrode_INPUT_SYNC 2u
+#define Short_Electrode_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
+#define Short_Electrode_NUM 1u
+#define Short_Electrode_PORT GPIO_PRT9
+#define Short_Electrode_SLEWRATE CY_GPIO_SLEW_FAST
+#define Short_Electrode_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
 
 #endif /* INCLUDED_CYFITTER_GPIO_H */

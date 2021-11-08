@@ -53,7 +53,7 @@ void TimerInterruptHandler(void)
         dacWrite = 0x000;  
     }
     VDAC_1_SetValue(dacWrite);
-    
+    Cy_GPIO_Write(P9_3_PORT, P9_3_NUM, 1);//set stim enable to high 
     Cy_SAR_StartConvert(SAR, CY_SAR_START_CONVERT_SINGLE_SHOT);
 
     volatile float value = Cy_SAR_GetResult16(SAR, 0);
@@ -112,20 +112,23 @@ void dacTask(void *arg) {
         while(xQueueReceive(msg_queue, (void *)&command, 0) == pdPASS) {
             uint32_t value = (command[1]<<24) + (command[2]<<16) + (command[3]<<8) + command[4];
             switch(command[0]) {
-                case 0x01:
+                case 0x01://start command
                     printf("start stimulation\r\n");                                  
                     Cy_TCPWM_Counter_SetCompare0(Timer_HW, Timer_CNT_NUM, phases[0]);
                     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
                     break;
-                case 0x02:
+                case 0x02://stop command
                     printf("stop stimulation\r\n");
                     Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);
                     break;
-                case 0x03:
+                case 0x03://stim_type 0: uniform 1:burst
                     printf("stim type = %s\r\n", value == 0 ? "uniform" : "burst");
                     stim_type = value;
                     break;
-                case 0x05:
+                case 0x04://anodic_cathodic 0:anodic (phase 1 is negative) 1:cathodic (phase 1 is positive)
+                    printf("anodic is 0 cathodic is 1, we got %d\r\n", (uint32_t) value) ;
+                    break;
+                case 0x05://dac_phase_one (0-4095)
                     printf("phase 1 = %d\r\n", value) ;
                     //printf("phase 1 after scaling = %f\r\n", floor(((2047 - value) / 2047) * 4095)) ;
                     //printf("phase 1 after scaling with bitwise = %f\r\n", floor(value & value)) ;
@@ -133,36 +136,76 @@ void dacTask(void *arg) {
                     
                     phase_1_dac = value;
                     break;
-                case 0x06:
+                case 0x06://dac_phase_two (0-4095)
                     printf("phase 2 = %d\r\n", value) ;
                     //printf("phase 2 after scaling = %f\r\n", floor(((value - 2047) / 2047) * 4095));
                     //printf("phase 2 = 0x%x\r\n", ((value - 2047) / 2047) * 4095);
                     
                     phase_2_dac = value;
                     break;
-                case 0x07:
+                case 0x07://dac_gap (0-4095)
                     printf("dac gap = %d\r\n", value);
                     dac_gap = value;
                     break;
-                case 0x08:
+                case 0x08://phase_one_time
                     printf("phase 1 time = %d\r\n", value);
                     phases[0] = value;
                     break;
-                case 0x09:
+                case 0x09://inter_phase_gap
                     printf("inter phase gap = %d\r\n", value);
                     phases[1] = value;
                     break;
-                case 0x0a:
+                case 0x0a://phase_two_time
                     printf("phase 2 time = %d\r\n", value);
                     phases[2] = value;
                     break;
-                case 0x0b:
+                case 0x0b://inter_stim_delay
                     printf("inter stim delay = %d\r\n", value);
                     phases[3] = value;
                     break;
-                case 0x0d:
+                case 0x0c://inter_burst_delay
+                    
+                    break;
+                case 0x0d://pulse_num
                     printf("number of pulses = %d\r\n", value);
                     num_pulses = value;
+                    break;
+                case 0x0e://pulse_num_in_one_burst
+                    
+                    break;
+                case 0x0f://burst_num
+                    
+                    break;
+                case 0x10://ramp_up
+                    
+                    break;
+                case 0x11://short_electrode
+                    Cy_GPIO_Write(P9_3_PORT, P9_3_NUM, 0);
+                    Cy_GPIO_Write(P9_1_PORT, P9_1_NUM, 1);//set short electrode pin to high
+                    break;
+                case 0x12://record_freq
+                    
+                    break;
+                case 0x13://start_recording
+                    
+                    break;
+                case 0x14://stop_recording
+                    
+                    break;
+                case 0x15://electrode_voltage
+                    
+                    break;
+                case 0x16://elec_offset
+                    
+                    break;
+                case 0x17://show_dac
+                    
+                    break;
+                case 0x18://return_idle
+                    
+                    break;
+                case 0x19://check_state
+                    
                     break;
                 default:
                     break;
