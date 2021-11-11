@@ -48,16 +48,27 @@ uint32_t original_inter_stim_gap;
 bool stim_type;
 uint32_t num_pulses = 0; /* could need to change to uint32_t based on how data format is sent/recieved */
 uint32_t curr_num_pulses = 0;
+uint32_t curr_num_bursts = 0;
 int current_phase = 0;
 // Following are burst mode globals
 uint32_t inter_burst_delay;
 uint32_t pulse_num_in_one_burst;
 uint32_t burst_num;
 bool ramp_up;
+int ramp_up_count = 10;
+
+
 
 // DAC timer interrupt handler - called each time the timer reaches the next phase
 void TimerInterruptHandler(void)
-{
+{   
+    if (ramp_up) {
+        ramp_up_count ++;
+        if (ramp_up_count == 11) {
+            ramp_up_count = 1;
+        }
+    }
+    
     //function will always ready the values for the DAC according to the phase
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
@@ -65,7 +76,7 @@ void TimerInterruptHandler(void)
     if (current_phase == 0) {
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM,0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
-        dacWrite = phase_1_dac;   
+        dacWrite = (ramp_up_count * phase_1_dac)/10;   
     } else if (current_phase == 1) {//interphase gap
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
@@ -73,16 +84,20 @@ void TimerInterruptHandler(void)
     } else if (current_phase == 2) {//phase 2
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
-        dacWrite = phase_2_dac;
+        dacWrite = (ramp_up_count * phase_2_dac)/10;
     } else if (current_phase == 3) {//inter stim gap
-        phases[3] = original_inter_stim_gap;
-        if (curr_num_pulses == pulse_num_in_one_burst) {//if one burst is finished
-            phases[3] = inter_burst_delay;
-        }
         
+        phases[3] = original_inter_stim_gap;
+        if (curr_num_pulses % pulse_num_in_one_burst == 0) {//if one burst is finished
+            phases[3] = inter_burst_delay;
+            printf("inside phase 3 the curr_num_pulses was %d and the pulse num in one burst was %d and the interstim gap was %d\r\n", curr_num_pulses,pulse_num_in_one_burst, phases[3]);
+        }
+        if (curr_num_pulses == pulse_num_in_one_burst) {
+            curr_num_bursts ++;
+        }
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
-
+        printf("The delay was %d \r\n", phases[3]);
         dacWrite = 0x800;  
     }
     
@@ -132,9 +147,13 @@ void TimerInterruptHandler(void)
     }
     
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
-    if (curr_num_pulses == num_pulses && num_pulses != 0) {
+    if (curr_num_pulses > num_pulses && num_pulses != 0 && burst_num == 0) {
         //printf("The required number of pulses was reached which was %d? \r\n", curr_num_pulses);
         Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);   
+    }   else if (curr_num_bursts > burst_num) {
+        Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);
+    }   else if (curr_num_pulses > num_pulses && num_pulses != 0) {
+        Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);
     }
 
     
@@ -232,6 +251,8 @@ void dacTask(void *arg) {
                 case 0x0f://burst_num
                     printf("number of bursts = %d\r\n", value);
                     burst_num = value;
+                    pulse_num_in_one_burst = pulse_num_in_one_burst/value;
+                    printf("THE ACTUAL number of pulses in one burst = %d\r\n", pulse_num_in_one_burst);
                     break;
                 case 0x10://ramp_up
                     printf("ramp up = %d\r\n", value);
