@@ -17,6 +17,17 @@
 #include <limits.h>
 #include <math.h>
 
+// Internal switching
+#define STIM_ENABLE P9_3_PORT
+#define DUMMY_LOAD  P9_0_PORT
+#define SHORT_ELECTRODE P9_1_PORT
+#define TOGGLE_OUTPUT P9_2_PORT
+
+#define STIM_ENABLE_NUM P9_3_NUM
+#define DUMMY_LOAD_NUM  P9_0_NUM
+#define SHORT_ELECTRODE_NUM P9_1_NUM
+#define TOGGLE_OUTPUT_NUM P9_2_NUM
+
 // BLE globals
 SemaphoreHandle_t bleSemaphore;
 
@@ -30,36 +41,46 @@ uint32_t phase_1_dac;
 uint32_t phase_2_dac;
 uint32_t dac_gap;
 uint32_t phase_2_time;
-uint32_t phases[4];
+uint32_t phases[4];// 0 = phase 1, 1 = interphase gap, 2 = phase 2, 3 = interstim gap
 bool stim_type;
 uint32_t num_pulses; /* could need to change to uint32_t based on how data format is sent/recieved */
 uint32_t curr_num_pulses = 0;
 int current_phase = 0;
 
 
-// DAC timer interrupt handler
+// DAC timer interrupt handler - called each time the timer reaches the next phase
 void TimerInterruptHandler(void)
 {
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
     if (current_phase == 0) {
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM,0);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
         dacWrite = phase_1_dac;   
-    } else if (current_phase == 1) {
-        dacWrite = 0x000;   
-    } else if (current_phase == 2) {
+    } else if (current_phase == 1) {//interphase gap
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
+        dacWrite = 0x800;   
+    } else if (current_phase == 2) {//phase 2
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
         dacWrite = phase_2_dac;
     } else if (current_phase == 3) {
-        dacWrite = 0x000;  
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
+        dacWrite = 0x800;  
     }
     VDAC_1_SetValue(dacWrite);
-    Cy_GPIO_Write(P9_3_PORT, P9_3_NUM, 1);//set stim enable to high 
-    Cy_SAR_StartConvert(SAR, CY_SAR_START_CONVERT_SINGLE_SHOT);
+    //Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
+    //Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
+    Cy_SAR_StartConvert(SAR, CY_SAR_START_CONVERT_SINGLE_SHOT); //ADC
 
-    volatile float value = Cy_SAR_GetResult16(SAR, 0);
-    volatile float volts = Cy_SAR_CountsTo_Volts(SAR, 0, value);
+    volatile float value = Cy_SAR_GetResult16(SAR, 0);//ADC
+    volatile float volts = Cy_SAR_CountsTo_Volts(SAR, 0, value);//ADC
     // printf("Value in V = %f\r\n", volts);
     
+    //handles 0 values for time periods so moves to next phase if value is 0
     while (1) {
         if (phases[current_phase] == 0) {
             if (current_phase == 3) {
@@ -180,8 +201,7 @@ void dacTask(void *arg) {
                     
                     break;
                 case 0x11://short_electrode
-                    Cy_GPIO_Write(P9_3_PORT, P9_3_NUM, 0);
-                    Cy_GPIO_Write(P9_1_PORT, P9_1_NUM, 1);//set short electrode pin to high
+                    Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
                     break;
                 case 0x12://record_freq
                     
@@ -215,6 +235,10 @@ void dacTask(void *arg) {
         vTaskDelay(5000);
     }
 }
+
+//Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
+//Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
+
 
 // BLE event handler
 void genericEventHandler(uint32_t event, void *eventParameter) {
@@ -304,6 +328,12 @@ int main(void)
     printf("System started\r\n");
     msg_queue = xQueueCreate(20, sizeof(uint8_t[5]));
     
+    // default states
+    Cy_GPIO_Write(STIM_ENABLE, STIM_ENABLE_NUM, 1);//set stim enable to high 
+    Cy_GPIO_Write(DUMMY_LOAD, DUMMY_LOAD_NUM, 0);//set dummy load to low
+    Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);//set short electrode to high 
+    Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);//set toggle output to low
+   
     xTaskCreate(bleTask, "bleTask", 1024, 0, 1, 0);
     xTaskCreate(dacTask, "dacTask", 1024, 0, 1, 0);
     
