@@ -41,16 +41,24 @@ uint32_t phase_1_dac;
 uint32_t phase_2_dac;
 uint32_t dac_gap;
 uint32_t phase_2_time;
-uint32_t phases[4];// 0 = phase 1, 1 = interphase gap, 2 = phase 2, 3 = interstim gap
+uint32_t phases[4];// 0 = phase 1 time, 1 = interphase gap, 2 = phase 2 time, 3 = interstim gap
+
+uint32_t original_inter_stim_gap;
+
 bool stim_type;
-uint32_t num_pulses; /* could need to change to uint32_t based on how data format is sent/recieved */
+uint32_t num_pulses = 0; /* could need to change to uint32_t based on how data format is sent/recieved */
 uint32_t curr_num_pulses = 0;
 int current_phase = 0;
-
+// Following are burst mode globals
+uint32_t inter_burst_delay;
+uint32_t pulse_num_in_one_burst;
+uint32_t burst_num;
+bool ramp_up;
 
 // DAC timer interrupt handler - called each time the timer reaches the next phase
 void TimerInterruptHandler(void)
 {
+    //function will always ready the values for the DAC according to the phase
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
@@ -66,12 +74,23 @@ void TimerInterruptHandler(void)
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
         dacWrite = phase_2_dac;
-    } else if (current_phase == 3) {
+    } else if (current_phase == 3) {//inter stim gap
+        phases[3] = original_inter_stim_gap;
+        if (curr_num_pulses == pulse_num_in_one_burst) {//if one burst is finished
+            phases[3] = inter_burst_delay;
+        }
+        
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
+
         dacWrite = 0x800;  
     }
-    VDAC_1_SetValue(dacWrite);
+    
+
+
+    
+    
+    
     //Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
     //Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
     Cy_SAR_StartConvert(SAR, CY_SAR_START_CONVERT_SINGLE_SHOT); //ADC
@@ -79,6 +98,15 @@ void TimerInterruptHandler(void)
     volatile float value = Cy_SAR_GetResult16(SAR, 0);//ADC
     volatile float volts = Cy_SAR_CountsTo_Volts(SAR, 0, value);//ADC
     // printf("Value in V = %f\r\n", volts);
+    
+    if (num_pulses == 0) {
+        //printf("The number of pulses in continuous mode is %d\r\n", curr_num_pulses);
+        VDAC_1_SetValue(dacWrite);
+    }   else if (curr_num_pulses <= num_pulses) {
+        printf("The number of pulses in burst mode is %d\r\n", curr_num_pulses);
+        VDAC_1_SetValue(dacWrite);
+    }
+    
     
     //handles 0 values for time periods so moves to next phase if value is 0
     while (1) {
@@ -105,8 +133,11 @@ void TimerInterruptHandler(void)
     
     Cy_TCPWM_TriggerReloadOrIndex(Timer_HW, Timer_CNT_MASK);
     if (curr_num_pulses == num_pulses && num_pulses != 0) {
+        //printf("The required number of pulses was reached which was %d? \r\n", curr_num_pulses);
         Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);   
     }
+
+    
 }
 
 // DAC Task
@@ -130,6 +161,7 @@ void dacTask(void *arg) {
     // parser
     for (;;) {
         uint8_t command[5];
+        //gets values from BLE and sets them accordingly
         while(xQueueReceive(msg_queue, (void *)&command, 0) == pdPASS) {
             uint32_t value = (command[1]<<24) + (command[2]<<16) + (command[3]<<8) + command[4];
             switch(command[0]) {
@@ -183,22 +215,27 @@ void dacTask(void *arg) {
                 case 0x0b://inter_stim_delay
                     printf("inter stim delay = %d\r\n", value);
                     phases[3] = value;
+                    original_inter_stim_gap = value;
                     break;
                 case 0x0c://inter_burst_delay
-                    
+                    inter_burst_delay = value;
+                    printf("The interburst delay is %d\r\n", value);
                     break;
                 case 0x0d://pulse_num
                     printf("number of pulses = %d\r\n", value);
                     num_pulses = value;
                     break;
                 case 0x0e://pulse_num_in_one_burst
-                    
+                    printf("number of pulses in one burst = %d\r\n", value);
+                    pulse_num_in_one_burst = value;
                     break;
                 case 0x0f://burst_num
-                    
+                    printf("number of bursts = %d\r\n", value);
+                    burst_num = value;
                     break;
                 case 0x10://ramp_up
-                    
+                    printf("ramp up = %d\r\n", value);
+                    ramp_up = value;
                     break;
                 case 0x11://short_electrode
                     Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
