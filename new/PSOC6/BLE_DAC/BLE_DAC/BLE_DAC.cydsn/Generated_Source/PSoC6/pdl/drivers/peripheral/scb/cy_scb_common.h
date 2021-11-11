@@ -1,12 +1,12 @@
 /***************************************************************************//**
 * \file cy_scb_common.h
-* \version 2.20
+* \version 2.30
 *
 * Provides common API declarations of the SCB driver.
 *
 ********************************************************************************
 * \copyright
-* Copyright 2016-2018, Cypress Semiconductor Corporation.  All rights reserved.
+* Copyright 2016-2021, Cypress Semiconductor Corporation.  All rights reserved.
 * You may use this file only in accordance with the license, terms, conditions,
 * disclaimers, and limitations in the end user license agreement accompanying
 * the software package with which this file was provided.
@@ -15,13 +15,13 @@
 /**
 * \addtogroup group_scb
 * \{
-* The Serial Communications Block (SCB) supports three serial communication 
-* protocols: Serial Peripheral Interface (SPI), Universal Asynchronous Receiver 
-* Transmitter (UART), and Inter Integrated Circuit (I2C or IIC). Only one of 
+* The Serial Communications Block (SCB) supports three serial communication
+* protocols: Serial Peripheral Interface (SPI), Universal Asynchronous Receiver
+* Transmitter (UART), and Inter Integrated Circuit (I2C or IIC). Only one of
 * the protocols is supported by an SCB at any given time.
 *
-* The functions and other declarations used in this driver are in cy_scb_spi.h, 
-* cy_scb_uart.h, cy_scb_ezi2c.h, cy_scb_i2c.h respectively. Include cy_pdl.h 
+* The functions and other declarations used in this driver are in cy_scb_spi.h,
+* cy_scb_uart.h, cy_scb_ezi2c.h, cy_scb_i2c.h respectively. Include cy_pdl.h
 * (ModusToolbox only) to get access to all functions and declarations in the PDL.
 
 * \defgroup group_scb_common Common
@@ -43,10 +43,10 @@
 * API for the SCB. However, you can use the common SCB API to implement
 * a custom driver based on the SCB hardware.
 *
-* The functions and other declarations used in this part of the driver are in 
-* cy_scb_common.h. You can include either of cy_scb_spi.h, cy_scb_uart.h, 
-* cy_scb_ezi2c.h, cy_scb_i2c.h depending on the desired functionality. 
-* You can also include cy_pdl.h to get access to all functions and declarations 
+* The functions and other declarations used in this part of the driver are in
+* cy_scb_common.h. You can include either of cy_scb_spi.h, cy_scb_uart.h,
+* cy_scb_ezi2c.h, cy_scb_i2c.h depending on the desired functionality.
+* You can also include cy_pdl.h to get access to all functions and declarations
 * in the PDL.
 *
 *******************************************************************************
@@ -88,8 +88,20 @@
 * <table class="doxtable">
 *   <tr><th>Version</th><th>Changes</th><th>Reason for Change</th></tr>
 *   <tr>
+*     <td rowspan="2">2.30</td>
+*     <td>Updated \ref Cy_SCB_I2C_SlaveInterrupt with check if address byte
+*           received.</td>
+*     <td>Fixed the issue of treating the address byte as data during a repeated start
+*         after a write transaction.</td>
+*   </tr>
+*   <tr>
+*     <td>Updated \ref Cy_SCB_UART_GetNumInRingBuffer to take the correct maximum
+*           size of the ring buffer.</td>
+*     <td>Fixed a possible incorrect return value due to an overflow.</td>
+*   </tr>
+*   <tr>
 *     <td rowspan="2">2.20</td>
-*     <td>Flattened the organization of the driver source code into the single 
+*     <td>Flattened the organization of the driver source code into the single
 *         source directory and the single include directory.
 *     </td>
 *     <td>Driver library directory-structure simplification.</td>
@@ -97,7 +109,7 @@
 *   <tr>
 *     <td>Added register access layer. Use register access macros instead
 *         of direct register access using dereferenced pointers.</td>
-*     <td>Makes register access device-independent, so that the PDL does 
+*     <td>Makes register access device-independent, so that the PDL does
 *         not need to be recompiled for each supported part number.</td>
 *   </tr>
 *   <tr>
@@ -251,7 +263,7 @@ __STATIC_INLINE uint32_t Cy_SCB_GetRxFifoLevel   (CySCB_Type const *base);
 #define CY_SCB_DRV_VERSION_MAJOR    (2)
 
 /** Driver minor version */
-#define CY_SCB_DRV_VERSION_MINOR    (20)
+#define CY_SCB_DRV_VERSION_MINOR    (30)
 
 /** SCB driver identifier */
 #define CY_SCB_ID           CY_PDL_DRV_ID(0x2AU)

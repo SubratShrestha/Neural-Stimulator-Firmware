@@ -59,6 +59,10 @@ int ramp_up_count1 = 10;
 int ramp_up_count2 = 10;
 bool finished = false;
 
+
+// stim modes
+uint32_t anodic_cathodic;
+
 // DAC timer interrupt handler - called each time the timer reaches the next phase
 void TimerInterruptHandler(void)
 {   
@@ -67,6 +71,18 @@ void TimerInterruptHandler(void)
     //function will always ready the values for the DAC according to the phase
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
+    
+    uint32_t dac_val_1;
+    uint32_t dac_val_2;
+    if (anodic_cathodic) {
+        // negative pulse first
+        dac_val_1 = phase_2_dac;
+        dac_val_2 = phase_1_dac;
+    } else {
+        // default positive
+        dac_val_1 = phase_1_dac;
+        dac_val_2 = phase_2_dac;
+    }
     
     if (current_phase == 0) {//phase 1
         if (ramp_up) {
@@ -78,7 +94,7 @@ void TimerInterruptHandler(void)
         }
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM,0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
-        dacWrite = (ramp_up_count1 * phase_1_dac)/10; 
+        dacWrite = (ramp_up_count1 * dac_val_1)/10; 
         //printf("The value the dac was set in phase 1 was %d and ramp_up_count was %d \r\n", dacWrite, ramp_up_count1);
     } else if (current_phase == 1) {//interphase gap
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
@@ -93,7 +109,7 @@ void TimerInterruptHandler(void)
         }
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
-        dacWrite = (ramp_up_count2 * phase_2_dac)/10;
+        dacWrite = (ramp_up_count2 * dac_val_2)/10;
         //printf("The value the dac was set in phase 2 was %d \r\n", dacWrite);
     } else if (current_phase == 3) {//inter stim gap (changes if we get inbetween bursts)
         
@@ -216,6 +232,15 @@ void dacTask(void *arg) {
                     break;
                 case 0x04://anodic_cathodic 0:anodic (phase 1 is negative) 1:cathodic (phase 1 is positive)
                     printf("anodic is 0 cathodic is 1, we got %d\r\n", (uint32_t) value) ;
+                    anodic_cathodic = value;
+                    // swap timing periods in the phases array
+                    // based on the assumption that the phases array is filled before this command is called
+                    // may need to reimplement.
+                    if (anodic_cathodic) {
+                        uint32_t tmp = phases[0];
+                        phases[0] = phases[2];
+                        phases[2] = tmp;
+                    }
                     break;
                 case 0x05://dac_phase_one (0-4095)
                     printf("phase 1 = %d\r\n", value) ;
