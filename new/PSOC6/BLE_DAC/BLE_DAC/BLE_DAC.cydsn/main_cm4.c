@@ -55,49 +55,58 @@ uint32_t inter_burst_delay;
 uint32_t pulse_num_in_one_burst;
 uint32_t burst_num;
 bool ramp_up;
-int ramp_up_count = 10;
-
+int ramp_up_count1 = 10;
+int ramp_up_count2 = 10;
 
 
 // DAC timer interrupt handler - called each time the timer reaches the next phase
 void TimerInterruptHandler(void)
 {   
-    if (ramp_up) {
-        ramp_up_count ++;
-        if (ramp_up_count == 11) {
-            ramp_up_count = 1;
-        }
-    }
+    
     
     //function will always ready the values for the DAC according to the phase
     Cy_TCPWM_ClearInterrupt(Timer_HW, Timer_CNT_NUM, CY_TCPWM_INT_ON_CC);
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
-    if (current_phase == 0) {
+    if (current_phase == 0) {//phase 1
+        if (ramp_up) {
+            ramp_up_count1 ++;
+            if (ramp_up_count1 == 11) {
+                ramp_up_count1 = 1;
+            }
+        }
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM,0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
-        dacWrite = (ramp_up_count * phase_1_dac)/10;   
+        dacWrite = (ramp_up_count1 * phase_1_dac)/10; 
+        printf("The value the dac was set in phase 1 was %d and ramp_up_count was %d \r\n", dacWrite, ramp_up_count1);
     } else if (current_phase == 1) {//interphase gap
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
         dacWrite = 0x800;   
     } else if (current_phase == 2) {//phase 2
+        if (ramp_up) {
+            ramp_up_count2 ++;
+            if (ramp_up_count2 == 11) {
+                ramp_up_count2 = 1;
+            }
+        }
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
-        dacWrite = (ramp_up_count * phase_2_dac)/10;
-    } else if (current_phase == 3) {//inter stim gap
+        dacWrite = (ramp_up_count2 * phase_2_dac)/10;
+        printf("The value the dac was set in phase 2 was %d \r\n", dacWrite);
+    } else if (current_phase == 3) {//inter stim gap (changes if we get inbetween bursts)
         
         phases[3] = original_inter_stim_gap;
         if (curr_num_pulses % pulse_num_in_one_burst == 0) {//if one burst is finished
             phases[3] = inter_burst_delay;
-            printf("inside phase 3 the curr_num_pulses was %d and the pulse num in one burst was %d and the interstim gap was %d\r\n", curr_num_pulses,pulse_num_in_one_burst, phases[3]);
+            //printf("inside phase 3 the curr_num_pulses was %d and the pulse num in one burst was %d and the interstim gap was %d\r\n", curr_num_pulses,pulse_num_in_one_burst, phases[3]);
         }
         if (curr_num_pulses == pulse_num_in_one_burst) {
             curr_num_bursts ++;
         }
         Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
         Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
-        printf("The delay was %d \r\n", phases[3]);
+        //printf("The delay was %d \r\n", phases[3]);
         dacWrite = 0x800;  
     }
     
