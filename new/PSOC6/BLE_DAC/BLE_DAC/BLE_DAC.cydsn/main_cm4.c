@@ -154,7 +154,6 @@ void TimerInterruptHandler(void)
         if (phases[current_phase] == 0) {
             if (current_phase == 3) {
                 current_phase = 0;
-                curr_num_pulses++;
             } else if (current_phase < 3) {
                 current_phase++;
             }
@@ -188,6 +187,12 @@ void TimerInterruptHandler(void)
     }//   else if (curr_num_pulses > num_pulses && num_pulses != 0) {
      //   Cy_TCPWM_TriggerStopOrKill(Timer_HW, Timer_CNT_MASK);
     //}
+    if (finished) {
+        curr_num_pulses = 0;
+        curr_num_bursts = 0;
+    }
+    // printf("curr_num_pulses = %d, num_pulses = %d, stim_type = %d\r\n", curr_num_pulses, num_pulses, stim_type);
+    // printf("curr_num_bursts = %d, burst_num = %d\r\n", curr_num_bursts, burst_num);
 
     
 }
