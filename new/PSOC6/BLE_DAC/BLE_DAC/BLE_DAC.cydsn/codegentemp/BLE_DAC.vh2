@@ -2,7 +2,7 @@
 --	Conversion of BLE_DAC.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon Nov 08 15:12:35 2021
+--	Mon Nov 22 14:59:01 2021
 --
 
 USE cypress.cypress.all;
@@ -433,13 +433,24 @@ TERMINAL \ADC:Net_105\ : bit;
 TERMINAL Net_187 : bit;
 TERMINAL Net_186 : bit;
 SIGNAL tmpFB_0__dac_out_net_0 : bit;
-TERMINAL Net_149 : bit;
 SIGNAL tmpIO_0__dac_out_net_0 : bit;
 TERMINAL tmpSIOVREF__dac_out_net_0 : bit;
 SIGNAL tmpFB_0__VDAC_Out_1_net_0 : bit;
 TERMINAL Net_194 : bit;
 SIGNAL tmpIO_0__VDAC_Out_1_net_0 : bit;
 TERMINAL tmpSIOVREF__VDAC_Out_1_net_0 : bit;
+SIGNAL tmpFB_0__STIM_ENABLE_net_0 : bit;
+SIGNAL tmpIO_0__STIM_ENABLE_net_0 : bit;
+TERMINAL tmpSIOVREF__STIM_ENABLE_net_0 : bit;
+SIGNAL tmpFB_0__DUMMY_LOAD_net_0 : bit;
+SIGNAL tmpIO_0__DUMMY_LOAD_net_0 : bit;
+TERMINAL tmpSIOVREF__DUMMY_LOAD_net_0 : bit;
+SIGNAL tmpFB_0__SHORT_ELECTRODE_net_0 : bit;
+SIGNAL tmpIO_0__SHORT_ELECTRODE_net_0 : bit;
+TERMINAL tmpSIOVREF__SHORT_ELECTRODE_net_0 : bit;
+SIGNAL tmpFB_0__TOGGLE_OUTPUT_net_0 : bit;
+SIGNAL tmpIO_0__TOGGLE_OUTPUT_net_0 : bit;
+TERMINAL tmpSIOVREF__TOGGLE_OUTPUT_net_0 : bit;
 BEGIN
 
 one <=  ('1') ;
@@ -1840,7 +1851,7 @@ dac_out:cy_mxs40_gpio_v1_0
 	PORT MAP(oe=>(one),
 		y=>(zero),
 		fb=>(tmpFB_0__dac_out_net_0),
-		analog=>Net_149,
+		analog=>Net_196,
 		io=>(tmpIO_0__dac_out_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__dac_out_net_0));
@@ -1876,5 +1887,133 @@ VDAC_Out_1:cy_mxs40_gpio_v1_0
 		io=>(tmpIO_0__VDAC_Out_1_net_0),
 		annotation=>(open),
 		siovref=>(tmpSIOVREF__VDAC_Out_1_net_0));
+STIM_ENABLE:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"0113321b-4a37-46f6-8407-2f8646c68756",
+		drive_mode=>"0",
+		ibuf_enabled=>"0",
+		init_dr_st=>"1",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__STIM_ENABLE_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__STIM_ENABLE_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__STIM_ENABLE_net_0));
+DUMMY_LOAD:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"6545b923-80b9-498e-9613-76679b6e37bc",
+		drive_mode=>"6",
+		ibuf_enabled=>"0",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__DUMMY_LOAD_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__DUMMY_LOAD_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__DUMMY_LOAD_net_0));
+SHORT_ELECTRODE:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"8515ae31-4f0f-424c-aac7-19ef634b004b",
+		drive_mode=>"6",
+		ibuf_enabled=>"0",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__SHORT_ELECTRODE_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__SHORT_ELECTRODE_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__SHORT_ELECTRODE_net_0));
+TOGGLE_OUTPUT:cy_mxs40_gpio_v1_0
+	GENERIC MAP(cy_registers=>"",
+		width=>1,
+		sio_grp_cnt=>0,
+		id=>"87a42148-8c0c-482d-9b8b-28a2865ba2ce",
+		drive_mode=>"6",
+		ibuf_enabled=>"0",
+		init_dr_st=>"0",
+		input_sync=>"0",
+		intr_mode=>"0",
+		io_voltage=>"",
+		output_conn=>"0",
+		oe_conn=>"0",
+		output_sync=>"0",
+		oe_sync=>"0",
+		drive_strength=>"0",
+		max_frequency=>"100",
+		output_current_cap=>"8",
+		i2c_mode=>"0",
+		pin_aliases=>"",
+		pin_mode=>"O",
+		slew_rate=>"0",
+		vtrip=>"0",
+		use_annotation=>"0",
+		hotswap_needed=>"0")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>(tmpFB_0__TOGGLE_OUTPUT_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__TOGGLE_OUTPUT_net_0),
+		annotation=>(open),
+		siovref=>(tmpSIOVREF__TOGGLE_OUTPUT_net_0));
 
 END R_T_L;

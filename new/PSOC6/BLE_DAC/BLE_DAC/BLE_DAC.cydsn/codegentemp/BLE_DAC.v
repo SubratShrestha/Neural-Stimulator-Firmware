@@ -1,6 +1,6 @@
 // ======================================================================
 // BLE_DAC.v generated from TopDesign.cysch
-// 11/08/2021 at 15:12
+// 11/22/2021 at 14:58
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2025,7 +2025,6 @@ endmodule
 module top ;
 
     electrical  Net_194;
-    electrical  Net_149;
     electrical  Net_187;
     electrical  Net_186;
     electrical [1:0] Net_185;
@@ -2319,7 +2318,7 @@ module top ;
 		 (.oe({1'b1}),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__dac_out_net[0:0]}),
-		  .analog({Net_149}),
+		  .analog({Net_196}),
 		  .io({tmpIO_0__dac_out_net[0:0]}),
 		  .siovref(tmpSIOVREF__dac_out_net));
 
@@ -2359,6 +2358,150 @@ module top ;
 		  .analog({Net_194}),
 		  .io({tmpIO_0__VDAC_Out_1_net[0:0]}),
 		  .siovref(tmpSIOVREF__VDAC_Out_1_net));
+
+
+	wire [0:0] tmpFB_0__STIM_ENABLE_net;
+	wire [0:0] tmpIO_0__STIM_ENABLE_net;
+	electrical [0:0] tmpSIOVREF__STIM_ENABLE_net;
+
+	cy_mxs40_gpio_v1_0
+		#(.id("0113321b-4a37-46f6-8407-2f8646c68756"),
+		  .width(1),
+		  .sio_grp_cnt(0),
+		  .drive_mode("0"),
+		  .ibuf_enabled("0"),
+		  .init_dr_st("1"),
+		  .input_sync("0"),
+		  .intr_mode("0"),
+		  .io_voltage(""),
+		  .output_conn("0"),
+		  .oe_conn("0"),
+		  .output_sync("0"),
+		  .oe_sync("0"),
+		  .drive_strength("0"),
+		  .max_frequency("100"),
+		  .i2c_mode("0"),
+		  .output_current_cap("8"),
+		  .pin_aliases(""),
+		  .pin_mode("O"),
+		  .slew_rate("0"),
+		  .vtrip("0"),
+		  .use_annotation("0"),
+		  .hotswap_needed("0"))
+		STIM_ENABLE
+		 (.oe({1'b1}),
+		  .y({1'b0}),
+		  .fb({tmpFB_0__STIM_ENABLE_net[0:0]}),
+		  .io({tmpIO_0__STIM_ENABLE_net[0:0]}),
+		  .siovref(tmpSIOVREF__STIM_ENABLE_net));
+
+
+	wire [0:0] tmpFB_0__DUMMY_LOAD_net;
+	wire [0:0] tmpIO_0__DUMMY_LOAD_net;
+	electrical [0:0] tmpSIOVREF__DUMMY_LOAD_net;
+
+	cy_mxs40_gpio_v1_0
+		#(.id("6545b923-80b9-498e-9613-76679b6e37bc"),
+		  .width(1),
+		  .sio_grp_cnt(0),
+		  .drive_mode("6"),
+		  .ibuf_enabled("0"),
+		  .init_dr_st("0"),
+		  .input_sync("0"),
+		  .intr_mode("0"),
+		  .io_voltage(""),
+		  .output_conn("0"),
+		  .oe_conn("0"),
+		  .output_sync("0"),
+		  .oe_sync("0"),
+		  .drive_strength("0"),
+		  .max_frequency("100"),
+		  .i2c_mode("0"),
+		  .output_current_cap("8"),
+		  .pin_aliases(""),
+		  .pin_mode("O"),
+		  .slew_rate("0"),
+		  .vtrip("0"),
+		  .use_annotation("0"),
+		  .hotswap_needed("0"))
+		DUMMY_LOAD
+		 (.oe({1'b1}),
+		  .y({1'b0}),
+		  .fb({tmpFB_0__DUMMY_LOAD_net[0:0]}),
+		  .io({tmpIO_0__DUMMY_LOAD_net[0:0]}),
+		  .siovref(tmpSIOVREF__DUMMY_LOAD_net));
+
+
+	wire [0:0] tmpFB_0__SHORT_ELECTRODE_net;
+	wire [0:0] tmpIO_0__SHORT_ELECTRODE_net;
+	electrical [0:0] tmpSIOVREF__SHORT_ELECTRODE_net;
+
+	cy_mxs40_gpio_v1_0
+		#(.id("8515ae31-4f0f-424c-aac7-19ef634b004b"),
+		  .width(1),
+		  .sio_grp_cnt(0),
+		  .drive_mode("6"),
+		  .ibuf_enabled("0"),
+		  .init_dr_st("0"),
+		  .input_sync("0"),
+		  .intr_mode("0"),
+		  .io_voltage(""),
+		  .output_conn("0"),
+		  .oe_conn("0"),
+		  .output_sync("0"),
+		  .oe_sync("0"),
+		  .drive_strength("0"),
+		  .max_frequency("100"),
+		  .i2c_mode("0"),
+		  .output_current_cap("8"),
+		  .pin_aliases(""),
+		  .pin_mode("O"),
+		  .slew_rate("0"),
+		  .vtrip("0"),
+		  .use_annotation("0"),
+		  .hotswap_needed("0"))
+		SHORT_ELECTRODE
+		 (.oe({1'b1}),
+		  .y({1'b0}),
+		  .fb({tmpFB_0__SHORT_ELECTRODE_net[0:0]}),
+		  .io({tmpIO_0__SHORT_ELECTRODE_net[0:0]}),
+		  .siovref(tmpSIOVREF__SHORT_ELECTRODE_net));
+
+
+	wire [0:0] tmpFB_0__TOGGLE_OUTPUT_net;
+	wire [0:0] tmpIO_0__TOGGLE_OUTPUT_net;
+	electrical [0:0] tmpSIOVREF__TOGGLE_OUTPUT_net;
+
+	cy_mxs40_gpio_v1_0
+		#(.id("87a42148-8c0c-482d-9b8b-28a2865ba2ce"),
+		  .width(1),
+		  .sio_grp_cnt(0),
+		  .drive_mode("6"),
+		  .ibuf_enabled("0"),
+		  .init_dr_st("0"),
+		  .input_sync("0"),
+		  .intr_mode("0"),
+		  .io_voltage(""),
+		  .output_conn("0"),
+		  .oe_conn("0"),
+		  .output_sync("0"),
+		  .oe_sync("0"),
+		  .drive_strength("0"),
+		  .max_frequency("100"),
+		  .i2c_mode("0"),
+		  .output_current_cap("8"),
+		  .pin_aliases(""),
+		  .pin_mode("O"),
+		  .slew_rate("0"),
+		  .vtrip("0"),
+		  .use_annotation("0"),
+		  .hotswap_needed("0"))
+		TOGGLE_OUTPUT
+		 (.oe({1'b1}),
+		  .y({1'b0}),
+		  .fb({tmpFB_0__TOGGLE_OUTPUT_net[0:0]}),
+		  .io({tmpIO_0__TOGGLE_OUTPUT_net[0:0]}),
+		  .siovref(tmpSIOVREF__TOGGLE_OUTPUT_net));
 
 
 

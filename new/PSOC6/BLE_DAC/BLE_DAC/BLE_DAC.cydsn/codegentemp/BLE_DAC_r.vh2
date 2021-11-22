@@ -1,5 +1,5 @@
 -- Project:   BLE_DAC
--- Generated: 11/08/2021 15:12:42
+-- Generated: 11/22/2021 14:59:07
 -- PSoC Creator  4.4
 
 ENTITY BLE_DAC IS
@@ -8,8 +8,11 @@ ENTITY BLE_DAC IS
         \UART_1:rx(0)_PAD\ : IN std_ulogic;
         RED(0)_PAD : OUT std_ulogic;
         GREEN(0)_PAD : OUT std_ulogic;
-        dac_out(0)_PAD : INOUT std_ulogic;
-        VDAC_Out_1(0)_PAD : INOUT std_ulogic);
+        VDAC_Out_1(0)_PAD : INOUT std_ulogic;
+        STIM_ENABLE(0)_PAD : OUT std_ulogic;
+        DUMMY_LOAD(0)_PAD : OUT std_ulogic;
+        SHORT_ELECTRODE(0)_PAD : OUT std_ulogic;
+        TOGGLE_OUTPUT(0)_PAD : OUT std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDIO_A OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -47,6 +50,7 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     ATTRIBUTE global_signal OF ClockBlock_PeriClk : SIGNAL IS true;
     SIGNAL ClockBlock_SlowClk : bit;
     SIGNAL ClockBlock_WCO : bit;
+    SIGNAL DUMMY_LOAD(0)__PA : bit;
     SIGNAL GREEN(0)__PA : bit;
     SIGNAL Net_10_ff11 : bit;
     ATTRIBUTE global_signal OF Net_10_ff11 : SIGNAL IS true;
@@ -97,6 +101,9 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     SIGNAL Net_63 : bit;
     SIGNAL Net_77 : bit;
     SIGNAL RED(0)__PA : bit;
+    SIGNAL SHORT_ELECTRODE(0)__PA : bit;
+    SIGNAL STIM_ENABLE(0)__PA : bit;
+    SIGNAL TOGGLE_OUTPUT(0)__PA : bit;
     SIGNAL VDAC_Out_1(0)__PA : bit;
     SIGNAL \ADC:Net_423\ : bit;
     SIGNAL \ADC:Net_428_ff49\ : bit;
@@ -144,9 +151,17 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     ATTRIBUTE lib_model OF GREEN(0) : LABEL IS "iocell8";
     ATTRIBUTE Location OF GREEN(0) : LABEL IS "P6[2]";
     ATTRIBUTE lib_model OF dac_out(0) : LABEL IS "iocell9";
-    ATTRIBUTE Location OF dac_out(0) : LABEL IS "P10[0]";
+    ATTRIBUTE Location OF dac_out(0) : LABEL IS "P10[3]";
     ATTRIBUTE lib_model OF VDAC_Out_1(0) : LABEL IS "iocell10";
     ATTRIBUTE Location OF VDAC_Out_1(0) : LABEL IS "P0[4]";
+    ATTRIBUTE lib_model OF STIM_ENABLE(0) : LABEL IS "iocell11";
+    ATTRIBUTE Location OF STIM_ENABLE(0) : LABEL IS "P9[3]";
+    ATTRIBUTE lib_model OF DUMMY_LOAD(0) : LABEL IS "iocell12";
+    ATTRIBUTE Location OF DUMMY_LOAD(0) : LABEL IS "P9[0]";
+    ATTRIBUTE lib_model OF SHORT_ELECTRODE(0) : LABEL IS "iocell13";
+    ATTRIBUTE Location OF SHORT_ELECTRODE(0) : LABEL IS "P9[1]";
+    ATTRIBUTE lib_model OF TOGGLE_OUTPUT(0) : LABEL IS "iocell14";
+    ATTRIBUTE Location OF TOGGLE_OUTPUT(0) : LABEL IS "P9[2]";
     ATTRIBUTE Location OF \UART_1:SCB_IRQ\ : LABEL IS "[IntrContainer=(0)][IntrId=(46)]";
     ATTRIBUTE Location OF \UART_1:SCB\ : LABEL IS "F(SCB,5)";
     ATTRIBUTE Location OF \BLE_1:cy_mxs40_ble\ : LABEL IS "F(BLE,0)";
@@ -1102,7 +1117,6 @@ BEGIN
         PORT MAP(
             pa_out => dac_out(0)__PA,
             oe => open,
-            pad_in => dac_out(0)_PAD,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,
@@ -1157,6 +1171,222 @@ BEGIN
             pa_out => VDAC_Out_1(0)__PA,
             oe => open,
             pad_in => VDAC_Out_1(0)_PAD,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    STIM_ENABLE:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "000",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "0113321b-4a37-46f6-8407-2f8646c68756",
+            init_dr_st => "1",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    STIM_ENABLE(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "STIM_ENABLE",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => STIM_ENABLE(0)__PA,
+            oe => open,
+            pad_in => STIM_ENABLE(0)_PAD,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    DUMMY_LOAD:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "110",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "6545b923-80b9-498e-9613-76679b6e37bc",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    DUMMY_LOAD(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "DUMMY_LOAD",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => DUMMY_LOAD(0)__PA,
+            oe => open,
+            pad_in => DUMMY_LOAD(0)_PAD,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    SHORT_ELECTRODE:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "110",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "8515ae31-4f0f-424c-aac7-19ef634b004b",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    SHORT_ELECTRODE(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "SHORT_ELECTRODE",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => SHORT_ELECTRODE(0)__PA,
+            oe => open,
+            pad_in => SHORT_ELECTRODE(0)_PAD,
+            in_clock => open,
+            in_clock_en => open,
+            in_reset => open,
+            out_clock => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    TOGGLE_OUTPUT:logicalport
+        GENERIC MAP(
+            cy_registers => "",
+            drive_mode => "110",
+            drive_strength => "0",
+            hotswap_needed => "0",
+            i2c_mode => "0",
+            ibuf_enabled => "0",
+            id => "87a42148-8c0c-482d-9b8b-28a2865ba2ce",
+            init_dr_st => "0",
+            input_sync => "0",
+            intr_mode => "00",
+            io_voltage => "",
+            max_frequency => "100",
+            oe_conn => "0",
+            oe_sync => "0",
+            output_conn => "0",
+            output_current_cap => "8",
+            output_sync => "0",
+            pin_aliases => "",
+            pin_mode => "B",
+            sio_grp_cnt => 0,
+            slew_rate => "0",
+            use_annotation => "0",
+            vtrip => "00",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0);
+
+    TOGGLE_OUTPUT(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "TOGGLE_OUTPUT",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000001")
+        PORT MAP(
+            pa_out => TOGGLE_OUTPUT(0)__PA,
+            oe => open,
+            pad_in => TOGGLE_OUTPUT(0)_PAD,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,

@@ -17,6 +17,17 @@
 #include <limits.h>
 #include <math.h>
 
+// Internal switching
+#define STIM_ENABLE P9_3_PORT
+#define DUMMY_LOAD  P9_0_PORT
+#define SHORT_ELECTRODE P9_1_PORT
+#define TOGGLE_OUTPUT P9_2_PORT
+
+//#define STIM_ENABLE_NUM P9_3_NUM
+//#define DUMMY_LOAD_NUM  P9_0_NUM
+//#define SHORT_ELECTRODE_NUM P9_1_NUM
+//#define TOGGLE_OUTPUT_NUM P9_2_NUM
+
 // BLE globals
 SemaphoreHandle_t bleSemaphore;
 
@@ -30,7 +41,7 @@ uint32_t phase_1_dac;
 uint32_t phase_2_dac;
 uint32_t dac_gap;
 uint32_t phase_2_time;
-uint32_t phases[4];
+uint32_t phases[4]; // 0 = phase 1, 1 = interphase gap, 2 = phase 2, 3 = interstim gap
 bool stim_type;
 uint32_t num_pulses; /* could need to change to uint32_t based on how data format is sent/recieved */
 uint32_t curr_num_pulses = 0;
@@ -44,12 +55,20 @@ void TimerInterruptHandler(void)
     comparevalue = Cy_TCPWM_Counter_GetCounter(Timer_HW, Timer_CNT_NUM);
     
     if (current_phase == 0) {
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM,0);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
         dacWrite = phase_1_dac;   
     } else if (current_phase == 1) {
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
         dacWrite = 0x000;   
     } else if (current_phase == 2) {
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 0);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 1);
         dacWrite = phase_2_dac;
     } else if (current_phase == 3) {
+        Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
+        Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);
         dacWrite = 0x000;  
     }
     VDAC_1_SetValue(dacWrite);
@@ -164,6 +183,10 @@ void dacTask(void *arg) {
                     printf("number of pulses = %d\r\n", value);
                     num_pulses = value;
                     break;
+                case 0x11:// Short Electrode
+                    Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);
+                    
+                    break;
                 default:
                     break;
             }
@@ -260,6 +283,12 @@ int main(void)
     setvbuf(stdout, NULL, _IONBF, 0);
     printf("System started\r\n");
     msg_queue = xQueueCreate(20, sizeof(uint8_t[5]));
+    
+    // Default states:
+    Cy_GPIO_Write(STIM_ENABLE, STIM_ENABLE_NUM, 1);//set stim enable to high 
+    Cy_GPIO_Write(DUMMY_LOAD, DUMMY_LOAD_NUM, 0);//set dummy load to low
+    Cy_GPIO_Write(SHORT_ELECTRODE, SHORT_ELECTRODE_NUM, 1);//set short electrode to high 
+    Cy_GPIO_Write(TOGGLE_OUTPUT, TOGGLE_OUTPUT_NUM, 0);//set toggle output to low
     
     xTaskCreate(bleTask, "bleTask", 1024, 0, 1, 0);
     xTaskCreate(dacTask, "dacTask", 1024, 0, 1, 0);
