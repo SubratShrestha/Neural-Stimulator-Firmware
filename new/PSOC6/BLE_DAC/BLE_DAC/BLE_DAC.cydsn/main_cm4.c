@@ -46,11 +46,11 @@ void TimerInterruptHandler(void)
     if (current_phase == 0) {
         dacWrite = phase_1_dac;   
     } else if (current_phase == 1) {
-        dacWrite = 0x000;   
+        dacWrite = 0x800;   
     } else if (current_phase == 2) {
         dacWrite = phase_2_dac;
     } else if (current_phase == 3) {
-        dacWrite = 0x000;  
+        dacWrite = 0x800;  
     }
     VDAC_1_SetValue(dacWrite);
     

@@ -1,5 +1,5 @@
 -- Project:   BLE_DAC
--- Generated: 11/08/2021 15:12:41
+-- Generated: 11/22/2021 17:03:17
 -- PSoC Creator  4.4
 
 ENTITY BLE_DAC IS
@@ -8,7 +8,6 @@ ENTITY BLE_DAC IS
         \UART_1:rx(0)_PAD\ : IN std_ulogic;
         RED(0)_PAD : OUT std_ulogic;
         GREEN(0)_PAD : OUT std_ulogic;
-        dac_out(0)_PAD : INOUT std_ulogic;
         VDAC_Out_1(0)_PAD : INOUT std_ulogic);
     ATTRIBUTE voltage_VBACKUP OF __DEFAULT__ : ENTITY IS 3.3e0;
     ATTRIBUTE voltage_VDDA_CSD OF __DEFAULT__ : ENTITY IS 3.3e0;
@@ -138,7 +137,7 @@ ARCHITECTURE __DEFAULT__ OF BLE_DAC IS
     ATTRIBUTE lib_model OF RED(0) : LABEL IS "iocell7";
     ATTRIBUTE lib_model OF GREEN(0) : LABEL IS "iocell8";
     ATTRIBUTE lib_model OF dac_out(0) : LABEL IS "iocell9";
-    ATTRIBUTE Location OF dac_out(0) : LABEL IS "P10[0]";
+    ATTRIBUTE Location OF dac_out(0) : LABEL IS "P9[6]";
     ATTRIBUTE lib_model OF VDAC_Out_1(0) : LABEL IS "iocell10";
     ATTRIBUTE Location OF \VDAC_1:CTDAC\ : LABEL IS "F(CTDAC,0)";
     ATTRIBUTE Location OF \ADC:SAR\ : LABEL IS "F(SARADC,0)";
@@ -1085,7 +1084,6 @@ BEGIN
         PORT MAP(
             pa_out => dac_out(0)__PA,
             oe => open,
-            pad_in => dac_out(0)_PAD,
             in_clock => open,
             in_clock_en => open,
             in_reset => open,

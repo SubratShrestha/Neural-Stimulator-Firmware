@@ -1,6 +1,6 @@
 // ======================================================================
 // BLE_DAC.v generated from TopDesign.cysch
-// 11/08/2021 at 15:12
+// 11/22/2021 at 17:03
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -2025,7 +2025,6 @@ endmodule
 module top ;
 
     electrical  Net_194;
-    electrical  Net_149;
     electrical  Net_187;
     electrical  Net_186;
     electrical [1:0] Net_185;
@@ -2319,7 +2318,7 @@ module top ;
 		 (.oe({1'b1}),
 		  .y({1'b0}),
 		  .fb({tmpFB_0__dac_out_net[0:0]}),
-		  .analog({Net_149}),
+		  .analog({Net_196}),
 		  .io({tmpIO_0__dac_out_net[0:0]}),
 		  .siovref(tmpSIOVREF__dac_out_net));
 

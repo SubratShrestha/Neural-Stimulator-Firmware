@@ -66,21 +66,21 @@
 #define dac_out_0_DRIVEMODE CY_GPIO_DM_ANALOG
 #define dac_out_0_INBUF_ENABLED 0u
 #define dac_out_0_INIT_DRIVESTATE 1u
-#define dac_out_0_INIT_MUXSEL 0u
+#define dac_out_0_INIT_MUXSEL 4u
 #define dac_out_0_INPUT_SYNC 2u
 #define dac_out_0_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define dac_out_0_NUM 0u
-#define dac_out_0_PORT GPIO_PRT10
+#define dac_out_0_NUM 6u
+#define dac_out_0_PORT GPIO_PRT9
 #define dac_out_0_SLEWRATE CY_GPIO_SLEW_FAST
 #define dac_out_0_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
 #define dac_out_DRIVEMODE CY_GPIO_DM_ANALOG
 #define dac_out_INBUF_ENABLED 0u
 #define dac_out_INIT_DRIVESTATE 1u
-#define dac_out_INIT_MUXSEL 0u
+#define dac_out_INIT_MUXSEL 4u
 #define dac_out_INPUT_SYNC 2u
 #define dac_out_INTERRUPT_MODE CY_GPIO_INTR_DISABLE
-#define dac_out_NUM 0u
-#define dac_out_PORT GPIO_PRT10
+#define dac_out_NUM 6u
+#define dac_out_PORT GPIO_PRT9
 #define dac_out_SLEWRATE CY_GPIO_SLEW_FAST
 #define dac_out_THRESHOLD_LEVEL CY_GPIO_VTRIP_CMOS
 
