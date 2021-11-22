@@ -1,3 +1,3 @@
-# Component constraints for C:\Users\cmila\uni\projects\Neural-Stimulator-Firmware\new\PSOC6\BLE_DAC\BLE_DAC\BLE_DAC.cydsn\TopDesign\TopDesign.cysch
-# Project: C:\Users\cmila\uni\projects\Neural-Stimulator-Firmware\new\PSOC6\BLE_DAC\BLE_DAC\BLE_DAC.cydsn\BLE_DAC.cyprj
-# Date: Thu, 11 Nov 2021 14:16:39 GMT
+# Component constraints for C:\Users\User\Documents\Neural-Stimulator-Firmware\new\PSOC6\BLE_DAC\BLE_DAC\BLE_DAC.cydsn\TopDesign\TopDesign.cysch
+# Project: C:\Users\User\Documents\Neural-Stimulator-Firmware\new\PSOC6\BLE_DAC\BLE_DAC\BLE_DAC.cydsn\BLE_DAC.cyprj
+# Date: Mon, 08 Nov 2021 04:12:33 GMT
